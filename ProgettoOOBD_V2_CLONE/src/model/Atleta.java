@@ -1,14 +1,18 @@
 
 package model;
+import java.util.ArrayList;
 
-
-public class Atleta extends Persona {
+public class Atleta {
     
     private float peso;
     private float altezza;
-    private String club;
     private int idAtleta; 
     
+    /*RELAZIONI*/
+    private ArrayList<Evento> listaEvento = new ArrayList<Evento>();
+    private ArrayList<Sponsor> listaSponsor = new ArrayList<Sponsor>();
+    private Procuratore procuratore;
+    private Club club;
     
     public float getPeso() {
         return peso;
@@ -26,16 +30,6 @@ public class Atleta extends Persona {
     public void setAltezza(float altezza) {
         this.altezza = altezza;
     }
-
-   
-    public String getClub() {
-        return club;
-    }
-
-    
-    public void setClub(String club) {
-        this.club = club;
-    }
     
     public int getIdAtleta() {
         return idAtleta;
@@ -43,5 +37,33 @@ public class Atleta extends Persona {
 
     public void setIdAtleta(int idAtleta) {
         this.idAtleta = idAtleta;
+    }
+    
+    /**
+     * @return the procuratore
+     */
+    public Procuratore getProcuratore() {
+        return procuratore;
+    }
+
+    /**
+     * @param procuratore the procuratore to set
+     */
+    public void setProcuratore(Procuratore procuratore) {
+        this.procuratore = procuratore;
+    }
+
+    /**
+     * @return the club
+     */
+    public Club getClub() {
+        return club;
+    }
+
+    /**
+     * @param club the club to set
+     */
+    public void setClub(Club club) {
+        this.club = club;
     }
 }

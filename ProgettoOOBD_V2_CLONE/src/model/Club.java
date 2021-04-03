@@ -3,39 +3,43 @@ package model;
 
 import java.util.ArrayList;
 
-public class Sponsor {
-    
-    private int idSponsor;
-    private String nome;
-    private String indirizzo; 
-    private String telefono;
-    
-    /*RELAZIONI*/
-    private ArrayList<Atleta> listaAtleta = new ArrayList<Atleta>();
-    
-    public int getIdSponsor() {
-        return idSponsor;
+
+public class Club {
+
+   private int idClub; 
+   private String nomeClub; 
+   private String indirizzo; 
+   private String telefono;
+   
+   /*RELAZIONI*/
+   private ArrayList<Atleta> listaAtleta = new ArrayList<Atleta>();
+   
+     /**
+     * @return the idClub
+     */
+    public int getIdClub() {
+        return idClub;
     }
 
     /**
-     * @param idSponsor the idSponsor to set
+     * @param idClub the idClub to set
      */
-    public void setIdSponsor(int idSponsor) {
-        this.idSponsor = idSponsor;
+    public void setIdClub(int idClub) {
+        this.idClub = idClub;
     }
 
     /**
-     * @return the nome
+     * @return the nomeClub
      */
-    public String getNome() {
-        return nome;
+    public String getNomeClub() {
+        return nomeClub;
     }
 
     /**
-     * @param nome the nome to set
+     * @param nomeClub the nomeClub to set
      */
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setNomeClub(String nomeClub) {
+        this.nomeClub = nomeClub;
     }
 
     /**
