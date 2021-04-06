@@ -3,7 +3,7 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-
+import java.sql.SQLException; 
 
 public class DataAccessObject {
     
@@ -16,15 +16,15 @@ public class DataAccessObject {
 
 	try {
             Class.forName("org.postgresql.Driver");
+            
+        }catch(ClassNotFoundException e) {
+            e.printStackTrace();    //errore sul caricamento del driver postgresql
+        }
+        
+        try{
             connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/OO_BD_V2", "postgres", "SNOWEBELLO12");
-            if(connection != null) {
-                System.out.println("Connessione al database effettuata con successo ");
-            }
-        }catch(Exception e) {
-            System.out.println(e);
-            System.out.println("Connection FAILED ");
-            System.err.println(e.getClass().getName()+": "+e.getMessage()); 
-            System.exit(0);
+        }catch(SQLException e) {
+            e.printStackTrace();    //errore derivato dalla connessione
         }
         
         return connection;

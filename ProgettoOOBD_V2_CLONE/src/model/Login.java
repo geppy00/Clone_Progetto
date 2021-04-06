@@ -1,18 +1,26 @@
 
 package model;
 
+import dao.ExceptionDao;
+import dao.LoginDao;
+
 
 public class Login {
 
-   
-   
     private int codeLogin;
     private String username; 
     private String password;
-    private int opzioneLogin;
-    
+    private String opzioneLogin;
+   
+
+    public Login(String username, String password, String scelta) {
+        this.username = username;
+        this.password = password;
+        this.opzioneLogin = scelta;
+    }
+
     public Login() {
-        
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
    
@@ -44,14 +52,17 @@ public class Login {
     public void setPassword(String password) {
         this.password = password;
     }
-
     
-    public int getOpzioneLogin() {
+   public String getOpzioneLogin() {
         return opzioneLogin;
     }
 
    
-    public void setOpzioneLogin(int opzioneLogin) {
+    public void setOpzioneLogin(String opzioneLogin) {
         this.opzioneLogin = opzioneLogin;
+    }
+    
+    public void verificaLogin(Login login) throws ExceptionDao {
+        new LoginDao().verificaLogin(username, password, username);
     }
 }
