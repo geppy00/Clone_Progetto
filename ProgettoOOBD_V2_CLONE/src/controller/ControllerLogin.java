@@ -8,13 +8,11 @@ public class ControllerLogin {
         
         if(username.length() > 0 && username != null && password.length() > 0 && password != null && scelta.length() > 0 && scelta != null) {
             Login login = new Login(username, password, scelta);
-            login.verificaLogin(login);
-            return true;
+            boolean value  =  login.verificaLogin(login);
+            if(value == true)
+                return true;
         }
         
         return false;
     }
-    
-    
-    
 }

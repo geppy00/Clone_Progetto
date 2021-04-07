@@ -62,7 +62,8 @@ public class Login {
         this.opzioneLogin = opzioneLogin;
     }
     
-    public void verificaLogin(Login login) throws ExceptionDao {
-        new LoginDao().verificaLogin(username, password, username);
+    public boolean verificaLogin(Login login) throws ExceptionDao {
+       return new LoginDao().verificaLogin(username, password, opzioneLogin);
+      
     }
 }
