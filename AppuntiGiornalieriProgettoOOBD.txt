@@ -1,0 +1,8 @@
+************************************Problem Solving PROGETTO OO-BD************************************
+
+10/04/21 - Oggi abbiamo concluso la sessione registra procuratore ed effettuato la conversione java.util.Date in java.sql.Date
+	   Errore "org.postgresql.util.psqlexception error syntax error at or near $2" (INSERT INTO procuratore(code_procuratore, nome, cognome, sesso, nazione, indirizzo, datanascita, telefono, codfiscale, iban_procuratore) VALUES(?. ?, ?, ?, ?, ?, ?, ? ,?, ?))
+	   Soluzione (INSERT INTO procuratore(code_procuratore, nome, cognome, sesso, nazione, indirizzo, datanascita, telefono, codfiscale, iban_procuratore) VALUES(?, ?, ?, ?, ?, ?, ?, ? ,?, ?))
+	   Abbiamo anche trovato difficoltà nella gestione delle date, precisamente lavorando con formato e nella conversione date in java a quello SQL 
+	   	Soluzione formato = yyyy/MM/dd
+		Codice Conversione => java.sql.Date dataNascitaPresoSql = new java.sql.Date(dataNascitaJDC.getDate().getTime());
