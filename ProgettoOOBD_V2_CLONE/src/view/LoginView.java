@@ -22,10 +22,10 @@ public class LoginView extends javax.swing.JFrame {
         usernameJL = new javax.swing.JLabel();
         usernameJTF = new javax.swing.JTextField();
         passwordJL = new javax.swing.JLabel();
-        passwordJTF = new javax.swing.JTextField();
         sceltaAccessoJCB = new javax.swing.JComboBox<>();
         btnAccediJB = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        passwordPJTF = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -63,8 +63,8 @@ public class LoginView extends javax.swing.JFrame {
                     .addComponent(passwordJL)
                     .addComponent(sceltaAccessoJCB, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(usernameJTF)
-                    .addComponent(passwordJTF)
-                    .addComponent(usernameJL))
+                    .addComponent(usernameJL)
+                    .addComponent(passwordPJTF))
                 .addContainerGap(82, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -77,8 +77,8 @@ public class LoginView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(passwordJL)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(passwordJTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
+                .addComponent(passwordPJTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
                 .addComponent(sceltaAccessoJCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -92,7 +92,7 @@ public class LoginView extends javax.swing.JFrame {
 
     private void btnAccediJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAccediJBActionPerformed
        String userName = usernameJTF.getText();
-       String password = passwordJTF.getText();
+       String password = passwordPJTF.getText();
        String scelta = sceltaAccessoJCB.getSelectedItem().toString();
        
        ControllerLogin loginController = new ControllerLogin();
@@ -129,7 +129,7 @@ public class LoginView extends javax.swing.JFrame {
     private javax.swing.JButton btnAccediJB;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel passwordJL;
-    private javax.swing.JTextField passwordJTF;
+    private javax.swing.JPasswordField passwordPJTF;
     private javax.swing.JComboBox<String> sceltaAccessoJCB;
     private javax.swing.JLabel usernameJL;
     private javax.swing.JTextField usernameJTF;

@@ -17,12 +17,12 @@ public class Admin extends Login {
     private String sessoProcuratore;
     private String nazioneProcuratore;
     private String indirizzoProcuratore;
-    private Date dataNascitaProcuratore;
+    private java.sql.Date dataNascitaProcuratore;
     private String telefonoProcuratore;
     private String codiceFiscaleProcuratore;
     private String ibanProcuratore;
     
-    public Admin(String codiceProcuratore, String nome, String cognmome, String sesso, String nazione, String indirizzo, Date dataNascita, String telefono, String codiceFiscale, String iban) {
+    public Admin(String codiceProcuratore, String nome, String cognmome, String sesso, String nazione, String indirizzo, java.sql.Date dataNascita, String telefono, String codiceFiscale, String iban) {
         this.codiceFiscaleProcuratore = codiceFiscale;
         this.codiceProcuratore = codiceProcuratore;
         this.cognmomeProcuratore = cognmome;
@@ -157,14 +157,14 @@ public class Admin extends Login {
     /**
      * @return the dataNascitaProcuratore
      */
-    public Date getDataNascitaProcuratore() {
+    public java.sql.Date getDataNascitaProcuratore() {
         return dataNascitaProcuratore;
     }
 
     /**
      * @param dataNascitaProcuratore the dataNascitaProcuratore to set
      */
-    public void setDataNascitaProcuratore(Date dataNascitaProcuratore) {
+    public void setDataNascitaProcuratore(java.sql.Date dataNascitaProcuratore) {
         this.dataNascitaProcuratore = dataNascitaProcuratore;
     }
 

@@ -2,6 +2,10 @@
 package view.registrare;
 
 import controller.ControllerAdmin;
+import dao.ExceptionDao;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import view.SezioneProcuratoreView;
 
 public class RegistraProcuratore extends javax.swing.JFrame {
@@ -35,6 +39,7 @@ public class RegistraProcuratore extends javax.swing.JFrame {
         btnTornaIndietroJB = new javax.swing.JButton();
         btnRegistraJB = new javax.swing.JButton();
         inputIndirizzoJTF = new javax.swing.JTextField();
+        dataNascitaJL = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -48,6 +53,8 @@ public class RegistraProcuratore extends javax.swing.JFrame {
         sessoJCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Maschio", "Femmina", "Altro" }));
 
         indirizzoJL.setText("Indirizzo");
+
+        dataNascitaJDC.setDateFormatString("yyyy/MM/dd");
 
         telefonoJL.setText("Telefono");
 
@@ -71,6 +78,8 @@ public class RegistraProcuratore extends javax.swing.JFrame {
             }
         });
 
+        dataNascitaJL.setText("Data di nascita");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -82,41 +91,46 @@ public class RegistraProcuratore extends javax.swing.JFrame {
                         .addComponent(indirizzoJL)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(inputIndirizzoJTF))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(ibanJL)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(InputIbanJTF))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(codiceFiscaleJL)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(InputCodiceFiscaleJTF))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(telefonoJL)
-                            .addGap(2, 2, 2)
-                            .addComponent(InputTelefonoJTF))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(cognomeJL)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(InputCognomeJTF, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(nazioneJL)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(inputNazioneJTF))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(nomeJL)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(inputNomeJTF)))
-                    .addComponent(btnTornaIndietroJB))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnRegistraJB, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dataNascitaJDC, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(ibanJL)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(InputIbanJTF))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(codiceFiscaleJL)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(InputCodiceFiscaleJTF))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(telefonoJL)
+                        .addGap(2, 2, 2)
+                        .addComponent(InputTelefonoJTF))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(cognomeJL)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(InputCognomeJTF, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(nazioneJL)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(inputNazioneJTF))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(nomeJL)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(inputNomeJTF))
+                    .addComponent(btnTornaIndietroJB))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnRegistraJB, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(dataNascitaJL)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(dataNascitaJDC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(sessoJL)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(sessoJCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(27, 27, 27))
+                        .addComponent(sessoJCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -134,7 +148,9 @@ public class RegistraProcuratore extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(dataNascitaJDC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(dataNascitaJL)
+                            .addComponent(dataNascitaJDC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(3, 3, 3)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nazioneJL)
@@ -179,11 +195,26 @@ public class RegistraProcuratore extends javax.swing.JFrame {
 
     private void btnRegistraJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistraJBActionPerformed
         ControllerAdmin controllerAdmin = new ControllerAdmin();
+        
         String nomePreso = inputNomeJTF.getText();
         String cognomePreso = InputCognomeJTF.getText();
         String nazionePresa = inputNazioneJTF.getText();
         String indirizzoPreso = inputIndirizzoJTF.getText();
-        Date dataNascitaPreso = 
+        //Date dataNascitaPreso = dataNascitaJDC.getDate();
+        String telefonoPreso = InputTelefonoJTF.getText();
+        String codiceFiscalePreso = InputCodiceFiscaleJTF.getText();
+        String ibanPreso = InputIbanJTF.getText();
+        
+        
+        java.sql.Date dataNascitaPresoSql = new java.sql.Date(dataNascitaJDC.getDate().getTime());
+        System.out.println("DATA DEL PROC = "+dataNascitaPresoSql);
+        
+        try {
+            controllerAdmin.registraProcuratore(codiceFiscalePreso, nomePreso, cognomePreso, nomePreso, nazionePresa, indirizzoPreso, (java.sql.Date) dataNascitaPresoSql, telefonoPreso, codiceFiscalePreso, ibanPreso);
+        } catch (ExceptionDao ex) {
+            Logger.getLogger(RegistraProcuratore.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }//GEN-LAST:event_btnRegistraJBActionPerformed
 
    
@@ -229,6 +260,7 @@ public class RegistraProcuratore extends javax.swing.JFrame {
     private javax.swing.JLabel codiceFiscaleJL;
     private javax.swing.JLabel cognomeJL;
     private com.toedter.calendar.JDateChooser dataNascitaJDC;
+    private javax.swing.JLabel dataNascitaJL;
     private javax.swing.JLabel ibanJL;
     private javax.swing.JLabel indirizzoJL;
     private javax.swing.JTextField inputIndirizzoJTF;

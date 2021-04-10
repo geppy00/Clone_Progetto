@@ -18,10 +18,14 @@ public class Login {
         this.password = password;
         this.opzioneLogin = scelta;
     }
-
+    
     public Login() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
+    
+    /*public Login() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }*/
     
    
     public int getCodeLogin() {
