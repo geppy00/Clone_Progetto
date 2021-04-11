@@ -20,4 +20,26 @@ public class ControllerAdmin {
         
         return false;
     }
+    
+    public boolean cercaProcuratore(String codiceProcuratore) throws ExceptionDao {
+        
+        if(codiceProcuratore != null && codiceProcuratore.length() > 0){
+            Admin admin = new Admin(codiceProcuratore);
+            admin.cercaProcuratore(admin);
+            return true;
+        }
+        
+        return false;
+    }
+    
+    public boolean eliminaProcuratore(String codiceProcuratore) throws ExceptionDao {
+        
+        if(codiceProcuratore != null && codiceProcuratore.length() > 0){
+            Admin admin = new Admin(codiceProcuratore);
+            admin.eliminaProcuratore(admin);
+            return true;
+        }
+        
+        return false;
+    }
 }

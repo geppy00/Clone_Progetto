@@ -1,12 +1,12 @@
 
 package view;
-import model.Admin;
 
 
 public class AdminView extends javax.swing.JFrame {
 
     public AdminView() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     @SuppressWarnings("unchecked")

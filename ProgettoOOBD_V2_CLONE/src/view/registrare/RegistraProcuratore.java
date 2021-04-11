@@ -3,7 +3,6 @@ package view.registrare;
 
 import controller.ControllerAdmin;
 import dao.ExceptionDao;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import view.SezioneProcuratoreView;
@@ -13,6 +12,7 @@ public class RegistraProcuratore extends javax.swing.JFrame {
    
     public RegistraProcuratore() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     
@@ -200,14 +200,10 @@ public class RegistraProcuratore extends javax.swing.JFrame {
         String cognomePreso = InputCognomeJTF.getText();
         String nazionePresa = inputNazioneJTF.getText();
         String indirizzoPreso = inputIndirizzoJTF.getText();
-        //Date dataNascitaPreso = dataNascitaJDC.getDate();
+        java.sql.Date dataNascitaPresoSql = new java.sql.Date(dataNascitaJDC.getDate().getTime());
         String telefonoPreso = InputTelefonoJTF.getText();
         String codiceFiscalePreso = InputCodiceFiscaleJTF.getText();
         String ibanPreso = InputIbanJTF.getText();
-        
-        
-        java.sql.Date dataNascitaPresoSql = new java.sql.Date(dataNascitaJDC.getDate().getTime());
-        System.out.println("DATA DEL PROC = "+dataNascitaPresoSql);
         
         try {
             controllerAdmin.registraProcuratore(codiceFiscalePreso, nomePreso, cognomePreso, nomePreso, nazionePresa, indirizzoPreso, (java.sql.Date) dataNascitaPresoSql, telefonoPreso, codiceFiscalePreso, ibanPreso);

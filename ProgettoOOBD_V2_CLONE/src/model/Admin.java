@@ -35,6 +35,10 @@ public class Admin extends Login {
         this.telefonoProcuratore = telefono;
     }
     
+    public Admin(String codiceProcuratore) {
+        this.codiceProcuratore = codiceProcuratore;
+    }
+    
     /**
      * @return the usernameAdmin
      */
@@ -212,5 +216,13 @@ public class Admin extends Login {
     
     public void registraProcuratore(Admin admin) throws ExceptionDao {
         new AdminDao().registraProcuratore(admin);
+    }
+    
+    public void cercaProcuratore(Admin admin) throws ExceptionDao {
+        new AdminDao().cercaProcuratore(admin);
+    }
+    
+    public void eliminaProcuratore(Admin admin) throws ExceptionDao {
+        new AdminDao().eliminaProcuratore(admin);
     }
 }

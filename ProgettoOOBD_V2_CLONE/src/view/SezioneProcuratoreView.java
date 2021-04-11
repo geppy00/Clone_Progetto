@@ -1,5 +1,6 @@
 
 package view;
+import view.elimina.EliminaProcuratore;
 import view.registrare.RegistraProcuratore;
 
 public class SezioneProcuratoreView extends javax.swing.JFrame {
@@ -7,7 +8,7 @@ public class SezioneProcuratoreView extends javax.swing.JFrame {
     
     public SezioneProcuratoreView() {
         initComponents();
-        
+        this.setLocationRelativeTo(null);
     }
 
     
@@ -17,6 +18,7 @@ public class SezioneProcuratoreView extends javax.swing.JFrame {
 
         btnRegistraProcuratoreJB = new javax.swing.JButton();
         btnTornaIndietroJB = new javax.swing.JButton();
+        btnEliminaProcuratoreJB = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -34,15 +36,24 @@ public class SezioneProcuratoreView extends javax.swing.JFrame {
             }
         });
 
+        btnEliminaProcuratoreJB.setText("ELIMINA UTENTE");
+        btnEliminaProcuratoreJB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminaProcuratoreJBActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addComponent(btnRegistraProcuratoreJB, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(588, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(115, 115, 115)
+                .addComponent(btnEliminaProcuratoreJB, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(326, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnTornaIndietroJB)
                 .addContainerGap())
@@ -50,9 +61,11 @@ public class SezioneProcuratoreView extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(105, Short.MAX_VALUE)
-                .addComponent(btnRegistraProcuratoreJB, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(65, 65, 65)
+                .addContainerGap(101, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnRegistraProcuratoreJB, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEliminaProcuratoreJB, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(61, 61, 61)
                 .addComponent(btnTornaIndietroJB)
                 .addContainerGap())
         );
@@ -71,6 +84,12 @@ public class SezioneProcuratoreView extends javax.swing.JFrame {
        adminPage.setVisible(true);
        this.setVisible(false);
     }//GEN-LAST:event_btnTornaIndietroJBActionPerformed
+
+    private void btnEliminaProcuratoreJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminaProcuratoreJBActionPerformed
+       EliminaProcuratore eliminaProcuratore = new EliminaProcuratore();
+       eliminaProcuratore.setVisible(true);
+       this.setVisible(false);
+    }//GEN-LAST:event_btnEliminaProcuratoreJBActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -105,6 +124,7 @@ public class SezioneProcuratoreView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnEliminaProcuratoreJB;
     private javax.swing.JButton btnRegistraProcuratoreJB;
     private javax.swing.JButton btnTornaIndietroJB;
     // End of variables declaration//GEN-END:variables
