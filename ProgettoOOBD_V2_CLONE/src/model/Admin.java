@@ -3,6 +3,7 @@ package model;
 
 import dao.AdminDao;
 import dao.ExceptionDao;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Admin extends Login {
@@ -33,6 +34,10 @@ public class Admin extends Login {
         this.nomeProcuratore = nome;
         this.sessoProcuratore = sesso;
         this.telefonoProcuratore = telefono;
+    }
+    
+    public Admin() {
+        
     }
     
     public Admin(String codiceProcuratore) {
@@ -218,8 +223,8 @@ public class Admin extends Login {
         new AdminDao().registraProcuratore(admin);
     }
     
-    public void cercaProcuratore(Admin admin) throws ExceptionDao {
-        new AdminDao().cercaProcuratore(admin);
+    public ArrayList<Admin> cercaProcuratore(Admin admin) throws ExceptionDao {
+        return new AdminDao().cercaProcuratore(admin);
     }
     
     public void eliminaProcuratore(Admin admin) throws ExceptionDao {

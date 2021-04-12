@@ -6,3 +6,8 @@
 	   Abbiamo anche trovato difficoltà nella gestione delle date, precisamente lavorando con formato e nella conversione date in java a quello SQL 
 	   	Soluzione formato = yyyy/MM/dd
 		Codice Conversione => java.sql.Date dataNascitaPresoSql = new java.sql.Date(dataNascitaJDC.getDate().getTime());
+
+12/04/2021 - Errore "Non si possono utilizzare i metodi "query" che hanno come argomento una stringa nel caso di «PreparedStatement»."
+	     per la sintassi "ResultSet rs = pStmt.executeQuery(sql);"
+	     Soluzione:  ResultSet rs = pStmt.executeQuery(); // senza passare il sql, perché è void
+             Oggi abbiamo concluso la sessione per cercare ed eliminare un procuratore

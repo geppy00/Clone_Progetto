@@ -21,15 +21,14 @@ public class ControllerAdmin {
         return false;
     }
     
-    public boolean cercaProcuratore(String codiceProcuratore) throws ExceptionDao {
+    public ArrayList<Admin> cercaProcuratore(String codiceProcuratore) throws ExceptionDao {
         
         if(codiceProcuratore != null && codiceProcuratore.length() > 0){
             Admin admin = new Admin(codiceProcuratore);
-            admin.cercaProcuratore(admin);
-            return true;
+            return admin.cercaProcuratore(admin);
         }
         
-        return false;
+        return null;
     }
     
     public boolean eliminaProcuratore(String codiceProcuratore) throws ExceptionDao {

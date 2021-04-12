@@ -3,6 +3,7 @@ package dao;
 
 import java.sql.*;
 import java.sql.PreparedStatement;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import model.Admin;
 import refactorCode.FinallyException;
@@ -39,40 +40,37 @@ public class AdminDao {
         }
     }
     
-    public void cercaProcuratore(Admin admin) throws ExceptionDao {
+    public ArrayList<Admin> cercaProcuratore(Admin admin) throws ExceptionDao {
         String sql= "SELECT * FROM procuratore WHERE code_procuratore LIKE ?;";
         PreparedStatement pStmt = null;
+
         Connection connection = null;
         ResultSet rs = null;
+        ArrayList<Admin> datiProcuratore = new ArrayList<Admin>();
         
         try{
             connection = new DataAccessObject().connectionToDatabase();
             pStmt = connection.prepareStatement(sql);
             pStmt.setString(1, admin.getCodiceProcuratore()+"%");
             rs = pStmt.executeQuery();
-            
+            if(rs==null){return null;}
             //QUESTO CONTROLLO NON FUNZIONA BISOGNA AGGIUSTARE CIOE' SE ESISTE LA MATRICOLA CERCATA ESSO STAMPA A SCHERMO LA JDIALOG PERO' SE NON ESISTE ALLORA NON STAMPA QUESTA JDIALOG SOTTO
-            if(pStmt == null)
-                JOptionPane.showMessageDialog(null, "Procuratore non trovato");
-            
-            while(rs.next()){
-                String codeProcuratoreSQL = rs.getString("code_procuratore");
-                System.out.println(codeProcuratoreSQL);
+            if(rs != null) {
+                while(rs.next()) {
+                    admin.setNomeProcuratore(rs.getString("nome"));
+                    admin.setCodiceProcuratore(rs.getString("code_procuratore"));
+                    admin.setCognmomeProcuratore(rs.getString("cognome"));
+                    admin.setSessoProcuratore(rs.getString("sesso"));
+                    admin.setNazioneProcuratore(rs.getString("nazione"));
+                    admin.setIndirizzoProcuratore(rs.getString("indirizzo"));
+                    admin.setDataNascitaProcuratore(rs.getDate("datanascita"));
+                    admin.setTelefonoProcuratore(rs.getString("telefono"));
+                    admin.setCodiceFiscaleProcuratore(rs.getString("codfiscale"));
+                    admin.setIbanProcuratore(rs.getString("iban_procuratore"));
                 
-                String nomeProcuratoreSQL = rs.getString("nome");
-                String cognmomeProcuratoreSQL = rs.getString("cognome");
-                String sessoProcuratoreSQL = rs.getString("sesso");
-                String nazioneProcuratoreSQL = rs.getString("nazione"); 
-                String indirizzoProcuratoreSQL = rs.getString("indirizzo"); 
-                java.sql.Date dataNascitaProcuratoreSQL = rs.getDate("datanascita"); 
-                String telefonoProcuratoreSQL = rs.getString("telefono"); 
-                String codiceFiscaleProcuratoreSQL = rs.getString("codfiscale"); 
-                String ibanProcuratoreSQL = rs.getString("iban_procuratore");
-                
-                if(codeProcuratoreSQL.equals(admin.getCodiceProcuratore()))
-                    JOptionPane.showMessageDialog(null, "Procuratore trovato");
-            }
-            
+                    datiProcuratore.add(admin);
+                }
+            }       
         }catch(SQLException e){
             throw new ExceptionDao("ERRORE RICERCA PROCURATORE FALLITA "+e);
         }
@@ -81,6 +79,8 @@ public class AdminDao {
             FinallyException finallyException = new FinallyException();
             finallyException.finallyException();
         }
+        
+        return datiProcuratore;
     }
     
     public void eliminaProcuratore(Admin admin) throws ExceptionDao {

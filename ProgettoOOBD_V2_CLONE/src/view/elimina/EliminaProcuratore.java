@@ -3,9 +3,12 @@ package view.elimina;
 
 import controller.ControllerAdmin;
 import dao.ExceptionDao;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.Admin;
 import view.SezioneProcuratoreView;
 
 
@@ -109,9 +112,35 @@ public class EliminaProcuratore extends javax.swing.JFrame {
        ControllerAdmin controllerAdmin = new ControllerAdmin();
        String matricolaPresa = inputMatricolaJTF.getText();
        System.out.println("Matricola = " + matricolaPresa);
+       ArrayList<Admin> datiProcuratore =  new ArrayList<Admin>();
        
         try {
-            controllerAdmin.cercaProcuratore(matricolaPresa);
+            datiProcuratore = controllerAdmin.cercaProcuratore(matricolaPresa);
+            if(datiProcuratore != null){
+                JOptionPane.showMessageDialog(null, "Procuratore trovato");
+                
+                DefaultTableModel tblModel = (DefaultTableModel)jTable1.getModel();
+            
+                datiProcuratore.forEach((Admin admin)->{
+                    tblModel.addRow(new Object[]{
+                        admin.getCodiceProcuratore(),
+                        admin.getNomeProcuratore(),
+                        admin.getCognmomeProcuratore(),
+                        admin.getSessoProcuratore(),
+                        admin.getNazioneProcuratore(),
+                        admin.getIndirizzoProcuratore(),
+                        admin.getDataNascitaProcuratore(),
+                        admin.getTelefonoProcuratore(),
+                        admin.getCodiceFiscaleProcuratore(),
+                        admin.getIbanProcuratore()
+                    });
+                    jTable1.setModel(tblModel);
+                });
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Procuratore non trovato");
+            }
+            
         } catch (ExceptionDao ex) {
             Logger.getLogger(EliminaProcuratore.class.getName()).log(Level.SEVERE, null, ex);
         }
