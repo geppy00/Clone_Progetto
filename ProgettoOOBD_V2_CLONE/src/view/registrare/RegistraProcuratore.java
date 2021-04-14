@@ -1,7 +1,7 @@
 
 package view.registrare;
 
-import controller.ControllerAdmin;
+import controller.ControllerProcuratore;
 import dao.ExceptionDao;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -40,6 +40,8 @@ public class RegistraProcuratore extends javax.swing.JFrame {
         btnRegistraJB = new javax.swing.JButton();
         inputIndirizzoJTF = new javax.swing.JTextField();
         dataNascitaJL = new javax.swing.JLabel();
+        matricolaJL = new javax.swing.JLabel();
+        inputMatricolaJTF = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -80,6 +82,9 @@ public class RegistraProcuratore extends javax.swing.JFrame {
 
         dataNascitaJL.setText("Data di nascita");
 
+        matricolaJL.setText("Matricola");
+        matricolaJL.setToolTipText("");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -115,7 +120,11 @@ public class RegistraProcuratore extends javax.swing.JFrame {
                         .addComponent(nomeJL)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(inputNomeJTF))
-                    .addComponent(btnTornaIndietroJB))
+                    .addComponent(btnTornaIndietroJB)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(matricolaJL)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(inputMatricolaJTF)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
@@ -176,7 +185,11 @@ public class RegistraProcuratore extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(ibanJL)
                             .addComponent(InputIbanJTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(matricolaJL)
+                            .addComponent(inputMatricolaJTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                         .addComponent(btnTornaIndietroJB))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -194,8 +207,10 @@ public class RegistraProcuratore extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTornaIndietroJBActionPerformed
 
     private void btnRegistraJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistraJBActionPerformed
-        ControllerAdmin controllerAdmin = new ControllerAdmin();
+        ControllerProcuratore controllerProcuratore = new ControllerProcuratore();
         
+        String sessoPreso = (String) sessoJCB.getSelectedItem();
+        String matricolaPresa = inputMatricolaJTF.getText();
         String nomePreso = inputNomeJTF.getText();
         String cognomePreso = InputCognomeJTF.getText();
         String nazionePresa = inputNazioneJTF.getText();
@@ -206,7 +221,7 @@ public class RegistraProcuratore extends javax.swing.JFrame {
         String ibanPreso = InputIbanJTF.getText();
         
         try {
-            controllerAdmin.registraProcuratore(codiceFiscalePreso, nomePreso, cognomePreso, nomePreso, nazionePresa, indirizzoPreso, (java.sql.Date) dataNascitaPresoSql, telefonoPreso, codiceFiscalePreso, ibanPreso);
+            controllerProcuratore.registraProcuratore(matricolaPresa, nomePreso, cognomePreso, sessoPreso, nazionePresa, indirizzoPreso, (java.sql.Date) dataNascitaPresoSql, telefonoPreso, codiceFiscalePreso, ibanPreso);
         } catch (ExceptionDao ex) {
             Logger.getLogger(RegistraProcuratore.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -260,8 +275,10 @@ public class RegistraProcuratore extends javax.swing.JFrame {
     private javax.swing.JLabel ibanJL;
     private javax.swing.JLabel indirizzoJL;
     private javax.swing.JTextField inputIndirizzoJTF;
+    private javax.swing.JTextField inputMatricolaJTF;
     private javax.swing.JTextField inputNazioneJTF;
     private javax.swing.JTextField inputNomeJTF;
+    private javax.swing.JLabel matricolaJL;
     private javax.swing.JLabel nazioneJL;
     private javax.swing.JLabel nomeJL;
     private javax.swing.JComboBox<String> sessoJCB;

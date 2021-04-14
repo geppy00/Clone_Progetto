@@ -6,6 +6,7 @@ import dao.ExceptionDao;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import model.Admin;
 
 public class LoginView extends javax.swing.JFrame {
     
@@ -107,9 +108,11 @@ public class LoginView extends javax.swing.JFrame {
                JOptionPane.showMessageDialog(null, "Dati corretti");
                if(scelta=="Admin"){ 
                   // qua entro normalmente, non lo so solo perché non mi apre na nuova finestra
+                  Admin admin = new Admin();
                   AdminView adminview = new AdminView();
                   adminview.setVisible(true);
                   this.setVisible(false);
+                   System.out.println("DATI D'ACCESSO= "+admin.getPasswordAdmin()+admin.getUsernameAdmin());
                }
                else if(scelta=="Procuratore"){}
                else if(scelta=="Sporsor"){}

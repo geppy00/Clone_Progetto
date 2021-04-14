@@ -62,6 +62,11 @@
                       <Component id="inputNomeJTF" max="32767" attributes="0"/>
                   </Group>
                   <Component id="btnTornaIndietroJB" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="matricolaJL" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="inputMatricolaJTF" max="32767" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
@@ -142,7 +147,12 @@
                           <Component id="ibanJL" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="InputIbanJTF" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="31" max="32767" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="matricolaJL" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="inputMatricolaJTF" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="41" max="32767" attributes="0"/>
                       <Component id="btnTornaIndietroJB" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
@@ -250,6 +260,14 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Data di nascita"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="matricolaJL">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Matricola"/>
+        <Property name="toolTipText" type="java.lang.String" value=""/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="inputMatricolaJTF">
     </Component>
   </SubComponents>
 </Form>

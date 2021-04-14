@@ -26,9 +26,11 @@
           <Group type="102" attributes="0">
               <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
               <Component id="btnRegistraProcuratoreJB" min="-2" pref="147" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="115" max="-2" attributes="0"/>
-              <Component id="btnEliminaProcuratoreJB" min="-2" pref="147" max="-2" attributes="0"/>
-              <EmptySpace pref="326" max="32767" attributes="0"/>
+              <EmptySpace pref="129" max="32767" attributes="0"/>
+              <Component id="btnEliminaProcuratoreJB" min="-2" pref="150" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="122" max="-2" attributes="0"/>
+              <Component id="btnModificaDatiProcuratoreJB" min="-2" pref="150" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
@@ -44,6 +46,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnRegistraProcuratoreJB" alignment="3" min="-2" pref="120" max="-2" attributes="0"/>
                   <Component id="btnEliminaProcuratoreJB" alignment="3" min="-2" pref="128" max="-2" attributes="0"/>
+                  <Component id="btnModificaDatiProcuratoreJB" alignment="3" min="-2" pref="128" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
               <Component id="btnTornaIndietroJB" min="-2" max="-2" attributes="0"/>
@@ -75,6 +78,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEliminaProcuratoreJBActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnModificaDatiProcuratoreJB">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="MODIFICA DATI PERSONALI"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnModificaDatiProcuratoreJBActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

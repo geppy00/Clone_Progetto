@@ -7,15 +7,34 @@ import java.util.Date;
 
 public class Procuratore {
 
+
     private String code_procuratore;
     private String nome;
     private String cognome;
     private String sesso;
     private String nazione; 
     private String indirizzo;
-    private Date dataNascita;
+    private java.sql.Date dataNascita;
     private String telefono;
     private String codFiscale;
+    private String iban;
+
+    public Procuratore(String code_procuratore, String nome, String cognome, String sesso, String nazione, String indirizzo, java.sql.Date dataNascita, String telefono, String codFiscale, String iban) {
+        this.code_procuratore = code_procuratore;
+        this.nome = nome;
+        this.cognome = cognome;
+        this.sesso = sesso;
+        this.nazione = nazione;
+        this.indirizzo = indirizzo;
+        this.dataNascita = dataNascita;
+        this.telefono = telefono;
+        this.codFiscale = codFiscale;
+        this.iban = iban;
+    }
+    
+    public Procuratore(String codiceProcuratore){
+        this.code_procuratore = codiceProcuratore;
+    }
     
     /*RELAZIONI*/
     private ArrayList<Atleta> listaAtleta = new ArrayList<Atleta>();
@@ -107,14 +126,14 @@ public class Procuratore {
     /**
      * @return the dataNascita
      */
-    public Date getDataNascita() {
+    public java.sql.Date getDataNascita() {
         return dataNascita;
     }
 
     /**
      * @param dataNascita the dataNascita to set
      */
-    public void setDataNascita(Date dataNascita) {
+    public void setDataNascita(java.sql.Date dataNascita) {
         this.dataNascita = dataNascita;
     }
 
@@ -145,4 +164,16 @@ public class Procuratore {
     public void setCodFiscale(String codFiscale) {
         this.codFiscale = codFiscale;
     }
+    
+    
+    public String getIban() {
+        return iban;
+    }
+
+   
+    public void setIban(String iban) {
+        this.iban = iban;
+    }
+    
+    
 }
