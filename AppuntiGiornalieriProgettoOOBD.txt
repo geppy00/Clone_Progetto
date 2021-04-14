@@ -11,3 +11,7 @@
 	     per la sintassi "ResultSet rs = pStmt.executeQuery(sql);"
 	     Soluzione:  ResultSet rs = pStmt.executeQuery(); // senza passare il sql, perché è void
              Oggi abbiamo concluso la sessione per cercare ed eliminare un procuratore
+
+14/04/2021 - Aggiornati la posizione dei metodi per eliminare, cercare, registrare ed aggiornare i dati di un procuratore da parte dell'admin
+	     dalla classe dao dell'admin sono stati trasferiti all'interno della classe dao del procuratore perchè sono operazione compite dall'admin
+             però riguardante al procuratore
