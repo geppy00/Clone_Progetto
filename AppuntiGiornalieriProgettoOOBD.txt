@@ -15,3 +15,5 @@
 14/04/2021 - Aggiornati la posizione dei metodi per eliminare, cercare, registrare ed aggiornare i dati di un procuratore da parte dell'admin
 	     dalla classe dao dell'admin sono stati trasferiti all'interno della classe dao del procuratore perchè sono operazione compite dall'admin
              però riguardante al procuratore
+	     Abbiamo definito nella schermata Admin la sezione per lo Sponsor, ed nella sezione Sponsor abbiamo definito la registrazione da parte dell'admin
+       	     Nessun problema rivelato nella scrittura dei metodi precedentemente definiti 
