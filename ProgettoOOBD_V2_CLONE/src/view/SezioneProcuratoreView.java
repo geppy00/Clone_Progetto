@@ -21,6 +21,7 @@ public class SezioneProcuratoreView extends javax.swing.JFrame {
         btnTornaIndietroJB = new javax.swing.JButton();
         btnEliminaProcuratoreJB = new javax.swing.JButton();
         btnModificaDatiProcuratoreJB = new javax.swing.JButton();
+        titoloJL = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -52,27 +53,35 @@ public class SezioneProcuratoreView extends javax.swing.JFrame {
             }
         });
 
+        titoloJL.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
+        titoloJL.setText("SEZIONE PROCURATORE");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(btnRegistraProcuratoreJB, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 129, Short.MAX_VALUE)
-                .addComponent(btnEliminaProcuratoreJB, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(122, 122, 122)
-                .addComponent(btnModificaDatiProcuratoreJB, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37))
-            .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnTornaIndietroJB)
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(btnRegistraProcuratoreJB, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 129, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(titoloJL)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnEliminaProcuratoreJB, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(122, 122, 122)
+                        .addComponent(btnModificaDatiProcuratoreJB, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(37, 37, 37))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(101, Short.MAX_VALUE)
+                .addGap(28, 28, 28)
+                .addComponent(titoloJL)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRegistraProcuratoreJB, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEliminaProcuratoreJB, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -146,5 +155,6 @@ public class SezioneProcuratoreView extends javax.swing.JFrame {
     private javax.swing.JButton btnModificaDatiProcuratoreJB;
     private javax.swing.JButton btnRegistraProcuratoreJB;
     private javax.swing.JButton btnTornaIndietroJB;
+    private javax.swing.JLabel titoloJL;
     // End of variables declaration//GEN-END:variables
 }

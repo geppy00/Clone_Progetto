@@ -52,6 +52,11 @@ public class AdminView extends javax.swing.JFrame {
         jButton2.setText("Atleta");
 
         jButton3.setText("Sponsor");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -111,6 +116,12 @@ public class AdminView extends javax.swing.JFrame {
         procuratoreView.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnProcuratoreJBActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        SezioneSponsorView sezioneSponsorView = new SezioneSponsorView();
+        sezioneSponsorView.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments

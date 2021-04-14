@@ -3,6 +3,7 @@ package model;
 
 import dao.ExceptionDao;
 import dao.ProcuratoreDao;
+import dao.SponsorDao;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -48,10 +49,6 @@ public class Admin extends Login {
     public void setPasswordAdmin(String passwordAdmin) {
         this.passwordAdmin = passwordAdmin;
     }
-    
-    public void visualizaDatti(Admin admin) throws ExceptionDao{
-       
-    }
 
     public void registraProcuratore(Procuratore procuratore) throws ExceptionDao {
         new ProcuratoreDao().registraProcuratore(procuratore);
@@ -67,5 +64,9 @@ public class Admin extends Login {
     
     public void aggiornaProcuratore(Procuratore procuratore, String matricolaDaModificare) throws ExceptionDao {
         new ProcuratoreDao().aggiornaProcuratore(procuratore, matricolaDaModificare);
+    }
+    
+    public void registraSponsor(Sponsor sponsor) throws ExceptionDao {
+        new SponsorDao().registraSponsor(sponsor);
     }
 }

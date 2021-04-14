@@ -9,6 +9,16 @@ public class Sponsor {
     private String nome;
     private String indirizzo; 
     private String telefono;
+
+    public Sponsor(String nome, String indirizzo, String telefono) {
+        this.nome = nome;
+        this.indirizzo = indirizzo;
+        this.telefono = telefono;
+    }
+    
+    public Sponsor() {
+        
+    }
     
     /*RELAZIONI*/
     private ArrayList<Atleta> listaAtleta = new ArrayList<Atleta>();
