@@ -45,7 +45,6 @@ public class ProcuratoreDao {
     public ArrayList<Procuratore> cercaProcuratore(Procuratore procuratore) throws ExceptionDao {
         String sql= "SELECT * FROM procuratore WHERE code_procuratore LIKE ?;";
         PreparedStatement pStmt = null;
-
         Connection connection = null;
         ResultSet rs = null;
         ArrayList<Procuratore> datiProcuratore = new ArrayList<Procuratore>();

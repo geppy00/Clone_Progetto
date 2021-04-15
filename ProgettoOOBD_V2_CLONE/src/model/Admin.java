@@ -5,7 +5,6 @@ import dao.ExceptionDao;
 import dao.ProcuratoreDao;
 import dao.SponsorDao;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Admin extends Login {
 
@@ -19,23 +18,18 @@ public class Admin extends Login {
         
     }
     
-    
-    /**
-     * @return the usernameAdmin
-     */
     public String getUsernameAdmin() {
         return usernameAdmin;
     }
-
-    /**
-     * @param usernameAdmin the usernameAdmin to set
-     */
+    
     public void setUsernameAdmin(String usernameAdmin) {
         this.usernameAdmin = usernameAdmin;
     }
+    
     public String getopzAdmin() {
         return opzAdmin;
     }
+    
     public void setopzAdmin(String opzAdmin) {
         this.opzAdmin = opzAdmin;
     }
@@ -43,9 +37,7 @@ public class Admin extends Login {
      public String getPasswordAdmin() {
         return passwordAdmin;
     }
-    /**
-     * @param passwordAdmin the passwordAdmin to set
-     */
+   
     public void setPasswordAdmin(String passwordAdmin) {
         this.passwordAdmin = passwordAdmin;
     }
@@ -68,5 +60,17 @@ public class Admin extends Login {
     
     public void registraSponsor(Sponsor sponsor) throws ExceptionDao {
         new SponsorDao().registraSponsor(sponsor);
+    }
+    
+    public ArrayList<Sponsor> cercaSponsor(Sponsor sponsor) throws ExceptionDao {
+        return new SponsorDao().cercaSponsor(sponsor);
+    }
+    
+    public void eliminaSponsor(Sponsor sponsor) throws ExceptionDao {
+        new SponsorDao().eliminaSponsor(sponsor);
+    }
+    
+    public void aggiornaSponsor(Sponsor sponsor, String nomeSponsor) throws ExceptionDao {
+        new SponsorDao().aggiornaSponsor(sponsor, nomeSponsor);
     }
 }

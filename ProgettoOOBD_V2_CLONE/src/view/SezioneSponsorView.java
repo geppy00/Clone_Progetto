@@ -1,6 +1,8 @@
 
 package view;
 
+import view.elimina.EliminaSponsor;
+import view.modificaDati.ModificaSponsor;
 import view.registrare.RegistraSponsor;
 
 public class SezioneSponsorView extends javax.swing.JFrame {
@@ -18,8 +20,9 @@ public class SezioneSponsorView extends javax.swing.JFrame {
 
         titoloJL = new javax.swing.JLabel();
         btsRegistraSponsorJB = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnEliminaSponsorJB = new javax.swing.JButton();
+        btnAggiornaSponsorJB = new javax.swing.JButton();
+        btnTornaIndietroJB = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -34,9 +37,26 @@ public class SezioneSponsorView extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("ELIMINA SPONSOR");
+        btnEliminaSponsorJB.setText("ELIMINA SPONSOR");
+        btnEliminaSponsorJB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminaSponsorJBActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("AGGIORNA SPONSOR");
+        btnAggiornaSponsorJB.setText("AGGIORNA SPONSOR");
+        btnAggiornaSponsorJB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAggiornaSponsorJBActionPerformed(evt);
+            }
+        });
+
+        btnTornaIndietroJB.setText("TORNA INDIETRO");
+        btnTornaIndietroJB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTornaIndietroJBActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -46,14 +66,18 @@ public class SezioneSponsorView extends javax.swing.JFrame {
                 .addGap(50, 50, 50)
                 .addComponent(btsRegistraSponsorJB, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 129, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnEliminaSponsorJB, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(121, 121, 121)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnAggiornaSponsorJB, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(55, 55, 55))
             .addGroup(layout.createSequentialGroup()
                 .addGap(254, 254, 254)
                 .addComponent(titoloJL)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnTornaIndietroJB)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -63,9 +87,11 @@ public class SezioneSponsorView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btsRegistraSponsorJB, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(47, 47, 47))
+                    .addComponent(btnEliminaSponsorJB, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAggiornaSponsorJB, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17)
+                .addComponent(btnTornaIndietroJB)
+                .addContainerGap())
         );
 
         pack();
@@ -77,6 +103,24 @@ public class SezioneSponsorView extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btsRegistraSponsorJBActionPerformed
 
+    private void btnTornaIndietroJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTornaIndietroJBActionPerformed
+        AdminView adminView = new AdminView();
+        adminView.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnTornaIndietroJBActionPerformed
+
+    private void btnEliminaSponsorJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminaSponsorJBActionPerformed
+        EliminaSponsor eliminaSponsor = new EliminaSponsor();
+        eliminaSponsor.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnEliminaSponsorJBActionPerformed
+
+    private void btnAggiornaSponsorJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAggiornaSponsorJBActionPerformed
+        ModificaSponsor modificaSponsor = new ModificaSponsor();
+        modificaSponsor.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnAggiornaSponsorJBActionPerformed
+
     public static void main(String args[]) {
         
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -87,9 +131,10 @@ public class SezioneSponsorView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAggiornaSponsorJB;
+    private javax.swing.JButton btnEliminaSponsorJB;
+    private javax.swing.JButton btnTornaIndietroJB;
     private javax.swing.JButton btsRegistraSponsorJB;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel titoloJL;
     // End of variables declaration//GEN-END:variables
 }

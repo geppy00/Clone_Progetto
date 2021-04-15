@@ -27,15 +27,20 @@
               <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
               <Component id="btsRegistraSponsorJB" min="-2" pref="144" max="-2" attributes="0"/>
               <EmptySpace pref="129" max="32767" attributes="0"/>
-              <Component id="jButton1" min="-2" pref="145" max="-2" attributes="0"/>
+              <Component id="btnEliminaSponsorJB" min="-2" pref="145" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="121" max="-2" attributes="0"/>
-              <Component id="jButton2" min="-2" pref="145" max="-2" attributes="0"/>
+              <Component id="btnAggiornaSponsorJB" min="-2" pref="145" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="254" max="-2" attributes="0"/>
               <Component id="titoloJL" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="btnTornaIndietroJB" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -47,10 +52,12 @@
               <EmptySpace pref="29" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btsRegistraSponsorJB" alignment="3" min="-2" pref="116" max="-2" attributes="0"/>
-                  <Component id="jButton1" alignment="3" min="-2" pref="116" max="-2" attributes="0"/>
-                  <Component id="jButton2" alignment="3" min="-2" pref="116" max="-2" attributes="0"/>
+                  <Component id="btnEliminaSponsorJB" alignment="3" min="-2" pref="116" max="-2" attributes="0"/>
+                  <Component id="btnAggiornaSponsorJB" alignment="3" min="-2" pref="116" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+              <Component id="btnTornaIndietroJB" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -73,15 +80,29 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btsRegistraSponsorJBActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="btnEliminaSponsorJB">
       <Properties>
         <Property name="text" type="java.lang.String" value="ELIMINA SPONSOR"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEliminaSponsorJBActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton2">
+    <Component class="javax.swing.JButton" name="btnAggiornaSponsorJB">
       <Properties>
         <Property name="text" type="java.lang.String" value="AGGIORNA SPONSOR"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAggiornaSponsorJBActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnTornaIndietroJB">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="TORNA INDIETRO"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTornaIndietroJBActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

@@ -112,7 +112,6 @@ public class EliminaProcuratore extends javax.swing.JFrame {
     private void btnCercaProcuratoreEliminareJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCercaProcuratoreEliminareJBActionPerformed
        ControllerProcuratore controllerProcuratore = new ControllerProcuratore();
        String matricolaPresa = inputMatricolaJTF.getText();
-       System.out.println("Matricola = " + matricolaPresa);
        ArrayList<Procuratore> datiProcuratore =  new ArrayList<Procuratore>();
       
        
@@ -120,20 +119,20 @@ public class EliminaProcuratore extends javax.swing.JFrame {
             datiProcuratore = controllerProcuratore.cercaProcuratore(matricolaPresa);
             if(datiProcuratore != null){
                 JOptionPane.showMessageDialog(null, "Procuratore trovato");
-                        DefaultTableModel tblModel = (DefaultTableModel)jTable1.getModel();
+                DefaultTableModel tblModel = (DefaultTableModel)jTable1.getModel();
                         
-                        datiProcuratore.forEach((Procuratore procuratore)->{
-                        tblModel.addRow(new Object[]{
-                        procuratore.getCode_procuratore(),
-                        procuratore.getNome(),
-                        procuratore.getCognome(),
-                        procuratore.getSesso(),
-                        procuratore.getNazione(),
-                        procuratore.getIndirizzo(),
-                        procuratore.getDataNascita(),
-                        procuratore.getTelefono(),
-                        procuratore.getCodFiscale(),
-                        procuratore.getIban()
+                datiProcuratore.forEach((Procuratore procuratore)->{
+                    tblModel.addRow(new Object[]{
+                    procuratore.getCode_procuratore(),
+                    procuratore.getNome(),
+                    procuratore.getCognome(),
+                    procuratore.getSesso(),
+                    procuratore.getNazione(),
+                    procuratore.getIndirizzo(),
+                    procuratore.getDataNascita(),
+                    procuratore.getTelefono(),
+                    procuratore.getCodFiscale(),
+                    procuratore.getIban()
                     });
                     jTable1.setModel(tblModel);
                 });
@@ -150,7 +149,6 @@ public class EliminaProcuratore extends javax.swing.JFrame {
     private void btnEliminaJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminaJBActionPerformed
        ControllerProcuratore controllerProcuratore = new ControllerProcuratore();
         String matricolaPresa = inputMatricolaJTF.getText();
-        System.out.println("Matricola = " + matricolaPresa);
         
         try {
             controllerProcuratore.eliminaProcuratore(matricolaPresa);
