@@ -10,7 +10,7 @@ import model.Sponsor;
 public class ControllerSponsor {
     public boolean registraSponsor(String nome, String indirizzo, String telefono) throws ExceptionDao {
         
-        if(nome != null && nome.length() > 0 && indirizzo != null && indirizzo.length() > 0 && telefono != null && telefono.length() > 0) {
+        if(nome != null && nome.length() > 0 && indirizzo != null && indirizzo.length() > 0) {
             Sponsor sponsor = new Sponsor(nome, indirizzo, telefono);
             Admin admin = new Admin();
             admin.registraSponsor(sponsor);
@@ -39,7 +39,7 @@ public class ControllerSponsor {
     }
     
     public boolean aggiornaSponsor(String nome, String indirizzo, String telefono, String nomeDaAggiornare) throws ExceptionDao {
-        if(nome != null && nome.length() > 0 && indirizzo != null && indirizzo.length() > 0 && telefono != null && telefono.length() > 0 && nomeDaAggiornare != null && nomeDaAggiornare.length() > 0) {
+        if(nome != null && nome.length() > 0 && indirizzo != null && indirizzo.length() > 0 && nomeDaAggiornare != null && nomeDaAggiornare.length() > 0) {
             Sponsor sponsor = new Sponsor(nome, indirizzo, telefono);
             Admin admin = new Admin();
             admin.aggiornaSponsor(sponsor, nomeDaAggiornare);

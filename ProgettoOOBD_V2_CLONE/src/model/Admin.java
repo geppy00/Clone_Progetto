@@ -4,6 +4,7 @@ package model;
 import dao.ExceptionDao;
 import dao.ProcuratoreDao;
 import dao.SponsorDao;
+import dao.SportivoDao;
 import java.util.ArrayList;
 
 public class Admin extends Login {
@@ -41,7 +42,7 @@ public class Admin extends Login {
     public void setPasswordAdmin(String passwordAdmin) {
         this.passwordAdmin = passwordAdmin;
     }
-
+/*METODI PER ADMIN*/
     public void registraProcuratore(Procuratore procuratore) throws ExceptionDao {
         new ProcuratoreDao().registraProcuratore(procuratore);
     }
@@ -72,5 +73,9 @@ public class Admin extends Login {
     
     public void aggiornaSponsor(Sponsor sponsor, String nomeSponsor) throws ExceptionDao {
         new SponsorDao().aggiornaSponsor(sponsor, nomeSponsor);
+    }
+    
+    public void registraSportivo(Atleta atleta) throws ExceptionDao {
+        new SportivoDao().registraSportivo(atleta);
     }
 }
