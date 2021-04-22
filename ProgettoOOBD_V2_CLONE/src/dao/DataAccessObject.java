@@ -22,7 +22,7 @@ public class DataAccessObject {
         }
         
         try{
-            connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/OO_BD_V2", "postgres", "SNOWEBELLO12");
+            connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/progettooobd", "postgres", "SNOWEBELLO12");
         }catch(SQLException e) {
             e.printStackTrace();    //errore derivato dalla connessione
         }

@@ -1,6 +1,8 @@
 
 package view;
 
+import view.elimina.EliminaAtleta;
+import view.modificaDati.ModificaSportivo;
 import view.registrare.RegistrareSportivo;
 
 
@@ -20,6 +22,7 @@ public class SezioneAtletaView extends javax.swing.JFrame {
         btnAggiungiSportivoJB = new javax.swing.JButton();
         btnEliminaSportivoJB = new javax.swing.JButton();
         btnAggiornaSportivoJB = new javax.swing.JButton();
+        btnIndietroJB = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -35,8 +38,26 @@ public class SezioneAtletaView extends javax.swing.JFrame {
 
         btnEliminaSportivoJB.setText("ELIMINA SPORTIVO");
         btnEliminaSportivoJB.setToolTipText("");
+        btnEliminaSportivoJB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminaSportivoJBActionPerformed(evt);
+            }
+        });
 
         btnAggiornaSportivoJB.setText("AGGIORNA SPORTIVO");
+        btnAggiornaSportivoJB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAggiornaSportivoJBActionPerformed(evt);
+            }
+        });
+
+        btnIndietroJB.setText("TORNA INDIETRO");
+        btnIndietroJB.setToolTipText("");
+        btnIndietroJB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIndietroJBActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -45,7 +66,9 @@ public class SezioneAtletaView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(247, 247, 247)
                 .addComponent(sezSportivoJL)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnIndietroJB)
+                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnAggiungiSportivoJB, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -59,13 +82,15 @@ public class SezioneAtletaView extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(sezSportivoJL)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnIndietroJB)
+                    .addComponent(sezSportivoJL))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnAggiungiSportivoJB, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
                     .addComponent(btnAggiornaSportivoJB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnEliminaSportivoJB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -77,9 +102,26 @@ public class SezioneAtletaView extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnAggiungiSportivoJBActionPerformed
 
+    private void btnIndietroJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIndietroJBActionPerformed
+        AdminView adminView = new AdminView();
+        adminView.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnIndietroJBActionPerformed
+
+    private void btnEliminaSportivoJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminaSportivoJBActionPerformed
+        EliminaAtleta eliminaAtleta = new EliminaAtleta();
+        eliminaAtleta.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnEliminaSportivoJBActionPerformed
+
+    private void btnAggiornaSportivoJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAggiornaSportivoJBActionPerformed
+        ModificaSportivo modificaSportivo = new ModificaSportivo();
+        modificaSportivo.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnAggiornaSportivoJBActionPerformed
+
   
     public static void main(String args[]) {
-       
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new SezioneAtletaView().setVisible(true);
@@ -91,6 +133,7 @@ public class SezioneAtletaView extends javax.swing.JFrame {
     private javax.swing.JButton btnAggiornaSportivoJB;
     private javax.swing.JButton btnAggiungiSportivoJB;
     private javax.swing.JButton btnEliminaSportivoJB;
+    private javax.swing.JButton btnIndietroJB;
     private javax.swing.JLabel sezSportivoJL;
     // End of variables declaration//GEN-END:variables
 }

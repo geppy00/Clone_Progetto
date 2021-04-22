@@ -14,7 +14,7 @@ import refactorCode.FinallyException;
 
 public class ProcuratoreDao {
     public void registraProcuratore(Procuratore procuratore) throws ExceptionDao {
-        String sql= "INSERT INTO procuratore(code_procuratore, nome, cognome, sesso, nazione, indirizzo, datanascita, telefono, codfiscale, iban_procuratore) VALUES(?, ?, ?, ?, ?, ?, ?, ? ,?, ?)";
+        String sql= "INSERT INTO procuratore(code_procuratore, nome, cognome, sexo, nazione, indirizzo, datanascita, telefono, codfiscale, iban_procuratore) VALUES(?, ?, ?, ?, ?, ?, ?, ? ,?, ?)";
         PreparedStatement pStmt = null;
         Connection connection = null;
         
@@ -61,7 +61,7 @@ public class ProcuratoreDao {
                     procuratore.setNome(rs.getString("nome"));
                     procuratore.setCode_procuratore(rs.getString("code_procuratore"));
                     procuratore.setCognome(rs.getString("cognome"));
-                    procuratore.setSesso(rs.getString("sesso"));
+                    procuratore.setSesso(rs.getString("sexo"));
                     procuratore.setNazione(rs.getString("nazione"));
                     procuratore.setIndirizzo(rs.getString("indirizzo"));
                     procuratore.setDataNascita(rs.getDate("datanascita"));
@@ -99,7 +99,7 @@ public class ProcuratoreDao {
             throw new ExceptionDao("ERRORE ELIMINAZIONE PROCURATORE FALLITA "+e);
         }
         
-        finally{
+        finally {
             FinallyException finallyException = new FinallyException();
             finallyException.finallyException();
         }
@@ -107,8 +107,8 @@ public class ProcuratoreDao {
     
     public void aggiornaProcuratore(Procuratore procuratore, String matricolaDaModificare) throws ExceptionDao {
         String sql = "UPDATE procuratore set code_procuratore='"+procuratore.getCode_procuratore()+"', nome='"+procuratore.getNome()+"', cognome='"+procuratore.getCognome()+
-                     "', sesso='"+procuratore.getSesso()+"', nazione='"+procuratore.getNazione()+"', indirizzo='"+procuratore.getIndirizzo()+"', datanascita='"+procuratore.getDataNascita()+
-                     "', telefono='"+procuratore.getTelefono()+"', codfiscale='"+procuratore.getCodFiscale()+"', iban_procuratore='"+procuratore.getIban()+"' WHERE code_procuratore='"+matricolaDaModificare+"';";
+                     "', sexo='"+procuratore.getSesso()+"', nazione='"+procuratore.getNazione()+"', indirizzo='"+procuratore.getIndirizzo()+"', datanascita='"+procuratore.getDataNascita()+
+                     "', telefono='"+procuratore.getTelefono()+"', codfiscale='"+procuratore.getCodFiscale()+"', iban_procuratore='"+procuratore.getIban()+"' WHERE codfiscale='"+matricolaDaModificare+"';";
         Statement stmt = null;
         Connection connection = null;
         

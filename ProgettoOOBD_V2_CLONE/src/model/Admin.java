@@ -78,4 +78,16 @@ public class Admin extends Login {
     public void registraSportivo(Atleta atleta) throws ExceptionDao {
         new SportivoDao().registraSportivo(atleta);
     }
+    
+    public ArrayList<Atleta> cercaSportivo(Atleta atleta) throws ExceptionDao {
+        return new SportivoDao().cercaSportivo(atleta);
+    }
+    
+    public void eliminaSportivo(Atleta atleta) throws ExceptionDao {
+        new SportivoDao().eliminaSportivo(atleta);
+    }
+    
+    public void aggiornaSportivo(Atleta atleta, String codiceFiscaleDaModificare) throws ExceptionDao {
+        new SportivoDao().aggiornaSportivo(atleta, codiceFiscaleDaModificare);
+    }
 }

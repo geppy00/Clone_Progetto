@@ -27,6 +27,8 @@
               <EmptySpace min="-2" pref="247" max="-2" attributes="0"/>
               <Component id="sezSportivoJL" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
+              <Component id="btnIndietroJB" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
@@ -43,14 +45,17 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="sezSportivoJL" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="btnIndietroJB" min="-2" max="-2" attributes="0"/>
+                  <Component id="sezSportivoJL" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="btnAggiungiSportivoJB" pref="150" max="32767" attributes="0"/>
                   <Component id="btnAggiornaSportivoJB" alignment="0" max="32767" attributes="0"/>
                   <Component id="btnEliminaSportivoJB" alignment="0" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace pref="38" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -77,11 +82,26 @@
         <Property name="text" type="java.lang.String" value="ELIMINA SPORTIVO"/>
         <Property name="toolTipText" type="java.lang.String" value=""/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEliminaSportivoJBActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnAggiornaSportivoJB">
       <Properties>
         <Property name="text" type="java.lang.String" value="AGGIORNA SPORTIVO"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAggiornaSportivoJBActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnIndietroJB">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="TORNA INDIETRO"/>
+        <Property name="toolTipText" type="java.lang.String" value=""/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnIndietroJBActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

@@ -148,7 +148,7 @@ public class EliminaProcuratore extends javax.swing.JFrame {
 
     private void btnEliminaJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminaJBActionPerformed
        ControllerProcuratore controllerProcuratore = new ControllerProcuratore();
-        String matricolaPresa = inputMatricolaJTF.getText();
+       String matricolaPresa = inputMatricolaJTF.getText();
         
         try {
             controllerProcuratore.eliminaProcuratore(matricolaPresa);

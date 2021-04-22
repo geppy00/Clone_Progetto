@@ -37,6 +37,10 @@ public class Atleta {
         this.iban = iban;
     }
     
+    public Atleta(String codiceFiscaleAtleta) {
+        this.codiceFiscale = codiceFiscaleAtleta;
+    }
+    
 /*SETTER AND GETTER*/
     public String getNome() {
         return nome;
