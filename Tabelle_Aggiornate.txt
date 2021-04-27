@@ -1,0 +1,92 @@
+
+=============================================
+create table login (
+	idLogin serial PRIMARY KEY NOT NULL,
+	userName varchar(50) not null,
+	passUser varchar(50) not null,
+	opzUser varchar(50) not null
+);
+
+===========================================
+
+create table Procuratore(
+code_procuratore varchar(50) primary key not null,
+nome varchar(50) not null,
+cognome varchar(50) not null,
+sexo varchar(30),
+nazione varchar(50) not null,
+indirizzo varchar(50) not null,
+dataNascita date not null,
+telefono varchar(50),
+codFiscale varchar(50) not null,
+iban_procuratore archar(50)
+);
+===============================================
+create table Club(
+idClub serial primary key not null,
+nomeClub varchar(50) not null,
+indirizzo varchar(50) not null,
+telefono varchar(50)
+);
+=============================================
+create table Atleta(
+nome varchar(50) not null,
+cognome varchar(50) not null,
+sexo varchar(30),
+nazione varchar(50) not null,
+indirizzo varchar(50) not null,
+dataNascita date not null,
+telefono varchar(50),
+codFiscale varchar(50) primary key not null,
+ruolo atleta varchar(50),
+peso float,
+codProcuratore varchar(50),
+iban_atleta varchar(50),
+codClub integer,
+foreign key(codProcuratore) references Procuratore(code_procuratore),
+foreign key(codClub) references Club(idClub)
+);
+
+===========================================
+create table Sponsor(
+idSponsor serial primary key not null,
+nome varchar(50) not null,
+indirizzo varchar(50) not null,
+telefono varchar(50)
+);
+
+==============================================
+
+create table Contratto(
+idAtleta varchar(50) not null,
+idSponsor int not null,
+idClub int not null,
+dataStart date not null,
+dataEnd date not null,
+Stipendio float,
+primary key(idAtleta,idSponsor,idClub),
+foreign key(idAtleta) references Atleta(codFiscale),
+foreign key(idSponsor) references Sponsor(idSponsor),
+foreign key(idClub) references Club(idClub)
+	
+);
+
+===================================================
+create table Evento(
+idEvento serial primary key not null,
+dataEvento date not null,
+LuogoEvento varchar(50) not null,
+oraEvento time not null,
+idSponsor int not null,
+foreign key(idSponsor) references Sponsor(idSponsor)	
+);
+===================================================
+create table Invitatti(
+idAtleta varchar(50) not null,
+idEvento int not null,
+gettoneValue float not null,
+primary key(idAtleta,idEvento),
+foreign key(idAtleta) references Atleta(codFiscale),
+foreign key(idEvento) references Evento(idEvento)
+);
+===================================================
