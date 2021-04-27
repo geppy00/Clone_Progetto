@@ -14,58 +14,57 @@ public class Club {
    /*RELAZIONI*/
    private ArrayList<Atleta> listaAtleta = new ArrayList<Atleta>();
    
-     /**
-     * @return the idClub
-     */
+   
+   /*COSTRUTTORE*/
+   public Club(String nome, String indirizzo, String telefono) {
+       this.indirizzo = indirizzo;
+       this.nomeClub = nome;
+       this.telefono = telefono;
+   }
+   
+   public Club() {
+       
+   }
+   
+   public Club(String nomeClub) {
+    this.nomeClub = nomeClub;
+   }
+   
+
     public int getIdClub() {
         return idClub;
     }
 
-    /**
-     * @param idClub the idClub to set
-     */
+   
     public void setIdClub(int idClub) {
         this.idClub = idClub;
     }
 
-    /**
-     * @return the nomeClub
-     */
+   
     public String getNomeClub() {
         return nomeClub;
     }
 
-    /**
-     * @param nomeClub the nomeClub to set
-     */
+   
     public void setNomeClub(String nomeClub) {
         this.nomeClub = nomeClub;
     }
 
-    /**
-     * @return the indirizzo
-     */
+    
     public String getIndirizzo() {
         return indirizzo;
     }
 
-    /**
-     * @param indirizzo the indirizzo to set
-     */
     public void setIndirizzo(String indirizzo) {
         this.indirizzo = indirizzo;
     }
 
-    /**
-     * @return the telefono
-     */
+   
     public String getTelefono() {
         return telefono;
     }
 
-    /**
-     * @param telefono the telefono to set
-     */
+   
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }

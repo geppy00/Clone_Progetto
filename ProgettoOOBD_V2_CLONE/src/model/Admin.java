@@ -1,6 +1,7 @@
 
 package model;
 
+import dao.ClubDao;
 import dao.ExceptionDao;
 import dao.ProcuratoreDao;
 import dao.SponsorDao;
@@ -90,4 +91,21 @@ public class Admin extends Login {
     public void aggiornaSportivo(Atleta atleta, String codiceFiscaleDaModificare) throws ExceptionDao {
         new SportivoDao().aggiornaSportivo(atleta, codiceFiscaleDaModificare);
     }
+    
+    public void registraClub(Club club) throws ExceptionDao {
+        new ClubDao().registraClub(club);
+    }
+    
+    public ArrayList<Club> cercaClub(Club club) throws ExceptionDao {
+        return new ClubDao().cercaClub(club);
+    }
+    
+    public void eliminaClub(Club club) throws ExceptionDao {
+        new ClubDao().eliminaClub(club);
+    }
+    
+    public void aggiornaClub(Club club, String nomeClub) throws ExceptionDao {
+        new ClubDao().aggiornaClub(club, nomeClub);
+    }
+    
 }
