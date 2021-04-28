@@ -3,6 +3,8 @@ package model;
 import java.util.ArrayList;
 
 public class Atleta {
+
+    
     private String nome;
     private String cognmome;
     private String sesso;
@@ -15,6 +17,7 @@ public class Atleta {
     private float peso;
     private String idProcuratore;
     private String iban;
+    private int idClub;
     
     /*RELAZIONI*/
     private ArrayList<Evento> listaEvento = new ArrayList<Evento>();
@@ -22,7 +25,7 @@ public class Atleta {
     private Procuratore procuratore;
     private Club club;
     
-    public Atleta(String nome, String cognmome, String sesso, String nazione, String indirizzo, java.sql.Date dataNascita, String telefono, String codiceFiscale, String ruolo, float peso, String idProcuratore, String iban){
+    public Atleta(String nome, String cognmome, String sesso, String nazione, String indirizzo, java.sql.Date dataNascita, String telefono, String codiceFiscale, String ruolo, float peso, String idProcuratore, String iban, int idClub){
         this.nome = nome;
         this.cognmome = cognmome;
         this.sesso = sesso;
@@ -35,6 +38,7 @@ public class Atleta {
         this.peso = peso;
         this.idProcuratore = idProcuratore;
         this.iban = iban;
+        this.idClub = idClub;
     }
     
     public Atleta(String codiceFiscaleAtleta) {
@@ -150,5 +154,13 @@ public class Atleta {
     
     public void setClub(Club club) {
         this.club = club;
+    }
+    
+    public int getIdClub() {
+        return idClub;
+    }
+
+    public void setIdClub(int idClub) {
+        this.idClub = idClub;
     }
 }

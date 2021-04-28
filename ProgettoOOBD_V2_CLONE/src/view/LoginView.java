@@ -6,7 +6,7 @@ import dao.ExceptionDao;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import model.Admin;
+
 
 public class LoginView extends javax.swing.JFrame {
     
@@ -35,7 +35,7 @@ public class LoginView extends javax.swing.JFrame {
 
         passwordJL.setText("Password");
 
-        sceltaAccessoJCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Procuratore", "Atleta", "Sponsor", "Admin" }));
+        sceltaAccessoJCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Procuratore", "Atleta", "Sponsor", "Admin", "Club" }));
 
         btnAccediJB.setText("ACCEDI");
         btnAccediJB.addActionListener(new java.awt.event.ActionListener() {
@@ -106,15 +106,26 @@ public class LoginView extends javax.swing.JFrame {
              
             }else{
                JOptionPane.showMessageDialog(null, "Dati corretti");
-               if(scelta=="Admin"){ 
+               if(scelta=="Admin") { 
                   // qua entro normalmente, non lo so solo perché non mi apre na nuova finestra
                   AdminView adminview = new AdminView();
                   adminview.setVisible(true);
                   this.setVisible(false);
                }
-               else if(scelta=="Procuratore"){}
-               else if(scelta=="Sporsor"){}
-               else if(scelta=="Atleta"){}
+               else if(scelta=="Procuratore") {
+                   
+               }
+               else if(scelta=="Sporsor"){
+               
+               }
+               else if(scelta=="Atleta"){
+               
+               }
+               else if(scelta=="Club") {
+                   ClubView clubView = new ClubView();
+                   clubView.setVisible(true);
+                   this.setVisible(false);
+               }
                
             }
         } catch (ExceptionDao ex) {

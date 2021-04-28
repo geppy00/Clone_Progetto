@@ -15,7 +15,7 @@ import refactorCode.FinallyException;
 public class SportivoDao {
     
     public void registraSportivo(Atleta atleta) throws ExceptionDao {
-        String sql= "INSERT INTO atleta(nome, cognome, sexo, nazione, indirizzo, datanascita, telefono, codfiscale, ruolo_atleta, peso, codprocuratore, iban_atleta) VALUES(?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?, ?)";
+        String sql= "INSERT INTO atleta(nome, cognome, sexo, nazione, indirizzo, datanascita, telefono, codfiscale, ruolo_atleta, peso, codprocuratore, iban_atleta, codclub) VALUES(?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?, ?, ?)";
         PreparedStatement pStmt = null;
         Connection connection = null;
         
@@ -34,6 +34,7 @@ public class SportivoDao {
           pStmt.setDouble(10, atleta.getPeso());
           pStmt.setString(11, atleta.getIdProcuratore());
           pStmt.setString(12, atleta.getIban());
+          pStmt.setInt(13, atleta.getIdClub());
           pStmt.execute();
         }catch(SQLException e) {
             throw new ExceptionDao("ERRORE REGISTRAZIONE PROCURATORE FALLITA "+e);
