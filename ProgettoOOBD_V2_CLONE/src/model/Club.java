@@ -10,16 +10,21 @@ public class Club {
    private String nomeClub; 
    private String indirizzo; 
    private String telefono;
+   private String username;
+   private String password;
+   
    
    /*RELAZIONI*/
    private ArrayList<Atleta> listaAtleta = new ArrayList<Atleta>();
    
    
    /*COSTRUTTORE*/
-   public Club(String nome, String indirizzo, String telefono) {
+   public Club(String nome, String indirizzo, String telefono, String username, String password) {
        this.indirizzo = indirizzo;
        this.nomeClub = nome;
        this.telefono = telefono;
+       this.username = username;
+       this.password = password;
    }
    
    public Club() {
@@ -67,5 +72,21 @@ public class Club {
    
     public void setTelefono(String telefono) {
         this.telefono = telefono;
+    }
+    
+     public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

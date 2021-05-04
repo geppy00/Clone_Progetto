@@ -36,6 +36,11 @@ public class LoginView extends javax.swing.JFrame {
         passwordJL.setText("Password");
 
         sceltaAccessoJCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Procuratore", "Atleta", "Sponsor", "Admin", "Club" }));
+        sceltaAccessoJCB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sceltaAccessoJCBActionPerformed(evt);
+            }
+        });
 
         btnAccediJB.setText("ACCEDI");
         btnAccediJB.addActionListener(new java.awt.event.ActionListener() {
@@ -100,8 +105,8 @@ public class LoginView extends javax.swing.JFrame {
        ControllerLogin loginController = new ControllerLogin();
        
         try {
-            boolean verificaDiLogin = loginController.verificaLogin(userName, password, scelta);
-            if(verificaDiLogin == false){ 
+            String idCopiato = loginController.verificaLogin(userName, password, scelta);
+            if(idCopiato == null){ 
                 JOptionPane.showMessageDialog(null, "Dati Sbagliati!!");
              
             }else{
@@ -122,7 +127,7 @@ public class LoginView extends javax.swing.JFrame {
                
                }
                else if(scelta=="Club") {
-                   ClubView clubView = new ClubView();
+                   ClubView clubView = new ClubView(idCopiato);
                    clubView.setVisible(true);
                    this.setVisible(false);
                }
@@ -136,6 +141,10 @@ public class LoginView extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void sceltaAccessoJCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sceltaAccessoJCBActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_sceltaAccessoJCBActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

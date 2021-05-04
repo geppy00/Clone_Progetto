@@ -4,13 +4,15 @@ package view;
 import model.Club;
 
 public class ClubView extends javax.swing.JFrame {
-
     
-    public void visuallizzaDatiTabella() {
+    private String idClub;
+    
+    public ClubView() {
         
     }
     
-    public ClubView() {
+    public ClubView(String idClub) {
+        this.idClub = idClub;
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -26,6 +28,7 @@ public class ClubView extends javax.swing.JFrame {
         btnAtletiPagatiJB = new javax.swing.JButton();
         btnAtletiNonPagatiJB = new javax.swing.JButton();
         btnLogoutJB = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -53,18 +56,30 @@ public class ClubView extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(filtriJL)
-                    .addComponent(btnAtletiPagatiJB, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(btnLogoutJB)
-                        .addComponent(btnAtletiNonPagatiJB)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(filtriJL)
+                            .addComponent(btnAtletiPagatiJB, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(btnLogoutJB)
+                                .addComponent(btnAtletiNonPagatiJB))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addComponent(jButton1)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 754, Short.MAX_VALUE)
                 .addContainerGap())
@@ -80,6 +95,8 @@ public class ClubView extends javax.swing.JFrame {
                         .addComponent(btnAtletiPagatiJB)
                         .addGap(18, 18, 18)
                         .addComponent(btnAtletiNonPagatiJB)
+                        .addGap(68, 68, 68)
+                        .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnLogoutJB, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
@@ -97,6 +114,17 @@ public class ClubView extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnLogoutJBActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        System.out.println(getIdClub());
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    public String getIdClub() {
+        return idClub;
+    }
+
+    public void setIdClub(String idClub) {
+        this.idClub = idClub;
+    }
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -111,6 +139,7 @@ public class ClubView extends javax.swing.JFrame {
     private javax.swing.JButton btnAtletiPagatiJB;
     private javax.swing.JButton btnLogoutJB;
     private javax.swing.JLabel filtriJL;
+    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable visualizzaAtletiJT;
     // End of variables declaration//GEN-END:variables
