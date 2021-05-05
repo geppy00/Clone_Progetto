@@ -16,15 +16,13 @@ public class Club {
    
    /*RELAZIONI*/
    private ArrayList<Atleta> listaAtleta = new ArrayList<Atleta>();
-   
+   private ArrayList<Stipendio> listaStipendi = new ArrayList<Stipendio>(); 
    
    /*COSTRUTTORE*/
-   public Club(String nome, String indirizzo, String telefono, String username, String password) {
+   public Club(String nome, String indirizzo, String telefono) {
        this.indirizzo = indirizzo;
        this.nomeClub = nome;
        this.telefono = telefono;
-       this.username = username;
-       this.password = password;
    }
    
    public Club() {

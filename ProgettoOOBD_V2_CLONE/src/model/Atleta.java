@@ -22,6 +22,7 @@ public class Atleta {
     /*RELAZIONI*/
     private ArrayList<Evento> listaEvento = new ArrayList<Evento>();
     private ArrayList<Sponsor> listaSponsor = new ArrayList<Sponsor>();
+    private ArrayList<Stipendio> listaStipendi = new ArrayList<Stipendio>(); 
     private Procuratore procuratore;
     private Club club;
     

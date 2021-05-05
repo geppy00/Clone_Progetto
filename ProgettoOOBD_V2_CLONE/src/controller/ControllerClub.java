@@ -9,9 +9,9 @@ import model.Club;
 
 public class ControllerClub {
     
-    public boolean registraClub(String nome, String indirizzo, String telefono, String username, String password) throws ExceptionDao {
-        if(nome != null && nome.length() > 0 && indirizzo != null && indirizzo.length() > 0 && username != null && username.length() > 0 && password != null && password.length() > 0) {
-            Club club = new Club(nome, indirizzo, telefono, username, password);
+    public boolean registraClub(String nome, String indirizzo, String telefono) throws ExceptionDao {
+        if(nome != null && nome.length() > 0 && indirizzo != null && indirizzo.length() > 0) {
+            Club club = new Club(nome, indirizzo, telefono);
             Admin admin = new Admin();
             admin.registraClub(club);
         }
@@ -36,9 +36,9 @@ public class ControllerClub {
         }
     }
     
-    public void aggiornaClub(String nomeClubCercare, String nome, String indirizzo, String telefono, String username, String password) throws ExceptionDao {
+    public void aggiornaClub(String nomeClubCercare, String nome, String indirizzo, String telefono) throws ExceptionDao {
         if(nome != null && nome.length() > 0 && indirizzo != null && indirizzo.length() > 0 && nomeClubCercare != null && nomeClubCercare.length() > 0) {
-            Club club = new Club(nome, indirizzo, telefono, username, password);
+            Club club = new Club(nome, indirizzo, telefono);
             Admin admin = new Admin();
             admin.aggiornaClub(club, nomeClubCercare);
         }

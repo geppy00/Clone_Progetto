@@ -58,34 +58,15 @@
                               <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Group type="102" attributes="0">
-                                      <Component id="idClubJL" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="inputIdClubJTF" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" attributes="0">
                                       <Component id="indirizzoInJL" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="inputIndirizzoJTF" min="-2" pref="136" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="usernameJL" min="-2" max="-2" attributes="0"/>
-                                          <Component id="telefonoInJL" min="-2" max="-2" attributes="0"/>
-                                      </Group>
+                                      <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+                                      <Component id="telefonoInJL" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="inputTelefonoJTF" max="32767" attributes="0"/>
-                                          <Group type="102" attributes="0">
-                                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                          </Group>
-                                          <Component id="inputUsernameJTF" max="32767" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="passwordJL" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="inputPasswordJTF" max="32767" attributes="0"/>
+                                      <Component id="inputTelefonoJTF" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -129,24 +110,7 @@
                   <Component id="telefonoInJL" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="inputTelefonoJTF" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="usernameJL" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="inputUsernameJTF" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="passwordJL" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="inputPasswordJTF" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="idClubJL" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="inputIdClubJTF" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace pref="10" max="32767" attributes="0"/>
+              <EmptySpace pref="29" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnModificaJB" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnTornaIndietroJB" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -213,39 +177,6 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTornaIndietroJBActionPerformed"/>
       </Events>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel1">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Dubai Medium" size="14" style="3"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="DATI PER LOGIN"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="usernameJL">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Usename"/>
-        <Property name="toolTipText" type="java.lang.String" value=""/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="passwordJL">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Password"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="idClubJL">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="ID Club"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="inputUsernameJTF">
-    </Component>
-    <Component class="javax.swing.JTextField" name="inputPasswordJTF">
-    </Component>
-    <Component class="javax.swing.JTextField" name="inputIdClubJTF">
-      <Properties>
-        <Property name="editable" type="boolean" value="false"/>
-      </Properties>
     </Component>
   </SubComponents>
 </Form>

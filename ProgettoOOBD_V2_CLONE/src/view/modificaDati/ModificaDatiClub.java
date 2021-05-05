@@ -35,13 +35,6 @@ public class ModificaDatiClub extends javax.swing.JFrame {
         inputTelefonoJTF = new javax.swing.JTextField();
         btnModificaJB = new javax.swing.JButton();
         btnTornaIndietroJB = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        usernameJL = new javax.swing.JLabel();
-        passwordJL = new javax.swing.JLabel();
-        idClubJL = new javax.swing.JLabel();
-        inputUsernameJTF = new javax.swing.JTextField();
-        inputPasswordJTF = new javax.swing.JTextField();
-        inputIdClubJTF = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -76,18 +69,6 @@ public class ModificaDatiClub extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Dubai Medium", 3, 14)); // NOI18N
-        jLabel1.setText("DATI PER LOGIN");
-
-        usernameJL.setText("Usename");
-        usernameJL.setToolTipText("");
-
-        passwordJL.setText("Password");
-
-        idClubJL.setText("ID Club");
-
-        inputIdClubJTF.setEditable(false);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -120,28 +101,14 @@ public class ModificaDatiClub extends javax.swing.JFrame {
                                 .addGap(35, 35, 35)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(idClubJL)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(inputIdClubJTF))
-                                    .addGroup(layout.createSequentialGroup()
                                         .addComponent(indirizzoInJL)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(inputIndirizzoJTF, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(usernameJL)
-                                            .addComponent(telefonoInJL))
+                                        .addGap(7, 7, 7)
+                                        .addComponent(telefonoInJL)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(inputTelefonoJTF)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel1)
-                                                .addGap(0, 0, Short.MAX_VALUE))
-                                            .addComponent(inputUsernameJTF)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(passwordJL)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(inputPasswordJTF)))))
+                                        .addComponent(inputTelefonoJTF)))))
                         .addGap(0, 29, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
@@ -172,21 +139,7 @@ public class ModificaDatiClub extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(telefonoInJL)
                     .addComponent(inputTelefonoJTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel1)
-                .addGap(17, 17, 17)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(usernameJL)
-                    .addComponent(inputUsernameJTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(passwordJL)
-                    .addComponent(inputPasswordJTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(idClubJL)
-                    .addComponent(inputIdClubJTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnModificaJB)
                     .addComponent(btnTornaIndietroJB))
@@ -232,11 +185,10 @@ public class ModificaDatiClub extends javax.swing.JFrame {
         String nome = inputNomeJTF.getText();
         String indirizzo = inputIndirizzoJTF.getText();
         String telefono = inputTelefonoJTF.getText();
-        String username = inputUsernameJTF.getText();
-        String password = inputPasswordJTF.getText();
+       
         
         try {
-            controllerClub.aggiornaClub(nomeClubCercare, nome, indirizzo, telefono, username, password);
+            controllerClub.aggiornaClub(nomeClubCercare, nome, indirizzo, telefono);
         } catch (ExceptionDao ex) {
             Logger.getLogger(ModificaDatiClub.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -256,20 +208,13 @@ public class ModificaDatiClub extends javax.swing.JFrame {
     private javax.swing.JButton btnModificaJB;
     private javax.swing.JButton btnTornaIndietroJB;
     private javax.swing.JLabel datiRiportatiJL;
-    private javax.swing.JLabel idClubJL;
     private javax.swing.JLabel indirizzoInJL;
-    private javax.swing.JTextField inputIdClubJTF;
     private javax.swing.JTextField inputIndirizzoJTF;
     private javax.swing.JTextField inputNomeCercareJTF;
     private javax.swing.JTextField inputNomeJTF;
-    private javax.swing.JTextField inputPasswordJTF;
     private javax.swing.JTextField inputTelefonoJTF;
-    private javax.swing.JTextField inputUsernameJTF;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel nomeInJL;
     private javax.swing.JLabel nomeJL;
-    private javax.swing.JLabel passwordJL;
     private javax.swing.JLabel telefonoInJL;
-    private javax.swing.JLabel usernameJL;
     // End of variables declaration//GEN-END:variables
 }

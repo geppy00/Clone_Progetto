@@ -14,28 +14,7 @@ import refactorCode.FinallyException;
 
 
 public class ClubDao {
-    
-    public int cercaIdClub(Club club) throws ExceptionDao {
-        String sql="SELECT * FROM club WHERE nomeclub='"+club.getNomeClub()+"' AND indirizzo='"+club.getIndirizzo()+"' AND telefono='"+club.getTelefono()+"';";
-        Statement stmt = null;
-        Connection connection = null;
-        ResultSet rs = null;
-        
-        try {
-            connection = new DataAccessObject().connectionToDatabase();
-            stmt = connection.createStatement();
-            rs = stmt.executeQuery(sql);
-            while(rs.next()) {
-                int idClubPreso = rs.getInt("idclub");
-                return idClubPreso;
-            }
-        }catch(SQLException e) {
-            throw new ExceptionDao("ERRORE ID CLUB NON TROVATO "+e);
-        }
-        
-        return -1;
-    }
-    
+     
     public void registraClub(Club club) throws ExceptionDao {
         String sql= "INSERT INTO club(nomeclub, indirizzo, telefono) VALUES(?, ?, ?)";
         PreparedStatement pStmt = null;
@@ -53,29 +32,7 @@ public class ClubDao {
         }catch(SQLException e) {
             throw new ExceptionDao("ERRORE REGISTRAZIONE CLUB FALLITA "+e);
         }
-        
-        
-        int idClub = cercaIdClub(club);
-        if(idClub == -1) {
-            JOptionPane.showMessageDialog(null, "!!ERRORE NON E' STATO POSSIBILE REGISTRARE IL CLUB!!");
-            System.exit(0);
-        }
-        sql = "INSERT INTO login(username, passuser, opzuser, codclub) VALUES(?, ?, ?, ?)";
-        try {
-            connection = new DataAccessObject().connectionToDatabase();
-            pStmt = connection.prepareStatement(sql);
-            pStmt.setString(1, club.getUsername());
-            pStmt.setString(2, club.getPassword());
-            pStmt.setString(3, "Club");
-            pStmt.setInt(4, idClub);
-            pStmt.execute();
-            JOptionPane.showMessageDialog(null, "CLUB REGISTRATO CON SUCCESSO");
-            pStmt.close();
-            connection.close();
-        }catch(SQLException e) {
-            throw new ExceptionDao("ERRORE REGISTRAZIONE LOGIN CLUB FALLITA "+e);
-        }
-        
+       
         finally{
             FinallyException finallyException = new FinallyException();
             finallyException.finallyException();
@@ -119,10 +76,9 @@ public class ClubDao {
     }
     
     public void eliminaClub(Club club) throws ExceptionDao {
-        String sql= "DELETE FROM club WHERE nomeclub = ?;";
         PreparedStatement pStmt = null;
         Connection connection = null;
-        
+        String sql= "DELETE FROM club WHERE nomeclub = ?;";
         try {
             connection = new DataAccessObject().connectionToDatabase();
             pStmt = connection.prepareStatement(sql);
@@ -139,7 +95,7 @@ public class ClubDao {
         }
     }
     
-     public void aggiornaClub(Club club, String nomeClub) throws ExceptionDao {
+    public void aggiornaClub(Club club, String nomeClub) throws ExceptionDao {
         String sql = "UPDATE club set nomeclub='"+club.getNomeClub()+"', indirizzo='"+club.getIndirizzo()+"', telefono='"+club.getTelefono()+"' WHERE nomeclub='"+nomeClub+"';";
         Statement stmt = null;
         Connection connection = null;

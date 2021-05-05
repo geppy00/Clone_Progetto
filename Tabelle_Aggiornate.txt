@@ -90,3 +90,14 @@ foreign key(idAtleta) references Atleta(codFiscale),
 foreign key(idEvento) references Evento(idEvento)
 );
 ===================================================
+
+create table Stipendio(
+idStipendio serial primary key not null,
+val_stipendio float not null,
+status_pagamento int not null,
+data_pagamento date not null,
+idAtleta varchar(50) not null,
+idClub int not null,
+foreign key(idAtleta) references Atleta(codFiscale),
+foreign key(idClub) references Club(idClub) 
+);
