@@ -3,17 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Home/Documents/NetBeansProjects/ProgettoOOBD_V2/src/view/ClubView.java</file>
+            <file>file:/C:/Users/Home/Documents/NetBeansProjects/ProgettoOOBD_V2/src/dao/LoginDao.java</file>
+            <file>file:/C:/Users/Home/Documents/NetBeansProjects/ProgettoOOBD_V2/src/view/elimina/EliminaClub.java</file>
             <file>file:/C:/Users/Home/Documents/NetBeansProjects/ProgettoOOBD_V2/src/view/LoginView.java</file>
-            <file>file:/C:/Users/Home/Documents/NetBeansProjects/ProgettoOOBD_V2/src/controller/ControllerClub.java</file>
-            <file>file:/C:/Users/Home/Documents/NetBeansProjects/ProgettoOOBD_V2/src/model/Club.java</file>
             <file>file:/C:/Users/Home/Documents/NetBeansProjects/ProgettoOOBD_V2/src/dao/ClubDao.java</file>
-            <file>file:/C:/Users/Home/Documents/NetBeansProjects/ProgettoOOBD_V2/src/view/SezionePagamentoView.java</file>
-            <file>file:/C:/Users/Home/Documents/NetBeansProjects/ProgettoOOBD_V2/src/model/Stipendio.java</file>
-            <file>file:/C:/Users/Home/Documents/NetBeansProjects/ProgettoOOBD_V2/src/view/registrare/RegistraPagamento.java</file>
-            <file>file:/C:/Users/Home/Documents/NetBeansProjects/ProgettoOOBD_V2/src/model/Contratto.java</file>
+            <file>file:/C:/Users/Home/Documents/NetBeansProjects/ProgettoOOBD_V2/src/model/Admin.java</file>
+            <file>file:/C:/Users/Home/Documents/NetBeansProjects/ProgettoOOBD_V2/src/view/registrare/RegistraNuovoProfilo.java</file>
+            <file>file:/C:/Users/Home/Documents/NetBeansProjects/ProgettoOOBD_V2/src/controller/ControllerLogin.java</file>
             <file>file:/C:/Users/Home/Documents/NetBeansProjects/ProgettoOOBD_V2/src/model/Login.java</file>
-            <file>file:/C:/Users/Home/Documents/NetBeansProjects/ProgettoOOBD_V2/src/model/Atleta.java</file>
+            <file>file:/C:/Users/Home/Documents/NetBeansProjects/ProgettoOOBD_V2/src/view/AdminView.java</file>
         </group>
     </open-files>
 </project-private>

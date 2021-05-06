@@ -4,52 +4,60 @@ package model;
 
 public class Stipendio {
     
-    private int idstipendio;
-    private double val_stipendio;
-    private int status_pagamento;
-    private String idatleta;
-    private int idclub;
+    private int idStipendio;
+    private double valoreStipendio;
+    private int statusPagamento;
+    private String idAtleta;
+    private int idClub;
     private java.sql.Date dataPagamento;
     
+    /*COSTRUTTORI*/
+    public Stipendio(double valoreStipendio, String idAtleta, int idClub, java.sql.Date dataPagamento) {
+        this.valoreStipendio = valoreStipendio;
+        this.idAtleta = idAtleta;
+        this.idClub = idClub;
+        this.dataPagamento = dataPagamento;  
+    }
     
-    public int getIdstipendio() {
-        return idstipendio;
+    /*GET AND SET*/
+    public int getIdStipendio() {
+        return idStipendio;
     }
 
-    public void setIdstipendio(int idstipendio) {
-        this.idstipendio = idstipendio;
+    public void setIdStipendio(int idStipendio) {
+        this.idStipendio = idStipendio;
     }
 
-    public double getVal_stipendio() {
-        return val_stipendio;
+    public double getValoreStipendio() {
+        return valoreStipendio;
     }
 
-    public void setVal_stipendio(double val_stipendio) {
-        this.val_stipendio = val_stipendio;
+    public void setValoreStipendio(double valoreStipendio) {
+        this.valoreStipendio = valoreStipendio;
     }
 
-    public int getStatus_pagamento() {
-        return status_pagamento;
+    public int getStatusPagamento() {
+        return statusPagamento;
     }
 
-    public void setStatus_pagamento(int status_pagamento) {
-        this.status_pagamento = status_pagamento;
+    public void setStatusPagamento(int statusPagamento) {
+        this.statusPagamento = statusPagamento;
     }
 
-    public String getIdatleta() {
-        return idatleta;
+    public String getIdAtleta() {
+        return idAtleta;
     }
 
-    public void setIdatleta(String idatleta) {
-        this.idatleta = idatleta;
+    public void setIdAtleta(String idAtleta) {
+        this.idAtleta = idAtleta;
     }
 
-    public int getIdclub() {
-        return idclub;
+    public int getIdClub() {
+        return idClub;
     }
 
-    public void setIdclub(int idclub) {
-        this.idclub = idclub;
+    public void setIdClub(int idClub) {
+        this.idClub = idClub;
     }
     
     public java.sql.Date getDataPagamento() {

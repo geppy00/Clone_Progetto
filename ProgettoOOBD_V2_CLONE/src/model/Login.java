@@ -14,9 +14,11 @@ public class Login {
     private String codprocuratore; 
     private int codclub;
     private int codsponsor;
-    private String codatleta; 
+    private String codatleta;
+    private String idGenerico;
    
 
+    /*COSTRUTTORI*/
     public Login(String username, String password, String scelta, String idAtleta, String idProcuratore, int idClub, int idSponsor, int idLogin) {
         this.username = username;
         this.password = password;
@@ -28,21 +30,24 @@ public class Login {
         this.codeLogin = idLogin;
     }
     
-    public Login() {
-        
+    public Login(String opzUser, String username, String password, String idCorrispodente) {
+        this.opzioneLogin = opzUser;
+        this.username = username;
+        this.password = password;
+        this.idGenerico = idCorrispodente;
     }
     
-    /*public Login() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }*/
-
     public Login(String username, String password, String scelta) {
         this.username = username;
         this.password = password;
         this.opzioneLogin = scelta;
     }
     
-   
+    public Login() {
+        
+    }
+    
+   /*GET AND SET*/
     public int getCodeLogin() {
         return codeLogin;
     }
@@ -86,7 +91,7 @@ public class Login {
       
     }
     
-       public String getCodprocuratore() {
+    public String getCodprocuratore() {
         return codprocuratore;
     }
 
@@ -117,4 +122,13 @@ public class Login {
     public void setCodatleta(String codatleta) {
         this.codatleta = codatleta;
     }
+    
+        public String getIdGenerico() {
+        return idGenerico;
+    }
+
+    public void setIdGenerico(String idGenerico) {
+        this.idGenerico = idGenerico;
+    }
+
 }

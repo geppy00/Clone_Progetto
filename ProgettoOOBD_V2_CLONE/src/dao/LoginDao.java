@@ -79,4 +79,58 @@ public class LoginDao {
         
         return null;
     }
+    
+    public void registraUtente(Login login) throws ExceptionDao {
+        String sql = null;
+        PreparedStatement pStmt = null;
+        Connection connection = null;
+        
+        switch(login.getOpzioneLogin()) {
+            case "Procuratore":
+                sql = "INSERT INTO login(username, passuser, opzuser, codprocuratore) VALUES(?, ?, ?, ?)";
+                //login.setCodprocuratore(login.getIdGenerico());
+                break;
+                
+            case "Atleta":
+                sql = "INSERT INTO login(username, passuser, opzuser, codatleta) VALUES(?, ?, ?, ?)";
+                //login.setCodatleta(login.getIdGenerico());
+                break;
+                
+            case "Sponsor":
+                sql = "INSERT INTO login(username, passuser, opzuser, codsponsor) VALUES(?, ?, ?, ?)";
+                //login.setCodsponsor(Integer.parseInt(login.getIdGenerico()));
+                break;
+                
+            case "Club":
+                sql = "INSERT INTO login(username, passuser, opzuser, codclub) VALUES(?, ?, ?, ?)";
+                //login.setC(Integer.parseInt(login.getIdGenerico()));
+                break;
+        }
+        
+        System.out.println("COMANDO SQL: "+sql);
+        
+         try{
+            connection = new DataAccessObject().connectionToDatabase();
+            pStmt = connection.prepareStatement(sql);
+            pStmt.setString(1, login.getUsername());
+            pStmt.setString(2, login.getPassword());
+            pStmt.setString(3, login.getOpzioneLogin());
+            
+            if(login.getOpzioneLogin().equals("Procuratore") || login.getOpzioneLogin().equals("Atleta"))
+                pStmt.setString(4, login.getIdGenerico());
+            else
+                pStmt.setInt(4, Integer.parseInt(login.getIdGenerico()));
+            
+            pStmt.execute();
+            pStmt.close();
+            connection.close();
+        }catch(SQLException e) {
+            throw new ExceptionDao("ERRORE REGISTRAZIONE CLUB FALLITA "+e);
+        }
+       
+        finally{
+            FinallyException finallyException = new FinallyException();
+            finallyException.finallyException();
+        }
+    }
 }

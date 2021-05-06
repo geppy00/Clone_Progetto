@@ -1,6 +1,8 @@
 
 package model;
 
+import dao.ExceptionDao;
+import dao.StipendioDao;
 import java.util.ArrayList;
 
 
@@ -18,7 +20,7 @@ public class Club {
    private ArrayList<Atleta> listaAtleta = new ArrayList<Atleta>();
    private ArrayList<Stipendio> listaStipendi = new ArrayList<Stipendio>(); 
    
-   /*COSTRUTTORE*/
+   /*COSTRUTTORI*/
    public Club(String nome, String indirizzo, String telefono) {
        this.indirizzo = indirizzo;
        this.nomeClub = nome;
@@ -29,6 +31,7 @@ public class Club {
        
    }
    
+   /*GET AND SET*/
    public Club(String nomeClub) {
     this.nomeClub = nomeClub;
    }
@@ -86,5 +89,10 @@ public class Club {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+    
+    /*METODI RELATIVI PER IL CLUB*/
+    public void effettuaPagamento(Stipendio stipendio) throws ExceptionDao {
+        new StipendioDao().registraPagamento(stipendio);
     }
 }

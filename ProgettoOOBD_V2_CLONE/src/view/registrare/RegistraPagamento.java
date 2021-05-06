@@ -1,17 +1,23 @@
 
 package view.registrare;
 
+import controller.ControllerClub;
+import dao.ExceptionDao;
 import view.SezionePagamentoView;
 import  java.sql.Date;
 import java.time.LocalDate;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class RegistraPagamento extends javax.swing.JFrame {
 
-    private String idClub;
+    private String idClubStr;
+    private int idClub;
     
     public RegistraPagamento(String idClub) {
         initComponents();
-        this.idClub = idClub;
+        this.idClubStr = idClub;
         this.setLocationRelativeTo(null);
     }
 
@@ -92,33 +98,56 @@ public class RegistraPagamento extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /*ACTION PERFOMED*/
     private void btnPagaJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagaJBActionPerformed
+       ControllerClub controllerClub = new ControllerClub();
        LocalDate dataPagamento = java.time.LocalDate.now();
        Date javaDate = Date.valueOf(dataPagamento); 
-       //java.sql.Date dateSql = new java.sql.Date(javaDate);
-       
        String importoStr = inputImportoJTF.getText();
        double importo = Float.parseFloat(importoStr);
        String idDestinatario = inputIdDestinatarioJTF.getText();
-   
+       this.setIdClub(Integer.parseInt(idClubStr));
+    
        System.out.println("ID CLUB= "+this.getIdClub());
        System.out.println("DATA CURRENT= "+javaDate);
+       
+        try {
+            boolean checkPagamento = controllerClub.effettuaPagamento(importo, idDestinatario, this.getIdClub(), (java.sql.Date) javaDate);
+            if(checkPagamento == true) 
+                JOptionPane.showMessageDialog(null, "PAGAMENTO EFFETTUATO CON SUCCESSO\nRiepilogo\nImporto: "+importo+"\nDestinatario: "+idDestinatario+"\nData Pagamento: "+javaDate+"\nID Mittente: "+this.getIdClub());
+            else
+                JOptionPane.showMessageDialog(null, "!! PAGAMENTO FALLITO !!");
+        } catch (ExceptionDao ex) {
+            Logger.getLogger(RegistraPagamento.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnPagaJBActionPerformed
 
     private void btnAnnullaJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnnullaJBActionPerformed
-        SezionePagamentoView sezionePagamentoView = new SezionePagamentoView();
+        SezionePagamentoView sezionePagamentoView = new SezionePagamentoView(this.getIdClubStr());
         sezionePagamentoView.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnAnnullaJBActionPerformed
 
-    public String getIdClub() {
+    
+    /*GET AND SET*/
+    public String getIdClubStr() {
+        return idClubStr;
+    }
+
+    public void setIdClubStr(String idClubStr) {
+        this.idClubStr = idClubStr;
+    }
+
+    public int getIdClub() {
         return idClub;
     }
 
-    public void setIdClub(String idClub) {
+    public void setIdClub(int idClub) {
         this.idClub = idClub;
     }
+
     
+    /*MAIN PER APRIRE FINESTRA*/
     public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(new Runnable() {

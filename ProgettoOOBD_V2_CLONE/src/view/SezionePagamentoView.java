@@ -5,15 +5,7 @@ import view.registrare.RegistraPagamento;
 
 
 public class SezionePagamentoView extends javax.swing.JFrame {
-
-    public String getIdClub() {
-        return idClub;
-    }
-
-    public void setIdClub(String idClub) {
-        this.idClub = idClub;
-    }
-
+    
     private String idClub;
     
     public SezionePagamentoView(String idClub) {
@@ -95,7 +87,7 @@ public class SezionePagamentoView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnTornaIndietroJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTornaIndietroJBActionPerformed
-        ClubView clubView = new ClubView();
+        ClubView clubView = new ClubView(this.getIdClub());
         clubView.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnTornaIndietroJBActionPerformed
@@ -106,6 +98,16 @@ public class SezionePagamentoView extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnEffettuaPagamentoJBActionPerformed
 
+    /*GET AND SET*/
+    public String getIdClub() {
+        return idClub;
+    }
+
+    public void setIdClub(String idClub) {
+        this.idClub = idClub;
+    }
+    
+    
     public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(new Runnable() {

@@ -3,6 +3,7 @@ package model;
 
 import dao.ClubDao;
 import dao.ExceptionDao;
+import dao.LoginDao;
 import dao.ProcuratoreDao;
 import dao.SponsorDao;
 import dao.SportivoDao;
@@ -15,11 +16,12 @@ public class Admin extends Login {
     private String passwordAdmin;
     private String opzAdmin;
     
-    
+    /*COSTRUTTORI*/
     public Admin() {
         
     }
     
+    /*GET AND SET*/
     public String getUsernameAdmin() {
         return usernameAdmin;
     }
@@ -43,7 +45,9 @@ public class Admin extends Login {
     public void setPasswordAdmin(String passwordAdmin) {
         this.passwordAdmin = passwordAdmin;
     }
-/*METODI PER ADMIN*/
+    
+    
+    /*METODI PER ADMIN*/
     public void registraProcuratore(Procuratore procuratore) throws ExceptionDao {
         new ProcuratoreDao().registraProcuratore(procuratore);
     }
@@ -108,4 +112,7 @@ public class Admin extends Login {
         new ClubDao().aggiornaClub(club, nomeClub);
     }
     
+    public void registraUtenteLogin(Login login) throws ExceptionDao {
+        new LoginDao().registraUtente(login);
+    }
 }

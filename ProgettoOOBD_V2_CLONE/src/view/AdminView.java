@@ -1,6 +1,8 @@
 
 package view;
 
+import view.registrare.RegistraNuovoProfilo;
+
 
 public class AdminView extends javax.swing.JFrame {
 
@@ -186,7 +188,9 @@ public class AdminView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnClubJBActionPerformed
 
     private void btnNuovoProfiloJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuovoProfiloJBActionPerformed
-       
+        RegistraNuovoProfilo registraNuovoProfilo = new RegistraNuovoProfilo();
+        registraNuovoProfilo.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnNuovoProfiloJBActionPerformed
 
     
