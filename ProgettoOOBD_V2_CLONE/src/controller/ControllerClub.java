@@ -54,4 +54,34 @@ public class ControllerClub {
         }
         return false;
     }
+    
+    public ArrayList<Stipendio> cercaTuttiPagamenti(int idClub) throws ExceptionDao {
+        if(idClub > 0) {
+            Stipendio stipendio = new Stipendio(idClub);
+            Club club = new Club();
+            return club.cercaTuttiPagamenti(stipendio);
+        }
+        
+        return null;
+    }
+    
+    public ArrayList<Stipendio> cercaPagamentiAtleta(String idAtleta, int idClub) throws ExceptionDao {
+        if(idAtleta != null && idAtleta.length() > 0) {
+            Stipendio stipendio = new Stipendio(idAtleta, idClub);
+            Club club = new Club();
+            return club.cercaPagamentiAtleta(stipendio);
+        }
+        
+        return null;
+    }
+    
+    public ArrayList<Stipendio> cercaPagamentiDataPagamento(java.sql.Date dataPagamento, int idClub) throws ExceptionDao {
+        if(dataPagamento != null) {
+            Stipendio stipendio = new Stipendio(dataPagamento, idClub);
+            Club club = new Club();
+            return club.cercaPagamentiDataPagamento(stipendio);
+        }
+        
+        return null;
+    }
 }

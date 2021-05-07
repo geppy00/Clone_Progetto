@@ -1,6 +1,9 @@
 
 package view;
 
+import dao.ExceptionDao;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import view.registrare.RegistraPagamento;
 
 
@@ -8,6 +11,7 @@ public class SezionePagamentoView extends javax.swing.JFrame {
     
     private String idClub;
     
+    /*COSTRUTTORI*/
     public SezionePagamentoView(String idClub) {
         initComponents();
         this.idClub = idClub;
@@ -38,10 +42,15 @@ public class SezionePagamentoView extends javax.swing.JFrame {
         });
 
         btnVisualizzaPagamentiJB.setText("VISUALIZZA PAGAMENTI");
+        btnVisualizzaPagamentiJB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVisualizzaPagamentiJBActionPerformed(evt);
+            }
+        });
 
         btnModificaPagamentiJB.setText("MODIFICA PAGAMENTI");
 
-        btnEliminaPagamentoJB.setText("ELIMINA PAGAMENTO");
+        btnEliminaPagamentoJB.setText("ANNULLA PAGAMENTO");
 
         btnTornaIndietroJB.setText("TORNA INDIETRO");
         btnTornaIndietroJB.addActionListener(new java.awt.event.ActionListener() {
@@ -62,8 +71,8 @@ public class SezionePagamentoView extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(btnModificaPagamentiJB, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnEliminaPagamentoJB, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addComponent(btnEliminaPagamentoJB, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(29, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnTornaIndietroJB)
@@ -86,6 +95,7 @@ public class SezionePagamentoView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /*ACTION PERFOMED*/
     private void btnTornaIndietroJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTornaIndietroJBActionPerformed
         ClubView clubView = new ClubView(this.getIdClub());
         clubView.setVisible(true);
@@ -97,6 +107,17 @@ public class SezionePagamentoView extends javax.swing.JFrame {
         registraPagamento.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnEffettuaPagamentoJBActionPerformed
+
+    private void btnVisualizzaPagamentiJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisualizzaPagamentiJBActionPerformed
+        SezioneVisualizzaPagamenti sezioneVisualizzaPagamenti = null;
+        try {
+            sezioneVisualizzaPagamenti = new SezioneVisualizzaPagamenti(this.getIdClub());
+        } catch (ExceptionDao ex) {
+            Logger.getLogger(SezionePagamentoView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        sezioneVisualizzaPagamenti.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnVisualizzaPagamentiJBActionPerformed
 
     /*GET AND SET*/
     public String getIdClub() {

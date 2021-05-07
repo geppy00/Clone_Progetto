@@ -95,4 +95,16 @@ public class Club {
     public void effettuaPagamento(Stipendio stipendio) throws ExceptionDao {
         new StipendioDao().registraPagamento(stipendio);
     }
+    
+    public ArrayList<Stipendio> cercaTuttiPagamenti(Stipendio stipendio) throws ExceptionDao {
+        return new StipendioDao().cercaTuttiPagamenti(stipendio);
+    }
+    
+    public ArrayList<Stipendio> cercaPagamentiAtleta(Stipendio stipendio) throws ExceptionDao {
+        return new StipendioDao().cercaPagamentiAtleta(stipendio);
+    }
+    
+    public ArrayList<Stipendio> cercaPagamentiDataPagamento(Stipendio stipendio) throws ExceptionDao {
+        return new StipendioDao().cercaPagamentiDataPagamento(stipendio);
+    }
 }

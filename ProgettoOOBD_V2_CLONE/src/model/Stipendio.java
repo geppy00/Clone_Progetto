@@ -11,6 +11,10 @@ public class Stipendio {
     private int idClub;
     private java.sql.Date dataPagamento;
     
+    /*RELAZIONI*/
+    private Atleta atleta;
+    private Club club;
+    
     /*COSTRUTTORI*/
     public Stipendio(double valoreStipendio, String idAtleta, int idClub, java.sql.Date dataPagamento) {
         this.valoreStipendio = valoreStipendio;
@@ -18,6 +22,25 @@ public class Stipendio {
         this.idClub = idClub;
         this.dataPagamento = dataPagamento;  
     }
+    
+    public Stipendio() {
+        
+    }
+    
+    public Stipendio(int idClub) {
+        this.idClub = idClub;
+    }
+    
+    public Stipendio(String idAtleta, int idClub) {
+        this.idAtleta = idAtleta;
+        this.idClub = idClub;
+    }
+    
+    public Stipendio(java.sql.Date dataPagamento, int idClub) {
+        this.dataPagamento = dataPagamento;
+        this.idClub = idClub;
+    }
+    
     
     /*GET AND SET*/
     public int getIdStipendio() {
@@ -67,4 +90,5 @@ public class Stipendio {
     public void setDataPagamento(java.sql.Date dataPagamento) {
         this.dataPagamento = dataPagamento;
     }
+  
 }

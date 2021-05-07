@@ -153,6 +153,8 @@ public class RegistraNuovoProfilo extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    
     /*ACTION PERFOMED*/
     private void btnTornaIndietroJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTornaIndietroJBActionPerformed
         AdminView adminView = new AdminView();
@@ -162,11 +164,25 @@ public class RegistraNuovoProfilo extends javax.swing.JFrame {
 
     private void btnRegistraJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistraJBActionPerformed
         ControllerLogin controllerLogin = new ControllerLogin();
-        String opzUser = opzUserJCB.getSelectedItem().toString();
-        String username = inputUsernameJTF.getText();
         String password = inputPasswordJTF.getText();
         String confermaPassword = inputConfermaPasswordJTF.getText();
+        String opzUser = opzUserJCB.getSelectedItem().toString();
+        String username = inputUsernameJTF.getText();
         String idCorrispodente = inputIdCorrispondenteJTF.getText();
+        boolean ripeti = false;
+        
+        /*do {
+            try {
+                password = inputPasswordJTF.getText();
+                confermaPassword = inputConfermaPasswordJTF.getText();
+                if(password.equals(confermaPassword))
+                    ripeti=false;
+            }catch(Exception e) {
+                inputPasswordJTF.setText("");
+                inputConfermaPasswordJTF.setText("");
+                ripeti=true;
+            }
+        }while(ripeti);*/
         
         try {
             boolean check = controllerLogin.registraUtenteLogin(opzUser, username, password, idCorrispodente);

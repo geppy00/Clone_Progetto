@@ -31,8 +31,8 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="btnModificaPagamentiJB" min="-2" pref="140" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="btnEliminaPagamentoJB" min="-2" pref="135" max="-2" attributes="0"/>
-              <EmptySpace pref="45" max="32767" attributes="0"/>
+              <Component id="btnEliminaPagamentoJB" min="-2" pref="151" max="-2" attributes="0"/>
+              <EmptySpace pref="29" max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
@@ -71,6 +71,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="VISUALIZZA PAGAMENTI"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVisualizzaPagamentiJBActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnModificaPagamentiJB">
       <Properties>
@@ -79,7 +82,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnEliminaPagamentoJB">
       <Properties>
-        <Property name="text" type="java.lang.String" value="ELIMINA PAGAMENTO"/>
+        <Property name="text" type="java.lang.String" value="ANNULLA PAGAMENTO"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnTornaIndietroJB">
