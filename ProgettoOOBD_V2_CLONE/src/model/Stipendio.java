@@ -41,6 +41,12 @@ public class Stipendio {
         this.idClub = idClub;
     }
     
+    public Stipendio(java.sql.Date dataPagamento, int idClub, String idAtleta) {
+        this.dataPagamento = dataPagamento;
+        this.idClub = idClub;
+        this.idAtleta = idAtleta;
+    }
+    
     
     /*GET AND SET*/
     public int getIdStipendio() {

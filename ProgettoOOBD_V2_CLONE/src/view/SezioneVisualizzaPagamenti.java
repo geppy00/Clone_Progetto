@@ -73,11 +73,15 @@ public class SezioneVisualizzaPagamenti extends javax.swing.JFrame {
     }
     
     /*COSTRUTTORI*/
-    public SezioneVisualizzaPagamenti(String idClub) throws ExceptionDao {
+    public SezioneVisualizzaPagamenti(String idClub) {
         initComponents();
         this.idClub = idClub;
         //visualizzaTuttiPagamenti();
-        visualizzaTuttiPagamenti();
+        try {
+            visualizzaTuttiPagamenti();
+        } catch (ExceptionDao ex) {
+            Logger.getLogger(SezioneVisualizzaPagamenti.class.getName()).log(Level.SEVERE, null, ex);
+        }
         this.setLocationRelativeTo(null);
     }
     

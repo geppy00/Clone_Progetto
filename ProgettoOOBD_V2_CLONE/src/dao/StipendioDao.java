@@ -149,5 +149,35 @@ public class StipendioDao {
         
         return datiStipendio;
     }
+    
+    public double cercaPagamento(Stipendio stipendio) throws ExceptionDao {
+        String sql = "SELECT * FROM stipendio WHERE idclub="+stipendio.getIdClub()+" AND idatleta='"+stipendio.getIdAtleta()+"' AND data_pagamento='"+stipendio.getDataPagamento()+"';";
+        PreparedStatement pStmt = null;
+        Connection connection = null;
+        ResultSet rs = null;
+        
+        try {
+            connection = new DataAccessObject().connectionToDatabase();
+            pStmt = connection.prepareStatement(sql);
+            rs = pStmt.executeQuery();
+            if(rs == null)
+                return -1;
+            else {
+                while(rs.next()) {
+                    double importo = rs.getDouble("val_stipendio");
+                    return importo;
+                }
+            }
+        } catch(SQLException e) {
+            throw new ExceptionDao("ERRORE RICERCA PAGAMENTO FALLITA "+e);
+        }
+        
+        finally{
+            FinallyException finallyException = new FinallyException();
+            finallyException.finallyException();
+        }
+        
+        return -1;
+    }
  
 }

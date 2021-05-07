@@ -84,4 +84,14 @@ public class ControllerClub {
         
         return null;
     }
+    
+    public double cercaPagamento(java.sql.Date dataPagamento, int idClub, String idAtleta) throws ExceptionDao {
+        if(dataPagamento != null && idClub > 0 && idAtleta != null && idAtleta.length() > 0) {
+            Stipendio stipendio = new Stipendio(dataPagamento, idClub, idAtleta);
+            Club club = new Club();
+            return club.cercaPagamento(stipendio);
+        }
+        
+        return -1;
+    }
 }

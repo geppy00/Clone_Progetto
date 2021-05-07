@@ -4,6 +4,7 @@ package view;
 import dao.ExceptionDao;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import view.modificaDati.ModificaPagamento;
 import view.registrare.RegistraPagamento;
 
 
@@ -49,6 +50,11 @@ public class SezionePagamentoView extends javax.swing.JFrame {
         });
 
         btnModificaPagamentiJB.setText("MODIFICA PAGAMENTI");
+        btnModificaPagamentiJB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificaPagamentiJBActionPerformed(evt);
+            }
+        });
 
         btnEliminaPagamentoJB.setText("ANNULLA PAGAMENTO");
 
@@ -110,14 +116,16 @@ public class SezionePagamentoView extends javax.swing.JFrame {
 
     private void btnVisualizzaPagamentiJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisualizzaPagamentiJBActionPerformed
         SezioneVisualizzaPagamenti sezioneVisualizzaPagamenti = null;
-        try {
-            sezioneVisualizzaPagamenti = new SezioneVisualizzaPagamenti(this.getIdClub());
-        } catch (ExceptionDao ex) {
-            Logger.getLogger(SezionePagamentoView.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        sezioneVisualizzaPagamenti = new SezioneVisualizzaPagamenti(this.getIdClub());
         sezioneVisualizzaPagamenti.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnVisualizzaPagamentiJBActionPerformed
+
+    private void btnModificaPagamentiJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificaPagamentiJBActionPerformed
+        ModificaPagamento modificaPagamento = new ModificaPagamento(this.getIdClub());
+        modificaPagamento.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnModificaPagamentiJBActionPerformed
 
     /*GET AND SET*/
     public String getIdClub() {

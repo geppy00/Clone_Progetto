@@ -107,4 +107,8 @@ public class Club {
     public ArrayList<Stipendio> cercaPagamentiDataPagamento(Stipendio stipendio) throws ExceptionDao {
         return new StipendioDao().cercaPagamentiDataPagamento(stipendio);
     }
+    
+    public double cercaPagamento(Stipendio stipendio) throws ExceptionDao {
+        return new StipendioDao().cercaPagamento(stipendio);
+    }
 }
