@@ -5,7 +5,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import model.Stipendio;
 import refactorCode.FinallyException;
 
@@ -37,6 +39,7 @@ public class StipendioDao {
             finallyException.finallyException();
         }
     }
+    
     
     public ArrayList<Stipendio> cercaTuttiPagamenti(Stipendio stipendio) throws ExceptionDao {
         ArrayList<Stipendio> datiStipendio = new ArrayList<Stipendio>();
@@ -76,6 +79,7 @@ public class StipendioDao {
         
         return datiStipendio;
     }
+    
     
     public ArrayList<Stipendio> cercaPagamentiAtleta(Stipendio stipendio) throws ExceptionDao {
         ArrayList<Stipendio> datiStipendio = new ArrayList<Stipendio>();
@@ -150,6 +154,7 @@ public class StipendioDao {
         return datiStipendio;
     }
     
+    
     public double cercaPagamento(Stipendio stipendio) throws ExceptionDao {
         String sql = "SELECT * FROM stipendio WHERE idclub="+stipendio.getIdClub()+" AND idatleta='"+stipendio.getIdAtleta()+"' AND data_pagamento='"+stipendio.getDataPagamento()+"';";
         PreparedStatement pStmt = null;
@@ -179,5 +184,47 @@ public class StipendioDao {
         
         return -1;
     }
+    
+    
+    public void modificaPagamento(Stipendio stipendio) throws ExceptionDao {
+        String sql = "UPDATE stipendio SET val_stipendio="+stipendio.getValoreStipendio()+" WHERE idclub="+stipendio.getIdClub()+" AND idatleta='"+stipendio.getIdAtleta()+"';";
+        Statement stmt = null;
+        Connection connection = null;
+        
+        try{
+            connection = new DataAccessObject().connectionToDatabase();
+            connection.setAutoCommit(false);
+            stmt = connection.createStatement();
+            stmt.executeUpdate(sql);
+            connection.commit();
+            JOptionPane.showMessageDialog(null, "MODIFICA DEL PAGAMENTO EFFETTUATO CON SUCCESSO");
+        }catch(SQLException e) {
+            throw new ExceptionDao("ERRORE AGGIORNAMENTO CLUB FALLITA "+e);
+        }
+        
+        finally{
+            FinallyException finallyException = new FinallyException();
+            finallyException.finallyException();
+        }
+    }
  
+    
+    public void eliminaPagamento (Stipendio stipendio) throws ExceptionDao {
+        PreparedStatement pStmt = null;
+        Connection connection = null;
+        String sql= "DELETE FROM stipendio WHERE val_stipendio="+stipendio.getValoreStipendio()+" AND idclub="+stipendio.getIdClub()+" AND idatleta='"+stipendio.getIdAtleta()+"' AND data_pagamento='"+stipendio.getDataPagamento()+"';";
+        try {
+            connection = new DataAccessObject().connectionToDatabase();
+            pStmt = connection.prepareStatement(sql);
+            pStmt.executeUpdate();
+            JOptionPane.showMessageDialog(null, "PAGAMENTO PER LA CIFRA: "+stipendio.getValoreStipendio()+" IN DATA: "+stipendio.getDataPagamento()+"\n\t\tANNULLATO CON SUCCESSO");
+        }catch(SQLException e) {
+            throw new ExceptionDao("ERRORE ELIMINAZIONE CLUB FALLITA "+e);
+        }
+        
+        finally {
+            FinallyException finallyException = new FinallyException();
+            finallyException.finallyException();
+        }
+    }
 }

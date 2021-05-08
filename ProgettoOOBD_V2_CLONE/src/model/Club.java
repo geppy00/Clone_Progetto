@@ -111,4 +111,12 @@ public class Club {
     public double cercaPagamento(Stipendio stipendio) throws ExceptionDao {
         return new StipendioDao().cercaPagamento(stipendio);
     }
+    
+    public void modificaPagamento(Stipendio stipendio) throws ExceptionDao {
+        new StipendioDao().modificaPagamento(stipendio);
+    }
+    
+    public void eliminaPagamento(Stipendio stipendio) throws ExceptionDao {
+        new StipendioDao().eliminaPagamento(stipendio);
+    }
 }

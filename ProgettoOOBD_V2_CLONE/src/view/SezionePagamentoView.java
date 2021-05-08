@@ -4,6 +4,7 @@ package view;
 import dao.ExceptionDao;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import view.elimina.EliminaPagamento;
 import view.modificaDati.ModificaPagamento;
 import view.registrare.RegistraPagamento;
 
@@ -57,6 +58,11 @@ public class SezionePagamentoView extends javax.swing.JFrame {
         });
 
         btnEliminaPagamentoJB.setText("ANNULLA PAGAMENTO");
+        btnEliminaPagamentoJB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminaPagamentoJBActionPerformed(evt);
+            }
+        });
 
         btnTornaIndietroJB.setText("TORNA INDIETRO");
         btnTornaIndietroJB.addActionListener(new java.awt.event.ActionListener() {
@@ -126,6 +132,12 @@ public class SezionePagamentoView extends javax.swing.JFrame {
         modificaPagamento.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnModificaPagamentiJBActionPerformed
+
+    private void btnEliminaPagamentoJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminaPagamentoJBActionPerformed
+        EliminaPagamento eliminaPagamento = new EliminaPagamento(this.getIdClub());
+        eliminaPagamento.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnEliminaPagamentoJBActionPerformed
 
     /*GET AND SET*/
     public String getIdClub() {

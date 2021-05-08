@@ -94,4 +94,23 @@ public class ControllerClub {
         
         return -1;
     }
+    
+    public boolean modificaPagamento(java.sql.Date dataPagamento, int idClub, String idAtleta, double importo) throws ExceptionDao {
+        if(dataPagamento != null && idClub > 0 && idAtleta != null && idAtleta.length() > 0 && importo > 0) {
+            Stipendio stipendio = new Stipendio(importo, idAtleta, idClub, dataPagamento);
+            Club club = new Club();
+            club.modificaPagamento(stipendio);
+            return true;
+        }
+        
+        return false;
+    }
+    
+    public void eliminaPagamento(java.sql.Date dataPagamento, int idClub, String idAtleta, double importo) throws ExceptionDao {
+        if(dataPagamento != null && idClub > 0 && idAtleta != null && idAtleta.length() > 0 && importo > 0) {
+            Stipendio stipendio = new Stipendio(importo, idAtleta, idClub, dataPagamento);
+            Club club = new Club();
+            club.eliminaPagamento(stipendio);
+        }
+    }
 }

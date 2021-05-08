@@ -5,6 +5,7 @@ import controller.ControllerClub;
 import dao.ExceptionDao;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import view.SezionePagamentoView;
 
 
@@ -155,6 +156,18 @@ public class ModificaPagamento extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAnnullaJBActionPerformed
 
     private void btnModificaJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificaJBActionPerformed
+        ControllerClub controllerClub = new ControllerClub();
+        double importo = Double.parseDouble(inputImportoJTF.getText());
+        String idAtletaCercare = inputIdDestinatarioJTF.getText();
+        java.sql.Date dataPagamentoCercare = new java.sql.Date(inputDataCercareJDC.getDate().getTime());
+        
+        try {
+            boolean check = controllerClub.modificaPagamento(dataPagamentoCercare, Integer.parseInt(this.getIdClub()), idAtletaCercare, importo);
+            if(check == false)
+                JOptionPane.showMessageDialog(null, "!! MODIFICA DEL PAGAMENTO FALLITA !!");
+        } catch (ExceptionDao ex) {
+            Logger.getLogger(ModificaPagamento.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_btnModificaJBActionPerformed
 
@@ -165,7 +178,12 @@ public class ModificaPagamento extends javax.swing.JFrame {
        
         try {
             double importo = controllerClub.cercaPagamento(dataPagamentoCercare, Integer.parseInt(this.getIdClub()), idAtletaCercare);
-            inputImportoJTF.setText(Double.toString(importo));
+            if(importo == -1)
+                JOptionPane.showMessageDialog(null, "!! PAGAMENTO NON TROVATO !!");
+            else {
+                JOptionPane.showMessageDialog(null, "PAGAMENTO TROVATO CON SUCCESSO");
+                inputImportoJTF.setText(Double.toString(importo));
+            }
         } catch (ExceptionDao ex) {
             Logger.getLogger(ModificaPagamento.class.getName()).log(Level.SEVERE, null, ex);
         }
