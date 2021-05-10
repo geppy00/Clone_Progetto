@@ -55,7 +55,7 @@ public class ControllerClub {
         return false;
     }
     
-    public ArrayList<Stipendio> cercaTuttiPagamenti(int idClub) throws ExceptionDao {
+    /*public ArrayList<Stipendio> cercaTuttiPagamenti(int idClub) throws ExceptionDao {
         if(idClub > 0) {
             Stipendio stipendio = new Stipendio(idClub);
             Club club = new Club();
@@ -63,7 +63,8 @@ public class ControllerClub {
         }
         
         return null;
-    }
+    }*/
+    
     
     public ArrayList<Stipendio> cercaPagamentiAtleta(String idAtleta, int idClub) throws ExceptionDao {
         if(idAtleta != null && idAtleta.length() > 0) {

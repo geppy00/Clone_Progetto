@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import model.Stipendio;
@@ -14,6 +16,8 @@ import refactorCode.FinallyException;
 
 public class StipendioDao {
     
+    
+    /*METODI DAO*/
     public void registraPagamento(Stipendio stipendio) throws ExceptionDao {
         String sql = "INSERT INTO stipendio(val_stipendio, status_pagamento, data_pagamento, idatleta, idclub) VALUES(?, ?, ?, ?, ?)";
         PreparedStatement pStmt = null;
@@ -41,7 +45,7 @@ public class StipendioDao {
     }
     
     
-    public ArrayList<Stipendio> cercaTuttiPagamenti(Stipendio stipendio) throws ExceptionDao {
+    /*public ArrayList<Stipendio> cercaTuttiPagamenti(Stipendio stipendio) throws ExceptionDao {
         ArrayList<Stipendio> datiStipendio = new ArrayList<Stipendio>();
         String sql= "SELECT * FROM stipendio WHERE idclub="+stipendio.getIdClub()+";";
         PreparedStatement pStmt = null;
@@ -78,7 +82,8 @@ public class StipendioDao {
         }
         
         return datiStipendio;
-    }
+    }*/
+    
     
     
     public ArrayList<Stipendio> cercaPagamentiAtleta(Stipendio stipendio) throws ExceptionDao {

@@ -86,11 +86,6 @@ public class Login {
         this.opzioneLogin = opzioneLogin;
     }
     
-    public String verificaLogin(Login login) throws ExceptionDao {
-       return new LoginDao().verificaLogin(username, password, opzioneLogin);
-      
-    }
-    
     public String getCodprocuratore() {
         return codprocuratore;
     }
@@ -129,6 +124,12 @@ public class Login {
 
     public void setIdGenerico(String idGenerico) {
         this.idGenerico = idGenerico;
+    }
+    
+    /*METODI*/
+    public String verificaLogin(Login login) throws ExceptionDao {
+       return new LoginDao().verificaLogin(username, password, opzioneLogin);
+      
     }
 
 }

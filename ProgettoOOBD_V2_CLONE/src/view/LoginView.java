@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 
 public class LoginView extends javax.swing.JFrame {
     
+    private String idCopiato;
     
     public LoginView() {
         initComponents();
@@ -97,6 +98,16 @@ public class LoginView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /*GET AND SET*/
+    public String getIdCopiato() {
+        return idCopiato;
+    }
+
+    public void setIdCopiato(String idCopiato) {
+        this.idCopiato = idCopiato;
+    }
+    
+    /*ACTION PERFOMED*/
     private void btnAccediJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAccediJBActionPerformed
        String userName = usernameJTF.getText();
        String password = passwordPJTF.getText();
@@ -105,33 +116,73 @@ public class LoginView extends javax.swing.JFrame {
        ControllerLogin loginController = new ControllerLogin();
        
         try {
-            String idCopiato = loginController.verificaLogin(userName, password, scelta);
-            if(idCopiato == null){ 
+            setIdCopiato(loginController.verificaLogin(userName, password, scelta));
+            System.out.println("CODICE ACCESSO "+getIdCopiato());
+            if(getIdCopiato() == null){ 
                 JOptionPane.showMessageDialog(null, "Dati Sbagliati!!");
              
             }else{
                JOptionPane.showMessageDialog(null, "Dati corretti");
-               if(scelta=="Admin") { 
+               /*if(getIdCopiato().equals("admin")) { 
                   // qua entro normalmente, non lo so solo perché non mi apre na nuova finestra
                   AdminView adminview = new AdminView();
                   adminview.setVisible(true);
                   this.setVisible(false);
                }
-               else if(scelta=="Procuratore") {
-                   
-               }
-               else if(scelta=="Sporsor"){
-               
-               }
-               else if(scelta=="Atleta"){
-               
-               }
-               else if(scelta=="Club") {
-                   ClubView clubView = new ClubView(idCopiato);
-                   clubView.setVisible(true);
+               else if(getIdCopiato().equals("procuratore")) {
+                   ProcuratoreView procuratoreView = new ProcuratoreView(getIdCopiato());
+                   procuratoreView.setVisible(true);
                    this.setVisible(false);
                }
+               else if(getIdCopiato().equals("sporsor")) {
+                    SponsorView sponsorView = new SponsorView(getIdCopiato());
+                    sponsorView.setVisible(true);
+                    this.setVisible(false);
+               }
+               else if(getIdCopiato().equals("atleta")) {
+                    AtletaView atletaView = new AtletaView(getIdCopiato());
+                    atletaView.setVisible(true);
+                    this.setVisible(false);
+               }
+               else if(getIdCopiato().equals("club")) {
+                   ClubView clubView = new ClubView(getIdCopiato());
+                   clubView.setVisible(true);
+                   this.setVisible(false);
+               }*/
                
+               //HO SCELTO DI USARE LO SWITCH PERCHE' VA DIRETTAMENTE NEL CASO INTERESSATO
+               switch(scelta) {
+                   case "Admin":
+                        // qua entro normalmente, non lo so solo perché non mi apre na nuova finestra
+                        AdminView adminview = new AdminView();
+                        adminview.setVisible(true);
+                        this.setVisible(false);
+                   break;
+                   
+                   case "Procuratore":
+                       ProcuratoreView procuratoreView = new ProcuratoreView(getIdCopiato());
+                       procuratoreView.setVisible(true);
+                       this.setVisible(false);
+                   break;
+                   
+                   case "Sporsor":
+                        SponsorView sponsorView = new SponsorView(getIdCopiato());
+                        sponsorView.setVisible(true);
+                        this.setVisible(false);
+                   break;
+                   
+                   case "Atleta":
+                       AtletaView atletaView = new AtletaView(getIdCopiato());
+                       atletaView.setVisible(true);
+                       this.setVisible(false);
+                   break;
+                   
+                   case "Club":
+                       ClubView clubView = new ClubView(getIdCopiato());
+                       clubView.setVisible(true);
+                       this.setVisible(false);
+                   break;
+               }
             }
         } catch (ExceptionDao ex) {
             Logger.getLogger(LoginView.class.getName()).log(Level.SEVERE, null, ex);

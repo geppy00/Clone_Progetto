@@ -23,9 +23,8 @@ import java.text.SimpleDateFormat;
 import view.registrare.RegistraClub;
 
 public class SezioneVisualizzaPagamenti extends javax.swing.JFrame {
-
-
-
+    
+    private String[] tbData;
     private String idClub;
     
     public void visualizzaTuttiPagamenti() throws ExceptionDao {
@@ -72,6 +71,7 @@ public class SezioneVisualizzaPagamenti extends javax.swing.JFrame {
         }
     }
     
+    
     /*COSTRUTTORI*/
     public SezioneVisualizzaPagamenti(String idClub) {
         initComponents();
@@ -88,6 +88,7 @@ public class SezioneVisualizzaPagamenti extends javax.swing.JFrame {
     public SezioneVisualizzaPagamenti() {  
         
     }
+    
 
 
     @SuppressWarnings("unchecked")
@@ -335,6 +336,15 @@ public class SezioneVisualizzaPagamenti extends javax.swing.JFrame {
     public void setIdClub(String idClub) {
         this.idClub = idClub;
     }
+    
+    public String[] getTbData() {
+        return tbData;
+    }
+
+    public void setTbData(String[] tbData) {
+        this.tbData = tbData;
+    }
+    
     
     /*MAIN*/
     public static void main(String args[]) {
