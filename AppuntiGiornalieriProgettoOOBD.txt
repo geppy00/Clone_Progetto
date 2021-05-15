@@ -17,3 +17,12 @@
              però riguardante al procuratore
 	     Abbiamo definito nella schermata Admin la sezione per lo Sponsor, ed nella sezione Sponsor abbiamo definito la registrazione da parte dell'admin
        	     Nessun problema rivelato nella scrittura dei metodi precedentemente definiti 
+
+13/05/2021 - ERRORE = "AWT-EventQueue-0" java.lang.UnsupportedOperationException: Not supported yet.
+	     risolto cancellando il costruttore con un relativo metodo
+	     costruttore = "public ProcuratoreDao() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }"
+
+
+Exception in thread "AWT-EventQueue-0" java.lang.NullPointerException: Cannot invoke "java.util.Date.getYear()" because "dataInizio" is null
