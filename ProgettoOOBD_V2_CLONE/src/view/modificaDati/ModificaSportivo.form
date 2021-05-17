@@ -90,18 +90,9 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="inputDataNascitaJDC" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Component id="idClubJL" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="inputIdClubJTF" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" attributes="0">
-                                      <Component id="ibanJL" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="inputIbanJTF" max="32767" attributes="0"/>
-                                  </Group>
-                              </Group>
+                              <Component id="ibanJL" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="inputIbanJTF" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -179,12 +170,7 @@
                       <Component id="inputIbanJTF" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="idClubJL" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="inputIdClubJTF" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace pref="10" max="32767" attributes="0"/>
+              <EmptySpace pref="46" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="btnTornaIndietroJB" alignment="1" min="-2" pref="62" max="-2" attributes="0"/>
                   <Component id="btnAggiornaJB" alignment="1" min="-2" pref="43" max="-2" attributes="0"/>
@@ -314,13 +300,6 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAggiornaJBActionPerformed"/>
       </Events>
-    </Component>
-    <Component class="javax.swing.JLabel" name="idClubJL">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="ID Club"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="inputIdClubJTF">
     </Component>
   </SubComponents>
 </Form>

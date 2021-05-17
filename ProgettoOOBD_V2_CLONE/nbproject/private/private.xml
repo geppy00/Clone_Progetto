@@ -3,13 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Home/Documents/NetBeansProjects/ProgettoOOBD_V2/src/view/ClubView.java</file>
-            <file>file:/C:/Users/Home/Documents/NetBeansProjects/ProgettoOOBD_V2/src/controller/ControllerClub.java</file>
+            <file>file:/C:/Users/Home/Documents/NetBeansProjects/ProgettoOOBD_V2/src/view/SezioneGestioneContrattiView.java</file>
+            <file>file:/C:/Users/Home/Documents/NetBeansProjects/ProgettoOOBD_V2/src/view/registrare/RegistraContratto.java</file>
+            <file>file:/C:/Users/Home/Documents/NetBeansProjects/ProgettoOOBD_V2/src/view/ProcuratoreView.java</file>
             <file>file:/C:/Users/Home/Documents/NetBeansProjects/ProgettoOOBD_V2/src/model/Club.java</file>
-            <file>file:/C:/Users/Home/Documents/NetBeansProjects/ProgettoOOBD_V2/src/dao/StipendioDao.java</file>
-            <file>file:/C:/Users/Home/Documents/NetBeansProjects/ProgettoOOBD_V2/src/view/SezionePagamentoView.java</file>
-            <file>file:/C:/Users/Home/Documents/NetBeansProjects/ProgettoOOBD_V2/src/view/SezioneVisualizzaPagamenti.java</file>
-            <file>file:/C:/Users/Home/Documents/NetBeansProjects/ProgettoOOBD_V2/src/model/Stipendio.java</file>
+            <file>file:/C:/Users/Home/Documents/NetBeansProjects/ProgettoOOBD_V2/src/dao/ClubDao.java</file>
+            <file>file:/C:/Users/Home/Documents/NetBeansProjects/ProgettoOOBD_V2/src/dao/ProcuratoreDao.java</file>
+            <file>file:/C:/Users/Home/Documents/NetBeansProjects/ProgettoOOBD_V2/src/controller/ControllerProcuratore.java</file>
+            <file>file:/C:/Users/Home/Documents/NetBeansProjects/ProgettoOOBD_V2/src/model/Procuratore.java</file>
         </group>
     </open-files>
 </project-private>

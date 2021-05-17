@@ -1,11 +1,15 @@
 
 package model;
 
+import dao.ExceptionDao;
+import dao.ProcuratoreDao;
 import java.util.ArrayList;
 import java.util.Date;
 
 
 public class Procuratore {
+
+    
 
 
     private String code_procuratore;
@@ -18,6 +22,7 @@ public class Procuratore {
     private String telefono;
     private String codFiscale;
     private String iban;
+    
 
     public Procuratore(String code_procuratore, String nome, String cognome, String sesso, String nazione, String indirizzo, java.sql.Date dataNascita, String telefono, String codFiscale, String iban) {
         this.code_procuratore = code_procuratore;
@@ -34,6 +39,10 @@ public class Procuratore {
     
     public Procuratore(String codiceProcuratore){
         this.code_procuratore = codiceProcuratore;
+    }
+    
+    public Procuratore() {
+        
     }
     
     /*RELAZIONI*/
@@ -175,5 +184,16 @@ public class Procuratore {
         this.iban = iban;
     }
     
+    /*METODI*/
+    public ArrayList<Atleta> cercaSportivo(Atleta atleta) throws ExceptionDao {
+        return new ProcuratoreDao().cercaSportivo(atleta);
+    }
     
+    public String cercaClub(Club club) throws ExceptionDao {
+        return new ProcuratoreDao().cercaClub(club);
+    }
+    
+    public void registraContratto(Contratto contratto) throws ExceptionDao {
+        new ProcuratoreDao().registraContratto(contratto);
+    }
 }

@@ -51,8 +51,6 @@ public class ModificaSportivo extends javax.swing.JFrame {
         ibanJL = new javax.swing.JLabel();
         inputIbanJTF = new javax.swing.JTextField();
         btnAggiornaJB = new javax.swing.JButton();
-        idClubJL = new javax.swing.JLabel();
-        inputIdClubJTF = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -106,8 +104,6 @@ public class ModificaSportivo extends javax.swing.JFrame {
                 btnAggiornaJBActionPerformed(evt);
             }
         });
-
-        idClubJL.setText("ID Club");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -167,15 +163,9 @@ public class ModificaSportivo extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(inputDataNascitaJDC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(idClubJL)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(inputIdClubJTF))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(ibanJL)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(inputIbanJTF)))))
+                                .addComponent(ibanJL)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(inputIbanJTF)))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btnTornaIndietroJB)
@@ -236,11 +226,7 @@ public class ModificaSportivo extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(ibanJL)
                         .addComponent(inputIbanJTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(idClubJL)
-                    .addComponent(inputIdClubJTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnTornaIndietroJB, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAggiornaJB, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -301,11 +287,11 @@ public class ModificaSportivo extends javax.swing.JFrame {
         float peso = Float.parseFloat(pesoStr);
         String idProcuratore = inputProcuratoreAssociatoJTF.getText();
         String iban = inputIbanJTF.getText();
-        String idClubStr = inputIdClubJTF.getText();
-        int idClub = Integer.parseInt(idClubStr);
+        
+        System.out.println("NAZIONE: "+nazionalita);
         
         try {
-            controllerSportivo.aggiornaSportivo(codiceFiscalePreso, nome, cognome, sesso, nazionalita, indirizzo, dataNascitaSql, telefono, codiceFiscale, ruolo, peso, idProcuratore, iban, idClub);
+            controllerSportivo.aggiornaSportivo(codiceFiscalePreso, nome, cognome, sesso, nazionalita, indirizzo, dataNascitaSql, telefono, codiceFiscale, ruolo, peso, idProcuratore, iban);
         } catch (ExceptionDao ex) {
             Logger.getLogger(ModificaSportivo.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -328,7 +314,6 @@ public class ModificaSportivo extends javax.swing.JFrame {
     private javax.swing.JLabel cognomeJL;
     private javax.swing.JLabel dataNascitaJL;
     private javax.swing.JLabel ibanJL;
-    private javax.swing.JLabel idClubJL;
     private javax.swing.JLabel idProcuratoreAssociatoJL;
     private javax.swing.JLabel indirizzoJL;
     private javax.swing.JTextField inputCodiceFiscaleJTF;
@@ -336,7 +321,6 @@ public class ModificaSportivo extends javax.swing.JFrame {
     private javax.swing.JTextField inputCognomeJTF;
     private com.toedter.calendar.JDateChooser inputDataNascitaJDC;
     private javax.swing.JTextField inputIbanJTF;
-    private javax.swing.JTextField inputIdClubJTF;
     private javax.swing.JTextField inputIndirizzoJTF;
     private javax.swing.JTextField inputNazioneJTF;
     private javax.swing.JTextField inputNomeJTF;

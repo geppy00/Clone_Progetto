@@ -287,30 +287,19 @@ public class RegistraNuovoProfilo extends javax.swing.JFrame {
         String username = inputUsernameJTF.getText();
         String idCorrispodente = inputIdCorrispondenteJTF.getText();
         boolean ripeti = false;
-            
         
-        //NON E' STATO POSSIBILE CONTROLLARE LA CONFERMA DELLA PASSSWORD PERCHE IL PROGRAMMA VA IN LOOP
-        /*do {
+       if(!(password.equals(confermaPassword))) {
+           JOptionPane.showMessageDialog(null, "ATTENZIONE PASSWORD NON COMPATIBILE");
+       } else {
             try {
-                password = inputPasswordJTF.getText();
-                confermaPassword = inputConfermaPasswordJTF.getText();
-                if(password.equals(confermaPassword))
-                    ripeti=false;
-            }catch(Exception e) {
-                inputPasswordJTF.setText("");
-                inputConfermaPasswordJTF.setText("");
-                ripeti=true;
+                boolean check = controllerLogin.registraUtenteLogin(opzUser, username, password, idCorrispodente);
+                if(check == true)
+                    JOptionPane.showMessageDialog(null, "REGISTRAZIONE EFFETTUATA CON SUCCESSO");
+                else
+                    JOptionPane.showMessageDialog(null, "!! REGISTRAZIONE FALLITA !!");
+            }catch (ExceptionDao ex) {
+                    Logger.getLogger(RegistraNuovoProfilo.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }while(ripeti);*/
-        
-        try {
-            boolean check = controllerLogin.registraUtenteLogin(opzUser, username, password, idCorrispodente);
-            if(check == true)
-                JOptionPane.showMessageDialog(null, "REGISTRAZIONE EFFETTUATA CON SUCCESSO");
-            else
-                JOptionPane.showMessageDialog(null, "!! REGISTRAZIONE FALLITA !!");
-        } catch (ExceptionDao ex) {
-            Logger.getLogger(RegistraNuovoProfilo.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnRegistraJBActionPerformed
 

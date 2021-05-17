@@ -2,8 +2,12 @@
 package controller;
 
 import dao.ExceptionDao;
+import dao.ProcuratoreDao;
 import java.util.ArrayList;
 import model.Admin;
+import model.Atleta;
+import model.Club;
+import model.Contratto;
 import model.Procuratore;
 
 
@@ -50,6 +54,36 @@ public class ControllerProcuratore {
             Procuratore procuratore = new Procuratore(codiceProcuratoreAgiornato, nomeAgiornato, cognmomeAgiornato, sessoAgiornato, nazioneAgiornato, indirizzoAgiornato, (java.sql.Date) dataNascitaAgiornato, telefonoAgiornato, codiceFiscaleAgiornato, ibanAgiornato);
             Admin admin = new Admin();
             admin.aggiornaProcuratore(procuratore, matricolaDaModificare);
+            return true;
+        }
+        
+        return false;
+    }
+    
+    public ArrayList<Atleta> cercaSportivo(String idAtleta) throws ExceptionDao {
+        if(idAtleta != null && idAtleta.length() > 0) {
+            Atleta atleta = new Atleta(idAtleta);
+            Procuratore procuratore = new Procuratore();
+            return procuratore.cercaSportivo(atleta);
+        }
+        
+        return null;
+    }
+    
+    public String cercaClub(int idClub) throws ExceptionDao {
+        if(idClub > 0) {
+            Club club = new Club(idClub);
+            Procuratore procuratore = new Procuratore();
+            return procuratore.cercaClub(club);
+        }
+        return null;
+    }
+    
+    public boolean registraContratto(String idAtleta, int idClub, java.sql.Date dataInizio, java.sql.Date dataFine, float valContratto) throws ExceptionDao {
+        if(idAtleta != null && idAtleta.length() > 0 && idClub > 0 && dataInizio != null && dataFine != null && valContratto > 0) {
+            Contratto contratto = new Contratto(idAtleta, idClub, dataInizio, dataFine, valContratto);
+            Procuratore procuratore = new Procuratore();
+            procuratore.registraContratto(contratto);
             return true;
         }
         

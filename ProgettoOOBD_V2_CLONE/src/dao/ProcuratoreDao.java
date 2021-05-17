@@ -8,11 +8,21 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import model.Atleta;
+import model.Club;
+import model.Contratto;
 import model.Procuratore;
 import refactorCode.FinallyException;
 
 
 public class ProcuratoreDao {
+    
+    private String nomeClub;
+
+    public ProcuratoreDao() {
+        
+    }
+    
     public void registraProcuratore(Procuratore procuratore) throws ExceptionDao {
         String sql= "INSERT INTO procuratore(code_procuratore, nome, cognome, sexo, nazione, indirizzo, datanascita, telefono, codfiscale, iban_procuratore) VALUES(?, ?, ?, ?, ?, ?, ?, ? ,?, ?)";
         PreparedStatement pStmt = null;
@@ -127,5 +137,107 @@ public class ProcuratoreDao {
             FinallyException finallyException = new FinallyException();
             finallyException.finallyException();
         }
+    }
+    
+    public ArrayList<Atleta> cercaSportivo(Atleta atleta) throws ExceptionDao {
+        String sql= "SELECT * FROM atleta WHERE codfiscale='"+atleta.getCodiceFiscale()+"';";
+        PreparedStatement pStmt = null;
+        Connection connection = null;
+        ResultSet rs = null;
+        ArrayList<Atleta> datiAtleta = new ArrayList<Atleta>();
+        
+        try {
+            connection = new DataAccessObject().connectionToDatabase();
+            pStmt = connection.prepareStatement(sql);
+            //pStmt.setString(1, atleta.getCodiceFiscale()+"%");
+            rs = pStmt.executeQuery();
+            if(rs == null)
+                return null;
+            else {
+                while(rs.next()) {
+                    atleta.setNome(rs.getString("nome"));
+                    atleta.setCognmome(rs.getString("cognome"));
+                    atleta.setDataNascita(rs.getDate("datanascita"));
+                    atleta.setCodiceFiscale(rs.getString("codfiscale")); //in piu ma ci puo servire
+                    atleta.setRuolo(rs.getString("ruolo_atleta"));
+                    
+                    datiAtleta.add(atleta);
+                }
+            }
+        }catch(SQLException e){
+            throw new ExceptionDao("ERRORE RICERCA ATLETA FALLITA "+e);
+        }
+        
+        finally{
+            FinallyException finallyException = new FinallyException();
+            finallyException.finallyException();
+        }
+        
+        return datiAtleta;
+    }
+    
+    public String cercaClub(Club club) throws ExceptionDao {
+        String sql= "SELECT * FROM club WHERE idclub="+club.getIdClub()+";";
+        PreparedStatement pStmt = null;
+        Connection connection = null;
+        ResultSet rs = null;
+        
+        try {
+            connection = new DataAccessObject().connectionToDatabase();
+            pStmt = connection.prepareStatement(sql);
+            //pStmt.setInt(1, club.getIdClub());
+            rs = pStmt.executeQuery();
+            
+            if(rs == null)
+                return null;
+            else 
+                while(rs.next()){
+                    setNomeClub(rs.getString("nomeclub"));
+                    return getNomeClub();
+                } 
+        } catch(SQLException e) {
+            throw new ExceptionDao("ERRORE RICERCA CLUB FALLITA "+e);
+        }
+        
+        finally{
+            FinallyException finallyException = new FinallyException();
+            finallyException.finallyException();
+        }
+        
+        return null;
+    }
+    
+    
+    public void registraContratto(Contratto contratto) throws ExceptionDao {
+        String sql = "INSERT INTO contratto(idatleta, idclub, datastart, dataend, valore_contrattuale) VALUES(?, ?, ?, ?, ?);";
+        PreparedStatement pStmt = null;
+        Connection connection = null;
+        
+        try{
+          connection = new DataAccessObject().connectionToDatabase();
+          pStmt = connection.prepareStatement(sql);
+          pStmt.setString(1, contratto.getIdAtleta());
+          pStmt.setInt(2, contratto.getIdClub());
+          pStmt.setDate(3, contratto.getDataStart());
+          pStmt.setDate(4, contratto.getDataEnd());
+          pStmt.setDouble(5, contratto.getValoreContratto());
+          pStmt.execute();
+        }catch(SQLException e) {
+            throw new ExceptionDao("ERRORE REGISTRAZIONE CONTRATTO FALLITA "+e);
+        }
+        
+        finally{
+            FinallyException finallyException = new FinallyException();
+            finallyException.finallyException();
+        }
+    }
+    
+    /*GET AND SET*/
+    public String getNomeClub() {
+        return nomeClub;
+    }
+
+    public void setNomeClub(String nomeClub) {
+        this.nomeClub = nomeClub;
     }
 }

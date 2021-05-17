@@ -18,6 +18,18 @@
 	     Abbiamo definito nella schermata Admin la sezione per lo Sponsor, ed nella sezione Sponsor abbiamo definito la registrazione da parte dell'admin
        	     Nessun problema rivelato nella scrittura dei metodi precedentemente definiti 
 
+21/04/2021 - Risolto il problema della tabella nella classe "RegistraNuovoProfilo" in cui mostrova un solo utente
+             Soluzione: è stato definito un metodo "public void stampaDatiUtenteNellaTabella()" dove con uno switch case vado a leggere una tabella specifica ed aggiungo consecutivamente ogni riga
+             CODICE SORGENTE = dalla riga 28 a 123
+
+23/04/2021 - cambiato il codice per accedere nel sistema nella classe "LoginView" nel metodo "private void btnAccediJBActionPerformed" sostituito il nodo di if ed else if con uno switch
+
+26/04/2021 - risolto il problema relativo al controllo della password nella classe "RegistraNuovoProfilo" nel metodo "private void btnRegistraJBActionPerformed"
+	     ERRORE = loop, inizialmente si è usato un ciclo do while nel quale nel csao di sbaglio non dava la possibiltà all utente di riscrivere la passsword
+	     Soluzione = bastava un semplice controllo con un if codice = "if(!(password.equals(confermaPassword))) {
+           JOptionPane.showMessageDialog(null, "ATTENZIONE PASSWORD NON COMPATIBILE");
+       } else {ALGORITMO PER SCRIVERE SUL DB}"	       
+
 13/05/2021 - ERRORE = "AWT-EventQueue-0" java.lang.UnsupportedOperationException: Not supported yet.
 	     risolto cancellando il costruttore con un relativo metodo
 	     costruttore = "public ProcuratoreDao() {
@@ -25,4 +37,12 @@
     }"
 
 
-Exception in thread "AWT-EventQueue-0" java.lang.NullPointerException: Cannot invoke "java.util.Date.getYear()" because "dataInizio" is null
+
+17/05/2021 ERRORE = "Exception in thread "AWT-EventQueue-0" java.lang.NullPointerException: Cannot invoke "java.util.Date.getYear()" because "dataInizio" is null"
+		     nella classe "RegistraContratto" nel metodo "private void DataInizioJDCPropertyChange" 
+                     risolto facendo un controllo sull oggetto dataInizio, in pratica se era null allora gli passiamo la data odierna altrimenti gli passiamo la data che sceglie l'utente. 
+	             CODICE SORGENTE = ""  if (dataInizio == null) {  
+            					// Il form è stato appena creato e nessuna data è stata inserita
+            					dataInizio = Calendar.getInstance().getTime();
+            					DataInizioJDC.setDate(dataInizio);
+        				} ""

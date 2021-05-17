@@ -6,16 +6,25 @@ import java.util.Date;
 
 public class Contratto {
 
+
+
     
     private String idAtleta;
     private int idSponsor; 
     private int idClub; 
-    private Date dataStart; 
-    private Date dataEnd;
+    private java.sql.Date  dataStart; 
+    private java.sql.Date  dataEnd;
+    private float valoreContratto;
     
-    /**
-     * @return the idAtleta
-     */
+    /*COSTRUTTORI*/
+    public Contratto(String idAtleta, int idClub, java.sql.Date dataInizio, java.sql.Date dataFine, float valContratto) {
+        this.idAtleta = idAtleta;
+        this.valoreContratto = valContratto;
+        this.idClub = idClub;
+        this.dataStart = dataInizio;
+        this.dataEnd = dataFine;
+    }
+
     public String getIdAtleta() {
         return idAtleta;
     }
@@ -55,31 +64,27 @@ public class Contratto {
         this.idClub = idClub;
     }
 
-    /**
-     * @return the dataStart
-     */
-    public Date getDataStart() {
+    public java.sql.Date getDataStart() {
         return dataStart;
     }
 
-    /**
-     * @param dataStart the dataStart to set
-     */
-    public void setDataStart(Date dataStart) {
+    public void setDataStart(java.sql.Date dataStart) {
         this.dataStart = dataStart;
     }
 
-    /**
-     * @return the dataEnd
-     */
-    public Date getDataEnd() {
+    public java.sql.Date getDataEnd() {
         return dataEnd;
     }
 
-    /**
-     * @param dataEnd the dataEnd to set
-     */
-    public void setDataEnd(Date dataEnd) {
+    public void setDataEnd(java.sql.Date dataEnd) {
         this.dataEnd = dataEnd;
+    }
+    
+    public float getValoreContratto() {
+        return valoreContratto;
+    }
+
+    public void setValoreContratto(float valoreContratto) {
+        this.valoreContratto = valoreContratto;
     }
 }

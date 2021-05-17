@@ -31,12 +31,15 @@ public class Club {
        
    }
    
-   /*GET AND SET*/
-   public Club(String nomeClub) {
-    this.nomeClub = nomeClub;
-   }
+    public Club(String nomeClub) {
+       this.nomeClub = nomeClub;
+    }
    
-
+    public Club(int idClub) {
+        this.idClub = idClub;
+    }
+   
+    /*GET AND SET*/
     public int getIdClub() {
         return idClub;
     }
