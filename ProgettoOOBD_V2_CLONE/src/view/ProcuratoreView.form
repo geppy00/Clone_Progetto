@@ -28,6 +28,8 @@
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                       <Component id="btnGestireContrattiJB" min="-2" pref="151" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="106" max="-2" attributes="0"/>
+                      <Component id="btnDenaroJB" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="267" max="-2" attributes="0"/>
@@ -44,7 +46,10 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="benvenutoJL" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
-              <Component id="btnGestireContrattiJB" min="-2" pref="130" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btnGestireContrattiJB" alignment="3" min="-2" pref="130" max="-2" attributes="0"/>
+                  <Component id="btnDenaroJB" alignment="3" min="-2" pref="130" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace pref="117" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -62,6 +67,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGestireContrattiJBActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnDenaroJB">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="GESTIONE DENARO"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDenaroJBActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

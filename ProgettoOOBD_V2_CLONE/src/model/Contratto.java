@@ -24,7 +24,12 @@ public class Contratto {
         this.dataStart = dataInizio;
         this.dataEnd = dataFine;
     }
+    
+    public Contratto(String idAtleta) {
+        this.idAtleta = idAtleta;
+    }
 
+    /*GET AND SET*/
     public String getIdAtleta() {
         return idAtleta;
     }

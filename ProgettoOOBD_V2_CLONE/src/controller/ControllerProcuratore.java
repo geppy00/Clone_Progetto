@@ -89,4 +89,14 @@ public class ControllerProcuratore {
         
         return false;
     }
+    
+    public double prendiValoreContrattuale(String idAtleta) throws ExceptionDao {
+        if(idAtleta != null && idAtleta.length() > 0 ) {
+            Contratto contratto = new Contratto(idAtleta);
+            Procuratore procuratore = new Procuratore();
+            return procuratore.prendiValoreContrattuale(contratto);
+        }
+        
+        return -1;
+    }
 }

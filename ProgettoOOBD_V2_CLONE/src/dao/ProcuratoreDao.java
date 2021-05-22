@@ -232,6 +232,36 @@ public class ProcuratoreDao {
         }
     }
     
+    
+    public double prendiValoreContrattuale(Contratto contratto) throws ExceptionDao {
+        String sql= "SELECT valore_contrattuale FROM contratto WHERE idatleta='"+contratto.getIdAtleta()+"';";
+        PreparedStatement pStmt = null;
+        Connection connection = null;
+        ResultSet rs = null;
+        
+        try {
+            connection = new DataAccessObject().connectionToDatabase();
+            pStmt = connection.prepareStatement(sql);
+            rs = pStmt.executeQuery();
+            
+            if(rs == null)
+                return -1;
+            else 
+                while(rs.next()){
+                    return rs.getDouble("valore_contrattuale");
+                } 
+        } catch(SQLException e) {
+            throw new ExceptionDao("ERRORE RICERCA CLUB FALLITA "+e);
+        }
+        
+        finally{
+            FinallyException finallyException = new FinallyException();
+            finallyException.finallyException();
+        }
+        
+        return -1;
+    }
+    
     /*GET AND SET*/
     public String getNomeClub() {
         return nomeClub;

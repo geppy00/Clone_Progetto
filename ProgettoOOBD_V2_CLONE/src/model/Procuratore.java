@@ -196,4 +196,8 @@ public class Procuratore {
     public void registraContratto(Contratto contratto) throws ExceptionDao {
         new ProcuratoreDao().registraContratto(contratto);
     }
+    
+    public double prendiValoreContrattuale(Contratto contratto) throws ExceptionDao {
+        return new ProcuratoreDao().prendiValoreContrattuale(contratto);
+    }
 }
