@@ -28,6 +28,10 @@ public class Contratto {
     public Contratto(String idAtleta) {
         this.idAtleta = idAtleta;
     }
+    
+    public Contratto() {
+        
+    }
 
     /*GET AND SET*/
     public String getIdAtleta() {

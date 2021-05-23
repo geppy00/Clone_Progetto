@@ -34,6 +34,7 @@ public class SportivoDao {
           pStmt.setDouble(10, atleta.getPeso());
           pStmt.setString(11, atleta.getIdProcuratore());
           pStmt.setString(12, atleta.getIban());
+          pStmt.setInt(13, atleta.getIdClub());
           pStmt.execute();
         }catch(SQLException e) {
             throw new ExceptionDao("ERRORE REGISTRAZIONE PROCURATORE FALLITA "+e);
@@ -114,7 +115,7 @@ public class SportivoDao {
         System.out.println("NAZIONE NELLA DAO="+atleta.getNazione());
         String sql = "UPDATE atleta set nome='"+atleta.getNome()+"', cognome='"+atleta.getCognmome()+"', sexo='"+atleta.getSesso()+
                      "', nazione='"+atleta.getNazione()+"', indirizzo='"+atleta.getIndirizzo()+"', datanascita='"+atleta.getDataNascita()+"', telefono='"+atleta.getTelefono()+
-                     "', codfiscale='"+atleta.getCodiceFiscale()+"', ruolo_atleta='"+atleta.getRuolo()+"', peso='"+atleta.getPeso()+"', codprocuratore='"+atleta.getIdProcuratore()+"', iban_atleta='"+atleta.getIban()+"' WHERE codfiscale='"+codiceFiscaleDaModificare+"';";
+                     "', codfiscale='"+atleta.getCodiceFiscale()+"', ruolo_atleta='"+atleta.getRuolo()+"', peso='"+atleta.getPeso()+"', codprocuratore='"+atleta.getIdProcuratore()+"', iban_atleta='"+atleta.getIban()+"', codclub="+atleta.getIdClub()+" WHERE codfiscale='"+codiceFiscaleDaModificare+"';";
         Statement stmt = null;
         Connection connection = null;
         

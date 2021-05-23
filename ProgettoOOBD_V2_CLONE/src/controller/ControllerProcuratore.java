@@ -99,4 +99,14 @@ public class ControllerProcuratore {
         
         return -1;
     }
+    
+    public String[] prendiGuadagnoPiuAlto(String idProcuratore) throws ExceptionDao {
+        if(idProcuratore != null && idProcuratore.length() > 0) {
+            Contratto contratto = new Contratto();
+            Procuratore procuratore = new Procuratore();
+            return procuratore.prendiGuadagnoPiuAlto(contratto, idProcuratore);
+        }
+        
+        return null;
+    }
 }

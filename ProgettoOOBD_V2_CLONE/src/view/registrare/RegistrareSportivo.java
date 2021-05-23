@@ -45,6 +45,8 @@ public class RegistrareSportivo extends javax.swing.JFrame {
         inputIDProcuratoreJTF = new javax.swing.JTextField();
         indirizzoJL = new javax.swing.JLabel();
         inputIndirizzoJTF = new javax.swing.JTextField();
+        idClubJL = new javax.swing.JLabel();
+        inputIdClubJTF = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -87,6 +89,8 @@ public class RegistrareSportivo extends javax.swing.JFrame {
         idProcuratoreJL.setText("ID Procuratore");
 
         indirizzoJL.setText("Indirizzo");
+
+        idClubJL.setText("ID Club");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -147,9 +151,15 @@ public class RegistrareSportivo extends javax.swing.JFrame {
                                             .addGap(18, 18, 18)
                                             .addComponent(btnRegistraJB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
                         .addGap(22, 22, 22)
-                        .addComponent(indirizzoJL)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(inputIndirizzoJTF, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(indirizzoJL)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(inputIndirizzoJTF, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(idClubJL)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(inputIdClubJTF)))
                         .addGap(0, 32, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
@@ -167,19 +177,26 @@ public class RegistrareSportivo extends javax.swing.JFrame {
                     .addComponent(inputNomeJTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(cognomeJL)
+                                    .addComponent(inputCognomeJTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(3, 3, 3)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(indirizzoJL)
+                                    .addComponent(inputIndirizzoJTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cognomeJL)
-                            .addComponent(inputCognomeJTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(sessoJL)
+                            .addComponent(inputSessoJTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
+                        .addGap(52, 52, 52)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(indirizzoJL)
-                            .addComponent(inputIndirizzoJTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(sessoJL)
-                    .addComponent(inputSessoJTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(idClubJL)
+                            .addComponent(inputIdClubJTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nazioneJL)
@@ -244,11 +261,11 @@ public class RegistrareSportivo extends javax.swing.JFrame {
        String ibanPreso = inputIbanAtletaJTF.getText();
        String idProcuratore = inputIDProcuratoreJTF.getText();
        String indirizzoPreso = inputIndirizzoJTF.getText();
-       
+       int idClub = Integer.parseInt(inputIdClubJTF.getText());
        
        
         try {
-            controllerSportivo.registraSportivo(nomePreso, cognomePreso, sessoPreso, nazionePreso, indirizzoPreso, dataNascitaPresoSql, telefonoPreso, codiceFiscalePreso, ruoloAtletaPreso, pesoPreso, idProcuratore, ibanPreso);
+            controllerSportivo.registraSportivo(nomePreso, cognomePreso, sessoPreso, nazionePreso, indirizzoPreso, dataNascitaPresoSql, telefonoPreso, codiceFiscalePreso, ruoloAtletaPreso, pesoPreso, idProcuratore, ibanPreso, idClub);
                     } catch (ExceptionDao ex) {
             Logger.getLogger(RegistrareSportivo.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -272,12 +289,14 @@ public class RegistrareSportivo extends javax.swing.JFrame {
     private javax.swing.JLabel cognomeJL;
     private javax.swing.JLabel dataNascitaJL;
     private javax.swing.JLabel ibanJL;
+    private javax.swing.JLabel idClubJL;
     private javax.swing.JLabel idProcuratoreJL;
     private javax.swing.JLabel indirizzoJL;
     private javax.swing.JTextField inputCodiceFiscaleJTF;
     private javax.swing.JTextField inputCognomeJTF;
     private javax.swing.JTextField inputIDProcuratoreJTF;
     private javax.swing.JTextField inputIbanAtletaJTF;
+    private javax.swing.JTextField inputIdClubJTF;
     private javax.swing.JTextField inputIndirizzoJTF;
     private javax.swing.JTextField inputNazioneJTF;
     private javax.swing.JTextField inputNomeJTF;

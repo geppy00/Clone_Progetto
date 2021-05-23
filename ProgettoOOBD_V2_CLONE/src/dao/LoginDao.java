@@ -30,11 +30,13 @@ public class LoginDao {
                     return "admin";
                 }
                 else if(scelta.equals("Procuratore")) {
-                    sql = "SELECT code_procuratore from procuratore inner join login on procuratore.code_procuratore = login.codprocuratore;";
+                    //sql = "SELECT * from procuratore inner join login on procuratore.code_procuratore = login.codprocuratore;";
+                    sql = "SELECT Login.codprocuratore from login where username='"+userName+"' AND passuser='"+password+"';";
                     pStmt = connection.prepareStatement(sql);
                     rs = pStmt.executeQuery();
                     while(rs.next()) {
-                        id = rs.getString("code_procuratore");
+                        id = rs.getString("codprocuratore");
+                        System.out.println("ID LOGINDAO="+id);
                         return id;
                     }
                 }

@@ -26,7 +26,7 @@ public class Atleta {
     private Procuratore procuratore;
     private Club club;
     
-    public Atleta(String nome, String cognmome, String sesso, String nazione, String indirizzo, java.sql.Date dataNascita, String telefono, String codiceFiscale, String ruolo, float peso, String idProcuratore, String iban){
+    public Atleta(String nome, String cognmome, String sesso, String nazione, String indirizzo, java.sql.Date dataNascita, String telefono, String codiceFiscale, String ruolo, float peso, String idProcuratore, String iban, int idClub){
         this.nome = nome;
         this.cognmome = cognmome;
         this.sesso = sesso;
@@ -39,6 +39,7 @@ public class Atleta {
         this.peso = peso;
         this.idProcuratore = idProcuratore;
         this.iban = iban;
+        this.idClub = idClub;
     }
     
     public Atleta(String codiceFiscaleAtleta) {

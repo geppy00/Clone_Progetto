@@ -28,7 +28,11 @@
 	     ERRORE = loop, inizialmente si è usato un ciclo do while nel quale nel csao di sbaglio non dava la possibiltà all utente di riscrivere la passsword
 	     Soluzione = bastava un semplice controllo con un if codice = "if(!(password.equals(confermaPassword))) {
            JOptionPane.showMessageDialog(null, "ATTENZIONE PASSWORD NON COMPATIBILE");
-       } else {ALGORITMO PER SCRIVERE SUL DB}"	       
+       } else {ALGORITMO PER SCRIVERE SUL DB}"
+
+28/04/2021 - ERRORE = dao.ExceptionDao: ERRORE RICERCA MASSIMO VALORE FALLITA org.postgresql.util.PSQLException: Colonna denominata «valore_contrattuale» non è presente in questo «ResultSet».
+	     ERRORE = RICERCA MASSIMO VALORE FALLITA org.postgresql.util.PSQLException: Colonna denominata «codfiscale» non è presente in questo «ResultSet».
+	     Soluzione = abbiamo dovuto usare la clausola GROUP BY per restituire anche gli attributi dell'atleta, altrimenti con la clusola MAX senza l'uso di GROUP BY veniva restiuto solo il valore massimo della colonna valore_stipendio e non tutti i dati dell'atleta dandoci gli errori sopre descritti.	       
 
 13/05/2021 - ERRORE = "AWT-EventQueue-0" java.lang.UnsupportedOperationException: Not supported yet.
 	     risolto cancellando il costruttore con un relativo metodo
@@ -46,3 +50,6 @@
             					dataInizio = Calendar.getInstance().getTime();
             					DataInizioJDC.setDate(dataInizio);
         				} ""
+
+23/05/2021 ERRORE AGGIORNAMENTO ATLETA FALLITA org.postgresql.util.PSQLException: Unterminated string literal started at position 311 in SQL UPDATE atleta set nome='giovanna', cognome='nanna', sexo='Femmina' nazione='africana', indirizzo='milano', datanascita='1992-05-08', telefono='+3978358379', codfiscale='rsgrgrgr', ruolo_atleta='calciatrice', peso='85.0', codprocuratore='N86003383', iban_atleta='38747375', codclub=4' WHERE codfiscale='rsgrgrgr';. Expected  char
+		Soluzione = non si usano i singoli apici per passare una variabile intera ma la si passa senza l'uso dei singoli apici

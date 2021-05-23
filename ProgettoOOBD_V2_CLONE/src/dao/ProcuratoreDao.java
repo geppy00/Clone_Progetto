@@ -12,6 +12,7 @@ import model.Atleta;
 import model.Club;
 import model.Contratto;
 import model.Procuratore;
+import model.Stipendio;
 import refactorCode.FinallyException;
 
 
@@ -260,6 +261,43 @@ public class ProcuratoreDao {
         }
         
         return -1;
+    }
+    
+    public String[] prendiGuadagnoPiuAlto(Contratto contratto, String idProcuratore) throws ExceptionDao {
+        String sql= "select atleta.codfiscale, atleta.nome, atleta.cognome, MAX(valore_contrattuale) FROM contratto join atleta on contratto.idatleta=atleta.codfiscale WHERE atleta.codprocuratore= '"+idProcuratore+"' GROUP BY atleta.codfiscale, atleta.nome, atleta.cognome;";
+        PreparedStatement pStmt = null;
+        Connection connection = null;
+        ResultSet rs = null;
+        
+        try {
+            connection = new DataAccessObject().connectionToDatabase();
+            pStmt = connection.prepareStatement(sql);
+            rs = pStmt.executeQuery();
+            
+            if(rs == null)
+                return null;
+            else 
+                while(rs.next()){
+                    String valConstrattuale = String.valueOf(rs.getDouble("max"));
+                    String idAtleta = rs.getString("codfiscale");
+                    String nomeAtleta = rs.getString("nome");
+                    String cognomeAtleta = rs.getString("cognome");
+                    
+                    String tbDataAtleta[] = {idAtleta, nomeAtleta, cognomeAtleta, valConstrattuale};
+                    
+                    return tbDataAtleta;
+                } 
+        } catch(SQLException e) {
+            throw new ExceptionDao("ERRORE RICERCA MASSIMO VALORE FALLITA "+e);
+        }
+        
+        finally{
+            FinallyException finallyException = new FinallyException();
+            finallyException.finallyException();
+        }
+        
+        
+        return null;
     }
     
     /*GET AND SET*/

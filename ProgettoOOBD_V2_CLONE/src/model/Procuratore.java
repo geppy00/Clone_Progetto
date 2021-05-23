@@ -200,4 +200,8 @@ public class Procuratore {
     public double prendiValoreContrattuale(Contratto contratto) throws ExceptionDao {
         return new ProcuratoreDao().prendiValoreContrattuale(contratto);
     }
+    
+    public String[] prendiGuadagnoPiuAlto(Contratto contratto, String idProcuratore) throws ExceptionDao {
+        return new ProcuratoreDao().prendiGuadagnoPiuAlto(contratto, idProcuratore);
+    }
 }
