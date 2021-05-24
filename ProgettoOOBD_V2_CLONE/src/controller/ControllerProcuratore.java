@@ -9,9 +9,10 @@ import model.Atleta;
 import model.Club;
 import model.Contratto;
 import model.Procuratore;
+import model.Sponsor;
 
 
-public class ControllerProcuratore {
+    public class ControllerProcuratore {
     
      public boolean registraProcuratore(String codiceProcuratore, String nome, String cognmome, String sesso, String nazione, String indirizzo, java.sql.Date dataNascita, String telefono, String codiceFiscale, String iban) throws ExceptionDao {
         
@@ -79,11 +80,11 @@ public class ControllerProcuratore {
         return null;
     }
     
-    public boolean registraContratto(String idAtleta, int idClub, java.sql.Date dataInizio, java.sql.Date dataFine, float valContratto) throws ExceptionDao {
-        if(idAtleta != null && idAtleta.length() > 0 && idClub > 0 && dataInizio != null && dataFine != null && valContratto > 0) {
+    public boolean registraContratto(String idAtleta, int idClub, java.sql.Date dataInizio, java.sql.Date dataFine, float valContratto, String conChi) throws ExceptionDao {
+        if(idAtleta != null && idAtleta.length() > 0 && idClub > 0 && dataInizio != null && dataFine != null && valContratto > 0 && conChi != null && conChi.length() > 0) {
             Contratto contratto = new Contratto(idAtleta, idClub, dataInizio, dataFine, valContratto);
             Procuratore procuratore = new Procuratore();
-            procuratore.registraContratto(contratto);
+            procuratore.registraContratto(contratto, conChi);
             return true;
         }
         
@@ -107,6 +108,16 @@ public class ControllerProcuratore {
             return procuratore.prendiGuadagnoPiuAlto(contratto, idProcuratore);
         }
         
+        return null;
+    }
+    
+    
+    public String cercaSponsor(int idSponsor) throws ExceptionDao {
+        if(idSponsor > 0) {
+            Sponsor sponsor = new Sponsor(idSponsor);
+            Procuratore procuratore = new Procuratore();
+            return procuratore.cercaSponsor(sponsor);
+        }
         return null;
     }
 }

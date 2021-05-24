@@ -53,7 +53,7 @@ public class RicercaGuadagniProcuratoreView extends javax.swing.JFrame {
 
             },
             new String [] {
-                "CF Atleta", "Nome", "Cognome", "Stipendio"
+                "CF Atleta", "Nome", "Cognome", "Stipendio CLUB"
             }
         ));
         jScrollPane1.setViewportView(tblIntroitoSportivoJT);

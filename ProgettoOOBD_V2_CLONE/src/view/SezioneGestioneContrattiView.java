@@ -1,7 +1,7 @@
 
 package view;
 
-import view.registrare.RegistraContratto;
+import view.registrare.RegistraContrattoClub;
 
 
 public class SezioneGestioneContrattiView extends javax.swing.JFrame {
@@ -108,8 +108,8 @@ public class SezioneGestioneContrattiView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTornaIndietriJBActionPerformed
 
     private void btnStipulaContrattoJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStipulaContrattoJBActionPerformed
-        RegistraContratto registraContratto = new RegistraContratto(this.getIdProcuratore());
-        registraContratto.setVisible(true);
+        ScegliContrattoView scegliContrattoView = new ScegliContrattoView(this.getIdProcuratore());
+        scegliContrattoView.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnStipulaContrattoJBActionPerformed
 

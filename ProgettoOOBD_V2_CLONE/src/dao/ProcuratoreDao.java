@@ -12,6 +12,7 @@ import model.Atleta;
 import model.Club;
 import model.Contratto;
 import model.Procuratore;
+import model.Sponsor;
 import model.Stipendio;
 import refactorCode.FinallyException;
 
@@ -209,8 +210,45 @@ public class ProcuratoreDao {
     }
     
     
-    public void registraContratto(Contratto contratto) throws ExceptionDao {
-        String sql = "INSERT INTO contratto(idatleta, idclub, datastart, dataend, valore_contrattuale) VALUES(?, ?, ?, ?, ?);";
+    public String cercaSponsor(Sponsor sponsor) throws ExceptionDao {
+        String sql= "SELECT * FROM sponsor WHERE idsponsor="+sponsor.getIdSponsor()+";";
+        PreparedStatement pStmt = null;
+        Connection connection = null;
+        ResultSet rs = null;
+        
+        try {
+            connection = new DataAccessObject().connectionToDatabase();
+            pStmt = connection.prepareStatement(sql);
+            rs = pStmt.executeQuery();
+            
+            if(rs == null)
+                return null;
+            else 
+                while(rs.next()){
+                    return rs.getString("nome");
+                } 
+        } catch(SQLException e) {
+            throw new ExceptionDao("ERRORE RICERCA SPONSOR FALLITA "+e);
+        }
+        
+        finally {
+            FinallyException finallyException = new FinallyException();
+            finallyException.finallyException();
+        }
+        
+        return null;
+    }
+    
+    
+    public void registraContratto(Contratto contratto, String conChi) throws ExceptionDao {
+        String sql = null;
+        if(conChi.equals("CLUB"))
+            sql = "INSERT INTO contratto(idatleta, idclub, datastart, dataend, valore_contrattuale) VALUES(?, ?, ?, ?, ?);";
+        else if(conChi.equals("SPONSOR"))
+            sql = "INSERT INTO contratto(idatleta, idsponsor, datastart, dataend, valore_contrattuale) VALUES(?, ?, ?, ?, ?);";
+        else
+            sql = null;
+        
         PreparedStatement pStmt = null;
         Connection connection = null;
         

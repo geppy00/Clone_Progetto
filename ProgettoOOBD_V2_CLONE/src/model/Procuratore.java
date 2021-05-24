@@ -193,8 +193,8 @@ public class Procuratore {
         return new ProcuratoreDao().cercaClub(club);
     }
     
-    public void registraContratto(Contratto contratto) throws ExceptionDao {
-        new ProcuratoreDao().registraContratto(contratto);
+    public void registraContratto(Contratto contratto, String conChi) throws ExceptionDao {
+        new ProcuratoreDao().registraContratto(contratto, conChi);
     }
     
     public double prendiValoreContrattuale(Contratto contratto) throws ExceptionDao {
@@ -203,5 +203,9 @@ public class Procuratore {
     
     public String[] prendiGuadagnoPiuAlto(Contratto contratto, String idProcuratore) throws ExceptionDao {
         return new ProcuratoreDao().prendiGuadagnoPiuAlto(contratto, idProcuratore);
+    }
+    
+    public String cercaSponsor(Sponsor sponsor) throws ExceptionDao {
+        return new ProcuratoreDao().cercaSponsor(sponsor);
     }
 }

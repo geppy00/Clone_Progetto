@@ -10,6 +10,7 @@ public class Sponsor {
     private String indirizzo; 
     private String telefono;
 
+    /*COSTRUTTO*/
     public Sponsor(String nome, String indirizzo, String telefono) {
         this.nome = nome;
         this.indirizzo = indirizzo;
@@ -18,6 +19,10 @@ public class Sponsor {
     
     public Sponsor() {
         
+    }
+    
+    public Sponsor(int idSponsor) {
+        this.idSponsor = idSponsor;
     }
     
     public Sponsor(String nome) {
