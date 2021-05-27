@@ -92,11 +92,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="MODIFICA CONTRATTO"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnModificaContrattoJBActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnVisualizzaContrttiJB">
       <Properties>
         <Property name="text" type="java.lang.String" value="VISUALIZZA CONTRATTI"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVisualizzaContrttiJBActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnEliminaContrattoJB">
       <Properties>

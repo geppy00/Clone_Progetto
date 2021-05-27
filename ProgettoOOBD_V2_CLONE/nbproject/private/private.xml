@@ -3,12 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Home/Documents/NetBeansProjects/ProgettoOOBD_V2/src/view/ProcuratoreView.java</file>
-            <file>file:/C:/Users/Home/Documents/NetBeansProjects/ProgettoOOBD_V2/src/model/Sponsor.java</file>
-            <file>file:/C:/Users/Home/Documents/NetBeansProjects/ProgettoOOBD_V2/src/dao/ProcuratoreDao.java</file>
-            <file>file:/C:/Users/Home/Documents/NetBeansProjects/ProgettoOOBD_V2/src/view/PercentualiGuadagnoProcuratoreView.java</file>
-            <file>file:/C:/Users/Home/Documents/NetBeansProjects/ProgettoOOBD_V2/src/controller/ControllerProcuratore.java</file>
-            <file>file:/C:/Users/Home/Documents/NetBeansProjects/ProgettoOOBD_V2/src/model/Procuratore.java</file>
+            <file>file:/C:/Users/Home/Documents/NetBeansProjects/ProgettoOOBD_V2/src/view/SezioneEventiView.java</file>
+            <file>file:/C:/Users/Home/Documents/NetBeansProjects/ProgettoOOBD_V2/src/view/LoginView.java</file>
+            <file>file:/C:/Users/Home/Documents/NetBeansProjects/ProgettoOOBD_V2/src/view/SponsorView.java</file>
+            <file>file:/C:/Users/Home/Documents/NetBeansProjects/ProgettoOOBD_V2/src/view/modificaDati/ModificaContrattiProcuratore.java</file>
+            <file>file:/C:/Users/Home/Documents/NetBeansProjects/ProgettoOOBD_V2/src/view/registrare/RegistraEventoSponsor.java</file>
         </group>
     </open-files>
 </project-private>

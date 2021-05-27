@@ -165,7 +165,7 @@ public class LoginView extends javax.swing.JFrame {
                        this.setVisible(false);
                    break;
                    
-                   case "Sporsor":
+                   case "Sponsor":
                         SponsorView sponsorView = new SponsorView(getIdCopiato());
                         sponsorView.setVisible(true);
                         this.setVisible(false);

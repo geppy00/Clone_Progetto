@@ -25,6 +25,15 @@ public class Contratto {
         this.dataEnd = dataFine;
     }
     
+    public Contratto(String idAtleta, int idSponsor, int idClub, java.sql.Date dataInizio, java.sql.Date dataFine, float valContratto) {
+        this.idAtleta = idAtleta;
+        this.valoreContratto = valContratto;
+        this.idClub = idClub;
+        this.dataStart = dataInizio;
+        this.dataEnd = dataFine;
+        this.idSponsor = idSponsor;
+    }
+    
     public Contratto(String idAtleta) {
         this.idAtleta = idAtleta;
     }

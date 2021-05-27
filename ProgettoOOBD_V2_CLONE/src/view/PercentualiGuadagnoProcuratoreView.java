@@ -57,11 +57,11 @@ public class PercentualiGuadagnoProcuratoreView extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID Atleta", "Nome", "Cognome", "Data Nascita", "Club"
+                "ID Atleta", "Nome", "Cognome", "Data Nascita", "Club", "Sponsor"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -147,16 +147,15 @@ public class PercentualiGuadagnoProcuratoreView extends javax.swing.JFrame {
     private void tblDatiAtletiJTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDatiAtletiJTMouseClicked
         //String idAtleta = (String) tblDatiAtletiJT.getModel().getValueAt(evt.getX(), evt.getY());
         int row = tblDatiAtletiJT.getSelectedRow();
-        int column = tblDatiAtletiJT.getSelectedColumn();
         String idAtleta = (String) tblDatiAtletiJT.getValueAt(row, 0);
         System.out.println("idAtleta="+idAtleta);
         
         ControllerProcuratore controllerProcuratore = new ControllerProcuratore();
         try {
-            double valoreContrattuale = controllerProcuratore.prendiValoreContrattuale(idAtleta);
-            if(valoreContrattuale != -1) {
-                montanteContrattoJTF.setText(String.valueOf(valoreContrattuale));
-                double guadagnoProcuratore = (3*valoreContrattuale)/100;
+            double valoreContrattualeClub = controllerProcuratore.prendiValoreContrattuale(idAtleta);
+            if(valoreContrattualeClub != -1) {
+                montanteContrattoJTF.setText(String.valueOf(valoreContrattualeClub));
+                double guadagnoProcuratore = (3*valoreContrattualeClub)/100;
                 guadagnoJTF.setText(String.valueOf(guadagnoProcuratore));
             }
             else {
@@ -169,13 +168,19 @@ public class PercentualiGuadagnoProcuratoreView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tblDatiAtletiJTMouseClicked
 
-
     /*METODI*/
+    public String prendiNomeSponsor() throws ExceptionDao {
+       ControllerProcuratore controllerProcuratore = new ControllerProcuratore();
+       return controllerProcuratore.prendiNomeSponsorPerContratti();
+    }
+
+  
     public void stampaDatiAtltetaTbl() throws ExceptionDao {
         PreparedStatement pStmt = null;
         Connection connection = null;
         ResultSet rs = null;
         String sql = "SELECT atleta.nome, atleta.cognome, atleta.datanascita, atleta.codfiscale, club.nomeclub from atleta JOIN club ON atleta.codclub=club.idclub WHERE atleta.codprocuratore= '"+this.getIdProcuratore()+"' ORDER BY atleta.nome;";
+        //String sql = "select atleta.nome, atleta.cognome, atleta.datanascita, atleta.codfiscale, club.nomeclub from ((contratto INNER JOIN atleta on atleta.codfiscale=contratto.idatleta) INNER JOIN club on club.idclub=contratto.idclub); ";
         ControllerProcuratore controllerProcuratore = new ControllerProcuratore();
         DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");  
         System.out.println("ID PROC="+this.getIdProcuratore());
@@ -189,13 +194,13 @@ public class PercentualiGuadagnoProcuratoreView extends javax.swing.JFrame {
                 String cognomeAtleta = rs.getString("cognome");
                 String dataPagamento = dateFormat.format(rs.getDate("datanascita"));
                 String nomeClub = rs.getString("nomeclub");
-               
+                String nomeSponsor = prendiNomeSponsor();
                 
                 /*int idClub = rs.getInt("codclub");
                 String nomeClub = controllerProcuratore.cercaClub(idClub);*/
                 
                 System.out.println("NOME CLUB="+nomeClub);
-                String tbDataAtleta[] = {idAtleta, nomeAtleta, cognomeAtleta, dataPagamento, nomeClub};
+                String tbDataAtleta[] = {idAtleta, nomeAtleta, cognomeAtleta, dataPagamento, nomeClub, nomeSponsor};
                 DefaultTableModel tblModel = (DefaultTableModel)tblDatiAtletiJT.getModel();
                 tblModel.addRow(tbDataAtleta);
             }

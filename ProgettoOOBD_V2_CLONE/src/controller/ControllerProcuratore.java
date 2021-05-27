@@ -120,4 +120,23 @@ import model.Sponsor;
         }
         return null;
     }
+    
+    
+    public String prendiNomeSponsorPerContratti() throws ExceptionDao {
+        Procuratore procuratore = new Procuratore();
+        return procuratore.prendiNomeSponsorPerContratti();
+    }
+    
+    
+    public void modificaContratto(String idAtleta, int idSponsor, int idClub, java.sql.Date dataInizio,  java.sql.Date dataFine, float valContratto) throws ExceptionDao {
+        if(idAtleta != null && idAtleta.length() > 0 && idSponsor > 0 && idClub > 0 && dataInizio != null && dataFine != null && valContratto > 0) {
+            Contratto contratto = new Contratto(idAtleta, idSponsor, idClub, dataInizio, dataFine, valContratto);
+            Procuratore procuratore = new Procuratore();
+            procuratore.modificaContratto(contratto, idAtleta, dataInizio, dataFine);
+        }
+    }
+    
+    /*public double prendiValoreContrattualeSponsor() throws ExceptionDao {
+        
+    }*/
 }

@@ -208,4 +208,16 @@ public class Procuratore {
     public String cercaSponsor(Sponsor sponsor) throws ExceptionDao {
         return new ProcuratoreDao().cercaSponsor(sponsor);
     }
+    
+    public String prendiNomeSponsorPerContratti() throws ExceptionDao {
+        return new ProcuratoreDao().prendiNomeSponsorPerContratti();
+    }
+    
+    public void modificaContratto(Contratto contratto, String idAtletaDaModificare, java.sql.Date dataBegin, java.sql.Date dataEnd) throws ExceptionDao {
+        new ProcuratoreDao().modificaContratto(contratto, idAtletaDaModificare, dataBegin, dataEnd);
+    }
+    
+    /*public double prendiValoreContrattualeSponsor(Contratto contratto) throws ExceptionDao {
+        return new ProcuratoreDao().prendiValoreContrattualeSponsor(contratto);
+    }*/
 }

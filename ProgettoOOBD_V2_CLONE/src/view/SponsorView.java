@@ -21,30 +21,67 @@ public class SponsorView extends javax.swing.JFrame {
     private void initComponents() {
 
         benvenutoJL = new javax.swing.JLabel();
+        btnVisualizzaSportiviJB = new javax.swing.JButton();
+        btnGestioneEventiJB = new javax.swing.JButton();
+        btnLogoutJB = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         benvenutoJL.setText("BENVENUTO SPONSOR");
+
+        btnVisualizzaSportiviJB.setText("ELENCO SPORTIVI");
+
+        btnGestioneEventiJB.setText("GESTIONE EVENTI");
+        btnGestioneEventiJB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGestioneEventiJBActionPerformed(evt);
+            }
+        });
+
+        btnLogoutJB.setText("LOGOUT");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(127, 127, 127)
-                .addComponent(benvenutoJL)
-                .addContainerGap(136, Short.MAX_VALUE))
+                .addGap(84, 84, 84)
+                .addComponent(btnVisualizzaSportiviJB, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 188, Short.MAX_VALUE)
+                .addComponent(btnGestioneEventiJB, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(79, 79, 79))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(260, 260, 260)
+                        .addComponent(benvenutoJL))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(219, 219, 219)
+                        .addComponent(btnLogoutJB, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(benvenutoJL)
-                .addContainerGap(278, Short.MAX_VALUE))
+                .addGap(83, 83, 83)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnVisualizzaSportiviJB, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnGestioneEventiJB, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
+                .addComponent(btnLogoutJB)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnGestioneEventiJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGestioneEventiJBActionPerformed
+        SezioneEventiView sezioneEventiView = new SezioneEventiView(this.getIdSponsor());
+        sezioneEventiView.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnGestioneEventiJBActionPerformed
 
     
     /*GET AND SET*/
@@ -67,5 +104,8 @@ public class SponsorView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel benvenutoJL;
+    private javax.swing.JButton btnGestioneEventiJB;
+    private javax.swing.JButton btnLogoutJB;
+    private javax.swing.JButton btnVisualizzaSportiviJB;
     // End of variables declaration//GEN-END:variables
 }

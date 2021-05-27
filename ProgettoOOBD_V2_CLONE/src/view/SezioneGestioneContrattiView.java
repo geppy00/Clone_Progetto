@@ -1,6 +1,7 @@
 
 package view;
 
+import view.modificaDati.ModificaContrattiProcuratore;
 import view.registrare.RegistraContrattoClub;
 
 
@@ -42,8 +43,18 @@ public class SezioneGestioneContrattiView extends javax.swing.JFrame {
         });
 
         btnModificaContrattoJB.setText("MODIFICA CONTRATTO");
+        btnModificaContrattoJB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificaContrattoJBActionPerformed(evt);
+            }
+        });
 
         btnVisualizzaContrttiJB.setText("VISUALIZZA CONTRATTI");
+        btnVisualizzaContrttiJB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVisualizzaContrttiJBActionPerformed(evt);
+            }
+        });
 
         btnEliminaContrattoJB.setText("ELIMINA CONTRATTO");
 
@@ -112,6 +123,18 @@ public class SezioneGestioneContrattiView extends javax.swing.JFrame {
         scegliContrattoView.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnStipulaContrattoJBActionPerformed
+
+    private void btnModificaContrattoJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificaContrattoJBActionPerformed
+        ModificaContrattiProcuratore modificaContrattiProcuratore = new ModificaContrattiProcuratore(this.getIdProcuratore());  
+        modificaContrattiProcuratore.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnModificaContrattoJBActionPerformed
+
+    private void btnVisualizzaContrttiJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisualizzaContrttiJBActionPerformed
+        VisualizzaTuttiContrattiProcuratore modificaContrattiProcuratore = new VisualizzaTuttiContrattiProcuratore(this.getIdProcuratore());
+        modificaContrattiProcuratore.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnVisualizzaContrttiJBActionPerformed
 
      /*GET AND SET*/
     public String getIdProcuratore() {

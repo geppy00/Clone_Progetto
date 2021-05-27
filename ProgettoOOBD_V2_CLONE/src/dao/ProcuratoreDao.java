@@ -287,6 +287,7 @@ public class ProcuratoreDao {
                 return -1;
             else 
                 while(rs.next()){
+                    System.out.println("rs="+rs.getDouble("valore_contrattuale"));
                     return rs.getDouble("valore_contrattuale");
                 } 
         } catch(SQLException e) {
@@ -300,6 +301,37 @@ public class ProcuratoreDao {
         
         return -1;
     }
+    
+    /*public double prendiValoreContrattualeSponsor(Contratto contratto) throws ExceptionDao {
+        String sql= "select contratto.valore_contrattuale from sponsor JOIN contratto ON sponsor.idsponsor="+contratto.getIdSponsor()+";";
+        PreparedStatement pStmt = null;
+        Connection connection = null;
+        ResultSet rs = null;
+        
+        try {
+            connection = new DataAccessObject().connectionToDatabase();
+            pStmt = connection.prepareStatement(sql);
+            rs = pStmt.executeQuery();
+            
+            if(rs == null)
+                return -1;
+            else 
+                while(rs.next()){
+                    System.out.println("rs="+rs.getDouble("valore_contrattuale"));
+                    return rs.getDouble("valore_contrattuale");
+                } 
+        } catch(SQLException e) {
+            throw new ExceptionDao("ERRORE RICERCA CLUB FALLITA "+e);
+        }
+        
+        finally{
+            FinallyException finallyException = new FinallyException();
+            finallyException.finallyException();
+        }
+        
+        return -1;
+    }*/
+    
     
     public String[] prendiGuadagnoPiuAlto(Contratto contratto, String idProcuratore) throws ExceptionDao {
         String sql= "select atleta.codfiscale, atleta.nome, atleta.cognome, MAX(valore_contrattuale) FROM contratto join atleta on contratto.idatleta=atleta.codfiscale WHERE atleta.codprocuratore= '"+idProcuratore+"' GROUP BY atleta.codfiscale, atleta.nome, atleta.cognome;";
@@ -336,6 +368,58 @@ public class ProcuratoreDao {
         
         
         return null;
+    }
+    
+    
+    public String prendiNomeSponsorPerContratti() throws ExceptionDao {
+        String sql = "select sponsor.nome from sponsor JOIN contratto ON sponsor.idsponsor=contratto.idsponsor";
+        PreparedStatement pStmt = null;
+        Connection connection = null;
+        ResultSet rs = null;
+        
+        try {
+            connection = new DataAccessObject().connectionToDatabase();
+            pStmt = connection.prepareStatement(sql);
+            rs = pStmt.executeQuery();
+            while(rs.next()) {
+               return rs.getString("nome");
+            }
+            rs.close();
+            pStmt.close();
+            connection.close();
+        } catch(SQLException e) {
+            throw new ExceptionDao("ERRORE RICERCA ATLETA FALLITA "+e);
+        }
+        
+        finally {
+            FinallyException finallyException = new FinallyException();
+            finallyException.finallyException();
+        }
+        
+        return null;
+    }
+    
+    public void modificaContratto(Contratto contratto, String idAtletaDaModificare, java.sql.Date dataBegin, java.sql.Date dataEnd) throws ExceptionDao {
+        String sql = "UPDATE contratto set idatleta='"+contratto.getIdAtleta()+"', idsponsor="+contratto.getIdSponsor()+", idclub="+contratto.getIdClub()+"  datastart='"+contratto.getDataStart()+"', dataend='"+contratto.getDataEnd()+"', valore_contrattuale="+contratto.getValoreContratto()+" WHERE idatleta='"+idAtletaDaModificare+"' AND datastart='"+dataBegin+"' AND dataend='"+dataEnd+";";
+        System.out.println("COMANDO SQL="+sql);
+        Statement stmt = null;
+        Connection connection = null;
+        
+        try{
+            connection = new DataAccessObject().connectionToDatabase();
+            connection.setAutoCommit(false);
+            stmt = connection.createStatement();
+            stmt.executeUpdate(sql);
+            connection.commit();
+            JOptionPane.showMessageDialog(null, "Contratto aggirnato con successo");
+        }catch(SQLException e) {
+            throw new ExceptionDao("ERRORE AGGIORNAMENTO CLUB FALLITA "+e);
+        }
+        
+        finally{
+            FinallyException finallyException = new FinallyException();
+            finallyException.finallyException();
+        }
     }
     
     /*GET AND SET*/
