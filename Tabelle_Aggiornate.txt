@@ -5,6 +5,14 @@ create table login (
 	userName varchar(50) not null,
 	passUser varchar(50) not null,
 	opzUser varchar(50) not null
+	codprocuratore character varying(50),
+    	codclub integer,
+    	codsponsor integer,
+    	codatleta character varying(50),
+	foreign key(codProcuratore) references Procuratore(code_procuratore),
+	foreign key(codClub) references Club(idClub),
+	foreign key(codsponsor) references Sponsor(idSponsor),
+	foreign key(codatleta) references Atleta(codFiscale),
 );
 
 ===========================================
@@ -58,13 +66,13 @@ telefono varchar(50)
 ==============================================
 
 create table Contratto(
+numero_contratto serial primary key not null,
 idAtleta varchar(50) not null,
-idSponsor int not null,
-idClub int not null,
+idSponsor int,
+idClub int,
 dataStart date not null,
 dataEnd date not null,
-Stipendio float,
-primary key(idAtleta,idSponsor,idClub),
+valore_contrattuale float not null,
 foreign key(idAtleta) references Atleta(codFiscale),
 foreign key(idSponsor) references Sponsor(idSponsor),
 foreign key(idClub) references Club(idClub)
@@ -74,18 +82,22 @@ foreign key(idClub) references Club(idClub)
 ===================================================
 create table Evento(
 idEvento serial primary key not null,
-dataEvento date not null,
+titolo varchar(100) not null,
 LuogoEvento varchar(50) not null,
-oraEvento time not null,
+data_InizioEvento date not null,
+ora_Inizio_Evento time not null,
+data_FineEvento date not null,
+ora_Fine_Evento time not null,
 idSponsor int not null,
+descrizione varchar(280), 
 foreign key(idSponsor) references Sponsor(idSponsor)	
 );
 ===================================================
 create table Invitatti(
+idIvitati serial primary key not null,
 idAtleta varchar(50) not null,
 idEvento int not null,
 gettoneValue float not null,
-primary key(idAtleta,idEvento),
 foreign key(idAtleta) references Atleta(codFiscale),
 foreign key(idEvento) references Evento(idEvento)
 );
