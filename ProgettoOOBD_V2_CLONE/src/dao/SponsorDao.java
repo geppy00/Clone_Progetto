@@ -1,6 +1,7 @@
 
 package dao;
 
+import cambodia.raven.Time;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,6 +9,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import model.Evento;
 import model.Sponsor;
 import refactorCode.FinallyException;
 
@@ -113,5 +115,35 @@ public class SponsorDao {
             finallyException.finallyException();
         }
     }
+    
+    
+    public void registraEvento(Evento evento) throws ExceptionDao {
+        String sql= "INSERT INTO evento(titolo, luogoevento, data_inizioevento, ora_inizio_evento, data_fineevento, ora_fine_evento, idsponsor, descrizione) VALUES(?, ?, ?, ?,  ?, ?, ?, ?)";
+        PreparedStatement pStmt = null;
+        Connection connection = null;
+        
+        try{
+            connection = new DataAccessObject().connectionToDatabase();
+            pStmt = connection.prepareStatement(sql);
+            pStmt.setString(1, evento.getTitolo());
+            pStmt.setString(2, evento.getLuogoEvento());
+            pStmt.setDate(3, evento.getDataInizio());
+            pStmt.setTime(4, evento.getOraInizio());
+            pStmt.setDate(5, evento.getDataFine());
+            pStmt.setTime(6, evento.getOraFine());
+            pStmt.setInt(7, evento.getIdSponsor());
+            pStmt.setString(8, evento.getDescrizione());
+            pStmt.execute();
+            JOptionPane.showMessageDialog(null, "REGISTRAZIONE EVENTO EFFETTUATA CON SUCCESSO");
+        }catch(SQLException e) {
+            throw new ExceptionDao("ERRORE REGISTRAZIONE EVENTO FALLITA "+e);
+        }
+        
+        finally{
+            FinallyException finallyException = new FinallyException();
+            finallyException.finallyException();
+        }
+    }
+    
     
 }

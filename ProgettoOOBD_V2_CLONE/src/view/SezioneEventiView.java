@@ -46,6 +46,11 @@ public class SezioneEventiView extends javax.swing.JFrame {
         btnCancellaEventoJB.setText("CANCELLA EVENTO");
 
         btnTornaIndietroJB.setText("TORNA INDIETRO");
+        btnTornaIndietroJB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTornaIndietroJBActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -91,6 +96,12 @@ public class SezioneEventiView extends javax.swing.JFrame {
         registraEventoSponsor.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnCreaEventoJBActionPerformed
+
+    private void btnTornaIndietroJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTornaIndietroJBActionPerformed
+        SponsorView sponsorView = new SponsorView(this.getIdSponsor());
+        sponsorView.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnTornaIndietroJBActionPerformed
 
     
     /*GET AND SET*/

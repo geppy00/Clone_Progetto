@@ -72,6 +72,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="ELENCO SPORTIVI"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVisualizzaSportiviJBActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnGestioneEventiJB">
       <Properties>
@@ -85,6 +88,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="LOGOUT"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLogoutJBActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

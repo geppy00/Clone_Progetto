@@ -30,6 +30,11 @@ public class SponsorView extends javax.swing.JFrame {
         benvenutoJL.setText("BENVENUTO SPONSOR");
 
         btnVisualizzaSportiviJB.setText("ELENCO SPORTIVI");
+        btnVisualizzaSportiviJB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVisualizzaSportiviJBActionPerformed(evt);
+            }
+        });
 
         btnGestioneEventiJB.setText("GESTIONE EVENTI");
         btnGestioneEventiJB.addActionListener(new java.awt.event.ActionListener() {
@@ -39,6 +44,11 @@ public class SponsorView extends javax.swing.JFrame {
         });
 
         btnLogoutJB.setText("LOGOUT");
+        btnLogoutJB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutJBActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -82,6 +92,18 @@ public class SponsorView extends javax.swing.JFrame {
         sezioneEventiView.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnGestioneEventiJBActionPerformed
+
+    private void btnVisualizzaSportiviJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisualizzaSportiviJBActionPerformed
+        ElencoSportiviSponsor elencoSportiviSponsor = new ElencoSportiviSponsor(this.getIdSponsor());
+        elencoSportiviSponsor.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnVisualizzaSportiviJBActionPerformed
+
+    private void btnLogoutJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutJBActionPerformed
+        LoginView loginView = new LoginView();
+        loginView.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnLogoutJBActionPerformed
 
     
     /*GET AND SET*/

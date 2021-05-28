@@ -1,6 +1,8 @@
 
 package model;
 
+import dao.ExceptionDao;
+import dao.SponsorDao;
 import java.util.ArrayList;
 
 public class Sponsor {
@@ -62,5 +64,10 @@ public class Sponsor {
 
     public void setTelefono(String telefono) {
         this.telefono = telefono;
+    }
+    
+    /*METODI*/
+    public void registraEvento(Evento evento) throws ExceptionDao {
+        new SponsorDao().registraEvento(evento);
     }
 }

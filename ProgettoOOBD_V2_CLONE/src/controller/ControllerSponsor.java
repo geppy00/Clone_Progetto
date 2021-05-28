@@ -4,6 +4,7 @@ package controller;
 import dao.ExceptionDao;
 import java.util.ArrayList;
 import model.Admin;
+import model.Evento;
 import model.Sponsor;
 
 
@@ -46,5 +47,13 @@ public class ControllerSponsor {
             return true;
         }
         return false;
+    }
+    
+    public void registraEvento(String titolo, String luogo, java.sql.Date dataInizio, java.sql.Time oraInizio, java.sql.Date dataFine, java.sql.Time oraFine, int idSponsor, String descrizione) throws ExceptionDao {
+        if(titolo != null && titolo.length() > 0 && luogo != null && luogo.length() > 0 && dataInizio != null && oraInizio != null && dataFine != null && oraFine != null && idSponsor > 0 && descrizione != null) {
+            Evento evento = new Evento(titolo, luogo, dataInizio, oraInizio, dataFine, oraFine, idSponsor, descrizione);
+            Sponsor sponsor = new Sponsor();
+            sponsor.registraEvento(evento);
+        }
     }
 }

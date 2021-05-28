@@ -8,79 +8,104 @@ import java.util.Date;
 public class Evento {
     
     private int idEvento;
-    private Date dataEvento;
+    private String titolo;
     private String luogoEvento;
-    private Date oraEvento;
+    private java.sql.Date dataInizio;
+    private  java.sql.Time oraInizio;
+    private java.sql.Date dataFine;
+    private  java.sql.Time oraFine;
     private int idSponsor;
-    private ArrayList<Atleta> listaAtleta = new ArrayList<Atleta>();
-     
-    /**
-     * @return the idEvento
-     */
+    private String descrizione;
+    
+    private ArrayList<Atleta> listaAtleta = new ArrayList<Atleta>(); //associazione
+    
+    /*COSTRUTTORI*/
+    public Evento() {
+        
+    }
+    
+    public Evento(String titolo, String luogo, java.sql.Date dataInizio,  java.sql.Time oraInizio, java.sql.Date dataFine,  java.sql.Time oraFine, int idSponsor, String descrizione) {
+        this.dataFine = dataFine;
+        this.dataInizio = dataInizio;
+        this.descrizione = descrizione;
+        this.idSponsor = idSponsor;
+        this.luogoEvento = luogo;
+        this.oraFine = oraFine;
+        this.oraInizio = oraInizio;
+        this.titolo = titolo;
+    }
+    
+    /*GET AND SET*/
+    public java.sql.Time getOraInizio() {
+        return oraInizio;
+    }
+
+    public void setOraInizio(java.sql.Time oraInizio) {
+        this.oraInizio = oraInizio;
+    }
+
+    public java.sql.Time getOraFine() {
+        return oraFine;
+    }
+
+    public void setOraFine(java.sql.Time oraFine) {
+        this.oraFine = oraFine;
+    }
+    
     public int getIdEvento() {
         return idEvento;
     }
 
-    /**
-     * @param idEvento the idEvento to set
-     */
     public void setIdEvento(int idEvento) {
         this.idEvento = idEvento;
     }
 
-    /**
-     * @return the dataEvento
-     */
-    public Date getDataEvento() {
-        return dataEvento;
+    public String getTitolo() {
+        return titolo;
     }
 
-    /**
-     * @param dataEvento the dataEvento to set
-     */
-    public void setDataEvento(Date dataEvento) {
-        this.dataEvento = dataEvento;
+    public void setTitolo(String titolo) {
+        this.titolo = titolo;
     }
 
-    /**
-     * @return the luogoEvento
-     */
     public String getLuogoEvento() {
         return luogoEvento;
     }
 
-    /**
-     * @param luogoEvento the luogoEvento to set
-     */
     public void setLuogoEvento(String luogoEvento) {
         this.luogoEvento = luogoEvento;
     }
 
-    /**
-     * @return the oraEvento
-     */
-    public Date getOraEvento() {
-        return oraEvento;
+    public java.sql.Date getDataInizio() {
+        return dataInizio;
     }
 
-    /**
-     * @param oraEvento the oraEvento to set
-     */
-    public void setOraEvento(Date oraEvento) {
-        this.oraEvento = oraEvento;
+    public void setDataInizio(java.sql.Date dataInizio) {
+        this.dataInizio = dataInizio;
     }
 
-    /**
-     * @return the idSponsor
-     */
+    public java.sql.Date getDataFine() {
+        return dataFine;
+    }
+
+    public void setDataFine(java.sql.Date dataFine) {
+        this.dataFine = dataFine;
+    }
+
     public int getIdSponsor() {
         return idSponsor;
     }
 
-    /**
-     * @param idSponsor the idSponsor to set
-     */
     public void setIdSponsor(int idSponsor) {
         this.idSponsor = idSponsor;
     }
+
+    public String getDescrizione() {
+        return descrizione;
+    }
+
+    public void setDescrizione(String descrizione) {
+        this.descrizione = descrizione;
+    }
+    
 }

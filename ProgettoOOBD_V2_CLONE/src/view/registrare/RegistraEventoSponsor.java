@@ -1,10 +1,18 @@
 
 package view.registrare;
 
+import controller.ControllerSponsor;
+import dao.ExceptionDao;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import view.SezioneEventiView;
+import cambodia.raven.Time;
+import java.text.DateFormat;
+import java.text.ParseException;
 
 public class RegistraEventoSponsor extends javax.swing.JFrame {
 
@@ -19,6 +27,20 @@ public class RegistraEventoSponsor extends javax.swing.JFrame {
     
     public RegistraEventoSponsor() {
         
+    }
+    
+    /*METODI*/
+    private java.sql.Time stringToTime(String oraStr) {
+        DateFormat formatter = new SimpleDateFormat("HH:mm");
+        
+        try {
+            java.sql.Time timeValue = new java.sql.Time(formatter.parse(oraStr).getTime());
+            return timeValue;
+        } catch (ParseException ex) {
+            Logger.getLogger(RegistraEventoSponsor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return null;
     }
 
     @SuppressWarnings("unchecked")
@@ -166,21 +188,35 @@ public class RegistraEventoSponsor extends javax.swing.JFrame {
        String titolo = inputTitoloJTF.getText();
        String luogo = inputLuogoEventoJTF.getText();
        java.sql.Date dataInizio = new java.sql.Date(scegliDataInizioJDC.getDate().getTime());
-       java.sql.Date dataFine = new java.sql.Date(scegliDataInizioJDC.getDate().getTime());
+       java.sql.Date dataFine = new java.sql.Date(scegliDataFineJDC.getDate().getTime());
        
        SimpleDateFormat localDateFormat = new SimpleDateFormat("HH:mm:ss"); //RIGA 171 E 172 SERVONO PER RICAVRE L'ORARIO
        String oraInizio = localDateFormat.format(dataInizio);
        String oraFine = localDateFormat.format(dataFine);
-       System.out.println("Ora INIZIO="+oraInizio+" ORA FINE="+oraFine);
        
-       if(descrizione == null || descrizione.length() > 280 || descrizione.length() == 0) {
+       java.sql.Time oraInizioTime = stringToTime(oraInizio);
+       java.sql.Time oraFineTime = stringToTime(oraFine);
+       
+       System.out.println("Ora INIZIO="+oraInizioTime+" ORA FINE="+oraFineTime);
+       
+       if(descrizione == null || descrizione.length() > 280) {
            JOptionPane.showMessageDialog(null, "!! Hai sfiorato la soglia MASSIMA(280 caratteri) !!");
        }
+       else {
+            ControllerSponsor controllerSponsor = new ControllerSponsor();
+            try {
+                controllerSponsor.registraEvento(titolo, luogo, dataInizio, oraInizioTime, dataFine, oraFineTime, Integer.parseInt(this.getIdSponsor()), descrizione);
+            } catch (ExceptionDao ex) {
+                Logger.getLogger(RegistraEventoSponsor.class.getName()).log(Level.SEVERE, null, ex);
+           }
+        }
            
     }//GEN-LAST:event_btnCreaEventoJBActionPerformed
 
     private void btnTornaIndietroJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTornaIndietroJBActionPerformed
-        // TODO add your handling code here:
+        SezioneEventiView sezioneEventiView = new SezioneEventiView(this.getIdSponsor());
+        sezioneEventiView.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnTornaIndietroJBActionPerformed
 
     
