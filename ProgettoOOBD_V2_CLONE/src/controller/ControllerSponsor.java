@@ -56,4 +56,51 @@ public class ControllerSponsor {
             sponsor.registraEvento(evento);
         }
     }
+    
+    public ArrayList<Evento> prendiDatiEvento(int idEvento)throws ExceptionDao {
+        if(idEvento > 0) {
+            Evento evento = new Evento(idEvento);
+            Sponsor sponsor = new Sponsor();
+            sponsor.prendiDatiEvento(evento);
+            return sponsor.prendiDatiEvento(evento);
+        }
+        
+        return null;
+    }
+    
+    public void aggiornaEvento(int idEvento, String titolo, String luogo, java.sql.Date dataInizio,  java.sql.Time oraInizio, java.sql.Date dataFine,  java.sql.Time oraFine, int idSponsor, String descrizione) throws ExceptionDao {
+        if(idEvento > 0 && titolo != null && titolo.length() > 0 && luogo != null && luogo.length() > 0 && dataInizio != null && oraInizio != null && dataFine != null && oraFine != null && idSponsor > 0 && descrizione != null) {
+            Evento evento = new Evento(idEvento, titolo, luogo, dataInizio, oraInizio, dataFine, oraFine, idSponsor, descrizione);
+            Sponsor sponsor = new Sponsor();
+            sponsor.aggiornaEvento(evento);
+        }
+    }
+    
+    public ArrayList<Evento> cercaNomeEvento(String titolo, int idSponsor) throws ExceptionDao {
+        if(titolo != null && titolo.length() > 0 && idSponsor > 0) {
+            Evento evento = new Evento(titolo, idSponsor);
+            Sponsor sponsor = new Sponsor();
+            return sponsor.cercaNomeEvento(evento);
+        }
+        
+        return null;
+    }
+    
+    public ArrayList<Evento> cercaDataEvento(java.sql.Date dataEvento, int idSponsor) throws ExceptionDao {
+        if(dataEvento != null && idSponsor > 0) {
+            Evento evento = new Evento(dataEvento, idSponsor);
+            Sponsor sponsor = new Sponsor();
+            return sponsor.cercaDataEvento(evento);
+        }
+        
+        return null;
+    }
+    
+    public void eliminaEvento(int idEvento, int idSponsor) throws ExceptionDao {
+        if(idEvento > 0 && idSponsor > 0) {
+            Evento evento = new Evento(idEvento, idSponsor);
+            Sponsor sponsor = new Sponsor();
+            sponsor.eliminaEvento(evento);
+        }
+    }
 }

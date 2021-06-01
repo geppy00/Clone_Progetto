@@ -70,4 +70,24 @@ public class Sponsor {
     public void registraEvento(Evento evento) throws ExceptionDao {
         new SponsorDao().registraEvento(evento);
     }
+    
+    public ArrayList<Evento> prendiDatiEvento(Evento evento)throws ExceptionDao {
+        return new SponsorDao().prendiDatiEvento(evento);
+    }
+    
+    public void aggiornaEvento(Evento evento) throws ExceptionDao {
+        new SponsorDao().aggiornaEvento(evento);
+    }
+    
+    public ArrayList<Evento> cercaNomeEvento(Evento evento) throws ExceptionDao {
+        return new SponsorDao().cercaNomeEvento(evento);
+    }
+    
+    public ArrayList<Evento> cercaDataEvento(Evento evento) throws ExceptionDao {
+        return new SponsorDao().cercaDataEvento(evento);
+    }
+    
+    public void eliminaEvento(Evento evento) throws ExceptionDao {
+        new SponsorDao().eliminaEvento(evento);
+    }
 }

@@ -145,5 +145,164 @@ public class SponsorDao {
         }
     }
     
+    public ArrayList<Evento> prendiDatiEvento(Evento evento) throws ExceptionDao {
+        ArrayList<Evento> datiEvento = new ArrayList<Evento>();
+        String sql= "SELECT * FROM evento WHERE idevento = ?";
+        PreparedStatement pStmt = null;
+        Connection connection = null;
+        ResultSet rs = null;
+        
+        try {
+            connection = new DataAccessObject().connectionToDatabase();
+            pStmt = connection.prepareStatement(sql);
+            pStmt.setInt(1, evento.getIdEvento());
+            rs = pStmt.executeQuery();
+            if(rs==null) 
+                return null;
+            else {
+                while(rs.next()) {
+                   evento.setTitolo(rs.getString("titolo"));
+                   evento.setLuogoEvento(rs.getString("luogoevento"));
+                   evento.setDataInizio(rs.getDate("data_inizioevento"));
+                   evento.setOraInizio(rs.getTime("ora_inizio_evento"));
+                   evento.setDataFine(rs.getDate("data_fineevento"));
+                   evento.setOraFine(rs.getTime("ora_fine_evento"));
+                   evento.setDescrizione(rs.getString("descrizione"));
+                   
+                   datiEvento.add(evento);
+                }
+            }
+        }catch(SQLException e) {
+            throw new ExceptionDao("ERRORE RICERCA EVENTO FALLITA "+e);
+        }
+        
+        finally{
+            FinallyException finallyException = new FinallyException();
+            finallyException.finallyException();
+        }
+        
+        return datiEvento;
+    }
     
+    public void aggiornaEvento(Evento evento) throws ExceptionDao {
+        String sql = "UPDATE evento set titolo='"+evento.getTitolo()+"', luogoevento='"+evento.getLuogoEvento()+"', data_inizioevento='"+evento.getDataInizio()+"', ora_inizio_evento='"+evento.getOraInizio()+"', data_fineevento='"+evento.getDataFine()+"', ora_fine_evento='"+evento.getOraFine()+"', descrizione='"+evento.getDescrizione()+"' WHERE idevento="+evento.getIdEvento()+" AND idsponsor="+evento.getIdSponsor()+";";
+        Statement stmt = null;
+        Connection connection = null;
+        
+        System.out.println(sql);
+        
+        try{
+            connection = new DataAccessObject().connectionToDatabase();
+            connection.setAutoCommit(false);
+            stmt = connection.createStatement();
+            stmt.executeUpdate(sql);
+            connection.commit();
+            JOptionPane.showMessageDialog(null, "Evento aggirnato con successo");
+        }catch(SQLException e) {
+            throw new ExceptionDao("Evento AGGIORNAMENTO SPONSOR FALLITA "+e);
+        }
+        
+        finally{
+            FinallyException finallyException = new FinallyException();
+            finallyException.finallyException();
+        }
+    }
+    
+    public ArrayList<Evento> cercaNomeEvento(Evento evento) throws ExceptionDao {
+        ArrayList<Evento> datiEvento = new ArrayList<Evento>();
+        String sql= "SELECT * FROM evento WHERE idsponsor ="+evento.getIdSponsor()+" AND titolo ='"+evento.getTitolo()+"';";
+        PreparedStatement pStmt = null;
+        Connection connection = null;
+        ResultSet rs = null;
+        
+        try {
+            connection = new DataAccessObject().connectionToDatabase();
+            pStmt = connection.prepareStatement(sql);
+            rs = pStmt.executeQuery();
+            if(rs==null) 
+                return null;
+            else {
+                while(rs.next()) {
+                   evento.setIdEvento(rs.getInt("idevento"));
+                   evento.setTitolo(rs.getString("titolo"));
+                   evento.setLuogoEvento(rs.getString("luogoevento"));
+                   evento.setDataInizio(rs.getDate("data_inizioevento"));
+                   evento.setOraInizio(rs.getTime("ora_inizio_evento"));
+                   evento.setDataFine(rs.getDate("data_fineevento"));
+                   evento.setOraFine(rs.getTime("ora_fine_evento"));
+               
+                   datiEvento.add(evento);
+                }
+            }
+        }catch(SQLException e) {
+            throw new ExceptionDao("ERRORE RICERCA EVENTO FALLITA "+e);
+        }
+        
+        finally{
+            FinallyException finallyException = new FinallyException();
+            finallyException.finallyException();
+        }
+        
+        return datiEvento;
+    }
+    
+    public ArrayList<Evento> cercaDataEvento(Evento evento) throws ExceptionDao {
+        ArrayList<Evento> datiEvento = new ArrayList<Evento>();
+        String sql= "SELECT * FROM evento WHERE idsponsor ="+evento.getIdSponsor()+" AND data_inizioevento ='"+evento.getDataInizio()+"';";
+        PreparedStatement pStmt = null;
+        Connection connection = null;
+        ResultSet rs = null;
+        
+        try {
+            connection = new DataAccessObject().connectionToDatabase();
+            pStmt = connection.prepareStatement(sql);
+            rs = pStmt.executeQuery();
+            if(rs==null) 
+                return null;
+            else {
+                while(rs.next()) {
+                   evento.setIdEvento(rs.getInt("idevento"));
+                   evento.setTitolo(rs.getString("titolo"));
+                   evento.setLuogoEvento(rs.getString("luogoevento"));
+                   evento.setDataInizio(rs.getDate("data_inizioevento"));
+                   evento.setOraInizio(rs.getTime("ora_inizio_evento"));
+                   evento.setDataFine(rs.getDate("data_fineevento"));
+                   evento.setOraFine(rs.getTime("ora_fine_evento"));
+               
+                   datiEvento.add(evento);
+                }
+            }
+        }catch(SQLException e) {
+            throw new ExceptionDao("ERRORE RICERCA EVENTO FALLITA "+e);
+        }
+        
+        finally{
+            FinallyException finallyException = new FinallyException();
+            finallyException.finallyException();
+        }
+        
+        return datiEvento;
+    }
+    
+    public void eliminaEvento(Evento evento) throws ExceptionDao {
+        String sql= "DELETE FROM evento WHERE idevento = ? AND idsponsor = ?;";
+        PreparedStatement pStmt = null;
+        Connection connection = null;
+        
+        try {
+            connection = new DataAccessObject().connectionToDatabase();
+            pStmt = connection.prepareStatement(sql);
+            pStmt.setInt(1, evento.getIdEvento());
+            pStmt.setInt(2, evento.getIdSponsor());
+            pStmt.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Evento eliminato con successo");
+        }catch(SQLException e) {
+            throw new ExceptionDao("ERRORE ELIMINAZIONE SPONSOR FALLITA "+e);
+        }
+        
+        finally{
+            FinallyException finallyException = new FinallyException();
+            finallyException.finallyException();
+        }
+    }
 }

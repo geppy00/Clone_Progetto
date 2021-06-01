@@ -35,6 +35,38 @@ public class Evento {
         this.titolo = titolo;
     }
     
+    public Evento(int idEvento) {
+        this.idEvento = idEvento;
+    }
+    
+    public Evento(int idEvento, String titolo, String luogo, java.sql.Date dataInizio,  java.sql.Time oraInizio, java.sql.Date dataFine,  java.sql.Time oraFine, int idSponsor, String descrizione) {
+        this.dataFine = dataFine;
+        this.dataInizio = dataInizio;
+        this.descrizione = descrizione;
+        this.idSponsor = idSponsor;
+        this.luogoEvento = luogo;
+        this.oraFine = oraFine;
+        this.oraInizio = oraInizio;
+        this.titolo = titolo;
+        this.idEvento = idEvento;
+    }
+    
+    public Evento(String titolo, int idSponsor) {
+        this.titolo = titolo;
+        this.idSponsor = idSponsor;
+    }
+    
+    public Evento(java.sql.Date dataEvento, int idSponsor) {
+        this.dataInizio = dataEvento;
+        this.idSponsor = idSponsor;
+    }
+    
+    public Evento(int idEvento, int idSponsor) {
+        this.idEvento = idEvento;
+        this.idSponsor = idSponsor;
+    }
+    
+    
     /*GET AND SET*/
     public java.sql.Time getOraInizio() {
         return oraInizio;

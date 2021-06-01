@@ -26,20 +26,18 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
               <Component id="btnCreaEventoJB" min="-2" pref="120" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="78" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Component id="btnElencoEventiJB" min="-2" pref="125" max="-2" attributes="0"/>
-                      <EmptySpace pref="84" max="32767" attributes="0"/>
-                      <Component id="btnModificaEventoJB" min="-2" pref="125" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="85" max="-2" attributes="0"/>
-                      <Component id="btnCancellaEventoJB" min="-2" pref="134" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="96" max="-2" attributes="0"/>
+                      <Component id="btnTornaIndietroJB" min="-2" pref="325" max="-2" attributes="0"/>
+                      <EmptySpace pref="265" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                      <Component id="btnTornaIndietroJB" min="-2" pref="325" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
+                      <Component id="btnElencoEventiJB" min="-2" pref="176" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="146" max="-2" attributes="0"/>
+                      <Component id="btnCancellaEventoJB" min="-2" pref="134" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -52,7 +50,6 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnCreaEventoJB" alignment="3" min="-2" pref="109" max="-2" attributes="0"/>
                   <Component id="btnElencoEventiJB" alignment="3" min="-2" pref="109" max="-2" attributes="0"/>
-                  <Component id="btnModificaEventoJB" alignment="3" min="-2" pref="109" max="-2" attributes="0"/>
                   <Component id="btnCancellaEventoJB" alignment="3" min="-2" pref="109" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
@@ -73,20 +70,20 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnElencoEventiJB">
       <Properties>
-        <Property name="text" type="java.lang.String" value="ELENCO EVENTI"/>
+        <Property name="text" type="java.lang.String" value="ELENCO/MODIFICA EVENTI"/>
         <Property name="toolTipText" type="java.lang.String" value=""/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="btnModificaEventoJB">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="MODIFICA EVENTI"/>
-        <Property name="toolTipText" type="java.lang.String" value=""/>
-      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnElencoEventiJBActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnCancellaEventoJB">
       <Properties>
         <Property name="text" type="java.lang.String" value="CANCELLA EVENTO"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCancellaEventoJBActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnTornaIndietroJB">
       <Properties>

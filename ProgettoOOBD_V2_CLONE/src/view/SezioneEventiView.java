@@ -1,6 +1,7 @@
 
 package view;
 
+import view.elimina.EliminaEvento;
 import view.registrare.RegistraEventoSponsor;
 
 public class SezioneEventiView extends javax.swing.JFrame {
@@ -24,7 +25,6 @@ public class SezioneEventiView extends javax.swing.JFrame {
 
         btnCreaEventoJB = new javax.swing.JButton();
         btnElencoEventiJB = new javax.swing.JButton();
-        btnModificaEventoJB = new javax.swing.JButton();
         btnCancellaEventoJB = new javax.swing.JButton();
         btnTornaIndietroJB = new javax.swing.JButton();
 
@@ -37,13 +37,20 @@ public class SezioneEventiView extends javax.swing.JFrame {
             }
         });
 
-        btnElencoEventiJB.setText("ELENCO EVENTI");
+        btnElencoEventiJB.setText("ELENCO/MODIFICA EVENTI");
         btnElencoEventiJB.setToolTipText("");
-
-        btnModificaEventoJB.setText("MODIFICA EVENTI");
-        btnModificaEventoJB.setToolTipText("");
+        btnElencoEventiJB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnElencoEventiJBActionPerformed(evt);
+            }
+        });
 
         btnCancellaEventoJB.setText("CANCELLA EVENTO");
+        btnCancellaEventoJB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancellaEventoJBActionPerformed(evt);
+            }
+        });
 
         btnTornaIndietroJB.setText("TORNA INDIETRO");
         btnTornaIndietroJB.addActionListener(new java.awt.event.ActionListener() {
@@ -59,19 +66,17 @@ public class SezioneEventiView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(46, 46, 46)
                 .addComponent(btnCreaEventoJB, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(78, 78, 78)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnElencoEventiJB, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
-                        .addComponent(btnModificaEventoJB, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(85, 85, 85)
-                        .addComponent(btnCancellaEventoJB, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(55, 55, 55))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
+                        .addGap(96, 96, 96)
                         .addComponent(btnTornaIndietroJB, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(265, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnElencoEventiJB, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(146, 146, 146)
+                        .addComponent(btnCancellaEventoJB, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(55, 55, 55))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -80,7 +85,6 @@ public class SezioneEventiView extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCreaEventoJB, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnElencoEventiJB, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnModificaEventoJB, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCancellaEventoJB, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(77, 77, 77)
                 .addComponent(btnTornaIndietroJB)
@@ -102,6 +106,18 @@ public class SezioneEventiView extends javax.swing.JFrame {
         sponsorView.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnTornaIndietroJBActionPerformed
+
+    private void btnElencoEventiJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnElencoEventiJBActionPerformed
+        ElencoEventiView elencoEventiView = new ElencoEventiView(this.getIdSponsor());
+        elencoEventiView.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnElencoEventiJBActionPerformed
+
+    private void btnCancellaEventoJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancellaEventoJBActionPerformed
+        EliminaEvento eliminaEvento = new EliminaEvento(this.getIdSponsor());
+        eliminaEvento.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnCancellaEventoJBActionPerformed
 
     
     /*GET AND SET*/
@@ -126,7 +142,6 @@ public class SezioneEventiView extends javax.swing.JFrame {
     private javax.swing.JButton btnCancellaEventoJB;
     private javax.swing.JButton btnCreaEventoJB;
     private javax.swing.JButton btnElencoEventiJB;
-    private javax.swing.JButton btnModificaEventoJB;
     private javax.swing.JButton btnTornaIndietroJB;
     // End of variables declaration//GEN-END:variables
 }

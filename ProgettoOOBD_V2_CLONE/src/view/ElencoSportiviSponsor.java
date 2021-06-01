@@ -43,7 +43,7 @@ public class ElencoSportiviSponsor extends javax.swing.JFrame {
         PreparedStatement pStmt = null;
         Connection connection = null;
         ResultSet rs = null;
-        String sql = "select contratto.idatleta, atleta.nome, atleta.cognome, contratto.datastart, contratto.dataend from contratto JOIN atleta ON atleta.codfiscale=contratto.idatleta WHERE contratto.idclub IS NULL;";
+        String sql = "select contratto.idatleta, atleta.nome, atleta.cognome, contratto.datastart, contratto.dataend from contratto JOIN atleta ON atleta.codfiscale=contratto.idatleta WHERE contratto.idclub IS NULL AND idsponsor="+this.getIdSponsor()+";";
         
         try {
             connection = new DataAccessObject().connectionToDatabase();
