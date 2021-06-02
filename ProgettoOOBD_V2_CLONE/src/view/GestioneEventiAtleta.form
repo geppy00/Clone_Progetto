@@ -23,17 +23,15 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
+          <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane1" pref="776" max="32767" attributes="0"/>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="229" max="-2" attributes="0"/>
-                      <Component id="btnTornaIndietroJB" min="-2" pref="300" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  </Group>
-              </Group>
+              <Component id="jScrollPane1" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="477" max="-2" attributes="0"/>
+              <Component id="btnAnnullaJB" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="536" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -41,10 +39,10 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jScrollPane1" min="-2" pref="360" max="-2" attributes="0"/>
+              <Component id="jScrollPane1" min="-2" pref="388" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="btnAnnullaJB" pref="50" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="btnTornaIndietroJB" min="-2" pref="61" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -60,30 +58,28 @@
         <Component class="javax.swing.JTable" name="tblDatiEventoJT">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="8" rowCount="0">
+              <Table columnCount="9" rowCount="0">
                 <Column editable="false" title="ID Evento" type="java.lang.Object"/>
-                <Column editable="false" title="Titolo" type="java.lang.Object"/>
-                <Column editable="false" title="Indirizzo Evento" type="java.lang.Object"/>
-                <Column editable="false" title="Data Inizio" type="java.lang.Object"/>
-                <Column editable="false" title="Ora Inizio" type="java.lang.Object"/>
+                <Column editable="false" title="Nome" type="java.lang.Object"/>
+                <Column editable="false" title="Luogo" type="java.lang.Object"/>
+                <Column editable="false" title="Data Evento" type="java.lang.Object"/>
+                <Column editable="false" title="Ora " type="java.lang.Object"/>
                 <Column editable="false" title="Data Fine" type="java.lang.Object"/>
                 <Column editable="false" title="Ora Fine" type="java.lang.Object"/>
-                <Column editable="false" title="Valore Gettone" type="java.lang.Object"/>
+                <Column editable="false" title="Gettone Evento" type="java.lang.Object"/>
+                <Column editable="false" title="Sponsor Organizzatore" type="java.lang.Object"/>
               </Table>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblDatiEventoJTMouseClicked"/>
-          </Events>
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="btnTornaIndietroJB">
+    <Component class="javax.swing.JButton" name="btnAnnullaJB">
       <Properties>
-        <Property name="text" type="java.lang.String" value="TORNA INDIETRO"/>
+        <Property name="text" type="java.lang.String" value="ANNULLA"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTornaIndietroJBActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAnnullaJBActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

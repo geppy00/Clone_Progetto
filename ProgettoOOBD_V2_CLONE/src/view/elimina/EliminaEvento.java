@@ -64,11 +64,11 @@ public class EliminaEvento extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID Evento", "Nome", "Indirizzo", "Data Evento", "Ora Inizio", "Data Fine ", "Ora Fine"
+                "ID Evento", "Nome", "Indirizzo", "Data Evento", "Ora Inizio", "Data Fine ", "Ora Fine", "Valore Gettone"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -199,8 +199,9 @@ public class EliminaEvento extends javax.swing.JFrame {
                 String oraInizio = localDateFormat.format(rs.getTime("ora_inizio_evento"));
                 String dataFine = dateFormat.format(rs.getDate("data_fineevento"));
                 String oraFine = localDateFormat.format(rs.getTime("ora_fine_evento"));
+                String gettoneValue = String.valueOf(rs.getDouble("gettonevalue"));
                 
-                String tbDataAtleta[] = {idEvento, titolo, luogoEvento, dataInizio, oraInizio, dataFine, oraFine};
+                String tbDataAtleta[] = {idEvento, titolo, luogoEvento, dataInizio, oraInizio, dataFine, oraFine, gettoneValue};
                 DefaultTableModel tblModel = (DefaultTableModel)tblDatiEventoJT.getModel();
                 tblModel.addRow(tbDataAtleta);
             }
@@ -245,6 +246,7 @@ public class EliminaEvento extends javax.swing.JFrame {
                         evento.getOraInizio(),
                         evento.getDataFine(),
                         evento.getOraFine(),
+                        evento.getGettoneValue(),
                     });
                     tblDatiEventoJT.setModel(tblModel);
                 });

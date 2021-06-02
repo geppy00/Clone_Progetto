@@ -23,10 +23,18 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="159" max="-2" attributes="0"/>
-              <Component id="benvenutoJL" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="138" max="32767" attributes="0"/>
+          <Group type="102" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="159" max="-2" attributes="0"/>
+                      <Component id="benvenutoJL" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
+                      <Component id="btnGestioneEventiJB" min="-2" pref="225" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace pref="99" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -35,7 +43,9 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="benvenutoJL" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="278" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+              <Component id="btnGestioneEventiJB" min="-2" pref="86" max="-2" attributes="0"/>
+              <EmptySpace pref="174" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -45,6 +55,14 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="BENVUTO ATLETA"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnGestioneEventiJB">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Gestione Eventi"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGestioneEventiJBActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

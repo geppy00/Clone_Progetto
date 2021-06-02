@@ -61,6 +61,8 @@ public class RegistraEventoSponsor extends javax.swing.JFrame {
         inputDescrizioneJTA = new javax.swing.JTextArea();
         btnCreaEventoJB = new javax.swing.JButton();
         btnTornaIndietroJB = new javax.swing.JButton();
+        gettoneEventoJL = new javax.swing.JLabel();
+        inputGettoneEventoJTF = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -99,6 +101,8 @@ public class RegistraEventoSponsor extends javax.swing.JFrame {
             }
         });
 
+        gettoneEventoJL.setText("Gettone Evento");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -113,10 +117,6 @@ public class RegistraEventoSponsor extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(41, 41, 41)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(descrizioneJL)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jScrollPane1))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addGroup(layout.createSequentialGroup()
@@ -136,7 +136,15 @@ public class RegistraEventoSponsor extends javax.swing.JFrame {
                                             .addGroup(layout.createSequentialGroup()
                                                 .addComponent(titoloEventoJL)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(inputTitoloJTF)))))))
+                                                .addComponent(inputTitoloJTF))))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(descrizioneJL)
+                                            .addComponent(gettoneEventoJL))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(inputGettoneEventoJTF, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jScrollPane1))))))
                         .addGap(0, 52, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
@@ -172,7 +180,11 @@ public class RegistraEventoSponsor extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(descrizioneJL)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(gettoneEventoJL)
+                    .addComponent(inputGettoneEventoJTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCreaEventoJB)
                     .addComponent(btnTornaIndietroJB))
@@ -197,7 +209,7 @@ public class RegistraEventoSponsor extends javax.swing.JFrame {
        java.sql.Time oraInizioTime = stringToTime(oraInizio);
        java.sql.Time oraFineTime = stringToTime(oraFine);
        
-       System.out.println("Ora INIZIO="+oraInizioTime+" ORA FINE="+oraFineTime);
+       double gettoneValue = Double.parseDouble(inputGettoneEventoJTF.getText());
        
        if(descrizione == null || descrizione.length() > 280) {
            JOptionPane.showMessageDialog(null, "!! Hai sfiorato la soglia MASSIMA(280 caratteri) !!");
@@ -205,7 +217,7 @@ public class RegistraEventoSponsor extends javax.swing.JFrame {
        else {
             ControllerSponsor controllerSponsor = new ControllerSponsor();
             try {
-                controllerSponsor.registraEvento(titolo, luogo, dataInizio, oraInizioTime, dataFine, oraFineTime, Integer.parseInt(this.getIdSponsor()), descrizione);
+                controllerSponsor.registraEvento(gettoneValue, titolo, luogo, dataInizio, oraInizioTime, dataFine, oraFineTime, Integer.parseInt(this.getIdSponsor()), descrizione);
             } catch (ExceptionDao ex) {
                 Logger.getLogger(RegistraEventoSponsor.class.getName()).log(Level.SEVERE, null, ex);
            }
@@ -244,7 +256,9 @@ public class RegistraEventoSponsor extends javax.swing.JFrame {
     private javax.swing.JLabel dataEventoJL;
     private javax.swing.JLabel dataOraFineJL;
     private javax.swing.JLabel descrizioneJL;
+    private javax.swing.JLabel gettoneEventoJL;
     private javax.swing.JTextArea inputDescrizioneJTA;
+    private javax.swing.JTextField inputGettoneEventoJTF;
     private javax.swing.JTextField inputLuogoEventoJTF;
     private javax.swing.JTextField inputTitoloJTF;
     private javax.swing.JScrollPane jScrollPane1;

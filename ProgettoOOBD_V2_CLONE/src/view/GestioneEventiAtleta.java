@@ -13,36 +13,35 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import refactorCode.FinallyException;
-import view.modificaDati.ModificaEvento;
 
-public class ElencoEventiView extends javax.swing.JFrame {
+public class GestioneEventiAtleta extends javax.swing.JFrame {
 
-    private String idSponsor;
+    private String idAtleta;
     
-    /*COSTRUTTORI*/
-    public ElencoEventiView(String idSponsor) {
+    /*COSTRUTTORE*/
+    public GestioneEventiAtleta(String idAtleta) {
         initComponents();
         this.setLocationRelativeTo(null);
-        this.idSponsor = idSponsor;
+        this.idAtleta = idAtleta;
         
         try {
-            stampaDatiTabella();
+            stampaDati();
         } catch (ExceptionDao ex) {
-            Logger.getLogger(ElencoEventiView.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GestioneEventiAtleta.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-    public ElencoEventiView() {
+    
+    public GestioneEventiAtleta() {
         
     }
-  
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tblDatiEventoJT = new javax.swing.JTable();
-        btnTornaIndietroJB = new javax.swing.JButton();
+        btnAnnullaJB = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -51,28 +50,23 @@ public class ElencoEventiView extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID Evento", "Titolo", "Indirizzo Evento", "Data Inizio", "Ora Inizio", "Data Fine", "Ora Fine", "Valore Gettone"
+                "ID Evento", "Nome", "Luogo", "Data Evento", "Ora ", "Data Fine", "Ora Fine", "Gettone Evento", "Sponsor Organizzatore"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        tblDatiEventoJT.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblDatiEventoJTMouseClicked(evt);
-            }
-        });
         jScrollPane1.setViewportView(tblDatiEventoJT);
 
-        btnTornaIndietroJB.setText("TORNA INDIETRO");
-        btnTornaIndietroJB.addActionListener(new java.awt.event.ActionListener() {
+        btnAnnullaJB.setText("ANNULLA");
+        btnAnnullaJB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTornaIndietroJBActionPerformed(evt);
+                btnAnnullaJBActionPerformed(evt);
             }
         });
 
@@ -80,54 +74,41 @@ public class ElencoEventiView extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 776, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(229, 229, 229)
-                        .addComponent(btnTornaIndietroJB, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(jScrollPane1)
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(477, 477, 477)
+                .addComponent(btnAnnullaJB)
+                .addContainerGap(536, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnTornaIndietroJB, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnAnnullaJB, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     /*ACTION PERFOMED*/
-    private void btnTornaIndietroJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTornaIndietroJBActionPerformed
-        SezioneEventiView sezioneEventiView = new SezioneEventiView(this.getIdSponsor());
-        sezioneEventiView.setVisible(true);
+    private void btnAnnullaJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnnullaJBActionPerformed
+        AtletaView atletaView = new AtletaView(this.getIdAtleta());
+        atletaView.setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_btnTornaIndietroJBActionPerformed
-
-    private void tblDatiEventoJTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDatiEventoJTMouseClicked
-        if(evt.getClickCount() == 2 && !evt.isConsumed()) {
-            evt.consume();
-            int row = tblDatiEventoJT.getSelectedRow();
-            int idEvento = Integer.parseInt((String) tblDatiEventoJT.getValueAt(row, 0));
-            
-            ModificaEvento modificaEvento = new ModificaEvento(this.getIdSponsor(), idEvento);
-            modificaEvento.setVisible(true);
-            this.setVisible(false);
-        }
-    }//GEN-LAST:event_tblDatiEventoJTMouseClicked
+    }//GEN-LAST:event_btnAnnullaJBActionPerformed
 
     /*METODI*/
-    private void stampaDatiTabella() throws ExceptionDao {
+    public void stampaDati() throws ExceptionDao {
         PreparedStatement pStmt = null;
         Connection connection = null;
         ResultSet rs = null;
-        String sql = "select * from evento Where idsponsor ="+this.getIdSponsor()+";";
+        String sql = "SELECT evento.idevento, evento.titolo, evento.luogoevento, evento.data_inizioevento, evento.ora_inizio_evento, evento.data_fineevento, evento.ora_fine_evento, evento.gettonevalue, sponsor.nome from evento JOIN sponsor ON evento.idsponsor=sponsor.idsponsor";
         String descrizione = null;
         DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");  
         SimpleDateFormat localDateFormat = new SimpleDateFormat("HH:mm:ss"); 
@@ -145,8 +126,9 @@ public class ElencoEventiView extends javax.swing.JFrame {
                 String dataFine = dateFormat.format(rs.getDate("data_fineevento"));
                 String oraFine = localDateFormat.format(rs.getTime("ora_fine_evento"));
                 String gettoneValue = String.valueOf(rs.getDouble("gettonevalue"));
+                String nomeSponsor = rs.getString("nome");
                 
-                String tbDataAtleta[] = {idEvento, titolo, luogoEvento, dataInizio, oraInizio, dataFine, oraFine, gettoneValue};
+                String tbDataAtleta[] = {idEvento, titolo, luogoEvento, dataInizio, oraInizio, dataFine, oraFine, gettoneValue, nomeSponsor};
                 DefaultTableModel tblModel = (DefaultTableModel)tblDatiEventoJT.getModel();
                 tblModel.addRow(tbDataAtleta);
             }
@@ -163,27 +145,27 @@ public class ElencoEventiView extends javax.swing.JFrame {
             finallyException.finallyException();
         }
     }
-
+    
     /*GET AND SET*/
-    public String getIdSponsor() {
-        return idSponsor;
+    public String getIdAtleta() {
+        return idAtleta;
     }
 
-    public void setIdSponsor(String idSponsor) {
-        this.idSponsor = idSponsor;
+    public void setIdAtleta(String idAtleta) {
+        this.idAtleta = idAtleta;
     }
     
     /*MAIN*/
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ElencoEventiView().setVisible(true);
+                new GestioneEventiAtleta().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnTornaIndietroJB;
+    private javax.swing.JButton btnAnnullaJB;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblDatiEventoJT;
     // End of variables declaration//GEN-END:variables

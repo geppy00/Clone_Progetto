@@ -179,11 +179,9 @@ public class PercentualiGuadagnoProcuratoreView extends javax.swing.JFrame {
         PreparedStatement pStmt = null;
         Connection connection = null;
         ResultSet rs = null;
-        String sql = "SELECT atleta.nome, atleta.cognome, atleta.datanascita, atleta.codfiscale, club.nomeclub from atleta JOIN club ON atleta.codclub=club.idclub WHERE atleta.codprocuratore= '"+this.getIdProcuratore()+"' ORDER BY atleta.nome;";
-        //String sql = "select atleta.nome, atleta.cognome, atleta.datanascita, atleta.codfiscale, club.nomeclub from ((contratto INNER JOIN atleta on atleta.codfiscale=contratto.idatleta) INNER JOIN club on club.idclub=contratto.idclub); ";
-        ControllerProcuratore controllerProcuratore = new ControllerProcuratore();
+        String sql = "";
         DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");  
-        System.out.println("ID PROC="+this.getIdProcuratore());
+ 
         try {
             connection = new DataAccessObject().connectionToDatabase();
             pStmt = connection.prepareStatement(sql);

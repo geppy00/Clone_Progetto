@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import model.Evento;
 import view.ElencoEventiView;
 import view.registrare.RegistraEventoSponsor;
@@ -26,6 +27,7 @@ public class ModificaEvento extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.idSponsor = idSponsor;
         this.idEvento = idEvento;
+   
         stampaDati();
     }
     
@@ -52,6 +54,7 @@ public class ModificaEvento extends javax.swing.JFrame {
         datiEvento.forEach((Evento evento) -> {
             idEventoJTF.setText(String.valueOf(this.getIdEvento()));
             
+            inputGettoneEventoJTF.setText(String.valueOf(evento.getGettoneValue()));
             inputTitoloJTF.setText(evento.getTitolo());
             inpuIndirizzoJTF.setText(evento.getLuogoEvento());
             inputDataInizioJDC.setDate(evento.getDataInizio());
@@ -104,6 +107,8 @@ public class ModificaEvento extends javax.swing.JFrame {
         descrizioneJL = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         inputDescrizioneJTA = new javax.swing.JTextArea();
+        jLabel1 = new javax.swing.JLabel();
+        inputGettoneEventoJTF = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -146,6 +151,8 @@ public class ModificaEvento extends javax.swing.JFrame {
         inputDescrizioneJTA.setRows(5);
         jScrollPane1.setViewportView(inputDescrizioneJTA);
 
+        jLabel1.setText("Valore Gettone");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -160,44 +167,47 @@ public class ModificaEvento extends javax.swing.JFrame {
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(idEventoJL)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(idEventoJTF, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(194, 194, 194))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(titoloJL)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(inputTitoloJTF, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(78, 78, 78))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                                .addComponent(dataInizioJL)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                            .addComponent(dataInizioJL)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                                         .addGroup(layout.createSequentialGroup()
-                                            .addComponent(dataFineJL)
+                                            .addComponent(titoloJL)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(inputDataInizioJDC, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(inputDataFineJDC, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGap(78, 78, 78)))
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(oraFineJL)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(inputOraFineJTF))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(oraInizioJL)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(inputOraInizioJTF, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                .addComponent(inputTitoloJTF, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGroup(layout.createSequentialGroup()
+                                                    .addComponent(idEventoJL)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                    .addComponent(idEventoJTF, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addGap(58, 58, 58)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(dataFineJL)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(inputDataInizioJDC, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(inputDataFineJDC, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(78, 78, 78)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addGroup(layout.createSequentialGroup()
-                                            .addComponent(indirizzoJL)
+                                            .addComponent(oraFineJL)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(inpuIndirizzoJTF, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                            .addComponent(inputOraFineJTF))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(oraInizioJL)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(inputOraInizioJTF, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(indirizzoJL)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(inpuIndirizzoJTF, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addComponent(jLabel1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(inputGettoneEventoJTF))))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(descrizioneJL)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -210,7 +220,9 @@ public class ModificaEvento extends javax.swing.JFrame {
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(idEventoJL)
-                    .addComponent(idEventoJTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(idEventoJTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1)
+                    .addComponent(inputGettoneEventoJTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(titoloJL)
@@ -237,7 +249,7 @@ public class ModificaEvento extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(descrizioneJL)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnModificaJB)
                     .addComponent(btnAnnullaJB))
@@ -264,10 +276,14 @@ public class ModificaEvento extends javax.swing.JFrame {
         java.sql.Date dataFine = new java.sql.Date(inputDataFineJDC.getDate().getTime());
         String oraFine = inputOraFineJTF.getText();
         java.sql.Time oraFineTime = stringToTime(oraFine);
+        double gettoneValue = Double.parseDouble(inputGettoneEventoJTF.getText());
         String descrizione = inputDescrizioneJTA.getText();
        
         try {
-            controllerSponsor.aggiornaEvento(this.getIdEvento(), titolo, indirizzo, dataInizio, oraInizioTime, dataFine, oraFineTime, Integer.parseInt(this.getIdSponsor()), descrizione);
+            controllerSponsor.aggiornaEvento(gettoneValue, this.getIdEvento(), titolo, indirizzo, dataInizio, oraInizioTime, dataFine, oraFineTime, Integer.parseInt(this.getIdSponsor()), descrizione);
+            ElencoEventiView elencoEventiView = new ElencoEventiView(this.getIdSponsor());
+            elencoEventiView.setVisible(true);
+            this.setVisible(false);
         } catch (ExceptionDao ex) {
             Logger.getLogger(ModificaEvento.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -290,7 +306,7 @@ public class ModificaEvento extends javax.swing.JFrame {
     public void setIdEvento(int idEvento) {
         this.idEvento = idEvento;
     }
-
+    
     /*MAIN*/
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -313,9 +329,11 @@ public class ModificaEvento extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser inputDataFineJDC;
     private com.toedter.calendar.JDateChooser inputDataInizioJDC;
     private javax.swing.JTextArea inputDescrizioneJTA;
+    private javax.swing.JTextField inputGettoneEventoJTF;
     private javax.swing.JTextField inputOraFineJTF;
     private javax.swing.JTextField inputOraInizioJTF;
     private javax.swing.JTextField inputTitoloJTF;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel oraFineJL;
     private javax.swing.JLabel oraInizioJL;

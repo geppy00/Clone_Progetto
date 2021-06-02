@@ -6,6 +6,7 @@ import java.util.Date;
 
 
 public class Evento {
+
     
     private int idEvento;
     private String titolo;
@@ -16,6 +17,7 @@ public class Evento {
     private  java.sql.Time oraFine;
     private int idSponsor;
     private String descrizione;
+    private double gettoneValue;
     
     private ArrayList<Atleta> listaAtleta = new ArrayList<Atleta>(); //associazione
     
@@ -24,7 +26,7 @@ public class Evento {
         
     }
     
-    public Evento(String titolo, String luogo, java.sql.Date dataInizio,  java.sql.Time oraInizio, java.sql.Date dataFine,  java.sql.Time oraFine, int idSponsor, String descrizione) {
+    public Evento(double gettoneValue, String titolo, String luogo, java.sql.Date dataInizio,  java.sql.Time oraInizio, java.sql.Date dataFine,  java.sql.Time oraFine, int idSponsor, String descrizione) {
         this.dataFine = dataFine;
         this.dataInizio = dataInizio;
         this.descrizione = descrizione;
@@ -33,13 +35,14 @@ public class Evento {
         this.oraFine = oraFine;
         this.oraInizio = oraInizio;
         this.titolo = titolo;
+        this.gettoneValue = gettoneValue;
     }
     
     public Evento(int idEvento) {
         this.idEvento = idEvento;
     }
     
-    public Evento(int idEvento, String titolo, String luogo, java.sql.Date dataInizio,  java.sql.Time oraInizio, java.sql.Date dataFine,  java.sql.Time oraFine, int idSponsor, String descrizione) {
+    public Evento(double gettoneValue, int idEvento, String titolo, String luogo, java.sql.Date dataInizio,  java.sql.Time oraInizio, java.sql.Date dataFine,  java.sql.Time oraFine, int idSponsor, String descrizione) {
         this.dataFine = dataFine;
         this.dataInizio = dataInizio;
         this.descrizione = descrizione;
@@ -49,6 +52,7 @@ public class Evento {
         this.oraInizio = oraInizio;
         this.titolo = titolo;
         this.idEvento = idEvento;
+        this.gettoneValue = gettoneValue;
     }
     
     public Evento(String titolo, int idSponsor) {
@@ -68,6 +72,14 @@ public class Evento {
     
     
     /*GET AND SET*/
+    public double getGettoneValue() {
+        return gettoneValue;
+    }
+
+    public void setGettoneValue(double gettoneValue) {
+        this.gettoneValue = gettoneValue;
+    }
+    
     public java.sql.Time getOraInizio() {
         return oraInizio;
     }

@@ -118,7 +118,7 @@ public class SponsorDao {
     
     
     public void registraEvento(Evento evento) throws ExceptionDao {
-        String sql= "INSERT INTO evento(titolo, luogoevento, data_inizioevento, ora_inizio_evento, data_fineevento, ora_fine_evento, idsponsor, descrizione) VALUES(?, ?, ?, ?,  ?, ?, ?, ?)";
+        String sql= "INSERT INTO evento(titolo, luogoevento, data_inizioevento, ora_inizio_evento, data_fineevento, ora_fine_evento, gettonevalue, idsponsor, descrizione) VALUES(?, ?, ?, ?,  ?, ?, ?, ?, ?)";
         PreparedStatement pStmt = null;
         Connection connection = null;
         
@@ -131,8 +131,9 @@ public class SponsorDao {
             pStmt.setTime(4, evento.getOraInizio());
             pStmt.setDate(5, evento.getDataFine());
             pStmt.setTime(6, evento.getOraFine());
-            pStmt.setInt(7, evento.getIdSponsor());
-            pStmt.setString(8, evento.getDescrizione());
+            pStmt.setDouble(7, evento.getGettoneValue());
+            pStmt.setInt(8, evento.getIdSponsor());
+            pStmt.setString(9, evento.getDescrizione());
             pStmt.execute();
             JOptionPane.showMessageDialog(null, "REGISTRAZIONE EVENTO EFFETTUATA CON SUCCESSO");
         }catch(SQLException e) {
@@ -167,6 +168,7 @@ public class SponsorDao {
                    evento.setOraInizio(rs.getTime("ora_inizio_evento"));
                    evento.setDataFine(rs.getDate("data_fineevento"));
                    evento.setOraFine(rs.getTime("ora_fine_evento"));
+                   evento.setGettoneValue(rs.getDouble("gettonevalue"));
                    evento.setDescrizione(rs.getString("descrizione"));
                    
                    datiEvento.add(evento);
@@ -185,7 +187,7 @@ public class SponsorDao {
     }
     
     public void aggiornaEvento(Evento evento) throws ExceptionDao {
-        String sql = "UPDATE evento set titolo='"+evento.getTitolo()+"', luogoevento='"+evento.getLuogoEvento()+"', data_inizioevento='"+evento.getDataInizio()+"', ora_inizio_evento='"+evento.getOraInizio()+"', data_fineevento='"+evento.getDataFine()+"', ora_fine_evento='"+evento.getOraFine()+"', descrizione='"+evento.getDescrizione()+"' WHERE idevento="+evento.getIdEvento()+" AND idsponsor="+evento.getIdSponsor()+";";
+        String sql = "UPDATE evento set titolo='"+evento.getTitolo()+"', luogoevento='"+evento.getLuogoEvento()+"', data_inizioevento='"+evento.getDataInizio()+"', ora_inizio_evento='"+evento.getOraInizio()+"', data_fineevento='"+evento.getDataFine()+"', ora_fine_evento='"+evento.getOraFine()+"', gettonevalue='"+evento.getGettoneValue()+"', descrizione='"+evento.getDescrizione()+"' WHERE idevento="+evento.getIdEvento()+" AND idsponsor="+evento.getIdSponsor()+";";
         Statement stmt = null;
         Connection connection = null;
         
@@ -230,6 +232,7 @@ public class SponsorDao {
                    evento.setOraInizio(rs.getTime("ora_inizio_evento"));
                    evento.setDataFine(rs.getDate("data_fineevento"));
                    evento.setOraFine(rs.getTime("ora_fine_evento"));
+                   evento.setGettoneValue(rs.getDouble("gettonevalue"));
                
                    datiEvento.add(evento);
                 }
@@ -268,6 +271,7 @@ public class SponsorDao {
                    evento.setOraInizio(rs.getTime("ora_inizio_evento"));
                    evento.setDataFine(rs.getDate("data_fineevento"));
                    evento.setOraFine(rs.getTime("ora_fine_evento"));
+                   evento.setGettoneValue(rs.getDouble("gettonevalue"));
                
                    datiEvento.add(evento);
                 }

@@ -49,9 +49,9 @@ public class ControllerSponsor {
         return false;
     }
     
-    public void registraEvento(String titolo, String luogo, java.sql.Date dataInizio, java.sql.Time oraInizio, java.sql.Date dataFine, java.sql.Time oraFine, int idSponsor, String descrizione) throws ExceptionDao {
-        if(titolo != null && titolo.length() > 0 && luogo != null && luogo.length() > 0 && dataInizio != null && oraInizio != null && dataFine != null && oraFine != null && idSponsor > 0 && descrizione != null) {
-            Evento evento = new Evento(titolo, luogo, dataInizio, oraInizio, dataFine, oraFine, idSponsor, descrizione);
+    public void registraEvento(double gettoneValue, String titolo, String luogo, java.sql.Date dataInizio, java.sql.Time oraInizio, java.sql.Date dataFine, java.sql.Time oraFine, int idSponsor, String descrizione) throws ExceptionDao {
+        if(gettoneValue > 0 && titolo != null && titolo.length() > 0 && luogo != null && luogo.length() > 0 && dataInizio != null && oraInizio != null && dataFine != null && oraFine != null && idSponsor > 0 && descrizione != null) {
+            Evento evento = new Evento(gettoneValue, titolo, luogo, dataInizio, oraInizio, dataFine, oraFine, idSponsor, descrizione);
             Sponsor sponsor = new Sponsor();
             sponsor.registraEvento(evento);
         }
@@ -68,9 +68,9 @@ public class ControllerSponsor {
         return null;
     }
     
-    public void aggiornaEvento(int idEvento, String titolo, String luogo, java.sql.Date dataInizio,  java.sql.Time oraInizio, java.sql.Date dataFine,  java.sql.Time oraFine, int idSponsor, String descrizione) throws ExceptionDao {
-        if(idEvento > 0 && titolo != null && titolo.length() > 0 && luogo != null && luogo.length() > 0 && dataInizio != null && oraInizio != null && dataFine != null && oraFine != null && idSponsor > 0 && descrizione != null) {
-            Evento evento = new Evento(idEvento, titolo, luogo, dataInizio, oraInizio, dataFine, oraFine, idSponsor, descrizione);
+    public void aggiornaEvento(double gettoneValue, int idEvento, String titolo, String luogo, java.sql.Date dataInizio,  java.sql.Time oraInizio, java.sql.Date dataFine,  java.sql.Time oraFine, int idSponsor, String descrizione) throws ExceptionDao {
+        if(gettoneValue > 0 && idEvento > 0 && titolo != null && titolo.length() > 0 && luogo != null && luogo.length() > 0 && dataInizio != null && oraInizio != null && dataFine != null && oraFine != null && idSponsor > 0 && descrizione != null) {
+            Evento evento = new Evento(gettoneValue, idEvento, titolo, luogo, dataInizio, oraInizio, dataFine, oraFine, idSponsor, descrizione);
             Sponsor sponsor = new Sponsor();
             sponsor.aggiornaEvento(evento);
         }

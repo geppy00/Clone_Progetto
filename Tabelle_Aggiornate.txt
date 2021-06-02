@@ -88,6 +88,7 @@ data_InizioEvento date not null,
 ora_Inizio_Evento time not null,
 data_FineEvento date not null,
 ora_Fine_Evento time not null,
+gettoneValue float not null,
 idSponsor int not null,
 descrizione varchar(280), 
 foreign key(idSponsor) references Sponsor(idSponsor)	
@@ -97,7 +98,7 @@ create table Invitatti(
 idIvitati serial primary key not null,
 idAtleta varchar(50) not null,
 idEvento int not null,
-gettoneValue float not null,
+status_presenza int not null,
 foreign key(idAtleta) references Atleta(codFiscale),
 foreign key(idEvento) references Evento(idEvento)
 );
