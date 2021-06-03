@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import refactorCode.FinallyException;
+import view.registrare.RegistraInvitato;
 
 public class GestioneEventiAtleta extends javax.swing.JFrame {
 
@@ -61,6 +62,11 @@ public class GestioneEventiAtleta extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblDatiEventoJT.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblDatiEventoJTMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblDatiEventoJT);
 
         btnAnnullaJB.setText("ANNULLA");
@@ -76,12 +82,12 @@ public class GestioneEventiAtleta extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1068, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(477, 477, 477)
-                .addComponent(btnAnnullaJB)
-                .addContainerGap(536, Short.MAX_VALUE))
+                .addGap(413, 413, 413)
+                .addComponent(btnAnnullaJB, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -103,12 +109,23 @@ public class GestioneEventiAtleta extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnAnnullaJBActionPerformed
 
+    private void tblDatiEventoJTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDatiEventoJTMouseClicked
+        if (evt.getClickCount() == 2 && !evt.isConsumed()) {
+            evt.consume();
+            int row = tblDatiEventoJT.getSelectedRow();
+            int idEvento = Integer.parseInt((String) tblDatiEventoJT.getValueAt(row, 0));
+            
+            RegistraInvitato registraInvitato = new RegistraInvitato(this.getIdAtleta(), idEvento);
+            registraInvitato.setVisible(true);
+        }
+    }//GEN-LAST:event_tblDatiEventoJTMouseClicked
+
     /*METODI*/
     public void stampaDati() throws ExceptionDao {
         PreparedStatement pStmt = null;
         Connection connection = null;
         ResultSet rs = null;
-        String sql = "SELECT evento.idevento, evento.titolo, evento.luogoevento, evento.data_inizioevento, evento.ora_inizio_evento, evento.data_fineevento, evento.ora_fine_evento, evento.gettonevalue, sponsor.nome from evento JOIN sponsor ON evento.idsponsor=sponsor.idsponsor";
+        String sql = "SELECT evento.idevento, evento.titolo, evento.luogoevento, evento.data_inizioevento, evento.ora_inizio_evento, evento.data_fineevento, evento.ora_fine_evento, evento.gettonevalue, sponsor.nome  from contratto join sponsor on contratto.idsponsor = sponsor.idsponsor and contratto.idatleta = '"+this.getIdAtleta()+"' join evento on evento.idsponsor = sponsor.idsponsor join atleta on contratto.idatleta = atleta.codfiscale;";
         String descrizione = null;
         DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");  
         SimpleDateFormat localDateFormat = new SimpleDateFormat("HH:mm:ss"); 

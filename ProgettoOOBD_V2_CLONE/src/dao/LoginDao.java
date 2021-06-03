@@ -41,7 +41,7 @@ public class LoginDao {
                     }
                 }
                 else if(scelta.equals("Club")) {
-                    sql = "SELECT idclub from club inner join login on club.idclub = login.codclub;";
+                    sql = "SELECT idclub from club inner join login on club.idclub = login.codclub WHERE login.username='"+userName+"' AND login.passuser='"+password+"';";
                     pStmt = connection.prepareStatement(sql);
                     rs = pStmt.executeQuery();
                     while(rs.next()) {
@@ -51,17 +51,18 @@ public class LoginDao {
                     }
                 }
                 else if(scelta.equals("Sponsor")) {
-                    sql = "SELECT idsponsor from sponsor inner join login on sponsor.idsponsor = login.codsponsor;";
+                    sql = "SELECT idsponsor from sponsor inner join login on sponsor.idsponsor = login.codsponsor WHERE login.username='"+userName+"' AND login.passuser='"+password+"';";
                     pStmt = connection.prepareStatement(sql);
                     rs = pStmt.executeQuery();
                     while(rs.next()) {
                         int idInt = rs.getInt("idsponsor");
+                        System.out.println("nella dao="+idInt);
                         id = Integer.toString(idInt);
                         return id;
                     }
                 }
                 else if(scelta.equals("Atleta")) {
-                    sql = "SELECT codfiscale from atleta inner join login on atleta.codfiscale = login.codatleta;";
+                    sql = "SELECT codfiscale from atleta inner join login on atleta.codfiscale = login.codatleta WHERE login.username='"+userName+"' AND login.passuser='"+password+"';";
                     pStmt = connection.prepareStatement(sql);
                     rs = pStmt.executeQuery();
                     while(rs.next()) {

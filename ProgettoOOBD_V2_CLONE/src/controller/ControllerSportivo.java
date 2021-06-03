@@ -5,6 +5,7 @@ import dao.ExceptionDao;
 import java.util.ArrayList;
 import model.Admin;
 import model.Atleta;
+import model.Invitati;
 
 
 public class ControllerSportivo {
@@ -48,5 +49,13 @@ public class ControllerSportivo {
             return true;
         }
         return false;
+    }
+    
+    public void registraInvitato(String idAtleta, int idEvento, int statusPresenza)throws ExceptionDao {
+        if(idAtleta != null && idAtleta.length() > 0 && idEvento > 0 && statusPresenza == 1 || statusPresenza == 0) {
+            Invitati invitati = new Invitati(idAtleta, idEvento, statusPresenza);
+            Atleta atleta = new Atleta();
+            atleta.registraInvitato(invitati);
+        }   
     }
 }

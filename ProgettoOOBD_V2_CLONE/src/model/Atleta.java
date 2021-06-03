@@ -1,5 +1,7 @@
 
 package model;
+import dao.ExceptionDao;
+import dao.SportivoDao;
 import java.util.ArrayList;
 
 public class Atleta {
@@ -26,6 +28,7 @@ public class Atleta {
     private Procuratore procuratore;
     private Club club;
     
+    /*COSTRUTTORE*/
     public Atleta(String nome, String cognmome, String sesso, String nazione, String indirizzo, java.sql.Date dataNascita, String telefono, String codiceFiscale, String ruolo, float peso, String idProcuratore, String iban, int idClub){
         this.nome = nome;
         this.cognmome = cognmome;
@@ -46,7 +49,9 @@ public class Atleta {
         this.codiceFiscale = codiceFiscaleAtleta;
     }
     
-    
+    public Atleta() {
+        
+    }
     
 /*SETTER AND GETTER*/
     public String getNome() {
@@ -165,5 +170,10 @@ public class Atleta {
 
     public void setIdClub(int idClub) {
         this.idClub = idClub;
+    }
+    
+    /*METODO*/
+    public void registraInvitato(Invitati invitati) throws ExceptionDao {
+        new SportivoDao().registraInvitato(invitati);
     }
 }

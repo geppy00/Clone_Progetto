@@ -14,8 +14,13 @@
         <group>
             <file>file:/C:/Users/Home/Documents/NetBeansProjects/ProgettoOOBD_V2/src/view/LoginView.java</file>
             <file>file:/C:/Users/Home/Documents/NetBeansProjects/ProgettoOOBD_V2/src/view/AtletaView.java</file>
+            <file>file:/C:/Users/Home/Documents/NetBeansProjects/ProgettoOOBD_V2/src/dao/SportivoDao.java</file>
+            <file>file:/C:/Users/Home/Documents/NetBeansProjects/ProgettoOOBD_V2/src/controller/ControllerSportivo.java</file>
             <file>file:/C:/Users/Home/Documents/NetBeansProjects/ProgettoOOBD_V2/src/view/GestioneEventiAtleta.java</file>
+            <file>file:/C:/Users/Home/Documents/NetBeansProjects/ProgettoOOBD_V2/src/view/registrare/RegistraInvitato.java</file>
+            <file>file:/C:/Users/Home/Documents/NetBeansProjects/ProgettoOOBD_V2/src/model/Invitati.java</file>
             <file>file:/C:/Users/Home/Documents/NetBeansProjects/ProgettoOOBD_V2/src/view/ElencoEventiView.java</file>
+            <file>file:/C:/Users/Home/Documents/NetBeansProjects/ProgettoOOBD_V2/src/model/Atleta.java</file>
         </group>
     </open-files>
 </project-private>

@@ -5,47 +5,42 @@ public class Invitati {
 
     private String idAtleta; 
     private int idEvento;
-    private float gettoneValue;
+    private int statusPresenza;
     
-    /**
-     * @return the idAtleta
-     */
+    /*COSTRUTTORE*/
+    public Invitati() {
+        
+    }
+    
+    public Invitati(String idAtleta, int idEvento, int statusPresenza) {
+        this.idAtleta = idAtleta;
+        this.idEvento = idEvento;
+        this.statusPresenza = statusPresenza;
+    }
+    
+    /*GET AND SET*/
     public String getIdAtleta() {
         return idAtleta;
     }
 
-    /**
-     * @param idAtleta the idAtleta to set
-     */
     public void setIdAtleta(String idAtleta) {
         this.idAtleta = idAtleta;
     }
 
-    /**
-     * @return the idEvento
-     */
     public int getIdEvento() {
         return idEvento;
     }
 
-    /**
-     * @param idEvento the idEvento to set
-     */
     public void setIdEvento(int idEvento) {
         this.idEvento = idEvento;
     }
-
-    /**
-     * @return the gettoneValue
-     */
-    public float getGettoneValue() {
-        return gettoneValue;
+    
+     public int getStatusPresenza() {
+        return statusPresenza;
     }
 
-    /**
-     * @param gettoneValue the gettoneValue to set
-     */
-    public void setGettoneValue(float gettoneValue) {
-        this.gettoneValue = gettoneValue;
+    public void setStatusPresenza(int statusPresenza) {
+        this.statusPresenza = statusPresenza;
     }
+    
 }

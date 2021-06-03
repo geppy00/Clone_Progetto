@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import model.Atleta;
+import model.Invitati;
 import model.Procuratore;
 import refactorCode.FinallyException;
 
@@ -128,6 +129,28 @@ public class SportivoDao {
             JOptionPane.showMessageDialog(null, "Atleta aggirnato con successo");
         }catch(SQLException e){
             throw new ExceptionDao("ERRORE AGGIORNAMENTO ATLETA FALLITA "+e);
+        }
+        
+        finally{
+            FinallyException finallyException = new FinallyException();
+            finallyException.finallyException();
+        }
+    }
+    
+    public void registraInvitato(Invitati invitati) throws ExceptionDao {
+        String sql= "INSERT INTO invitatti(idatleta, idevento, status_presenza) VALUES(?, ?, ?)";
+        PreparedStatement pStmt = null;
+        Connection connection = null;
+        
+        try{
+          connection = new DataAccessObject().connectionToDatabase();
+          pStmt = connection.prepareStatement(sql);
+          pStmt.setString(1, invitati.getIdAtleta());
+          pStmt.setInt(2, invitati.getIdEvento());
+          pStmt.setInt(3, invitati.getStatusPresenza());
+          pStmt.execute();
+        }catch(SQLException e) {
+            throw new ExceptionDao("ERRORE REGISTRAZIONE INVITATI FALLITA "+e);
         }
         
         finally{
