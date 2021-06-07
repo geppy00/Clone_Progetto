@@ -100,7 +100,7 @@ public class RegistraInvitato extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnNoJBActionPerformed
 
-     /*GET AND SET*/
+    /*GET AND SET*/
     public String getIdAtleta() {
         return idAtleta;
     }

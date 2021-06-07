@@ -117,6 +117,8 @@ public class GestioneEventiAtleta extends javax.swing.JFrame {
             
             RegistraInvitato registraInvitato = new RegistraInvitato(this.getIdAtleta(), idEvento);
             registraInvitato.setVisible(true);
+            
+            //((DefaultTableModel)tblDatiEventoJT.getModel()).removeRow(row);
         }
     }//GEN-LAST:event_tblDatiEventoJTMouseClicked
 

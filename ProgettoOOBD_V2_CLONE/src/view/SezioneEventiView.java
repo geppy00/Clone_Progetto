@@ -27,6 +27,7 @@ public class SezioneEventiView extends javax.swing.JFrame {
         btnElencoEventiJB = new javax.swing.JButton();
         btnCancellaEventoJB = new javax.swing.JButton();
         btnTornaIndietroJB = new javax.swing.JButton();
+        btnPartecipantiJB = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -59,6 +60,13 @@ public class SezioneEventiView extends javax.swing.JFrame {
             }
         });
 
+        btnPartecipantiJB.setText("ELENCO PARTECIPANTI");
+        btnPartecipantiJB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPartecipantiJBActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -72,9 +80,11 @@ public class SezioneEventiView extends javax.swing.JFrame {
                         .addComponent(btnTornaIndietroJB, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(265, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(61, 61, 61)
                         .addComponent(btnElencoEventiJB, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(146, 146, 146)
+                        .addGap(51, 51, 51)
+                        .addComponent(btnPartecipantiJB, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnCancellaEventoJB, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(55, 55, 55))))
         );
@@ -82,11 +92,13 @@ public class SezioneEventiView extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(85, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCreaEventoJB, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnElencoEventiJB, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCancellaEventoJB, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(77, 77, 77)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnCreaEventoJB, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnElencoEventiJB, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnCancellaEventoJB, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnPartecipantiJB, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(73, 73, 73)
                 .addComponent(btnTornaIndietroJB)
                 .addContainerGap())
         );
@@ -119,6 +131,12 @@ public class SezioneEventiView extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnCancellaEventoJBActionPerformed
 
+    private void btnPartecipantiJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPartecipantiJBActionPerformed
+        ElencoPartecipantiSponsor elencoPartecipantiSponsor = new ElencoPartecipantiSponsor(this.getIdSponsor());
+        elencoPartecipantiSponsor.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnPartecipantiJBActionPerformed
+
     
     /*GET AND SET*/
     public String getIdSponsor() {
@@ -142,6 +160,7 @@ public class SezioneEventiView extends javax.swing.JFrame {
     private javax.swing.JButton btnCancellaEventoJB;
     private javax.swing.JButton btnCreaEventoJB;
     private javax.swing.JButton btnElencoEventiJB;
+    private javax.swing.JButton btnPartecipantiJB;
     private javax.swing.JButton btnTornaIndietroJB;
     // End of variables declaration//GEN-END:variables
 }
