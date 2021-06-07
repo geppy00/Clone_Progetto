@@ -289,7 +289,7 @@ public class PercentualiGuadagnoProcuratoreView extends javax.swing.JFrame {
         PreparedStatement pStmt = null;
         Connection connection = null;
         ResultSet rs = null;
-        String sql = "select atleta.codfiscale, atleta.nome, atleta.cognome, atleta.datanascita, contratto.numero_contratto, club.nomeclub, contratto.valore_contrattuale FROM contratto JOIN atleta ON contratto.idatleta=atleta.codfiscale JOIN club ON atleta.codclub=club.idclub WHERE atleta.codprocuratore='"+this.getIdProcuratore()+"' AND contratto.idsponsor IS NULL;";
+        String sql = "select atleta.codfiscale, atleta.nome, atleta.cognome, atleta.datanascita, contratto.numero_contratto, club.nomeclub, contratto.valore_contrattuale FROM contratto JOIN atleta ON contratto.idatleta=atleta.codfiscale JOIN club ON contratto.idclub=club.idclub WHERE atleta.codprocuratore='"+this.getIdProcuratore()+"';";
         DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");  
  
         try {
