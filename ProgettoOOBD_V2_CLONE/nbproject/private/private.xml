@@ -14,7 +14,11 @@
         <group>
             <file>file:/C:/Users/Home/Documents/NetBeansProjects/ProgettoOOBD_V2/src/view/LoginView.java</file>
             <file>file:/C:/Users/Home/Documents/NetBeansProjects/ProgettoOOBD_V2/src/view/ProcuratoreView.java</file>
+            <file>file:/C:/Users/Home/Documents/NetBeansProjects/ProgettoOOBD_V2/src/dao/ProcuratoreDao.java</file>
+            <file>file:/C:/Users/Home/Documents/NetBeansProjects/ProgettoOOBD_V2/src/view/RicercaGuadagniProcuratoreView.java</file>
+            <file>file:/C:/Users/Home/Documents/NetBeansProjects/ProgettoOOBD_V2/src/controller/ControllerProcuratore.java</file>
             <file>file:/C:/Users/Home/Documents/NetBeansProjects/ProgettoOOBD_V2/src/view/PercentualiGuadagnoProcuratoreView.java</file>
+            <file>file:/C:/Users/Home/Documents/NetBeansProjects/ProgettoOOBD_V2/src/model/Procuratore.java</file>
         </group>
     </open-files>
 </project-private>

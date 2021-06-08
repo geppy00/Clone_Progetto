@@ -8,6 +8,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -53,7 +55,7 @@ public class RicercaGuadagniProcuratoreView extends javax.swing.JFrame {
 
             },
             new String [] {
-                "CF Atleta", "Nome", "Cognome", "Stipendio CLUB", "Stipendio SPONSOR"
+                "CF Atleta", "Nome", "Cognome", "Stipendio CLUB", "Data Pagamento"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -176,8 +178,9 @@ public class RicercaGuadagniProcuratoreView extends javax.swing.JFrame {
         PreparedStatement pStmt = null;
         Connection connection = null;
         ResultSet rs = null;
-        String sql = "select atleta.nome, atleta.cognome, atleta.codfiscale, stipendio.val_stipendio from atleta join stipendio ON atleta.codfiscale=stipendio.idatleta WHERE atleta.codprocuratore= '"+this.getIdProcuratore()+"' ORDER BY atleta.nome;";
+        String sql = "select atleta.nome, atleta.cognome, atleta.codfiscale, stipendio.val_stipendio, stipendio.data_pagamento from atleta join stipendio ON atleta.codfiscale=stipendio.idatleta WHERE atleta.codprocuratore= '"+this.getIdProcuratore()+"' ORDER BY atleta.nome;";
         ControllerProcuratore controllerProcuratore = new ControllerProcuratore();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");  
         
         try {
             connection = new DataAccessObject().connectionToDatabase();
@@ -188,8 +191,9 @@ public class RicercaGuadagniProcuratoreView extends javax.swing.JFrame {
                 String nomeAtleta = rs.getString("nome");
                 String cognomeAtleta = rs.getString("cognome");
                 String valoreStipendio = String.valueOf(rs.getDouble("val_stipendio"));
+                String dataPagamento = dateFormat.format(rs.getDate("data_pagamento"));
                
-                String tbDataAtleta[] = {idAtleta, nomeAtleta, cognomeAtleta, valoreStipendio};
+                String tbDataAtleta[] = {idAtleta, nomeAtleta, cognomeAtleta, valoreStipendio,dataPagamento};
                 DefaultTableModel tblModel = (DefaultTableModel)tblIntroitoSportivoJT.getModel();
                 tblModel.addRow(tbDataAtleta);
             }

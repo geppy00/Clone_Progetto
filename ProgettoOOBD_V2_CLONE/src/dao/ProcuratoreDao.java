@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import model.Atleta;
@@ -334,10 +336,11 @@ public class ProcuratoreDao {
     
     
     public String[] prendiGuadagnoPiuAlto(Contratto contratto, String idProcuratore) throws ExceptionDao {
-        String sql= "select atleta.codfiscale, atleta.nome, atleta.cognome, MAX(valore_contrattuale) FROM contratto join atleta on contratto.idatleta=atleta.codfiscale WHERE atleta.codprocuratore= '"+idProcuratore+"' GROUP BY atleta.codfiscale, atleta.nome, atleta.cognome;";
+        String sql= "select atleta.codfiscale, atleta.nome, atleta.cognome, stipendio.val_stipendio, stipendio.data_pagamento from stipendio join atleta on stipendio.idatleta=atleta.codfiscale WHERE atleta.codprocuratore='"+idProcuratore+"';";
         PreparedStatement pStmt = null;
         Connection connection = null;
         ResultSet rs = null;
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");  
         
         try {
             connection = new DataAccessObject().connectionToDatabase();
@@ -348,12 +351,13 @@ public class ProcuratoreDao {
                 return null;
             else 
                 while(rs.next()){
-                    String valConstrattuale = String.valueOf(rs.getDouble("max"));
+                    String valConstrattuale = String.valueOf(rs.getDouble("val_stipendio"));
                     String idAtleta = rs.getString("codfiscale");
                     String nomeAtleta = rs.getString("nome");
                     String cognomeAtleta = rs.getString("cognome");
+                    String dataPagamento = dateFormat.format(rs.getDate("data_pagamento"));
                     
-                    String tbDataAtleta[] = {idAtleta, nomeAtleta, cognomeAtleta, valConstrattuale};
+                    String tbDataAtleta[] = {idAtleta, nomeAtleta, cognomeAtleta, valConstrattuale, dataPagamento};
                     
                     return tbDataAtleta;
                 } 
