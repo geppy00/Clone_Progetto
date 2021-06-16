@@ -4,7 +4,7 @@ create table login (
 	idLogin serial PRIMARY KEY NOT NULL,
 	userName varchar(50) not null,
 	passUser varchar(50) not null,
-	opzUser varchar(50) not null
+	opzUser varchar(50) not null,
 	codprocuratore character varying(50),
     	codclub integer,
     	codsponsor integer,
@@ -12,8 +12,9 @@ create table login (
 	foreign key(codProcuratore) references Procuratore(code_procuratore),
 	foreign key(codClub) references Club(idClub),
 	foreign key(codsponsor) references Sponsor(idSponsor),
-	foreign key(codatleta) references Atleta(codFiscale),
+	foreign key(codatleta) references Atleta(codFiscale)
 );
+
 
 ===========================================
 
