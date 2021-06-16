@@ -3,8 +3,12 @@ package view.modificaDati;
 
 import controller.ControllerProcuratore;
 import dao.ExceptionDao;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Contratto;
 import view.SezioneModificaContrattoProcuratore;
 
 public class ModificaContrattiProcuratore extends javax.swing.JFrame {
@@ -169,10 +173,21 @@ public class ModificaContrattiProcuratore extends javax.swing.JFrame {
 
     /*METODI*/
     private void stampaDatiContratto(int idContratto) {
+        ArrayList<Contratto> datiContratto = new ArrayList<Contratto>();
         ControllerProcuratore controllerProcuratore = new ControllerProcuratore();
         
         try {
-            controllerProcuratore.prendiDatiContratto(idContratto);
+            datiContratto = controllerProcuratore.prendiDatiContratto(idContratto);
+           
+            datiContratto.forEach((Contratto contratto)->{
+                inputIdSponsorJTF.setText(String.valueOf(contratto.getIdSponsor()));
+                inputIdClubJTF.setText(String.valueOf(contratto.getIdClub()));
+                inputDataInizioJDC.setDate(contratto.getDataStart());
+                inputDataFineJDC.setDate(contratto.getDataEnd());
+                inputValoreContrattualeJTF.setText(String.valueOf(contratto.getValoreContratto()));
+                inputIdAtletaJTF.setText(contratto.getIdAtleta());
+                inputIdContrattoJTF.setText(String.valueOf(contratto.getNumeroContratto()));
+            });
         } catch (ExceptionDao ex) {
             Logger.getLogger(ModificaContrattiProcuratore.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -197,6 +212,10 @@ public class ModificaContrattiProcuratore extends javax.swing.JFrame {
         ControllerProcuratore controllerProcuratore = new ControllerProcuratore();
         try {
             controllerProcuratore.modificaContratto(numeroContratto, idAtleta, idSponsor, idClub, dataInizio, dataFine, valoreContrattuale);
+            
+            SezioneModificaContrattoProcuratore sezioneModificaContrattoProcuratore = new SezioneModificaContrattoProcuratore(this.getIdProcuratore());
+            sezioneModificaContrattoProcuratore.setVisible(true);
+            this.setVisible(false);
         } catch (ExceptionDao ex) {
             Logger.getLogger(ModificaContrattiProcuratore.class.getName()).log(Level.SEVERE, null, ex);
         }

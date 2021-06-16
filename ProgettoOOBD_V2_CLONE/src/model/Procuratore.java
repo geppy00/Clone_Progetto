@@ -221,6 +221,10 @@ public class Procuratore {
         return new ProcuratoreDao().prendiDatiContratto(contratto);
     }
     
+    public void eliminaContratto(Contratto contratto) throws ExceptionDao {
+        new ProcuratoreDao().eliminaContratto(contratto);
+    }
+    
     /*public double prendiValoreContrattualeSponsor(Contratto contratto) throws ExceptionDao {
         return new ProcuratoreDao().prendiValoreContrattualeSponsor(contratto);
     }*/

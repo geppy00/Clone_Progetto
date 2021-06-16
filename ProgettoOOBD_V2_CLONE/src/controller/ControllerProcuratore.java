@@ -146,6 +146,14 @@ import model.Sponsor;
         return null;
     }
     
+    public void eliminaContratto(int numeroContratto) throws ExceptionDao {
+        if(numeroContratto > 0) {
+            Contratto contratto = new Contratto(numeroContratto);
+            Procuratore procuratore = new Procuratore();
+            procuratore.eliminaContratto(contratto);
+        }
+    }
+    
     /*public double prendiValoreContrattualeSponsor() throws ExceptionDao {
         
     }*/

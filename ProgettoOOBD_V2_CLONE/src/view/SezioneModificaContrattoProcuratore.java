@@ -17,6 +17,7 @@ import javax.swing.table.DefaultTableModel;
 import refactorCode.FinallyException;
 import view.SezioneGestioneContrattiView;
 import view.VisualizzaTuttiContrattiProcuratore;
+import view.modificaDati.ModificaContrattiProcuratore;
 
 public class SezioneModificaContrattoProcuratore extends javax.swing.JFrame {
 
@@ -288,7 +289,9 @@ public class SezioneModificaContrattoProcuratore extends javax.swing.JFrame {
             int idContratto = Integer.parseInt((String) tblDatiContrttoJT.getValueAt(row, 7));
             System.out.println("ID CONTRATTO="+idContratto);
             
-            
+            ModificaContrattiProcuratore modificaContrattiProcuratore = new ModificaContrattiProcuratore(this.getIdProcuratore(), idContratto);
+            modificaContrattiProcuratore.setVisible(true);
+            this.setVisible(false);
         }
     }//GEN-LAST:event_tblDatiContrttoJTMouseClicked
 
@@ -298,6 +301,8 @@ public class SezioneModificaContrattoProcuratore extends javax.swing.JFrame {
 
     private void btnRipristinaJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRipristinaJBActionPerformed
         try {
+            DefaultTableModel tblModel = (DefaultTableModel)tblDatiContrttoJT.getModel();
+            tblModel.setRowCount(0);
             stampaDatiInBaseFiltro();
         } catch (ExceptionDao ex) {
             Logger.getLogger(SezioneModificaContrattoProcuratore.class.getName()).log(Level.SEVERE, null, ex);

@@ -464,6 +464,28 @@ public class ProcuratoreDao {
         return datiContratto;
     }
     
+    public void eliminaContratto(Contratto contratto) throws ExceptionDao {
+        String sql= "DELETE FROM contratto WHERE numero_contratto = ?;";
+        PreparedStatement pStmt = null;
+        Connection connection = null;
+        
+        try {
+            connection = new DataAccessObject().connectionToDatabase();
+            pStmt = connection.prepareStatement(sql);
+            pStmt.setInt(1, contratto.getNumeroContratto());
+            pStmt.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Contratto numero "+contratto.getNumeroContratto()+" eliminato con successo");
+        }catch(SQLException e){
+            throw new ExceptionDao("ERRORE ELIMINAZIONE CONTRATTO FALLITA "+e);
+        }
+        
+        finally {
+            FinallyException finallyException = new FinallyException();
+            finallyException.finallyException();
+        }
+    }
+
+    
     /*GET AND SET*/
     public String getNomeClub() {
         return nomeClub;

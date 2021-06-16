@@ -56,6 +56,11 @@ public class SezioneGestioneContrattiView extends javax.swing.JFrame {
         });
 
         btnEliminaContrattoJB.setText("ELIMINA CONTRATTO");
+        btnEliminaContrattoJB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminaContrattoJBActionPerformed(evt);
+            }
+        });
 
         btnTornaIndietriJB.setText("TORNA INDIETRO");
         btnTornaIndietriJB.addActionListener(new java.awt.event.ActionListener() {
@@ -134,6 +139,12 @@ public class SezioneGestioneContrattiView extends javax.swing.JFrame {
         modificaContrattiProcuratore.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnVisualizzaContrttiJBActionPerformed
+
+    private void btnEliminaContrattoJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminaContrattoJBActionPerformed
+        SezioneEliminaContrattoProcuratore sezioneEliminaContrattoProcuratore = new SezioneEliminaContrattoProcuratore(this.getIdProcuratore());
+        sezioneEliminaContrattoProcuratore.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnEliminaContrattoJBActionPerformed
 
      /*GET AND SET*/
     public String getIdProcuratore() {
