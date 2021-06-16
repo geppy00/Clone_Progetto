@@ -403,8 +403,8 @@ public class ProcuratoreDao {
         return null;
     }
     
-    public void modificaContratto(Contratto contratto, String idAtletaDaModificare, java.sql.Date dataBegin, java.sql.Date dataEnd) throws ExceptionDao {
-        String sql = "UPDATE contratto set idatleta='"+contratto.getIdAtleta()+"', idsponsor="+contratto.getIdSponsor()+", idclub="+contratto.getIdClub()+"  datastart='"+contratto.getDataStart()+"', dataend='"+contratto.getDataEnd()+"', valore_contrattuale="+contratto.getValoreContratto()+" WHERE idatleta='"+idAtletaDaModificare+"' AND datastart='"+dataBegin+"' AND dataend='"+dataEnd+";";
+    public void modificaContratto(Contratto contratto) throws ExceptionDao {
+        String sql = "UPDATE contratto set idsponsor="+contratto.getIdSponsor()+", idclub="+contratto.getIdClub()+"  datastart='"+contratto.getDataStart()+"', dataend='"+contratto.getDataEnd()+"', valore_contrattuale="+contratto.getValoreContratto()+" WHERE numero_contratto="+contratto.getNumeroContratto()+" AND idatleta='"+contratto.getIdAtleta()+"';";
         System.out.println("COMANDO SQL="+sql);
         Statement stmt = null;
         Connection connection = null;
@@ -417,13 +417,51 @@ public class ProcuratoreDao {
             connection.commit();
             JOptionPane.showMessageDialog(null, "Contratto aggirnato con successo");
         }catch(SQLException e) {
-            throw new ExceptionDao("ERRORE AGGIORNAMENTO CLUB FALLITA "+e);
+            throw new ExceptionDao("ERRORE AGGIORNAMENTO CONTRATTO FALLITA "+e);
         }
         
         finally{
             FinallyException finallyException = new FinallyException();
             finallyException.finallyException();
         }
+    }
+    
+    public ArrayList<Contratto> prendiDatiContratto(Contratto contratto) throws ExceptionDao {
+        String sql= "SELECT * FROM contratto WHERE numero_contratto="+contratto.getNumeroContratto()+";";
+        PreparedStatement pStmt = null;
+        Connection connection = null;
+        ResultSet rs = null;
+        ArrayList<Contratto> datiContratto = new ArrayList<Contratto>();
+        
+        try {
+            connection = new DataAccessObject().connectionToDatabase();
+            pStmt = connection.prepareStatement(sql);
+            //pStmt.setString(1, atleta.getCodiceFiscale()+"%");
+            rs = pStmt.executeQuery();
+            if(rs == null)
+                return null;
+            else {
+                while(rs.next()) {
+                    contratto.setIdAtleta(rs.getString("idatleta"));
+                    contratto.setIdSponsor(rs.getInt("idsponsor"));
+                    contratto.setIdClub(rs.getInt("idclub"));
+                    contratto.setDataStart(rs.getDate("datastart"));
+                    contratto.setDataEnd(rs.getDate("dataend"));
+                    contratto.setValoreContratto(rs.getFloat("valore_contrattuale"));
+                    
+                    datiContratto.add(contratto);
+                }
+            }
+        }catch(SQLException e){
+            throw new ExceptionDao("ERRORE RICERCA ATLETA FALLITA "+e);
+        }
+        
+        finally{
+            FinallyException finallyException = new FinallyException();
+            finallyException.finallyException();
+        }
+        
+        return datiContratto;
     }
     
     /*GET AND SET*/

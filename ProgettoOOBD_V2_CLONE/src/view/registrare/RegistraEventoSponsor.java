@@ -10,7 +10,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import view.SezioneEventiView;
-import cambodia.raven.Time;
 import java.text.DateFormat;
 import java.text.ParseException;
 

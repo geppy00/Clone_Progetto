@@ -6,9 +6,7 @@ import java.util.Date;
 
 public class Contratto {
 
-
-
-    
+    private int numeroContratto;
     private String idAtleta;
     private int idSponsor; 
     private int idClub; 
@@ -17,6 +15,10 @@ public class Contratto {
     private float valoreContratto;
     
     /*COSTRUTTORI*/
+    public Contratto(int numeroContratto) {
+        this.numeroContratto = numeroContratto;
+    }
+    
     public Contratto(String idAtleta, int idClub, java.sql.Date dataInizio, java.sql.Date dataFine, float valContratto) {
         this.idAtleta = idAtleta;
         this.valoreContratto = valContratto;
@@ -26,6 +28,16 @@ public class Contratto {
     }
     
     public Contratto(String idAtleta, int idSponsor, int idClub, java.sql.Date dataInizio, java.sql.Date dataFine, float valContratto) {
+        this.idAtleta = idAtleta;
+        this.valoreContratto = valContratto;
+        this.idClub = idClub;
+        this.dataStart = dataInizio;
+        this.dataEnd = dataFine;
+        this.idSponsor = idSponsor;
+    }
+    
+    public Contratto(int numeroContratto, String idAtleta, int idSponsor, int idClub, java.sql.Date dataInizio, java.sql.Date dataFine, float valContratto) {
+        this.numeroContratto = numeroContratto;
         this.idAtleta = idAtleta;
         this.valoreContratto = valContratto;
         this.idClub = idClub;
@@ -105,4 +117,14 @@ public class Contratto {
     public void setValoreContratto(float valoreContratto) {
         this.valoreContratto = valoreContratto;
     }
+    
+    public int getNumeroContratto() {
+        return numeroContratto;
+    }
+
+    public void setNumeroContratto(int numeroContratto) {
+        this.numeroContratto = numeroContratto;
+    }
+
+
 }

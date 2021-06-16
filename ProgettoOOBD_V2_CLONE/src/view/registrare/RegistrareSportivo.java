@@ -266,7 +266,7 @@ public class RegistrareSportivo extends javax.swing.JFrame {
        
         try {
             controllerSportivo.registraSportivo(nomePreso, cognomePreso, sessoPreso, nazionePreso, indirizzoPreso, dataNascitaPresoSql, telefonoPreso, codiceFiscalePreso, ruoloAtletaPreso, pesoPreso, idProcuratore, ibanPreso, idClub);
-                    } catch (ExceptionDao ex) {
+                } catch (ExceptionDao ex) {
             Logger.getLogger(RegistrareSportivo.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnRegistraJBActionPerformed

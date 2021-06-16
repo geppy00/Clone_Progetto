@@ -1,7 +1,6 @@
 
 package view;
 
-import view.modificaDati.ModificaContrattiProcuratore;
 import view.registrare.RegistraContrattoClub;
 
 
@@ -125,7 +124,7 @@ public class SezioneGestioneContrattiView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnStipulaContrattoJBActionPerformed
 
     private void btnModificaContrattoJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificaContrattoJBActionPerformed
-        ModificaContrattiProcuratore modificaContrattiProcuratore = new ModificaContrattiProcuratore(this.getIdProcuratore());  
+        SezioneModificaContrattoProcuratore modificaContrattiProcuratore = new SezioneModificaContrattoProcuratore(this.getIdProcuratore());  
         modificaContrattiProcuratore.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnModificaContrattoJBActionPerformed

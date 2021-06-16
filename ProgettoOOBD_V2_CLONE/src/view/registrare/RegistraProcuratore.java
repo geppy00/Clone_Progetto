@@ -1,4 +1,5 @@
 
+//commento di prova 1
 package view.registrare;
 
 import controller.ControllerProcuratore;

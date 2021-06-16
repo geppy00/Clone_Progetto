@@ -213,11 +213,17 @@ public class Procuratore {
         return new ProcuratoreDao().prendiNomeSponsorPerContratti();
     }
     
-    public void modificaContratto(Contratto contratto, String idAtletaDaModificare, java.sql.Date dataBegin, java.sql.Date dataEnd) throws ExceptionDao {
-        new ProcuratoreDao().modificaContratto(contratto, idAtletaDaModificare, dataBegin, dataEnd);
+    public void modificaContratto(Contratto contratto) throws ExceptionDao {
+        new ProcuratoreDao().modificaContratto(contratto);
+    }
+    
+    public ArrayList<Contratto> prendiDatiContratto(Contratto contratto) throws ExceptionDao {
+        return new ProcuratoreDao().prendiDatiContratto(contratto);
     }
     
     /*public double prendiValoreContrattualeSponsor(Contratto contratto) throws ExceptionDao {
         return new ProcuratoreDao().prendiValoreContrattualeSponsor(contratto);
     }*/
+
+    
 }

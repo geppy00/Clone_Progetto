@@ -1,334 +1,206 @@
 
 package view.modificaDati;
 
-import dao.DataAccessObject;
+import controller.ControllerProcuratore;
 import dao.ExceptionDao;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.table.DefaultTableModel;
-import refactorCode.FinallyException;
-import view.VisualizzaTuttiContrattiProcuratore;
+import view.SezioneModificaContrattoProcuratore;
 
 public class ModificaContrattiProcuratore extends javax.swing.JFrame {
 
     private String idProcuratore;
+    private int idContratto;
     
     /*COSTRUTTORI*/
-    public ModificaContrattiProcuratore(String idProcuratore) {
+    public ModificaContrattiProcuratore(String idProcuratore, int idContratto) {
         initComponents();
         this.setLocationRelativeTo(null);
         this.idProcuratore = idProcuratore;
+        this.idContratto = idContratto;
         
-        try {
-            stampaDatiTabella();
-        } catch (ExceptionDao ex) {
-            Logger.getLogger(VisualizzaTuttiContrattiProcuratore.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        stampaDatiContratto(this.getIdContratto());
     }
-
+    
     public ModificaContrattiProcuratore() {
          
     }
 
-    /*METODI*/
-    public void stampaDatiTabella() throws ExceptionDao {
-        PreparedStatement pStmt = null;
-        Connection connection = null;
-        ResultSet rs = null;
-        String sql = "select atleta.codfiscale, contratto.idsponsor, contratto.idclub, contratto.datastart, contratto.dataend, contratto.valore_contrattuale, atleta.nome from contratto JOIN atleta ON atleta.codfiscale=contratto.idatleta WHERE atleta.codprocuratore='"+this.getIdProcuratore()+"';";
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");  
-        
-        try {
-            connection = new DataAccessObject().connectionToDatabase();
-            pStmt = connection.prepareStatement(sql);
-            rs = pStmt.executeQuery();
-            while(rs.next()) {
-                String idAtleta = rs.getString("codfiscale");
-                String idSponsor = String.valueOf(rs.getString("idsponsor"));
-                String idClub = String.valueOf(rs.getString("idclub"));
-                String dataInizio = dateFormat.format(rs.getDate("datastart"));
-                String dataFine = dateFormat.format(rs.getDate("dataend"));
-                String valoreContrattuale = String.valueOf(rs.getDouble("valore_contrattuale"));
-                String nomeAtleta = rs.getString("nome");
-                
-                String tbDataAtleta[] = {idAtleta, idSponsor, idClub, dataInizio, dataFine, valoreContrattuale, nomeAtleta};
-                DefaultTableModel tblModel = (DefaultTableModel)tblDatiContrttoJT.getModel();
-                tblModel.addRow(tbDataAtleta);
-            }
-            rs.close();
-            pStmt.close();
-            connection.close();
-        } catch(SQLException e) {
-            throw new ExceptionDao("ERRORE RICERCA ATLETA FALLITA "+e);
-        }
-        
-        finally {
-            FinallyException finallyException = new FinallyException();
-            finallyException.finallyException();
-        }
-    }
-    
-    
-    public void stampaDatiInBaseFiltro() throws ExceptionDao {
-        PreparedStatement pStmt = null;
-        Connection connection = null;
-        ResultSet rs = null;
-        String sql = null;
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
-        
-        String opzUser = opzioneFiltroJCB.getSelectedItem().toString();
-        System.out.println("OPZIONE USATA="+opzUser);
-        
-        switch(opzUser) {
-            case "Contratti con CLUB":
-                sql="select atleta.codfiscale, contratto.idclub, contratto.datastart, contratto.dataend, contratto.valore_contrattuale, atleta.nome from contratto JOIN atleta ON atleta.codfiscale=contratto.idatleta WHERE atleta.codprocuratore='"+this.getIdProcuratore()+"' AND contratto.idsponsor IS NULL;";
-                try {
-                    connection = new DataAccessObject().connectionToDatabase();
-                    pStmt = connection.prepareStatement(sql);
-                    rs = pStmt.executeQuery();
-                    while(rs.next()) {
-                        String idAtleta = rs.getString("codfiscale");
-                        String idSponsor = "/////////////////";
-                        String idClub = String.valueOf(rs.getString("idclub"));
-                        String dataInizio = dateFormat.format(rs.getDate("datastart"));
-                        String dataFine = dateFormat.format(rs.getDate("dataend"));
-                        String valoreContrattuale = String.valueOf(rs.getDouble("valore_contrattuale"));
-                        String nomeAtleta = rs.getString("nome");
-                        
-                        String tbDataAtleta[] = {idAtleta, idSponsor, idClub, dataInizio, dataFine, valoreContrattuale, nomeAtleta};
-                        DefaultTableModel tblModel = (DefaultTableModel)tblDatiContrttoJT.getModel();
-                        tblModel.addRow(tbDataAtleta);
-                    }
-                    rs.close();
-                    pStmt.close();
-                    connection.close();
-                } catch(SQLException e) {
-                    throw new ExceptionDao("ERRORE RICERCA ATLETA FALLITA "+e);
-                }
-
-                finally {
-                    FinallyException finallyException = new FinallyException();
-                    finallyException.finallyException();
-                }
-            break;
-            
-            case "Contratti con SPONSOR":
-                sql = "select atleta.codfiscale, contratto.idsponsor, contratto.datastart, contratto.dataend, contratto.valore_contrattuale, atleta.nome from contratto JOIN atleta ON atleta.codfiscale=contratto.idatleta WHERE atleta.codprocuratore='"+this.getIdProcuratore()+"' AND contratto.idclub IS NULL;";
-                try {
-                    connection = new DataAccessObject().connectionToDatabase();
-                    pStmt = connection.prepareStatement(sql);
-                    rs = pStmt.executeQuery();
-                    while(rs.next()) {
-                        String idAtleta = rs.getString("codfiscale");
-                        String idSponsor = String.valueOf(rs.getString("idsponsor"));
-                        String idClub = "/////////////////";
-                        String dataInizio = dateFormat.format(rs.getDate("datastart"));
-                        String dataFine = dateFormat.format(rs.getDate("dataend"));
-                        String valoreContrattuale = String.valueOf(rs.getDouble("valore_contrattuale"));
-                        String nomeAtleta = rs.getString("nome");
-                        
-                        String tbDataAtleta[] = {idAtleta, idSponsor, idClub, dataInizio, dataFine, valoreContrattuale, nomeAtleta};
-                        DefaultTableModel tblModel = (DefaultTableModel)tblDatiContrttoJT.getModel();
-                        tblModel.addRow(tbDataAtleta);
-                    }
-                    rs.close();
-                    pStmt.close();
-                    connection.close();
-                } catch(SQLException e) {
-                    throw new ExceptionDao("ERRORE RICERCA ATLETA FALLITA "+e);
-                }
-
-                finally {
-                    FinallyException finallyException = new FinallyException();
-                    finallyException.finallyException();
-                }
-            break;
-            
-        }
-    
-    }
-    
-    public java.sql.Date stringToSqlDate(String sDate) throws Exception {
-        
-        Date javaDate = new SimpleDateFormat("yyyy-mm-dd").parse(sDate);
-        java.sql.Date sqlDate = new java.sql.Date(javaDate.getTime()); //Conversione data da java a sql per inserirla nel database
-        
-        return sqlDate;
-    }
-    
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblDatiContrttoJT = new javax.swing.JTable();
-        opzioneFiltroJCB = new javax.swing.JComboBox<>();
-        btnTornaIndietroJB = new javax.swing.JButton();
-        btnRipristinaJB = new javax.swing.JButton();
+        idSponsorJL = new javax.swing.JLabel();
+        inputIdSponsorJTF = new javax.swing.JTextField();
+        idClubJL = new javax.swing.JLabel();
+        inputIdClubJTF = new javax.swing.JTextField();
+        dataInizioJL = new javax.swing.JLabel();
+        dataFineJL = new javax.swing.JLabel();
+        inputDataInizioJDC = new com.toedter.calendar.JDateChooser();
+        inputDataFineJDC = new com.toedter.calendar.JDateChooser();
+        valoreContrattualeJL = new javax.swing.JLabel();
+        inputValoreContrattualeJTF = new javax.swing.JTextField();
+        cfAtletaJL = new javax.swing.JLabel();
+        inputIdAtletaJTF = new javax.swing.JTextField();
+        btnAnnullaJB = new javax.swing.JButton();
+        btnModificaJB = new javax.swing.JButton();
+        idContrattoJL = new javax.swing.JLabel();
+        inputIdContrattoJTF = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        tblDatiContrttoJT.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+        idSponsorJL.setText("ID Sponsor");
 
-            },
-            new String [] {
-                "ID Atleta", "ID Sponsor", "ID Club", "Data Inizio", "Data Fine", "Valore Contratto", "Nome Atleta"
-            }
-        ));
-        tblDatiContrttoJT.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblDatiContrttoJTMouseClicked(evt);
-            }
-        });
-        tblDatiContrttoJT.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                tblDatiContrttoJTKeyPressed(evt);
-            }
-        });
-        jScrollPane1.setViewportView(tblDatiContrttoJT);
+        idClubJL.setText("ID Club");
 
-        opzioneFiltroJCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Contratti con CLUB", "Contratti con SPONSOR" }));
-        opzioneFiltroJCB.addActionListener(new java.awt.event.ActionListener() {
+        dataInizioJL.setText("Data Inizio");
+
+        dataFineJL.setText("Data Fine");
+
+        valoreContrattualeJL.setText("Valore Contrattuale");
+
+        cfAtletaJL.setText("Codice Fiscale Atleta");
+
+        inputIdAtletaJTF.setEditable(false);
+
+        btnAnnullaJB.setText("ANNULLA");
+        btnAnnullaJB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                opzioneFiltroJCBActionPerformed(evt);
+                btnAnnullaJBActionPerformed(evt);
             }
         });
 
-        btnTornaIndietroJB.setText("TORNA INDIETRO");
+        btnModificaJB.setText("MODIFICA");
+        btnModificaJB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificaJBActionPerformed(evt);
+            }
+        });
 
-        btnRipristinaJB.setText("RIPRISTINA");
+        idContrattoJL.setText("ID Contratto");
+
+        inputIdContrattoJTF.setEditable(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnTornaIndietroJB)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnRipristinaJB)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(91, 91, 91)
-                        .addComponent(opzioneFiltroJCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)))
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 655, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                        .addComponent(idContrattoJL)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(inputIdContrattoJTF, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(cfAtletaJL)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(inputIdAtletaJTF))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(valoreContrattualeJL)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(inputValoreContrattualeJTF))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(dataFineJL)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(inputDataFineJDC, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(idSponsorJL)
+                                .addComponent(dataInizioJL))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(inputIdSponsorJTF)
+                                .addComponent(inputDataInizioJDC, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(idClubJL)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(inputIdClubJTF))))
+                .addGap(59, 59, 59)
+                .addComponent(btnAnnullaJB, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45)
+                .addComponent(btnModificaJB, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(34, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 449, Short.MAX_VALUE))
+                        .addGap(23, 23, 23)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(idSponsorJL)
+                                    .addComponent(inputIdSponsorJTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(idClubJL)
+                                    .addComponent(inputIdClubJTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addComponent(dataInizioJL))
+                            .addComponent(inputDataInizioJDC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(21, 21, 21)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(dataFineJL)
+                            .addComponent(inputDataFineJDC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(111, 111, 111)
-                        .addComponent(opzioneFiltroJCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnTornaIndietroJB)
-                            .addComponent(btnRipristinaJB))))
-                .addContainerGap())
+                        .addGap(68, 68, 68)
+                        .addComponent(btnAnnullaJB, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnModificaJB, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(valoreContrattualeJL)
+                    .addComponent(inputValoreContrattualeJTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cfAtletaJL)
+                    .addComponent(inputIdAtletaJTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(idContrattoJL)
+                    .addComponent(inputIdContrattoJTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /*ACTION PERFOMED*/
-    private void opzioneFiltroJCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opzioneFiltroJCBActionPerformed
+    /*METODI*/
+    private void stampaDatiContratto(int idContratto) {
+        ControllerProcuratore controllerProcuratore = new ControllerProcuratore();
+        
         try {
-            DefaultTableModel tblModel = (DefaultTableModel)tblDatiContrttoJT.getModel();
-            tblModel.setRowCount(0);
-            stampaDatiInBaseFiltro();
+            controllerProcuratore.prendiDatiContratto(idContratto);
         } catch (ExceptionDao ex) {
             Logger.getLogger(ModificaContrattiProcuratore.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_opzioneFiltroJCBActionPerformed
+    }
+    
+    /*ACTION PERFOMED*/
+    private void btnAnnullaJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnnullaJBActionPerformed
+        SezioneModificaContrattoProcuratore sezioneModificaContrattoProcuratore = new SezioneModificaContrattoProcuratore(this.getIdProcuratore());  
+        sezioneModificaContrattoProcuratore.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnAnnullaJBActionPerformed
 
-    private void tblDatiContrttoJTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDatiContrttoJTMouseClicked
-        /*int row = tblDatiContrttoJT.getSelectedRow();
+    private void btnModificaJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificaJBActionPerformed
+        int numeroContratto = Integer.parseInt(inputIdContrattoJTF.getText());
+        String idAtleta = inputIdAtletaJTF.getText();
+        int idSponsor = Integer.parseInt(inputIdSponsorJTF.getText());
+        int idClub = Integer.parseInt(inputIdClubJTF.getText());
+        java.sql.Date dataInizio = (java.sql.Date) inputDataInizioJDC.getDate();
+        java.sql.Date dataFine = (java.sql.Date) inputDataFineJDC.getDate();
+        float valoreContrattuale = Float.parseFloat(inputValoreContrattualeJTF.getText());
         
-        String idAtleta = (String) tblDatiContrttoJT.getValueAt(row, 0);
-        
-        int idSponsor;
-        if(tblDatiContrttoJT.getValueAt(row, 1).equals("null"))
-            idSponsor = -1;
-        else
-            idSponsor = Integer.parseInt((String) tblDatiContrttoJT.getValueAt(row, 1));
-        
-        int idClub;
-        if(tblDatiContrttoJT.getValueAt(row, 2).equals("null"))
-            idClub = -1;
-        else
-            idClub = Integer.parseInt((String) tblDatiContrttoJT.getValueAt(row, 2));
-        
-        //java.sql.Date dataInizio = (java.sql.Date) tblDatiContrttoJT.getValueAt(row, 3);
-        //java.sql.Date dataFine = (java.sql.Date) tblDatiContrttoJT.getValueAt(row, 4);
-        
-        java.sql.Date dataInizio = null;
-        java.sql.Date dataFine = null;
-        
+        ControllerProcuratore controllerProcuratore = new ControllerProcuratore();
         try {
-            dataInizio = stringToSqlDate((String) tblDatiContrttoJT.getValueAt(row, 3));
-            dataFine = stringToSqlDate((String) tblDatiContrttoJT.getValueAt(row, 4));
-        } catch (Exception ex) {
+            controllerProcuratore.modificaContratto(numeroContratto, idAtleta, idSponsor, idClub, dataInizio, dataFine, valoreContrattuale);
+        } catch (ExceptionDao ex) {
             Logger.getLogger(ModificaContrattiProcuratore.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        float valContratto = Float.parseFloat((String) tblDatiContrttoJT.getValueAt(row, 5));
-        
-        ConfermaModificaContrattiProcuratore confermaModificaContrattiProcuratore = new ConfermaModificaContrattiProcuratore(this.getIdProcuratore(), idAtleta, idSponsor, idClub, dataInizio, dataFine, valContratto);
-        confermaModificaContrattiProcuratore.setVisible(true);*/
-    }//GEN-LAST:event_tblDatiContrttoJTMouseClicked
-
-    private void tblDatiContrttoJTKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblDatiContrttoJTKeyPressed
-        int row = tblDatiContrttoJT.getSelectedRow();
-        
-        String idAtleta = (String) tblDatiContrttoJT.getValueAt(row, 0);
-        
-        int idSponsor;
-        if(tblDatiContrttoJT.getValueAt(row, 1).equals("null"))
-            idSponsor = -1;
-        else
-            idSponsor = Integer.parseInt((String) tblDatiContrttoJT.getValueAt(row, 1));
-        
-        int idClub;
-        if(tblDatiContrttoJT.getValueAt(row, 2).equals("null"))
-            idClub = -1;
-        else
-            idClub = Integer.parseInt((String) tblDatiContrttoJT.getValueAt(row, 2));
-        
-        //java.sql.Date dataInizio = (java.sql.Date) tblDatiContrttoJT.getValueAt(row, 3);
-        //java.sql.Date dataFine = (java.sql.Date) tblDatiContrttoJT.getValueAt(row, 4);
-        
-        java.sql.Date dataInizio = null;
-        java.sql.Date dataFine = null;
-        
-        try {
-            dataInizio = stringToSqlDate((String) tblDatiContrttoJT.getValueAt(row, 3));
-            dataFine = stringToSqlDate((String) tblDatiContrttoJT.getValueAt(row, 4));
-        } catch (Exception ex) {
-            Logger.getLogger(ModificaContrattiProcuratore.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        float valContratto = Float.parseFloat((String) tblDatiContrttoJT.getValueAt(row, 5));
-        
-        ConfermaModificaContrattiProcuratore confermaModificaContrattiProcuratore = new ConfermaModificaContrattiProcuratore(this.getIdProcuratore(), idAtleta, idSponsor, idClub, dataInizio, dataFine, valContratto);
-        confermaModificaContrattiProcuratore.setVisible(true);
-    }//GEN-LAST:event_tblDatiContrttoJTKeyPressed
+    }//GEN-LAST:event_btnModificaJBActionPerformed
 
     
      /*GET AND SET*/
@@ -339,10 +211,17 @@ public class ModificaContrattiProcuratore extends javax.swing.JFrame {
     public void setIdProcuratore(String idProcuratore) {
         this.idProcuratore = idProcuratore;
     }
+   
+    public int getIdContratto() {
+        return idContratto;
+    }
+
+    public void setIdContratto(int idContratto) {
+        this.idContratto = idContratto;
+    }
 
     /*MAIN*/
     public static void main(String args[]) {
-
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new ModificaContrattiProcuratore().setVisible(true);
@@ -351,10 +230,21 @@ public class ModificaContrattiProcuratore extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnRipristinaJB;
-    private javax.swing.JButton btnTornaIndietroJB;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JComboBox<String> opzioneFiltroJCB;
-    private javax.swing.JTable tblDatiContrttoJT;
+    private javax.swing.JButton btnAnnullaJB;
+    private javax.swing.JButton btnModificaJB;
+    private javax.swing.JLabel cfAtletaJL;
+    private javax.swing.JLabel dataFineJL;
+    private javax.swing.JLabel dataInizioJL;
+    private javax.swing.JLabel idClubJL;
+    private javax.swing.JLabel idContrattoJL;
+    private javax.swing.JLabel idSponsorJL;
+    private com.toedter.calendar.JDateChooser inputDataFineJDC;
+    private com.toedter.calendar.JDateChooser inputDataInizioJDC;
+    private javax.swing.JTextField inputIdAtletaJTF;
+    private javax.swing.JTextField inputIdClubJTF;
+    private javax.swing.JTextField inputIdContrattoJTF;
+    private javax.swing.JTextField inputIdSponsorJTF;
+    private javax.swing.JTextField inputValoreContrattualeJTF;
+    private javax.swing.JLabel valoreContrattualeJL;
     // End of variables declaration//GEN-END:variables
 }
