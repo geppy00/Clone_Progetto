@@ -484,6 +484,62 @@ public class ProcuratoreDao {
             finallyException.finallyException();
         }
     }
+    
+    public double prendiMaxValoreContratto(String idProc) throws ExceptionDao {
+        String sql= "select MAX(contratto.valore_contrattuale) FROM contratto join atleta on atleta.codprocuratore='"+idProc+"';";
+        PreparedStatement pStmt = null;
+        Connection connection = null;
+        ResultSet rs = null;
+        double maxVal = 0;
+        try {
+            connection = new DataAccessObject().connectionToDatabase();
+            pStmt = connection.prepareStatement(sql);
+            //pStmt.setString(1, atleta.getCodiceFiscale()+"%");
+            rs = pStmt.executeQuery();
+            if(rs == null)
+                return -1;
+            else {
+                while(rs.next()) 
+                    maxVal = rs.getDouble("max");
+            }
+        }catch(SQLException e){
+                throw new ExceptionDao("ERRORE RICERCA MAXVAL CONTRATTO FALLITA "+e);
+        }
+        
+        finally{
+            FinallyException finallyException = new FinallyException();
+            finallyException.finallyException();
+        }
+        return maxVal;
+    }
+    
+    public String prendiAtletaMaggiorGuadagno(String idProc) throws ExceptionDao {
+        String sql= "select atleta.nome from atleta join contratto on atleta.codfiscale=contratto.idatleta WHERE contratto.valore_contrattuale="+this.prendiMaxValoreContratto(idProc)+";";
+        PreparedStatement pStmt = null;
+        Connection connection = null;
+        ResultSet rs = null;
+        String nomeAtleta = null;
+        try {
+            connection = new DataAccessObject().connectionToDatabase();
+            pStmt = connection.prepareStatement(sql);
+            //pStmt.setString(1, atleta.getCodiceFiscale()+"%");
+            rs = pStmt.executeQuery();
+            if(rs == null)
+                return null;
+            else {
+                while(rs.next()) 
+                    nomeAtleta = rs.getString("nome");
+            }
+        }catch(SQLException e){
+                throw new ExceptionDao("ERRORE RICERCA MAXVAL CONTRATTO FALLITA "+e);
+        }
+        
+        finally{
+            FinallyException finallyException = new FinallyException();
+            finallyException.finallyException();
+        }
+        return nomeAtleta;
+    }
 
     
     /*GET AND SET*/

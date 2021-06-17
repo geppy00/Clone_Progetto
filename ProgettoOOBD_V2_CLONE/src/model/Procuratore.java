@@ -225,6 +225,10 @@ public class Procuratore {
         new ProcuratoreDao().eliminaContratto(contratto);
     }
     
+    public String prendiAtletaMaggiorGuadagno(String idProc) throws ExceptionDao {
+        return new ProcuratoreDao().prendiAtletaMaggiorGuadagno(idProc);
+    }
+    
     /*public double prendiValoreContrattualeSponsor(Contratto contratto) throws ExceptionDao {
         return new ProcuratoreDao().prendiValoreContrattualeSponsor(contratto);
     }*/

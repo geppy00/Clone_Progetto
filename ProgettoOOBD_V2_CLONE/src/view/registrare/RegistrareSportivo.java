@@ -246,22 +246,27 @@ public class RegistrareSportivo extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAnnullaJBActionPerformed
 
     private void btnRegistraJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistraJBActionPerformed
-       ControllerSportivo controllerSportivo = new ControllerSportivo();
-       
-       String nomePreso = inputNomeJTF.getText();
-       String cognomePreso = inputCognomeJTF.getText();
-       String sessoPreso = (String) inputSessoJTF.getSelectedItem();
-       String nazionePreso = inputNazioneJTF.getText();
-       java.sql.Date dataNascitaPresoSql = new java.sql.Date(DataNascitaJDC.getDate().getTime());
-       String telefonoPreso = inputTelefonoJTF.getText();
-       String codiceFiscalePreso = inputCodiceFiscaleJTF.getText();
-       String ruoloAtletaPreso = inputRuoloAtletaJTF.getText();
-       String pesoStr = inputPesoJTF.getText();
-       float pesoPreso = Float.parseFloat(pesoStr);
-       String ibanPreso = inputIbanAtletaJTF.getText();
-       String idProcuratore = inputIDProcuratoreJTF.getText();
-       String indirizzoPreso = inputIndirizzoJTF.getText();
-       int idClub = Integer.parseInt(inputIdClubJTF.getText());
+        ControllerSportivo controllerSportivo = new ControllerSportivo();
+
+        String nomePreso = inputNomeJTF.getText();
+        String cognomePreso = inputCognomeJTF.getText();
+        String sessoPreso = (String) inputSessoJTF.getSelectedItem();
+        String nazionePreso = inputNazioneJTF.getText();
+        java.sql.Date dataNascitaPresoSql = new java.sql.Date(DataNascitaJDC.getDate().getTime());
+        String telefonoPreso = inputTelefonoJTF.getText();
+        String codiceFiscalePreso = inputCodiceFiscaleJTF.getText();
+        String ruoloAtletaPreso = inputRuoloAtletaJTF.getText();
+        String pesoStr = inputPesoJTF.getText();
+        float pesoPreso = Float.parseFloat(pesoStr);
+        String ibanPreso = inputIbanAtletaJTF.getText();
+        String idProcuratore = inputIDProcuratoreJTF.getText();
+        String indirizzoPreso = inputIndirizzoJTF.getText();
+
+        int idClub;
+        if(inputIdClubJTF.getText().equals(""))
+            idClub = 0;
+        else
+            idClub = Integer.parseInt(inputIdClubJTF.getText());
        
        
         try {

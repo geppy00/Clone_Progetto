@@ -61,6 +61,8 @@ public class PercentualiGuadagnoProcuratoreView extends javax.swing.JFrame {
         tblDatiSponsorJT = new javax.swing.JTable();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblDatiEventiJT = new javax.swing.JTable();
+        atletaMaggiorGuadagnoJL = new javax.swing.JLabel();
+        atletaMigliorGuadagnoJTF = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -149,6 +151,10 @@ public class PercentualiGuadagnoProcuratoreView extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(tblDatiEventiJT);
 
+        atletaMaggiorGuadagnoJL.setText("Atleta Maggior Guadagno");
+
+        atletaMigliorGuadagnoJTF.setEditable(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -163,8 +169,12 @@ public class PercentualiGuadagnoProcuratoreView extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(valoreContrattualeJL)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(totaleValoreContrattualeJTF, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(389, 389, 389)
+                                .addComponent(totaleValoreContrattualeJTF, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(104, 104, 104)
+                                .addComponent(atletaMaggiorGuadagnoJL)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(atletaMigliorGuadagnoJTF, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(78, 78, 78)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(828, 828, 828)
@@ -178,7 +188,7 @@ public class PercentualiGuadagnoProcuratoreView extends javax.swing.JFrame {
                                 .addComponent(totaleGuadagnojL)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(totaleGuadagnoJTF, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))))
+                                .addGap(0, 126, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addComponent(jScrollPane2))
@@ -201,7 +211,9 @@ public class PercentualiGuadagnoProcuratoreView extends javax.swing.JFrame {
                     .addComponent(totaleGettoniJL)
                     .addComponent(totaleGettoniJTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(totaleGuadagnojL)
-                    .addComponent(totaleGuadagnoJTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(totaleGuadagnoJTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(atletaMaggiorGuadagnoJL)
+                    .addComponent(atletaMigliorGuadagnoJTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAnnullaJB)
@@ -249,6 +261,7 @@ public class PercentualiGuadagnoProcuratoreView extends javax.swing.JFrame {
         double sommaContrattiClub = 0;
         double sommaContrattiSponsor = 0;
         double sommaGettone = 0;
+        ControllerProcuratore controllerProcuratore = new ControllerProcuratore();
         
         for(i = 0; i<datiPagamentiClub.size(); i++) {
             sommaContrattiClub = sommaContrattiClub + datiPagamentiClub.get(i);
@@ -275,6 +288,13 @@ public class PercentualiGuadagnoProcuratoreView extends javax.swing.JFrame {
         totaleValoreContrattualeJTF.setText(String.valueOf(sommaTotaleContratto));
         totaleGettoniJTF.setText(String.valueOf(sommaTotaleGettoni));
         totaleGuadagnoJTF.setText(String.valueOf(sommaTotale));
+        
+        try {
+            String nomeAtletaMigliorGuadagno = controllerProcuratore.prendiAtletaMaggiorGuadagno(this.getIdProcuratore());
+            atletaMigliorGuadagnoJTF.setText(nomeAtletaMigliorGuadagno);
+        } catch (ExceptionDao ex) {
+            Logger.getLogger(PercentualiGuadagnoProcuratoreView.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_btnCalcolaJBActionPerformed
 
@@ -400,6 +420,8 @@ public class PercentualiGuadagnoProcuratoreView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel atletaMaggiorGuadagnoJL;
+    private javax.swing.JTextField atletaMigliorGuadagnoJTF;
     private javax.swing.JButton btnAnnullaJB;
     private javax.swing.JButton btnCalcolaJB;
     private javax.swing.JScrollPane jScrollPane1;

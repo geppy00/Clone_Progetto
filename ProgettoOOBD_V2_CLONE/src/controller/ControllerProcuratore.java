@@ -154,6 +154,14 @@ import model.Sponsor;
         }
     }
     
+    public String prendiAtletaMaggiorGuadagno(String idProc) throws ExceptionDao {
+        if(idProc != null && idProc.length() > 0) {
+            Procuratore procuratore = new Procuratore();
+            return procuratore.prendiAtletaMaggiorGuadagno(idProc);
+        }
+        return null;
+    }
+    
     /*public double prendiValoreContrattualeSponsor() throws ExceptionDao {
         
     }*/

@@ -13,6 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import refactorCode.FinallyException;
 import view.SezioneGestioneContrattiView;
 
@@ -84,6 +85,7 @@ public class VisualizzaTuttiContrattiProcuratore extends javax.swing.JFrame {
         ResultSet rs = null;
         String sql = null;
         DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+        TableColumn tcol;
         
         String opzUser = opzProcuratoreFiltroJCB.getSelectedItem().toString();
         System.out.println("OPZIONE USATA="+opzUser);
@@ -97,13 +99,13 @@ public class VisualizzaTuttiContrattiProcuratore extends javax.swing.JFrame {
                     rs = pStmt.executeQuery();
                     while(rs.next()) {
                         String nomeAtleta = rs.getString("nome");
-                        String idSponsor = "/////////////////";
+                        //String idSponsor = "/////////////////";
                         String idClub = String.valueOf(rs.getString("idclub"));
                         String dataInizio = dateFormat.format(rs.getDate("datastart"));
                         String dataFine = dateFormat.format(rs.getDate("dataend"));
                         String valoreContrattuale = String.valueOf(rs.getDouble("valore_contrattuale"));
 
-                        String tbDataAtleta[] = {nomeAtleta, idSponsor, idClub, dataInizio, dataFine, valoreContrattuale};
+                        String tbDataAtleta[] = {nomeAtleta, idClub, dataInizio, dataFine, valoreContrattuale};
                         DefaultTableModel tblModel = (DefaultTableModel)tblDatiContrattoJT.getModel();
                         tblModel.addRow(tbDataAtleta);
                     }
@@ -129,12 +131,12 @@ public class VisualizzaTuttiContrattiProcuratore extends javax.swing.JFrame {
                     while(rs.next()) {
                         String nomeAtleta = rs.getString("nome");
                         String idSponsor = String.valueOf(rs.getString("idsponsor"));
-                        String idClub = "/////////////////";
+                        //String idClub = "/////////////////";
                         String dataInizio = dateFormat.format(rs.getDate("datastart"));
                         String dataFine = dateFormat.format(rs.getDate("dataend"));
                         String valoreContrattuale = String.valueOf(rs.getDouble("valore_contrattuale"));
 
-                        String tbDataAtleta[] = {nomeAtleta, idSponsor, idClub, dataInizio, dataFine, valoreContrattuale};
+                        String tbDataAtleta[] = {nomeAtleta, idSponsor, dataInizio, dataFine, valoreContrattuale};
                         DefaultTableModel tblModel = (DefaultTableModel)tblDatiContrattoJT.getModel();
                         tblModel.addRow(tbDataAtleta);
                     }

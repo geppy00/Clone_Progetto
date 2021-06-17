@@ -261,7 +261,8 @@ public class ModificaEvento extends javax.swing.JFrame {
 
     /*ACTION PERFOMED*/
     private void btnAnnullaJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnnullaJBActionPerformed
-
+        ElencoEventiView elencoEventiView = new ElencoEventiView(this.getIdSponsor());
+        elencoEventiView.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnAnnullaJBActionPerformed
 
