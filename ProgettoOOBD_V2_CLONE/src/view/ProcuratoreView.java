@@ -24,7 +24,6 @@ public class ProcuratoreView extends javax.swing.JFrame {
         btnGestireContrattiJB = new javax.swing.JButton();
         btnDenaroJB = new javax.swing.JButton();
         btnLogoutJB = new javax.swing.JButton();
-        btnGuadagniAtletiJB = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -51,13 +50,6 @@ public class ProcuratoreView extends javax.swing.JFrame {
             }
         });
 
-        btnGuadagniAtletiJB.setText("GUADAGNI ATLETI");
-        btnGuadagniAtletiJB.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuadagniAtletiJBActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -68,19 +60,16 @@ public class ProcuratoreView extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnLogoutJB))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(267, 267, 267)
-                                .addComponent(benvenutoJL))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(30, 30, 30)
-                                .addComponent(btnGestireContrattiJB, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(56, 56, 56)
-                                .addComponent(btnDenaroJB)
-                                .addGap(59, 59, 59)
-                                .addComponent(btnGuadagniAtletiJB, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 151, Short.MAX_VALUE)))
+                        .addGap(267, 267, 267)
+                        .addComponent(benvenutoJL)
+                        .addGap(0, 303, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(138, 138, 138)
+                .addComponent(btnGestireContrattiJB, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(91, 91, 91)
+                .addComponent(btnDenaroJB, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -90,8 +79,7 @@ public class ProcuratoreView extends javax.swing.JFrame {
                 .addGap(68, 68, 68)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGestireContrattiJB, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnDenaroJB, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnGuadagniAtletiJB, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnDenaroJB, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
                 .addComponent(btnLogoutJB)
                 .addContainerGap())
@@ -118,12 +106,6 @@ public class ProcuratoreView extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnLogoutJBActionPerformed
 
-    private void btnGuadagniAtletiJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuadagniAtletiJBActionPerformed
-        RicercaGuadagniProcuratoreView ricercaGuadagniProcuratoreView = new RicercaGuadagniProcuratoreView(this.getIdProcuratore());
-        ricercaGuadagniProcuratoreView.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_btnGuadagniAtletiJBActionPerformed
-
     
     /*GET AND SET*/
     public String getIdProcuratore() {
@@ -148,7 +130,6 @@ public class ProcuratoreView extends javax.swing.JFrame {
     private javax.swing.JLabel benvenutoJL;
     private javax.swing.JButton btnDenaroJB;
     private javax.swing.JButton btnGestireContrattiJB;
-    private javax.swing.JButton btnGuadagniAtletiJB;
     private javax.swing.JButton btnLogoutJB;
     // End of variables declaration//GEN-END:variables
 }

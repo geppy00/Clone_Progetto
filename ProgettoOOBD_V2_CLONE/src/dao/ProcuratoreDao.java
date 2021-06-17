@@ -334,47 +334,6 @@ public class ProcuratoreDao {
         return -1;
     }*/
     
-    
-    public String[] prendiGuadagnoPiuAlto(Contratto contratto, String idProcuratore) throws ExceptionDao {
-        String sql= "select atleta.codfiscale, atleta.nome, atleta.cognome, stipendio.val_stipendio, stipendio.data_pagamento from stipendio join atleta on stipendio.idatleta=atleta.codfiscale WHERE atleta.codprocuratore='"+idProcuratore+"';";
-        PreparedStatement pStmt = null;
-        Connection connection = null;
-        ResultSet rs = null;
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");  
-        
-        try {
-            connection = new DataAccessObject().connectionToDatabase();
-            pStmt = connection.prepareStatement(sql);
-            rs = pStmt.executeQuery();
-            
-            if(rs == null)
-                return null;
-            else 
-                while(rs.next()){
-                    String valConstrattuale = String.valueOf(rs.getDouble("val_stipendio"));
-                    String idAtleta = rs.getString("codfiscale");
-                    String nomeAtleta = rs.getString("nome");
-                    String cognomeAtleta = rs.getString("cognome");
-                    String dataPagamento = dateFormat.format(rs.getDate("data_pagamento"));
-                    
-                    String tbDataAtleta[] = {idAtleta, nomeAtleta, cognomeAtleta, valConstrattuale, dataPagamento};
-                    
-                    return tbDataAtleta;
-                } 
-        } catch(SQLException e) {
-            throw new ExceptionDao("ERRORE RICERCA MASSIMO VALORE FALLITA "+e);
-        }
-        
-        finally{
-            FinallyException finallyException = new FinallyException();
-            finallyException.finallyException();
-        }
-        
-        
-        return null;
-    }
-    
-    
     public String prendiNomeSponsorPerContratti() throws ExceptionDao {
         String sql = "select sponsor.nome from sponsor JOIN contratto ON sponsor.idsponsor=contratto.idsponsor";
         PreparedStatement pStmt = null;

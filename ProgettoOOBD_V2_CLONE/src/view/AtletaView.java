@@ -22,6 +22,8 @@ public class AtletaView extends javax.swing.JFrame {
 
         benvenutoJL = new javax.swing.JLabel();
         btnGestioneEventiJB = new javax.swing.JButton();
+        btnEntroitiJB = new javax.swing.JButton();
+        btnLogoutJB = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -34,6 +36,20 @@ public class AtletaView extends javax.swing.JFrame {
             }
         });
 
+        btnEntroitiJB.setText("Gestione Entroiti");
+        btnEntroitiJB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEntroitiJBActionPerformed(evt);
+            }
+        });
+
+        btnLogoutJB.setText("LOGOUT");
+        btnLogoutJB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutJBActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -41,12 +57,20 @@ public class AtletaView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(159, 159, 159)
-                        .addComponent(benvenutoJL))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(99, 99, 99)
-                        .addComponent(btnGestioneEventiJB, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(99, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(159, 159, 159)
+                                .addComponent(benvenutoJL))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(99, 99, 99)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(btnGestioneEventiJB, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
+                                    .addComponent(btnEntroitiJB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(0, 89, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnLogoutJB)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -55,7 +79,11 @@ public class AtletaView extends javax.swing.JFrame {
                 .addComponent(benvenutoJL)
                 .addGap(36, 36, 36)
                 .addComponent(btnGestioneEventiJB, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(174, Short.MAX_VALUE))
+                .addGap(41, 41, 41)
+                .addComponent(btnEntroitiJB, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addComponent(btnLogoutJB)
+                .addContainerGap())
         );
 
         pack();
@@ -67,6 +95,18 @@ public class AtletaView extends javax.swing.JFrame {
         gestioneEventiAtleta.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnGestioneEventiJBActionPerformed
+
+    private void btnEntroitiJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntroitiJBActionPerformed
+        SezioneIntroitiAtleta sezioneIntroitiAtleta = new SezioneIntroitiAtleta(this.getIdAtleta());
+        sezioneIntroitiAtleta.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnEntroitiJBActionPerformed
+
+    private void btnLogoutJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutJBActionPerformed
+        LoginView loginView = new LoginView();
+        loginView.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnLogoutJBActionPerformed
 
     
     /*GET AND SET*/
@@ -88,6 +128,8 @@ public class AtletaView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel benvenutoJL;
+    private javax.swing.JButton btnEntroitiJB;
     private javax.swing.JButton btnGestioneEventiJB;
+    private javax.swing.JButton btnLogoutJB;
     // End of variables declaration//GEN-END:variables
 }
