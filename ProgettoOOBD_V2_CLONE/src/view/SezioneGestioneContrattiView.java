@@ -129,8 +129,8 @@ public class SezioneGestioneContrattiView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnStipulaContrattoJBActionPerformed
 
     private void btnModificaContrattoJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificaContrattoJBActionPerformed
-        SezioneModificaContrattoProcuratore modificaContrattiProcuratore = new SezioneModificaContrattoProcuratore(this.getIdProcuratore());  
-        modificaContrattiProcuratore.setVisible(true);
+        ScegliModificaContratto scegliModificaContratto = new ScegliModificaContratto(this.getIdProcuratore());
+        scegliModificaContratto.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnModificaContrattoJBActionPerformed
 

@@ -8,8 +8,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import model.Contratto;
-import view.SezioneModificaContrattoProcuratore;
+import view.SezioneGestioneContrattiView;
+
 
 public class ModificaContrattiProcuratore extends javax.swing.JFrame {
 
@@ -17,11 +19,20 @@ public class ModificaContrattiProcuratore extends javax.swing.JFrame {
     private int idContratto;
     
     /*COSTRUTTORI*/
-    public ModificaContrattiProcuratore(String idProcuratore, int idContratto) {
+    public ModificaContrattiProcuratore(String idProcuratore, int idContratto, String flag) {
         initComponents();
         this.setLocationRelativeTo(null);
         this.idProcuratore = idProcuratore;
         this.idContratto = idContratto;
+        
+        if(flag.equals("CLUB")) 
+            inputIdSponsorJTF.setEditable(false);
+        else if(flag.equals("SPONSOR")) 
+            inputIdClubJTF.setEditable(false);
+        else {
+            JOptionPane.showMessageDialog(null, "!! ERRORE INPUT DATI !!");
+            System.exit(0);
+        }
         
         stampaDatiContratto(this.getIdContratto());
     }
@@ -180,8 +191,16 @@ public class ModificaContrattiProcuratore extends javax.swing.JFrame {
             datiContratto = controllerProcuratore.prendiDatiContratto(idContratto);
            
             datiContratto.forEach((Contratto contratto)->{
-                inputIdSponsorJTF.setText(String.valueOf(contratto.getIdSponsor()));
-                inputIdClubJTF.setText(String.valueOf(contratto.getIdClub()));
+                if(contratto.getIdSponsor() == 0)
+                    inputIdSponsorJTF.setText("");
+                else
+                    inputIdSponsorJTF.setText(String.valueOf(contratto.getIdSponsor()));
+                
+                if(contratto.getIdClub() == 0)
+                    inputIdClubJTF.setText("");
+                else
+                    inputIdClubJTF.setText(String.valueOf(contratto.getIdClub()));
+                
                 inputDataInizioJDC.setDate(contratto.getDataStart());
                 inputDataFineJDC.setDate(contratto.getDataEnd());
                 inputValoreContrattualeJTF.setText(String.valueOf(contratto.getValoreContratto()));
@@ -195,26 +214,36 @@ public class ModificaContrattiProcuratore extends javax.swing.JFrame {
     
     /*ACTION PERFOMED*/
     private void btnAnnullaJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnnullaJBActionPerformed
-        SezioneModificaContrattoProcuratore sezioneModificaContrattoProcuratore = new SezioneModificaContrattoProcuratore(this.getIdProcuratore());  
-        sezioneModificaContrattoProcuratore.setVisible(true);
+        SezioneGestioneContrattiView sezioneGestioneContrattiView = new SezioneGestioneContrattiView(this.getIdProcuratore());
+        sezioneGestioneContrattiView.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnAnnullaJBActionPerformed
 
     private void btnModificaJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificaJBActionPerformed
+        int idSponsor, idClub;
+        
+        if(inputIdSponsorJTF.getText().equals(""))
+            idSponsor = 0;
+        else
+            idSponsor = Integer.parseInt(inputIdSponsorJTF.getText());
+        
+        if(inputIdClubJTF.getText().equals(""))
+            idClub = 0;
+        else
+            idClub = Integer.parseInt(inputIdClubJTF.getText());
+        
         int numeroContratto = Integer.parseInt(inputIdContrattoJTF.getText());
         String idAtleta = inputIdAtletaJTF.getText();
-        int idSponsor = Integer.parseInt(inputIdSponsorJTF.getText());
-        int idClub = Integer.parseInt(inputIdClubJTF.getText());
-        java.sql.Date dataInizio = (java.sql.Date) inputDataInizioJDC.getDate();
-        java.sql.Date dataFine = (java.sql.Date) inputDataFineJDC.getDate();
+        java.sql.Date dataInizio = new java.sql.Date(inputDataInizioJDC.getDate().getTime());
+        java.sql.Date dataFine = new java.sql.Date(inputDataFineJDC.getDate().getTime());
         float valoreContrattuale = Float.parseFloat(inputValoreContrattualeJTF.getText());
         
         ControllerProcuratore controllerProcuratore = new ControllerProcuratore();
         try {
             controllerProcuratore.modificaContratto(numeroContratto, idAtleta, idSponsor, idClub, dataInizio, dataFine, valoreContrattuale);
             
-            SezioneModificaContrattoProcuratore sezioneModificaContrattoProcuratore = new SezioneModificaContrattoProcuratore(this.getIdProcuratore());
-            sezioneModificaContrattoProcuratore.setVisible(true);
+            SezioneGestioneContrattiView sezioneGestioneContrattiView = new SezioneGestioneContrattiView(this.getIdProcuratore());
+            sezioneGestioneContrattiView.setVisible(true);
             this.setVisible(false);
         } catch (ExceptionDao ex) {
             Logger.getLogger(ModificaContrattiProcuratore.class.getName()).log(Level.SEVERE, null, ex);

@@ -363,10 +363,14 @@ public class ProcuratoreDao {
     }
     
     public void modificaContratto(Contratto contratto) throws ExceptionDao {
-        String sql = "UPDATE contratto set idsponsor="+contratto.getIdSponsor()+", idclub="+contratto.getIdClub()+"  datastart='"+contratto.getDataStart()+"', dataend='"+contratto.getDataEnd()+"', valore_contrattuale="+contratto.getValoreContratto()+" WHERE numero_contratto="+contratto.getNumeroContratto()+" AND idatleta='"+contratto.getIdAtleta()+"';";
-        System.out.println("COMANDO SQL="+sql);
+        String sql;
         Statement stmt = null;
         Connection connection = null;
+        
+        if(contratto.getIdClub() == 0)
+            sql = "UPDATE contratto set idsponsor="+contratto.getIdSponsor()+", datastart='"+contratto.getDataStart()+"', dataend='"+contratto.getDataEnd()+"', valore_contrattuale="+contratto.getValoreContratto()+" WHERE numero_contratto="+contratto.getNumeroContratto()+" AND idatleta='"+contratto.getIdAtleta()+"';";
+        else
+            sql = "UPDATE contratto set idclub="+contratto.getIdClub()+", datastart='"+contratto.getDataStart()+"', dataend='"+contratto.getDataEnd()+"', valore_contrattuale="+contratto.getValoreContratto()+" WHERE numero_contratto="+contratto.getNumeroContratto()+" AND idatleta='"+contratto.getIdAtleta()+"';";
         
         try{
             connection = new DataAccessObject().connectionToDatabase();
@@ -374,7 +378,7 @@ public class ProcuratoreDao {
             stmt = connection.createStatement();
             stmt.executeUpdate(sql);
             connection.commit();
-            JOptionPane.showMessageDialog(null, "Contratto aggirnato con successo");
+            JOptionPane.showMessageDialog(null, "CONTRATTO AGGIORNATO CON SUCCESSO");
         }catch(SQLException e) {
             throw new ExceptionDao("ERRORE AGGIORNAMENTO CONTRATTO FALLITA "+e);
         }
