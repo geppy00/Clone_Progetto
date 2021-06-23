@@ -3,6 +3,8 @@ package view;
 
 import dao.DataAccessObject;
 import dao.ExceptionDao;
+import java.awt.Color;
+import java.awt.Font;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,6 +26,11 @@ public class ElencoPartecipantiSponsor extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.idSponsor = idSponsor;
         
+         tblDatiPartecipantiJT.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
+         tblDatiPartecipantiJT.getTableHeader().setOpaque(false);
+         tblDatiPartecipantiJT.getTableHeader().setBackground(new Color(32, 136, 203));
+         tblDatiPartecipantiJT.getTableHeader().setForeground(new Color(255,255,255));
+         tblDatiPartecipantiJT.setRowHeight(25);
         try {
             stampaDatiTabella();
         } catch (ExceptionDao ex) {
@@ -31,9 +38,7 @@ public class ElencoPartecipantiSponsor extends javax.swing.JFrame {
         }
     }
 
-    public ElencoPartecipantiSponsor() {
-        
-    }
+    public ElencoPartecipantiSponsor() {}
  
     /*METODI*/
     private void stampaDatiTabella() throws ExceptionDao {
@@ -77,11 +82,18 @@ public class ElencoPartecipantiSponsor extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblDatiPartecipantiJT = new javax.swing.JTable();
         btnTornaIndietroJB = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tblDatiPartecipantiJT.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -91,36 +103,72 @@ public class ElencoPartecipantiSponsor extends javax.swing.JFrame {
                 "ID Partecipante", "CF Atleta", "Partecipante", "ID Evento", "Evento", "Data Inizo", "Data Fine"
             }
         ));
+        tblDatiPartecipantiJT.setFocusable(false);
+        tblDatiPartecipantiJT.setIntercellSpacing(new java.awt.Dimension(0, 0));
+        tblDatiPartecipantiJT.setRequestFocusEnabled(false);
+        tblDatiPartecipantiJT.setRowHeight(25);
+        tblDatiPartecipantiJT.setRowMargin(0);
+        tblDatiPartecipantiJT.setSelectionBackground(new java.awt.Color(232, 57, 95));
+        tblDatiPartecipantiJT.setShowVerticalLines(false);
+        tblDatiPartecipantiJT.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tblDatiPartecipantiJT);
 
-        btnTornaIndietroJB.setText("TORNA INDIETRO");
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 110, 740, 280));
+
+        btnTornaIndietroJB.setBackground(new java.awt.Color(255, 255, 255));
+        btnTornaIndietroJB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_left_32px.png"))); // NOI18N
+        btnTornaIndietroJB.setBorder(null);
+        btnTornaIndietroJB.setFocusable(false);
         btnTornaIndietroJB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTornaIndietroJBActionPerformed(evt);
             }
         });
+        jPanel1.add(btnTornaIndietroJB, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 410, 40, -1));
+
+        jPanel3.setBackground(new java.awt.Color(46, 117, 233));
+
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel1.setFont(new java.awt.Font("Gadugi", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("LISTA DEI PARTICIPANTI");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap(317, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(296, 296, 296))))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 840, 90));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(234, 234, 234)
-                .addComponent(btnTornaIndietroJB, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(234, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnTornaIndietroJB, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 465, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -153,6 +201,10 @@ public class ElencoPartecipantiSponsor extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnTornaIndietroJB;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblDatiPartecipantiJT;
     // End of variables declaration//GEN-END:variables
