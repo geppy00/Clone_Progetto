@@ -6,8 +6,7 @@ import view.modificaDati.ModificaSponsor;
 import view.registrare.RegistraSponsor;
 
 public class SezioneSponsorView extends javax.swing.JFrame {
-
-  
+    
     public SezioneSponsorView() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -121,6 +120,7 @@ public class SezioneSponsorView extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnAggiornaSponsorJBActionPerformed
 
+    
     public static void main(String args[]) {
         
         java.awt.EventQueue.invokeLater(new Runnable() {

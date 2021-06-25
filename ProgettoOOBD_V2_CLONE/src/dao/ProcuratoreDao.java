@@ -227,7 +227,7 @@ public class ProcuratoreDao {
                 return null;
             else 
                 while(rs.next()){
-                    return rs.getString("nome");
+                    return rs.getString("nomesponsor");
                 } 
         } catch(SQLException e) {
             throw new ExceptionDao("ERRORE RICERCA SPONSOR FALLITA "+e);
@@ -335,7 +335,7 @@ public class ProcuratoreDao {
     }*/
     
     public String prendiNomeSponsorPerContratti() throws ExceptionDao {
-        String sql = "select sponsor.nome from sponsor JOIN contratto ON sponsor.idsponsor=contratto.idsponsor";
+        String sql = "select sponsor.nomesponsor from sponsor JOIN contratto ON sponsor.idsponsor=contratto.idsponsor";
         PreparedStatement pStmt = null;
         Connection connection = null;
         ResultSet rs = null;
@@ -345,7 +345,7 @@ public class ProcuratoreDao {
             pStmt = connection.prepareStatement(sql);
             rs = pStmt.executeQuery();
             while(rs.next()) {
-               return rs.getString("nome");
+               return rs.getString("nomesponsor");
             }
             rs.close();
             pStmt.close();

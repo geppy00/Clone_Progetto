@@ -338,7 +338,7 @@ public class PercentualiGuadagnoProcuratoreView extends javax.swing.JFrame {
             throw new ExceptionDao("ERRORE RICERCA ATLETA FALLITA "+e);
         }
         
-        sql = "select atleta.codfiscale, atleta.nome, atleta.cognome, atleta.datanascita, contratto.numero_contratto, sponsor.nome, contratto.valore_contrattuale FROM contratto JOIN atleta ON contratto.idatleta=atleta.codfiscale JOIN sponsor ON contratto.idsponsor=sponsor.idsponsor WHERE atleta.codprocuratore='"+this.getIdProcuratore()+"' AND contratto.idclub IS NULL;";
+        sql = "select atleta.codfiscale, atleta.nome, atleta.cognome, atleta.datanascita, contratto.numero_contratto, sponsor.nomesponsor, contratto.valore_contrattuale FROM contratto JOIN atleta ON contratto.idatleta=atleta.codfiscale JOIN sponsor ON contratto.idsponsor=sponsor.idsponsor WHERE atleta.codprocuratore='"+this.getIdProcuratore()+"' AND contratto.idclub IS NULL;";
         
         try {
             connection = new DataAccessObject().connectionToDatabase();
@@ -350,7 +350,7 @@ public class PercentualiGuadagnoProcuratoreView extends javax.swing.JFrame {
                 String cognomeAtleta = rs.getString("cognome");
                 String dataNascita = dateFormat.format(rs.getDate("datanascita"));
                 String numeroContrattoSponsor = String.valueOf(rs.getInt("numero_contratto"));
-                String nomeSponsor = rs.getString("nome");
+                String nomeSponsor = rs.getString("nomesponsor");
                 String valoreContrattualeSponsor = String.valueOf(rs.getDouble("valore_contrattuale"));
                 
                 datiPagamentiSponsor.add(rs.getDouble("valore_contrattuale"));

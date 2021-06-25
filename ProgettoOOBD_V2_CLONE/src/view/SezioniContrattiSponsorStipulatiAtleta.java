@@ -40,7 +40,7 @@ public class SezioniContrattiSponsorStipulatiAtleta extends javax.swing.JFrame {
         PreparedStatement pStmt = null;
         Connection connection = null;
         ResultSet rs = null;
-        String sql = "select contratto.numero_contratto, contratto.idsponsor, sponsor.nome, contratto.datastart, contratto.dataend, contratto.valore_contrattuale from contratto join sponsor on contratto.idsponsor=sponsor.idsponsor WHERE contratto.idatleta='"+this.getIdAtleta()+"';";
+        String sql = "select contratto.numero_contratto, contratto.idsponsor, sponsor.nomesponsor, contratto.datastart, contratto.dataend, contratto.valore_contrattuale from contratto join sponsor on contratto.idsponsor=sponsor.idsponsor WHERE contratto.idatleta='"+this.getIdAtleta()+"';";
         DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");  
         
         try {
@@ -50,7 +50,7 @@ public class SezioniContrattiSponsorStipulatiAtleta extends javax.swing.JFrame {
             while(rs.next()) {
                 String numeroContratto = String.valueOf(rs.getInt("numero_contratto"));
                 String idSponsor = String.valueOf(rs.getInt("idsponsor"));
-                String nomeSponsor = rs.getString("nome");
+                String nomeSponsor = rs.getString("nomesponsor");
                 String dataStart = dateFormat.format(rs.getDate("datastart"));
                 String dataEnd = dateFormat.format(rs.getDate("dataend"));
                 String valoreContrattuale = String.valueOf(rs.getDouble("valore_contrattuale"));

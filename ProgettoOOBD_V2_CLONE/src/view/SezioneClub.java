@@ -7,9 +7,12 @@ import view.registrare.RegistraClub;
 
 public class SezioneClub extends javax.swing.JFrame {
 
+   
+    
     public SezioneClub() {
         initComponents();
         this.setLocationRelativeTo(null);
+        
     }
 
 
@@ -119,7 +122,7 @@ public class SezioneClub extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnAggiornaClubJBActionPerformed
 
-
+     
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

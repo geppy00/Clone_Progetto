@@ -6,10 +6,12 @@ import view.registrare.RegistraProcuratore;
 
 public class SezioneProcuratoreView extends javax.swing.JFrame {
 
+
     
     public SezioneProcuratoreView() {
         initComponents();
         this.setLocationRelativeTo(null);
+        
     }
 
     
@@ -118,6 +120,7 @@ public class SezioneProcuratoreView extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnModificaDatiProcuratoreJBActionPerformed
 
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

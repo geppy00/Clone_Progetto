@@ -123,37 +123,10 @@ public class LoginView extends javax.swing.JFrame {
              
             }else{
                JOptionPane.showMessageDialog(null, "Dati corretti");
-               /*if(getIdCopiato().equals("admin")) { 
-                  // qua entro normalmente, non lo so solo perché non mi apre na nuova finestra
-                  AdminView adminview = new AdminView();
-                  adminview.setVisible(true);
-                  this.setVisible(false);
-               }
-               else if(getIdCopiato().equals("procuratore")) {
-                   ProcuratoreView procuratoreView = new ProcuratoreView(getIdCopiato());
-                   procuratoreView.setVisible(true);
-                   this.setVisible(false);
-               }
-               else if(getIdCopiato().equals("sporsor")) {
-                    SponsorView sponsorView = new SponsorView(getIdCopiato());
-                    sponsorView.setVisible(true);
-                    this.setVisible(false);
-               }
-               else if(getIdCopiato().equals("atleta")) {
-                    AtletaView atletaView = new AtletaView(getIdCopiato());
-                    atletaView.setVisible(true);
-                    this.setVisible(false);
-               }
-               else if(getIdCopiato().equals("club")) {
-                   ClubView clubView = new ClubView(getIdCopiato());
-                   clubView.setVisible(true);
-                   this.setVisible(false);
-               }*/
                
                //HO SCELTO DI USARE LO SWITCH PERCHE' VA DIRETTAMENTE NEL CASO INTERESSATO
                switch(scelta) {
                    case "Admin":
-                        // qua entro normalmente, non lo so solo perché non mi apre na nuova finestra
                         AdminView adminview = new AdminView();
                         adminview.setVisible(true);
                         this.setVisible(false);

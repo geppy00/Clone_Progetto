@@ -164,7 +164,7 @@ public class GestioneEventiAtleta extends javax.swing.JFrame {
         PreparedStatement pStmt = null;
         Connection connection = null;
         ResultSet rs = null;
-        String sql = "SELECT evento.idevento, evento.titolo, evento.luogoevento, evento.data_inizioevento, evento.ora_inizio_evento, evento.data_fineevento, evento.ora_fine_evento, evento.gettonevalue, sponsor.nome  from contratto join sponsor on contratto.idsponsor = sponsor.idsponsor and contratto.idatleta = '"+this.getIdAtleta()+"' join evento on evento.idsponsor = sponsor.idsponsor join atleta on contratto.idatleta = atleta.codfiscale;";
+        String sql = "SELECT evento.idevento, evento.titolo, evento.luogoevento, evento.data_inizioevento, evento.ora_inizio_evento, evento.data_fineevento, evento.ora_fine_evento, evento.gettonevalue, sponsor.nomesponsor  from contratto join sponsor on contratto.idsponsor = sponsor.idsponsor and contratto.idatleta = '"+this.getIdAtleta()+"' join evento on evento.idsponsor = sponsor.idsponsor join atleta on contratto.idatleta = atleta.codfiscale;";
         String descrizione = null;
         DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");  
         SimpleDateFormat localDateFormat = new SimpleDateFormat("HH:mm:ss"); 
@@ -182,7 +182,7 @@ public class GestioneEventiAtleta extends javax.swing.JFrame {
                 String dataFine = dateFormat.format(rs.getDate("data_fineevento"));
                 String oraFine = localDateFormat.format(rs.getTime("ora_fine_evento"));
                 String gettoneValue = String.valueOf(rs.getDouble("gettonevalue"));
-                String nomeSponsor = rs.getString("nome");
+                String nomeSponsor = rs.getString("nomesponsor");
                 
                 String tbDataAtleta[] = {idEvento, titolo, luogoEvento, dataInizio, oraInizio, dataFine, oraFine, gettoneValue, nomeSponsor};
                 DefaultTableModel tblModel = (DefaultTableModel)tblDatiEventoJT.getModel();

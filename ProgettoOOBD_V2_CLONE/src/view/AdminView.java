@@ -4,11 +4,16 @@ package view;
 import view.registrare.RegistraNuovoProfilo;
 
 public class AdminView extends javax.swing.JFrame {
-
+    
+    /*COSTRUTTORI*/
     public AdminView() {
         initComponents();
         this.setLocationRelativeTo(null);
     }
+    
+    /*public AdminView() {
+        
+    }*/
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -154,6 +159,7 @@ public class AdminView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /*ACTION PERFOMED*/
     private void btnProcuratoreJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProcuratoreJBActionPerformed
         SezioneProcuratoreView procuratoreView = new SezioneProcuratoreView();
         procuratoreView.setVisible(true);
@@ -191,6 +197,7 @@ public class AdminView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNuovoProfiloJBActionPerformed
 
     
+    /*MAIN*/
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

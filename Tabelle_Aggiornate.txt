@@ -59,7 +59,7 @@ foreign key(codClub) references Club(idClub)
 ===========================================
 create table Sponsor(
 idSponsor serial primary key not null,
-nome varchar(50) not null,
+nomesponsor varchar(50) not null,
 indirizzo varchar(50) not null,
 telefono varchar(50)
 );

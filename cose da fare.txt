@@ -1,0 +1,42 @@
+ADMIN
+-far scrivere dell'accesso da admin il nome utente
+-combiare i testi dei bottoni per la sezione procuratore(solo registra o registra procuratore ecc)
+-(registrare) far uscire un jpannel se non si inserisce niente
+-(QUANDO REGISTRI procuratore) mettere un jpannel
+-(RICERCA procuratore) aggiustare perche quando cerchi procuratore non esistente dice procuratore trovato
+-(RICERCA procuratore) Pulire la tabella quando si cerca un altra persona e il campo di ricerca se l'ha trovato
+-(MODIFICA Procuratore) controllare i campi obbligatori
+-(MODIFICA Procuratore) AGGIUSTARE LA MODIFICA
+-(registrare atleta) controllare i campi obbligatori
+-(registrare atleta) METTERE UN  JPANNEL QUANDO REGISTRO
+-(MODIFICA Atleta e registra) togliere idclub
+-(MODIFICA Atleta) controllare i campi obbligatori
+-(RICERCA ATLETA) Pulire la tabella quando si cerca un altra persona e il campo di ricerca se l'ha trovato
+-(RICERCA Atleta) aggiustare perche quando cerchi procuratore non esistente dice procuratore trovato
+-(QUANDO REGISTRI CLUB) mettere un jpannel
+-(QUANDO ModificaCLUB) mettere un jpannel se i campi sono vuoiti
+-(RICERCA CLUB) Pulire la tabella quando si cerca un altra persona e il campo di ricerca se l'ha trovato
+-(RICERCA CLUB) aggiustare perche quando cerchi procuratore non esistente dice procuratore trovato
+-(registrare SPONSOR) far uscire un jpannel se non si inserisce niente
+-(QUANDO REGISTRI SPONSOR) mettere un jpannel
+-(quando cerchi uno sponsor non esistente) mettere un jpannel
+-(RICERCA sponsor) Pulire la tabella quando si cerca un altra persona e il campo di ricerca se l'ha trovato
+-(RICERCA sponsor) aggiustare perche quando cerchi procuratore non esistente dice procuratore trovato
+
+PROCURATORE
+-far scrivere dell'accesso da procuratore il nome utente
+-(registra contratto) controllare i campi
+-(visuaizza contratti) fare 3 tabelle (contartti club,m sponsor e senza contratti) (✓ FATTO :D)
+
+ATLETA
+-far scrivere dell'accesso da procuratore il nome utente
+-far cancellere l'evento che partecipero
+-far funzionare il logout
+
+SPONSOR
+-controllo della data fine evento 
+-controllare i campi obbligatori per la creazione di un evento
+-controllare i campi obbligatori per la modifica di un evento
+
+CLUB
+-settare campi della tabella non editabili

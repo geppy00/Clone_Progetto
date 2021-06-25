@@ -16,7 +16,7 @@ import refactorCode.FinallyException;
 public class SponsorDao {
     
     public void registraSponsor(Sponsor sponsor) throws ExceptionDao {
-        String sql= "INSERT INTO sponsor(nome, indirizzo, telefono) VALUES(?, ?, ?)";
+        String sql= "INSERT INTO sponsor(nomesponsor, indirizzo, telefono) VALUES(?, ?, ?)";
         PreparedStatement pStmt = null;
         Connection connection = null;
         
@@ -39,7 +39,7 @@ public class SponsorDao {
     
     public ArrayList<Sponsor> cercaSponsor(Sponsor sponsor) throws ExceptionDao {
         ArrayList<Sponsor> datiSponsor = new ArrayList<Sponsor>();
-        String sql= "SELECT * FROM sponsor WHERE nome LIKE ?;";
+        String sql= "SELECT * FROM sponsor WHERE nomesponsor LIKE ?;";
         PreparedStatement pStmt = null;
         Connection connection = null;
         ResultSet rs = null;
@@ -54,7 +54,7 @@ public class SponsorDao {
             else {
                 while(rs.next()) {
                     sponsor.setIdSponsor(rs.getInt("idsponsor"));
-                    sponsor.setNome(rs.getString("nome"));
+                    sponsor.setNome(rs.getString("nomesponsor"));
                     sponsor.setIndirizzo(rs.getString("indirizzo"));
                     sponsor.setTelefono(rs.getString("telefono"));
                     datiSponsor.add(sponsor);
@@ -73,7 +73,7 @@ public class SponsorDao {
     }
     
     public void eliminaSponsor(Sponsor sponsor) throws ExceptionDao {
-        String sql= "DELETE FROM sponsor WHERE nome = ?;";
+        String sql= "DELETE FROM sponsor WHERE nomesponsor = ?;";
         PreparedStatement pStmt = null;
         Connection connection = null;
         
@@ -94,7 +94,7 @@ public class SponsorDao {
     }
     
     public void aggiornaSponsor(Sponsor sponsor, String nomeSponsor) throws ExceptionDao {
-        String sql = "UPDATE sponsor set nome='"+sponsor.getNome()+"', indirizzo='"+sponsor.getIndirizzo()+"', telefono='"+sponsor.getTelefono()+"' WHERE nome='"+nomeSponsor+"';";
+        String sql = "UPDATE sponsor set nomesponsor='"+sponsor.getNome()+"', indirizzo='"+sponsor.getIndirizzo()+"', telefono='"+sponsor.getTelefono()+"' WHERE nome='"+nomeSponsor+"';";
         Statement stmt = null;
         Connection connection = null;
         

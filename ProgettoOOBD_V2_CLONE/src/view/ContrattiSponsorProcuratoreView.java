@@ -42,7 +42,7 @@ public class ContrattiSponsorProcuratoreView extends javax.swing.JFrame {
         Connection connection = null;
         ResultSet rs = null;
         DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
-        String sql="select atleta.codfiscale, atleta.nome, atleta.cognome, contratto.idsponsor, sponsor.nome, contratto.datastart, contratto.dataend, contratto.valore_contrattuale, contratto.numero_contratto from contratto JOIN atleta ON atleta.codfiscale=contratto.idatleta join sponsor on contratto.idsponsor=sponsor.idsponsor WHERE atleta.codprocuratore='"+this.getIdProcuratore()+"' AND contratto.idclub IS NULL;";
+        String sql="select atleta.codfiscale, atleta.nome, atleta.cognome, contratto.idsponsor, sponsor.nomesponsor, contratto.datastart, contratto.dataend, contratto.valore_contrattuale, contratto.numero_contratto from contratto JOIN atleta ON atleta.codfiscale=contratto.idatleta join sponsor on contratto.idsponsor=sponsor.idsponsor WHERE atleta.codprocuratore='"+this.getIdProcuratore()+"' AND contratto.idclub IS NULL;";
         
             try {
                 connection = new DataAccessObject().connectionToDatabase();
@@ -53,7 +53,7 @@ public class ContrattiSponsorProcuratoreView extends javax.swing.JFrame {
                     String nomeAtleta = rs.getString("nome");
                     String cognome = rs.getString("cognome");
                     String idSponsor = String.valueOf(rs.getString("idsponsor"));
-                    String nomeSponsor = rs.getString("nome");
+                    String nomeSponsor = rs.getString("nomesponsor");
                     String dataInizio = dateFormat.format(rs.getDate("datastart"));
                     String dataFine = dateFormat.format(rs.getDate("dataend"));
                     String valoreContrattuale = String.valueOf(rs.getDouble("valore_contrattuale"));

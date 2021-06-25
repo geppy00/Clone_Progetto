@@ -7,10 +7,11 @@ import view.registrare.RegistrareSportivo;
 
 
 public class SezioneAtletaView extends javax.swing.JFrame {
-
+    
     public SezioneAtletaView() {
         initComponents();
         this.setLocationRelativeTo(null);
+       
     }
 
   
@@ -120,6 +121,7 @@ public class SezioneAtletaView extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnAggiornaSportivoJBActionPerformed
 
+     
   
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
