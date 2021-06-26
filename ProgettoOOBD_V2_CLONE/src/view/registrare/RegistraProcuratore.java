@@ -1,11 +1,12 @@
 
-//commento di prova 1
 package view.registrare;
 
 import controller.ControllerProcuratore;
+import convalidazione.ControlloConvalidazione;
 import dao.ExceptionDao;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import view.SezioneProcuratoreView;
 
 public class RegistraProcuratore extends javax.swing.JFrame {
@@ -209,6 +210,9 @@ public class RegistraProcuratore extends javax.swing.JFrame {
 
     private void btnRegistraJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistraJBActionPerformed
         ControllerProcuratore controllerProcuratore = new ControllerProcuratore();
+        ControlloConvalidazione controlloConvalidazione = new ControlloConvalidazione();
+        
+        java.sql.Date dataNascitaPresoSql = null;
         
         String sessoPreso = (String) sessoJCB.getSelectedItem();
         String matricolaPresa = inputMatricolaJTF.getText();
@@ -216,16 +220,30 @@ public class RegistraProcuratore extends javax.swing.JFrame {
         String cognomePreso = InputCognomeJTF.getText();
         String nazionePresa = inputNazioneJTF.getText();
         String indirizzoPreso = inputIndirizzoJTF.getText();
-        java.sql.Date dataNascitaPresoSql = new java.sql.Date(dataNascitaJDC.getDate().getTime());
+        
+        try {
+            dataNascitaPresoSql = new java.sql.Date(dataNascitaJDC.getDate().getTime());
+        }catch(NullPointerException nex) {
+                JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nUNO O PIU' CAMPI MANCANTI", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            }
+        
         String telefonoPreso = InputTelefonoJTF.getText();
         String codiceFiscalePreso = InputCodiceFiscaleJTF.getText();
         String ibanPreso = InputIbanJTF.getText();
         
-        try {
-            controllerProcuratore.registraProcuratore(matricolaPresa, nomePreso, cognomePreso, sessoPreso, nazionePresa, indirizzoPreso, (java.sql.Date) dataNascitaPresoSql, telefonoPreso, codiceFiscalePreso, ibanPreso);
-        } catch (ExceptionDao ex) {
-            Logger.getLogger(RegistraProcuratore.class.getName()).log(Level.SEVERE, null, ex);
+        String strDate = String.valueOf(dataNascitaPresoSql);
+        System.out.println("strDate="+strDate);
+        
+        if(controlloConvalidazione.controlloRegistraProcuratore(matricolaPresa, nomePreso, cognomePreso, nazionePresa, indirizzoPreso, strDate, codiceFiscalePreso) == true) {
+            try {
+                controllerProcuratore.registraProcuratore(matricolaPresa, nomePreso, cognomePreso, sessoPreso, nazionePresa, indirizzoPreso, (java.sql.Date) dataNascitaPresoSql, telefonoPreso, codiceFiscalePreso, ibanPreso);
+                JOptionPane.showMessageDialog(this, "✓ REGISTRAZIONE EFFETTUATA CON SUCCESSO", "REGISTRAZIONE", JOptionPane.INFORMATION_MESSAGE);
+            } catch (ExceptionDao ex) {
+                Logger.getLogger(RegistraProcuratore.class.getName()).log(Level.SEVERE, null, ex);
+            } 
         }
+        else
+            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nUNO O PIU' CAMPI MANCANTI", "ERRORE", JOptionPane.ERROR_MESSAGE);
         
     }//GEN-LAST:event_btnRegistraJBActionPerformed
 

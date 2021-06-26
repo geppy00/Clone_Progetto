@@ -1,8 +1,9 @@
 ADMIN
 -far scrivere dell'accesso da admin il nome utente
 -combiare i testi dei bottoni per la sezione procuratore(solo registra o registra procuratore ecc)
--(registrare) far uscire un jpannel se non si inserisce niente
--(QUANDO REGISTRI procuratore) mettere un jpannel
+-(RICERCA procuratore) controllare i campi obbligatori (✓ FATTO :D)
+-(registrare) far uscire un jpannel se non si inserisce niente (✓ FATTO :D)
+-(QUANDO REGISTRI procuratore) mettere un jpannel (✓ FATTO :D)
 -(RICERCA procuratore) aggiustare perche quando cerchi procuratore non esistente dice procuratore trovato
 -(RICERCA procuratore) Pulire la tabella quando si cerca un altra persona e il campo di ricerca se l'ha trovato
 -(MODIFICA Procuratore) controllare i campi obbligatori
