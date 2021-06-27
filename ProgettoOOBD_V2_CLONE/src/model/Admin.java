@@ -1,6 +1,7 @@
 
 package model;
 
+import dao.AdminDao;
 import dao.ClubDao;
 import dao.ExceptionDao;
 import dao.LoginDao;
@@ -19,6 +20,10 @@ public class Admin extends Login {
     /*COSTRUTTORI*/
     public Admin() {
         
+    }
+    
+    public Admin(String opzAdmin) {
+        this.opzAdmin = opzAdmin;
     }
     
     /*GET AND SET*/
@@ -114,5 +119,9 @@ public class Admin extends Login {
     
     public void registraUtenteLogin(Login login) throws ExceptionDao {
         new LoginDao().registraUtente(login);
+    }
+    
+    public String prendiNomeUtente(Admin admin) throws ExceptionDao {
+        return new AdminDao().prendiNomeUtente(admin);
     }
 }

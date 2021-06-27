@@ -1,15 +1,30 @@
 
 package view;
 
+import controller.ControllerSportivo;
+import dao.ExceptionDao;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class AtletaView extends javax.swing.JFrame {
 
+    /*INFORMAZIONI IMPORTANTI*/
     private String idAtleta;
+    
+    /*CONTROLLER PER SPORTIVO*/
+    ControllerSportivo controllerSportivo = new ControllerSportivo();
     
     /*COSTRUTTORI*/
     public AtletaView(String idAtleta) {
         initComponents();
         this.setLocationRelativeTo(null);
         this.idAtleta = idAtleta;
+        
+        try {
+            jLabel4.setText(controllerSportivo.prendiNomeUtente(this.getIdAtleta()));
+        } catch (ExceptionDao ex) {
+            Logger.getLogger(AtletaView.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
      public AtletaView() {
@@ -74,7 +89,6 @@ public class AtletaView extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Gadugi", 1, 16)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("DANIEL");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -150,7 +164,9 @@ public class AtletaView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEntroitiJBActionPerformed
 
     private void btnLogoutJB1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutJB1ActionPerformed
-        // TODO add your handling code here:
+        LoginView loginView = new LoginView();  
+        loginView.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnLogoutJB1ActionPerformed
 
     

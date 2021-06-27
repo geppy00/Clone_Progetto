@@ -20,7 +20,8 @@ import refactorCode.FinallyException;
 
 
 public class ProcuratoreDao {
-    
+    /*INFORMAZIONI IMPORTANTI*/
+    private String nomeUtente;
     private String nomeClub;
 
     public ProcuratoreDao() {
@@ -503,6 +504,32 @@ public class ProcuratoreDao {
         }
         return nomeAtleta;
     }
+    
+    public String prendiNomeUtente(Procuratore procuratore) throws ExceptionDao {
+        String sql= "SELECT username FROM login WHERE codprocuratore='"+procuratore.getCode_procuratore()+"' AND codclub IS NULL AND codatleta IS NULL AND codsponsor IS NULL;";
+        PreparedStatement pStmt = null;
+        Connection connection = null;
+        ResultSet rs = null;
+        
+        try {
+            connection = new DataAccessObject().connectionToDatabase();
+            pStmt = connection.prepareStatement(sql);
+            rs = pStmt.executeQuery();
+            
+            while(rs.next()) {   
+                this.setNomeUtente(rs.getString("username"));
+            }
+        }catch(SQLException e) {
+            throw new ExceptionDao("ERRORE RICERCA NOME UTENTE SPORTIVO FALLITA "+e);
+        }
+        
+        finally{
+            FinallyException finallyException = new FinallyException();
+            finallyException.finallyException();
+        }
+        
+        return this.getNomeUtente();
+    }
 
     
     /*GET AND SET*/
@@ -512,5 +539,13 @@ public class ProcuratoreDao {
 
     public void setNomeClub(String nomeClub) {
         this.nomeClub = nomeClub;
+    }
+    
+    public String getNomeUtente() {
+        return nomeUtente;
+    }
+
+    public void setNomeUtente(String nomeUtente) {
+        this.nomeUtente = nomeUtente;
     }
 }

@@ -35,6 +35,8 @@
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="260" max="-2" attributes="0"/>
                       <Component id="benvenutoJL" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="nomeUtenteJL" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="219" max="-2" attributes="0"/>
@@ -49,7 +51,10 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="benvenutoJL" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="benvenutoJL" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="nomeUtenteJL" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace min="-2" pref="83" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnVisualizzaSportiviJB" alignment="3" min="-2" pref="126" max="-2" attributes="0"/>
@@ -65,7 +70,7 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="benvenutoJL">
       <Properties>
-        <Property name="text" type="java.lang.String" value="BENVENUTO SPONSOR"/>
+        <Property name="text" type="java.lang.String" value="USER:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnVisualizzaSportiviJB">
@@ -91,6 +96,8 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLogoutJBActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="nomeUtenteJL">
     </Component>
   </SubComponents>
 </Form>

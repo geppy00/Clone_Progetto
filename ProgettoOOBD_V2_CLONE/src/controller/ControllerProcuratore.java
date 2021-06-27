@@ -157,4 +157,13 @@ import model.Sponsor;
     /*public double prendiValoreContrattualeSponsor() throws ExceptionDao {
         
     }*/
+    
+    public String prendiNomeUtente(String codiceProcuratore) throws ExceptionDao {
+        if(codiceProcuratore != null && codiceProcuratore.length() > 0) {
+            Procuratore procuratore = new Procuratore(codiceProcuratore);
+            return procuratore.prendiNomeUtente(procuratore);
+        }
+        else
+            return null;
+    }
 }

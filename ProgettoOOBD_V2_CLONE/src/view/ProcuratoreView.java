@@ -1,15 +1,30 @@
 
 package view;
 
+import controller.ControllerProcuratore;
+import dao.ExceptionDao;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class ProcuratoreView extends javax.swing.JFrame {
 
+    /*INFORMAZIONI IMPORTANTI*/
     private String idProcuratore;
-     
+    
+    /*CONTROLLER PER PROCURATORE*/
+    ControllerProcuratore controllerProcuratore = new ControllerProcuratore();
+    
     /*COSTRUTTORE*/
     public ProcuratoreView(String idProcuratore) {
         initComponents();
         this.setLocationRelativeTo(null);
         this.idProcuratore = idProcuratore;
+        
+        try {
+            jLabel4.setText(controllerProcuratore.prendiNomeUtente(this.getIdProcuratore()));
+        } catch (ExceptionDao ex) {
+            Logger.getLogger(ProcuratoreView.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public ProcuratoreView() {
@@ -81,7 +96,6 @@ public class ProcuratoreView extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Gadugi", 1, 16)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("GIUSEPPE");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);

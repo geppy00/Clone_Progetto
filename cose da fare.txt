@@ -1,5 +1,5 @@
 ADMIN
--far scrivere dell'accesso da admin il nome utente
+-far scrivere dell'accesso da admin il nome utente (✓ FATTO :D)
 -combiare i testi dei bottoni per la sezione procuratore(solo registra o registra procuratore ecc)
 -(RICERCA procuratore) controllare i campi obbligatori (✓ FATTO :D)
 -(registrare) far uscire un jpannel se non si inserisce niente (✓ FATTO :D)
@@ -25,19 +25,21 @@ ADMIN
 -(RICERCA sponsor) aggiustare perche quando cerchi procuratore non esistente dice procuratore trovato
 
 PROCURATORE
--far scrivere dell'accesso da procuratore il nome utente
--(registra contratto) controllare i campi
+-far scrivere dell'accesso da procuratore il nome utente (✓ FATTO :D)
+-(registra contratto) controllare i campi 
 -(visuaizza contratti) fare 3 tabelle (contartti club,m sponsor e senza contratti) (✓ FATTO :D)
 
 ATLETA
--far scrivere dell'accesso da procuratore il nome utente
+-far scrivere dell'accesso da procuratore il nome utente (✓ FATTO :D)
 -far cancellere l'evento che partecipero
 -far funzionare il logout
 
 SPONSOR
+-far scrivere dell'accesso da procuratore il nome utente (✓ FATTO :D)
 -controllo della data fine evento 
 -controllare i campi obbligatori per la creazione di un evento
 -controllare i campi obbligatori per la modifica di un evento
 
 CLUB
+-far scrivere dell'accesso da procuratore il nome utente (✓ FATTO :D)
 -settare campi della tabella non editabili

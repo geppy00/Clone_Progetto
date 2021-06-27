@@ -14,6 +14,9 @@ import refactorCode.FinallyException;
 
 
 public class ClubDao {
+    
+    /*INFORMAZIONI IMPORTANTI*/
+    private String nomeUtente;
      
     public void registraClub(Club club) throws ExceptionDao {
         String sql= "INSERT INTO club(nomeclub, indirizzo, telefono) VALUES(?, ?, ?)";
@@ -117,6 +120,41 @@ public class ClubDao {
         }
         
         
+    }
+    
+    public String prendiNomeUtente(Club club) throws ExceptionDao {
+        String sql= "SELECT username FROM login WHERE codclub = "+club.getIdClub()+" AND codprocuratore IS NULL AND codatleta IS NULL AND codsponsor IS NULL;";
+        PreparedStatement pStmt = null;
+        Connection connection = null;
+        ResultSet rs = null;
+        
+        try {
+            connection = new DataAccessObject().connectionToDatabase();
+            pStmt = connection.prepareStatement(sql);
+            rs = pStmt.executeQuery();
+            
+            while(rs.next()) {   
+                this.setNomeUtente(rs.getString("username"));
+            }
+        }catch(SQLException e) {
+            throw new ExceptionDao("ERRORE RICERCA NOME UTENTE SPORTIVO FALLITA "+e);
+        }
+        
+        finally{
+            FinallyException finallyException = new FinallyException();
+            finallyException.finallyException();
+        }
+        
+        return this.getNomeUtente();
+    }
+    
+    /*GET AND SET*/
+    public String getNomeUtente() {
+        return nomeUtente;
+    }
+
+    public void setNomeUtente(String nomeUtente) {
+        this.nomeUtente = nomeUtente;
     }
     
 }

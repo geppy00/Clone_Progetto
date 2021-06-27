@@ -1,11 +1,18 @@
 
 package view;
 
+import controller.ControllerClub;
+import dao.ExceptionDao;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Club;
 
 public class ClubView extends javax.swing.JFrame {
-    
+    /*INFORMAZIONI IMPORTANTI*/
     private String idClub;
+    
+    /*CONTROLLER PER CLUB*/
+    ControllerClub controllerClub = new ControllerClub();
     
     public ClubView() {
         
@@ -15,6 +22,12 @@ public class ClubView extends javax.swing.JFrame {
         this.idClub = idClub;
         initComponents();
         this.setLocationRelativeTo(null);
+        
+        try {
+            jLabel4.setText(controllerClub.prendiNomeUtente(Integer.parseInt(this.getIdClub())));
+        } catch (ExceptionDao ex) {
+            Logger.getLogger(ClubView.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 
@@ -74,7 +87,6 @@ public class ClubView extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Gadugi", 1, 16)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("GIUSEPPE");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);

@@ -58,4 +58,13 @@ public class ControllerSportivo {
             atleta.registraInvitato(invitati);
         }   
     }
+    
+    public String prendiNomeUtente(String codiceFiscale) throws ExceptionDao {
+        if(codiceFiscale != null && codiceFiscale.length() > 0) {
+            Atleta atleta = new Atleta(codiceFiscale);
+            return atleta.prendiNomeUtente(atleta);
+        }
+        else
+            return null;
+    }
 }

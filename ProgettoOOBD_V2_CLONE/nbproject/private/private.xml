@@ -5,17 +5,17 @@
             <url>src/view/AtletaView.java</url>
             <bookmark id="1">
                 <name/>
-                <line>8</line>
+                <line>17</line>
                 <key/>
             </bookmark>
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/peppe/OneDrive/Desktop/ALL%20MY%20SHIT/File%20progetto%20OO-BD/BACKUP%20PROGETTO/src/view/registrare/RegistraProcuratore.java</file>
-            <file>file:/C:/Users/peppe/OneDrive/Desktop/ALL%20MY%20SHIT/File%20progetto%20OO-BD/BACKUP%20PROGETTO/src/convalidazione/ControlloConvalidazione.java</file>
-            <file>file:/C:/Users/peppe/OneDrive/Desktop/ALL%20MY%20SHIT/File%20progetto%20OO-BD/BACKUP%20PROGETTO/src/view/SezioneProcuratoreView.java</file>
-            <file>file:/C:/Users/peppe/OneDrive/Desktop/ALL%20MY%20SHIT/File%20progetto%20OO-BD/BACKUP%20PROGETTO/src/view/registrare/RegistraNuovoProfilo.java</file>
+            <file>file:/C:/Users/peppe/OneDrive/Desktop/ALL%20MY%20SHIT/File%20progetto%20OO-BD/BACKUP%20PROGETTO/src/controller/ControllerSponsor.java</file>
+            <file>file:/C:/Users/peppe/OneDrive/Desktop/ALL%20MY%20SHIT/File%20progetto%20OO-BD/BACKUP%20PROGETTO/src/view/SponsorView.java</file>
+            <file>file:/C:/Users/peppe/OneDrive/Desktop/ALL%20MY%20SHIT/File%20progetto%20OO-BD/BACKUP%20PROGETTO/src/dao/SponsorDao.java</file>
+            <file>file:/C:/Users/peppe/OneDrive/Desktop/ALL%20MY%20SHIT/File%20progetto%20OO-BD/BACKUP%20PROGETTO/src/model/Sponsor.java</file>
         </group>
     </open-files>
 </project-private>

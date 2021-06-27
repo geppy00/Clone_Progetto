@@ -1,15 +1,30 @@
 
 package view;
 
+import controller.ControllerSponsor;
+import dao.ExceptionDao;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class SponsorView extends javax.swing.JFrame {
 
+    /*INFORMAZIONI IMPORTANTI*/
     private String idSponsor;
+    
+    /*CONTROLLER PER SPONSOR*/
+    ControllerSponsor ControllerSponsor = new ControllerSponsor();
     
     /*COSTRUTTORI*/
     public SponsorView(String idSponsor) {
         initComponents();
         this.setLocationRelativeTo(null);
         this.idSponsor = idSponsor;
+        
+        try {
+            nomeUtenteJL.setText(ControllerSponsor.prendiNomeUtente(Integer.parseInt(this.getIdSponsor())));
+        } catch (ExceptionDao ex) {
+            Logger.getLogger(SponsorView.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public SponsorView() {
@@ -24,10 +39,11 @@ public class SponsorView extends javax.swing.JFrame {
         btnVisualizzaSportiviJB = new javax.swing.JButton();
         btnGestioneEventiJB = new javax.swing.JButton();
         btnLogoutJB = new javax.swing.JButton();
+        nomeUtenteJL = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        benvenutoJL.setText("BENVENUTO SPONSOR");
+        benvenutoJL.setText("USER:");
 
         btnVisualizzaSportiviJB.setText("ELENCO SPORTIVI");
         btnVisualizzaSportiviJB.addActionListener(new java.awt.event.ActionListener() {
@@ -64,7 +80,9 @@ public class SponsorView extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(260, 260, 260)
-                        .addComponent(benvenutoJL))
+                        .addComponent(benvenutoJL)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(nomeUtenteJL))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(219, 219, 219)
                         .addComponent(btnLogoutJB, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -74,7 +92,9 @@ public class SponsorView extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(benvenutoJL)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(benvenutoJL)
+                    .addComponent(nomeUtenteJL))
                 .addGap(83, 83, 83)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnVisualizzaSportiviJB, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -130,5 +150,6 @@ public class SponsorView extends javax.swing.JFrame {
     private javax.swing.JButton btnGestioneEventiJB;
     private javax.swing.JButton btnLogoutJB;
     private javax.swing.JButton btnVisualizzaSportiviJB;
+    private javax.swing.JLabel nomeUtenteJL;
     // End of variables declaration//GEN-END:variables
 }

@@ -228,6 +228,10 @@ public class Procuratore {
     /*public double prendiValoreContrattualeSponsor(Contratto contratto) throws ExceptionDao {
         return new ProcuratoreDao().prendiValoreContrattualeSponsor(contratto);
     }*/
+    
+    public String prendiNomeUtente(Procuratore procuratore) throws ExceptionDao {
+        return new ProcuratoreDao().prendiNomeUtente(procuratore);
+    }
 
     
 }

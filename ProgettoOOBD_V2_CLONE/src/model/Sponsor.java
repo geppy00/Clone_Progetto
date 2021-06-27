@@ -90,4 +90,8 @@ public class Sponsor {
     public void eliminaEvento(Evento evento) throws ExceptionDao {
         new SponsorDao().eliminaEvento(evento);
     }
+    
+    public String prendiNomeUtente(Sponsor sponsor) throws ExceptionDao {
+        return new SponsorDao().prendiNomeUtente(sponsor);
+    }
 }

@@ -114,4 +114,13 @@ public class ControllerClub {
             club.eliminaPagamento(stipendio);
         }
     }
+    
+    public String prendiNomeUtente(int idClub) throws ExceptionDao {
+        if(idClub > 0) {
+            Club club = new Club(idClub);
+            return club.prendiNomeUtente(club);
+        }
+        else
+            return null;
+    }
 }

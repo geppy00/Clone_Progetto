@@ -1,6 +1,7 @@
 
 package model;
 
+import dao.ClubDao;
 import dao.ExceptionDao;
 import dao.StipendioDao;
 import java.util.ArrayList;
@@ -122,5 +123,9 @@ public class Club {
     
     public void eliminaPagamento(Stipendio stipendio) throws ExceptionDao {
         new StipendioDao().eliminaPagamento(stipendio);
+    }
+    
+    public String prendiNomeUtente(Club club) throws ExceptionDao {
+        return new ClubDao().prendiNomeUtente(club);
     }
 }

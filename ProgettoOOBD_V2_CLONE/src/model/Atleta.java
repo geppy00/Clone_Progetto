@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class Atleta {
 
-    
+    private String username;
     private String nome;
     private String cognmome;
     private String sesso;
@@ -172,8 +172,21 @@ public class Atleta {
         this.idClub = idClub;
     }
     
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    
     /*METODO*/
     public void registraInvitato(Invitati invitati) throws ExceptionDao {
         new SportivoDao().registraInvitato(invitati);
+    }
+    
+    public String prendiNomeUtente(Atleta atleta) throws ExceptionDao {
+        return new SportivoDao().prendiNomeUtente(atleta);
     }
 }

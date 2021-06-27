@@ -1,20 +1,32 @@
 
 package view;
 
+import controller.ControllerAdmin;
+import dao.ExceptionDao;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import view.registrare.RegistraNuovoProfilo;
 
 public class AdminView extends javax.swing.JFrame {
+
+    /*CONTROLLER PER ADMIN*/
+    ControllerAdmin controllerAdmin = new ControllerAdmin();
+    
+    /*INFORMAZIONI IMPORTANTI*/
+    private String opzUser = "Admin";
     
     /*COSTRUTTORI*/
     public AdminView() {
         initComponents();
         this.setLocationRelativeTo(null);
+        
+        try {
+            jLabel4.setText(controllerAdmin.prendiNomeUtente(this.getOpzUser()));
+        } catch (ExceptionDao ex) {
+            Logger.getLogger(AdminView.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
-    /*public AdminView() {
-        
-    }*/
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -51,7 +63,6 @@ public class AdminView extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Gadugi", 1, 16)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("MARCO");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -196,6 +207,14 @@ public class AdminView extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnNuovoProfiloJBActionPerformed
 
+    /*GET AND SET*/
+    public String getOpzUser() {
+        return opzUser;
+    }
+
+    public void setOpzUser(String opzUser) {
+        this.opzUser = opzUser;
+    }
     
     /*MAIN*/
     public static void main(String args[]) {
