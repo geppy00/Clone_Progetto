@@ -69,8 +69,6 @@ public class ProcuratoreDao {
             pStmt = connection.prepareStatement(sql);
             pStmt.setString(1, procuratore.getCode_procuratore()+"%");
             rs = pStmt.executeQuery();
-            if(rs==null){return null;}
-            //QUESTO CONTROLLO NON FUNZIONA BISOGNA AGGIUSTARE CIOE' SE ESISTE LA MATRICOLA CERCATA ESSO STAMPA A SCHERMO LA JDIALOG PERO' SE NON ESISTE ALLORA NON STAMPA QUESTA JDIALOG SOTTO
             if(rs != null) {
                 while(rs.next()) {
                     procuratore.setNome(rs.getString("nome"));
@@ -109,7 +107,6 @@ public class ProcuratoreDao {
             pStmt = connection.prepareStatement(sql);
             pStmt.setString(1, procuratore.getCode_procuratore());
             pStmt.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Procuratore eliminato con successo");
         }catch(SQLException e){
             throw new ExceptionDao("ERRORE ELIMINAZIONE PROCURATORE FALLITA "+e);
         }
@@ -133,7 +130,6 @@ public class ProcuratoreDao {
             stmt = connection.createStatement();
             stmt.executeUpdate(sql);
             connection.commit();
-            JOptionPane.showMessageDialog(null, "Procuratore aggirnato con successo");
         }catch(SQLException e){
             throw new ExceptionDao("ERRORE AGGIORNAMENTO PROCURATORE FALLITA "+e);
         }

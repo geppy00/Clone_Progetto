@@ -11,6 +11,8 @@ import view.SezioneProcuratoreView;
 
 public class RegistraProcuratore extends javax.swing.JFrame {
 
+    /*CONTROLLORE PER GESTIRE GLI ERRORI*/
+    ControlloConvalidazione controlloConvalidazione = new ControlloConvalidazione();
    
     public RegistraProcuratore() {
         initComponents();
@@ -210,7 +212,7 @@ public class RegistraProcuratore extends javax.swing.JFrame {
 
     private void btnRegistraJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistraJBActionPerformed
         ControllerProcuratore controllerProcuratore = new ControllerProcuratore();
-        ControlloConvalidazione controlloConvalidazione = new ControlloConvalidazione();
+        
         
         java.sql.Date dataNascitaPresoSql = null;
         

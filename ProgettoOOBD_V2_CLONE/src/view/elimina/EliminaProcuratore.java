@@ -2,6 +2,7 @@
 package view.elimina;
 
 import controller.ControllerProcuratore;
+import convalidazione.ControlloConvalidazione;
 import dao.ExceptionDao;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -15,6 +16,12 @@ import view.SezioneProcuratoreView;
 
 public class EliminaProcuratore extends javax.swing.JFrame {
      
+    /*CONTROLLORE PER GESTIRE GLI ERRORI*/
+    ControlloConvalidazione controlloConvalidazione = new ControlloConvalidazione();
+    
+    /*DATI DEL PROCURATORE*/
+    ArrayList<Procuratore> datiProcuratore =  new ArrayList<Procuratore>();
+    
     public EliminaProcuratore() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -112,50 +119,64 @@ public class EliminaProcuratore extends javax.swing.JFrame {
     private void btnCercaProcuratoreEliminareJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCercaProcuratoreEliminareJBActionPerformed
        ControllerProcuratore controllerProcuratore = new ControllerProcuratore();
        String matricolaPresa = inputMatricolaJTF.getText();
-       ArrayList<Procuratore> datiProcuratore =  new ArrayList<Procuratore>();
-      
        
-        try {
-            datiProcuratore = controllerProcuratore.cercaProcuratore(matricolaPresa);
-            if(datiProcuratore != null){
-                JOptionPane.showMessageDialog(null, "Procuratore trovato");
+      
+       if(controlloConvalidazione.controlloCercaProcuratore(matricolaPresa) == true) {
+            try {
+                datiProcuratore = controllerProcuratore.cercaProcuratore(matricolaPresa);
                 DefaultTableModel tblModel = (DefaultTableModel)jTable1.getModel();
-                        
-                datiProcuratore.forEach((Procuratore procuratore)->{
-                    tblModel.addRow(new Object[]{
-                    procuratore.getCode_procuratore(),
-                    procuratore.getNome(),
-                    procuratore.getCognome(),
-                    procuratore.getSesso(),
-                    procuratore.getNazione(),
-                    procuratore.getIndirizzo(),
-                    procuratore.getDataNascita(),
-                    procuratore.getTelefono(),
-                    procuratore.getCodFiscale(),
-                    procuratore.getIban()
+                tblModel.setRowCount(0);
+                if(datiProcuratore.isEmpty())
+                    JOptionPane.showMessageDialog(this, "PROCURATORE "+matricolaPresa+" NON TROVATO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                else {
+                    JOptionPane.showMessageDialog(this, "✓ PROCURATORE "+matricolaPresa+" TROVATO", "TROVATO", JOptionPane.INFORMATION_MESSAGE);
+                    //DefaultTableModel tblModel = (DefaultTableModel)jTable1.getModel();
+
+                    datiProcuratore.forEach((Procuratore procuratore)->{
+                        tblModel.addRow(new Object[]{
+                        procuratore.getCode_procuratore(),
+                        procuratore.getNome(),
+                        procuratore.getCognome(),
+                        procuratore.getSesso(),
+                        procuratore.getNazione(),
+                        procuratore.getIndirizzo(),
+                        procuratore.getDataNascita(),
+                        procuratore.getTelefono(),
+                        procuratore.getCodFiscale(),
+                        procuratore.getIban()
+                        });
+                        jTable1.setModel(tblModel);
                     });
-                    jTable1.setModel(tblModel);
-                });
+                }
+            } catch (ExceptionDao ex) {
+                Logger.getLogger(EliminaProcuratore.class.getName()).log(Level.SEVERE, null, ex);
             }
-            else {
-                JOptionPane.showMessageDialog(null, "Procuratore non trovato");
-            }
-            
-        } catch (ExceptionDao ex) {
-            Logger.getLogger(EliminaProcuratore.class.getName()).log(Level.SEVERE, null, ex);
-        }
+       }
+       else
+           JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nSCRIVERE NEL CAMPO LA MATRICOLA DA CERCARE", "ERRORE", JOptionPane.ERROR_MESSAGE);
+           
     }//GEN-LAST:event_btnCercaProcuratoreEliminareJBActionPerformed
 
     private void btnEliminaJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminaJBActionPerformed
        ControllerProcuratore controllerProcuratore = new ControllerProcuratore();
        String matricolaPresa = inputMatricolaJTF.getText();
-        
-        try {
-            controllerProcuratore.eliminaProcuratore(matricolaPresa);
-            DefaultTableModel tblModel = (DefaultTableModel)jTable1.getModel();
-            tblModel.setRowCount(0);
-        } catch (ExceptionDao ex) {
-            Logger.getLogger(EliminaProcuratore.class.getName()).log(Level.SEVERE, null, ex);
+       
+        if(controlloConvalidazione.controlloCercaProcuratore(matricolaPresa) == false)
+            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nSCRIVERE NEL CAMPO LA MATRICOLA DA ELIMINARE", "ERRORE", JOptionPane.ERROR_MESSAGE);
+        else {
+            if(datiProcuratore.isEmpty())
+                JOptionPane.showMessageDialog(this, "PROCURATORE "+matricolaPresa+" NON ESISTE\nNON POSSIBILE ELIMINARLO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            else {
+                try {
+                     controllerProcuratore.eliminaProcuratore(matricolaPresa);
+                     DefaultTableModel tblModel = (DefaultTableModel)jTable1.getModel();
+                     tblModel.setRowCount(0);
+                     JOptionPane.showMessageDialog(this, "✓ ELIMINAZIONE EFFETTUATA CON SUCCESSO", "ELIMINAZIONE", JOptionPane.INFORMATION_MESSAGE);
+                 } catch (ExceptionDao ex) {
+                        //Logger.getLogger(EliminaProcuratore.class.getName()).log(Level.SEVERE, null, ex);
+                        JOptionPane.showMessageDialog(this, "PROCURATORE "+matricolaPresa+" POSSIEDE UNO O PIU' ATLTETI NEL SISTEMA\nNON POSSIBILE ELIMINARLO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                 }
+            }     
         }
     }//GEN-LAST:event_btnEliminaJBActionPerformed
 

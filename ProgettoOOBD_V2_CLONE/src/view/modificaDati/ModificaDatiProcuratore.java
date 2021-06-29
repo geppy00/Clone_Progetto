@@ -2,19 +2,27 @@
 package view.modificaDati;
 
 import controller.ControllerProcuratore;
+import convalidazione.ControlloConvalidazione;
 import dao.ExceptionDao;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import model.Admin;
 import model.Procuratore;
 import view.AdminView;
 
 
 public class ModificaDatiProcuratore extends javax.swing.JFrame {
+    
+    /*CONTROLLORE PER GESTIRE GLI ERRORI*/
+    ControlloConvalidazione controlloConvalidazione = new ControlloConvalidazione();
     private static final String FORMAT = "yyyy/MM/dd";
+    
+    /*DATI DEL PROCURATORE*/
+    ArrayList<Procuratore> datiProcuratore =  new ArrayList<Procuratore>();
     
     public ModificaDatiProcuratore() {
         initComponents();
@@ -230,6 +238,7 @@ public class ModificaDatiProcuratore extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /*ACTION PERFOMED*/
     private void btnAnnullaJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnnullaJBActionPerformed
        AdminView adminPage = new AdminView();
        adminPage.setVisible(true);
@@ -245,76 +254,80 @@ public class ModificaDatiProcuratore extends javax.swing.JFrame {
     private void btnCercaJTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCercaJTFActionPerformed
         ControllerProcuratore controllerProcuratore = new ControllerProcuratore();
         String matricolaCopiata = inputMatricolaDaCercareJTF.getText();
-        ArrayList<Procuratore> datiProcuratore =  new ArrayList<Procuratore>();
         
-        try {
-            datiProcuratore = controllerProcuratore.cercaProcuratore(matricolaCopiata);
-            datiProcuratore.forEach((Procuratore procuratore)->{
-                inputMatricolaJTF.setText(procuratore.getCode_procuratore());
-                inputNomeJTF.setText(procuratore.getNome());
-                inputCognomeJTF.setText(procuratore.getCognome());
-                inputSessoJTF.setText(procuratore.getSesso());
-                inputNazioneJTF.setText(procuratore.getNazione());
-                inputIndirizzoJTF.setText(procuratore.getIndirizzo());
-                inputTelefonoJTF.setText(procuratore.getTelefono());
-                inputCodiceFiscaleJTF.setText(procuratore.getCodFiscale());
-                inputIbanJTF.setText(procuratore.getIban());
-                cambiaDataNascitaJDC.setDate(procuratore.getDataNascita());
-            });
-         
-        } catch (ExceptionDao ex) {
-            Logger.getLogger(ModificaDatiProcuratore.class.getName()).log(Level.SEVERE, null, ex);
+        if(controlloConvalidazione.controlloCercaProcuratore(matricolaCopiata) == true) {
+            try {
+                datiProcuratore = controllerProcuratore.cercaProcuratore(matricolaCopiata);
+                if(datiProcuratore.isEmpty())
+                    JOptionPane.showMessageDialog(this, "PROCURATORE "+matricolaCopiata+" NON TROVATO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                else{
+                    JOptionPane.showMessageDialog(this, "✓ PROCURATORE "+matricolaCopiata+" TROVATO CON SUCCESSO", "RICERCA", JOptionPane.INFORMATION_MESSAGE);
+                    datiProcuratore.forEach((Procuratore procuratore)->{
+                        inputMatricolaJTF.setText(procuratore.getCode_procuratore());
+                        inputNomeJTF.setText(procuratore.getNome());
+                        inputCognomeJTF.setText(procuratore.getCognome());
+                        inputSessoJTF.setText(procuratore.getSesso());
+                        inputNazioneJTF.setText(procuratore.getNazione());
+                        inputIndirizzoJTF.setText(procuratore.getIndirizzo());
+                        inputTelefonoJTF.setText(procuratore.getTelefono());
+                        inputCodiceFiscaleJTF.setText(procuratore.getCodFiscale());
+                        inputIbanJTF.setText(procuratore.getIban());
+                        cambiaDataNascitaJDC.setDate(procuratore.getDataNascita());
+                    });
+                }
+            } catch (ExceptionDao ex) {
+                    Logger.getLogger(ModificaDatiProcuratore.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
+        else
+            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nSCRIVERE NEL CAMPO LA MATRICOLA DA CERCARE", "ERRORE", JOptionPane.ERROR_MESSAGE);
+        
     }//GEN-LAST:event_btnCercaJTFActionPerformed
 
     private void btnModificaJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificaJBActionPerformed
         ControllerProcuratore controllerProcuratore = new ControllerProcuratore();
+        java.sql.Date dataNascitaPresoSql = null;
         String matricolaDaModificare = inputMatricolaDaCercareJTF.getText();
         
-        String matricolaNuova = inputMatricolaJTF.getText();
-        String nomeNuovo = inputNomeJTF.getText();
-        String cognomeNuovo = inputCognomeJTF.getText();
-        String sessoNuovo = inputSessoJTF.getText();
-        String nazioneNuova = inputNazioneJTF.getText();
-        String indirizzoNuovo = inputIndirizzoJTF.getText();
-        String telefonoNuovo = inputTelefonoJTF.getText();
-        String codiceFiscaleNuovo = inputCodiceFiscaleJTF.getText();
-        String ibanNuovo = inputIbanJTF.getText();
-        java.sql.Date dataNascitaSql = new java.sql.Date(cambiaDataNascitaJDC.getDate().getTime());
-        
-        try {
-            controllerProcuratore.aggiornaProcuratore(matricolaNuova, nomeNuovo, cognomeNuovo, sessoNuovo, nazioneNuova, indirizzoNuovo, (java.sql.Date) dataNascitaSql, telefonoNuovo, codiceFiscaleNuovo, ibanNuovo, matricolaDaModificare);
-        } catch (ExceptionDao ex) {
-            Logger.getLogger(ModificaDatiProcuratore.class.getName()).log(Level.SEVERE, null, ex);
+        if(controlloConvalidazione.controlloCercaProcuratore(matricolaDaModificare) == true) {
+            if(datiProcuratore.isEmpty())
+                JOptionPane.showMessageDialog(this, "PROCURATORE "+matricolaDaModificare+" NON ESISTE\nNON POSSIBILE MODIFICARLO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            else {
+                String matricolaNuova = inputMatricolaJTF.getText();
+                String nomeNuovo = inputNomeJTF.getText();
+                String cognomeNuovo = inputCognomeJTF.getText();
+                String sessoNuovo = inputSessoJTF.getText();
+                String nazioneNuova = inputNazioneJTF.getText();
+                String indirizzoNuovo = inputIndirizzoJTF.getText();
+                String telefonoNuovo = inputTelefonoJTF.getText();
+                String codiceFiscaleNuovo = inputCodiceFiscaleJTF.getText();
+                String ibanNuovo = inputIbanJTF.getText();
+
+                try {
+                    dataNascitaPresoSql = new java.sql.Date(cambiaDataNascitaJDC.getDate().getTime());
+                } catch(NullPointerException nex) {
+                        JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nUNO O PIU' CAMPI MANCANTI", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                }
+
+                if(controlloConvalidazione.controlloModificaProcuratore(matricolaNuova, nomeNuovo, cognomeNuovo, sessoNuovo, nazioneNuova, indirizzoNuovo, telefonoNuovo, codiceFiscaleNuovo, ibanNuovo, String.valueOf(dataNascitaPresoSql)) == true) {
+                    try {
+                        controllerProcuratore.aggiornaProcuratore(matricolaNuova, nomeNuovo, cognomeNuovo, sessoNuovo, nazioneNuova, indirizzoNuovo, (java.sql.Date) dataNascitaPresoSql, telefonoNuovo, codiceFiscaleNuovo, ibanNuovo, matricolaDaModificare);
+                        JOptionPane.showMessageDialog(this, "✓ MODIFICA DEL PROCURATORE "+matricolaDaModificare+" EFFETTUATA CON SUCCESSO", "MODIFICA", JOptionPane.INFORMATION_MESSAGE);
+                    } catch (ExceptionDao ex) {
+                        Logger.getLogger(ModificaDatiProcuratore.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+
+                else
+                    JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nUNO O PIU' CAMPI MANCANTI", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            }
         }
+        else
+            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nINSERIRE LA MATRICOLA PER TROVARE IL PROCURATORE DA MODIFICARE", "ERRORE", JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_btnModificaJBActionPerformed
 
-    
+    /*MAIN*/
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ModificaDatiProcuratore.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ModificaDatiProcuratore.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ModificaDatiProcuratore.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ModificaDatiProcuratore.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new ModificaDatiProcuratore().setVisible(true);
