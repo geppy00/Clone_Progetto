@@ -2,6 +2,7 @@
 package view.registrare;
 
 import controller.ControllerLogin;
+import convalidazione.ControlloConvalidazione;
 import dao.DataAccessObject;
 import dao.ExceptionDao;
 import java.sql.Connection;
@@ -18,14 +19,24 @@ import view.AdminView;
 
 public class RegistraNuovoProfilo extends javax.swing.JFrame {
 
+    /*CONTROLLORE PER GESTIRE GLI ERRORI*/
+    ControlloConvalidazione controlloConvalidazione = new ControlloConvalidazione();
 
+    /*COSTRUTTORE*/
     public RegistraNuovoProfilo() {
         initComponents();
         this.setLocationRelativeTo(null);
+        
+        try {
+            stampaDatiUtenteNellaTabella();
+        } catch (ExceptionDao ex) {
+            //Logger.getLogger(RegistraNuovoProfilo.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "NON E' STATO POSSIBILE STAMPARE I DATI NELLA TABELLA\n\t\tRIPROVA", "ERRORE", JOptionPane.ERROR_MESSAGE);
+        }
     }
     
     /*METODI*/
-    public void stampaDatiUtenteNellaTabella() throws ExceptionDao {
+    private void stampaDatiUtenteNellaTabella() throws ExceptionDao {
         PreparedStatement pStmt = null;
         Connection connection = null;
         ResultSet rs = null;
@@ -80,7 +91,7 @@ public class RegistraNuovoProfilo extends javax.swing.JFrame {
                 rs = pStmt.executeQuery();
                 while(rs.next()) {
                     String idSponsor = rs.getString("idsponsor");
-                    String nomeSponsor = rs.getString("nome");
+                    String nomeSponsor = rs.getString("nomesponsor");
                     String indirizzoSponsor = rs.getString("indirizzo");
                     String telefonoSponsor = rs.getString("telefono");
                     
@@ -150,7 +161,7 @@ public class RegistraNuovoProfilo extends javax.swing.JFrame {
 
         confermaPasswordJL.setText("Conferma Password");
 
-        opzUserJCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Procuratore", "Atleta", "Sponsor", "Club", "Admin", "" }));
+        opzUserJCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Procuratore", "Atleta", "Sponsor", "Club", " " }));
         opzUserJCB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 opzUserJCBActionPerformed(evt);
@@ -288,19 +299,23 @@ public class RegistraNuovoProfilo extends javax.swing.JFrame {
         String idCorrispodente = inputIdCorrispondenteJTF.getText();
         boolean ripeti = false;
         
-       if(!(password.equals(confermaPassword))) {
-           JOptionPane.showMessageDialog(null, "ATTENZIONE PASSWORD NON COMPATIBILE");
-       } else {
-            try {
-                boolean check = controllerLogin.registraUtenteLogin(opzUser, username, password, idCorrispodente);
-                if(check == true)
-                    JOptionPane.showMessageDialog(null, "REGISTRAZIONE EFFETTUATA CON SUCCESSO");
-                else
-                    JOptionPane.showMessageDialog(null, "!! REGISTRAZIONE FALLITA !!");
-            }catch (ExceptionDao ex) {
-                    Logger.getLogger(RegistraNuovoProfilo.class.getName()).log(Level.SEVERE, null, ex);
+        if(controlloConvalidazione.controlloRegistraNuovoProfilo(username, password, confermaPassword, idCorrispodente) == true) {
+            if(!(password.equals(confermaPassword))) {
+               JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nPASSWORD NON COINCIDONO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            } else {
+                try {
+                    boolean check = controllerLogin.registraUtenteLogin(opzUser, username, password, idCorrispodente);
+                    if(check == true)
+                        JOptionPane.showMessageDialog(this, "✓ REGISTRAZIONE DELL'UTENTE EFFETTUATA CON SUCCESSO", "REGISTRAZIONE", JOptionPane.INFORMATION_MESSAGE);
+                    else
+                        JOptionPane.showMessageDialog(this, "!! REGISTRAZIONE FALLITA !!", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                }catch (ExceptionDao ex) {
+                        Logger.getLogger(RegistraNuovoProfilo.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
+        else
+            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nUNO O PIU' CAMPI MANCANTI", "ERRORE", JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_btnRegistraJBActionPerformed
 
     private void opzUserJCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opzUserJCBActionPerformed

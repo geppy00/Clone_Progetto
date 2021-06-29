@@ -17,10 +17,10 @@ import view.SezioneProcuratoreView;
 public class EliminaProcuratore extends javax.swing.JFrame {
      
     /*CONTROLLORE PER GESTIRE GLI ERRORI*/
-    ControlloConvalidazione controlloConvalidazione = new ControlloConvalidazione();
+    private ControlloConvalidazione controlloConvalidazione = new ControlloConvalidazione();
     
     /*DATI DEL PROCURATORE*/
-    ArrayList<Procuratore> datiProcuratore =  new ArrayList<Procuratore>();
+    private ArrayList<Procuratore> datiProcuratore =  new ArrayList<Procuratore>();
     
     public EliminaProcuratore() {
         initComponents();

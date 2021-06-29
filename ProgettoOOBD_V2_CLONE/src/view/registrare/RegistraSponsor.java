@@ -2,13 +2,19 @@
 package view.registrare;
 
 import controller.ControllerSponsor;
+import convalidazione.ControlloConvalidazione;
 import dao.ExceptionDao;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import view.SezioneSponsorView;
 
 public class RegistraSponsor extends javax.swing.JFrame {
 
+    /*CONTROLLORE PER GESTIRE GLI ERRORI*/
+    ControlloConvalidazione controlloConvalidazione = new ControlloConvalidazione();
+    
+    /*COSTRUTTORE*/
     public RegistraSponsor() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -103,6 +109,7 @@ public class RegistraSponsor extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /*ACTION PERFOMED*/
     private void btnAnnullaJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnnullaJBActionPerformed
         SezioneSponsorView sezioneSponsorView = new SezioneSponsorView();
         sezioneSponsorView.setVisible(true);
@@ -116,11 +123,16 @@ public class RegistraSponsor extends javax.swing.JFrame {
         String indirizzoSponsor = inputIndirizzoJTF.getText();
         String telefonoSponsor = inputTelefonoJTF.getText();
         
-        try {
-            controllerSponsor.registraSponsor(nomeSponsor, indirizzoSponsor, telefonoSponsor);
-        } catch (ExceptionDao ex) {
-            Logger.getLogger(RegistraSponsor.class.getName()).log(Level.SEVERE, null, ex);
+        if(controlloConvalidazione.controlloRegistraSponsor(nomeSponsor, indirizzoSponsor, telefonoSponsor) == true) {
+            try {
+                controllerSponsor.registraSponsor(nomeSponsor, indirizzoSponsor, telefonoSponsor);
+                JOptionPane.showMessageDialog(this, "✓ REGISTRAZIONE EFFETTUATA CON SUCCESSO", "REGISTRAZIONE", JOptionPane.INFORMATION_MESSAGE);
+            } catch (ExceptionDao ex) {
+                Logger.getLogger(RegistraSponsor.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
+        else
+            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nUNO O PIU' CAMPI MANCANTI", "ERRORE", JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_btnRegistraJBActionPerformed
 
    

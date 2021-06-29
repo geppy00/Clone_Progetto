@@ -20,11 +20,13 @@ ADMIN
 -(QUANDO ModificaCLUB) mettere un jpannel se i campi sono vuoiti
 -(RICERCA CLUB) Pulire la tabella quando si cerca un altra persona e il campo di ricerca se l'ha trovato
 -(RICERCA CLUB) aggiustare perche quando cerchi procuratore non esistente dice procuratore trovato
--(registrare SPONSOR) far uscire un jpannel se non si inserisce niente
--(QUANDO REGISTRI SPONSOR) mettere un jpannel
--(quando cerchi uno sponsor non esistente) mettere un jpannel
--(RICERCA sponsor) Pulire la tabella quando si cerca un altra persona e il campo di ricerca se l'ha trovato
--(RICERCA sponsor) aggiustare perche quando cerchi procuratore non esistente dice procuratore trovato
+-(registrare SPONSOR) far uscire un jpannel se non si inserisce niente (✓ FATTO :D)
+-(QUANDO REGISTRI SPONSOR) mettere un jpannel (✓ FATTO :D)
+-(quando cerchi uno sponsor non esistente) mettere un jpannel (✓ FATTO :D)
+-(RICERCA sponsor) Pulire la tabella quando si cerca un altra persona e il campo di ricerca se l'ha trovato (✓ FATTO :D)
+-(RICERCA sponsor) controllare i campi obbligatori (✓ FATTO :D)
+-(RICERCA sponsor) aggiustare perche quando cerchi sponsor non esistente dice procuratore trovato (✓ FATTO :D)
+-(registrare profilo login) controllare i campi obbligatori (✓ FATTO :D)
 
 PROCURATORE
 -far scrivere dell'accesso da procuratore il nome utente (✓ FATTO :D)

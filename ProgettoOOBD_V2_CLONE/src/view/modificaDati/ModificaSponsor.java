@@ -2,15 +2,23 @@
 package view.modificaDati;
 
 import controller.ControllerSponsor;
+import convalidazione.ControlloConvalidazione;
 import dao.ExceptionDao;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import model.Sponsor;
 import view.SezioneSponsorView;
 
 public class ModificaSponsor extends javax.swing.JFrame {
 
+    /*CONTROLLORE PER GESTIRE GLI ERRORI*/
+    private ControlloConvalidazione controlloConvalidazione = new ControlloConvalidazione();
+    
+    /*DATI DELLO SPONSOR*/
+    private ArrayList<Sponsor> datiSponsor = new ArrayList<Sponsor>();
+    
     public ModificaSponsor() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -148,33 +156,54 @@ public class ModificaSponsor extends javax.swing.JFrame {
     private void btnCercaJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCercaJBActionPerformed
         ControllerSponsor controllerSponsor = new ControllerSponsor();
         String nomeSponsorCercare = inputNomeSponsorCercareJTF.getText();
-        ArrayList<Sponsor> datiSponsor = new ArrayList<Sponsor>();
         
-        try {
-            datiSponsor = controllerSponsor.cercaSponsor(nomeSponsorCercare);
-            datiSponsor.forEach((Sponsor sponsor) -> {
-                inputNomeSponsorJTF.setText(sponsor.getNome());
-                inputIndirizzoJTF.setText(sponsor.getIndirizzo());
-                inputTelefonoJTF.setText(sponsor.getTelefono());
-            });
-        } catch (ExceptionDao ex) {
-            Logger.getLogger(ModificaSponsor.class.getName()).log(Level.SEVERE, null, ex);
+        if(controlloConvalidazione.controlloCercaSponsor(nomeSponsorCercare) == true) {
+            try {
+                datiSponsor = controllerSponsor.cercaSponsor(nomeSponsorCercare);
+                if(datiSponsor.isEmpty())
+                    JOptionPane.showMessageDialog(this, "SPONSOR "+nomeSponsorCercare+" NON TROVATO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                else {
+                    JOptionPane.showMessageDialog(this, "✓ SPONSOR "+nomeSponsorCercare+" TROVATO CON SUCCESSO", "RICERCA", JOptionPane.INFORMATION_MESSAGE);
+                    datiSponsor.forEach((Sponsor sponsor) -> {
+                        inputNomeSponsorJTF.setText(sponsor.getNome());
+                        inputIndirizzoJTF.setText(sponsor.getIndirizzo());
+                        inputTelefonoJTF.setText(sponsor.getTelefono());
+                    });
+                }
+            } catch (ExceptionDao ex) {
+                Logger.getLogger(ModificaSponsor.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
+        else
+            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nSCRIVERE NEL CAMPO LO SPONSOR DA CERCARE", "ERRORE", JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_btnCercaJBActionPerformed
 
     private void btnAggiornaJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAggiornaJBActionPerformed
         ControllerSponsor controllerSponsor = new ControllerSponsor();
         String nomeSponsorCercare = inputNomeSponsorCercareJTF.getText();
         
-        String nomeDaAggiornare = inputNomeSponsorJTF.getText();
-        String indirizzoDaAggiornare = inputIndirizzoJTF.getText();
-        String telefonoDaAggiornare = inputTelefonoJTF.getText();
-        
-        try {
-            controllerSponsor.aggiornaSponsor(nomeDaAggiornare, indirizzoDaAggiornare, telefonoDaAggiornare, nomeSponsorCercare);
-        } catch (ExceptionDao ex) {
-            Logger.getLogger(ModificaSponsor.class.getName()).log(Level.SEVERE, null, ex);
+        if(controlloConvalidazione.controlloCercaSponsor(nomeSponsorCercare) == true) {
+            if(datiSponsor.isEmpty())
+                    JOptionPane.showMessageDialog(this, "SPONSOR "+nomeSponsorCercare+" NON ESISTE\nNON POSSIBILE MODIFICARLO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            else {
+                String nomeDaAggiornare = inputNomeSponsorJTF.getText();
+                String indirizzoDaAggiornare = inputIndirizzoJTF.getText();
+                String telefonoDaAggiornare = inputTelefonoJTF.getText();
+                
+                if(controlloConvalidazione.controlloModificaSponsor(nomeDaAggiornare, indirizzoDaAggiornare, telefonoDaAggiornare) == true) {
+                    try {
+                        controllerSponsor.aggiornaSponsor(nomeDaAggiornare, indirizzoDaAggiornare, telefonoDaAggiornare, nomeSponsorCercare);
+                        JOptionPane.showMessageDialog(this, "✓ MODIFICA DELLO SPONSOR "+nomeSponsorCercare+" EFFETTUATA CON SUCCESSO", "MODIFICA", JOptionPane.INFORMATION_MESSAGE);
+                    } catch (ExceptionDao ex) {
+                        Logger.getLogger(ModificaSponsor.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                else
+                    JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nUNO O PIU' CAMPI MANCANTI", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            }
         }
+        else
+            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nSCRIVERE NEL CAMPO LO SPONSOR DA CERCARE\nPER POTERLO MODIFICARE", "ERRORE", JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_btnAggiornaJBActionPerformed
 
    

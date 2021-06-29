@@ -86,7 +86,6 @@ public class SponsorDao {
             pStmt = connection.prepareStatement(sql);
             pStmt.setString(1, sponsor.getNome());
             pStmt.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Sponsor eliminato con successo");
         }catch(SQLException e) {
             throw new ExceptionDao("ERRORE ELIMINAZIONE SPONSOR FALLITA "+e);
         }
@@ -98,7 +97,7 @@ public class SponsorDao {
     }
     
     public void aggiornaSponsor(Sponsor sponsor, String nomeSponsor) throws ExceptionDao {
-        String sql = "UPDATE sponsor set nomesponsor='"+sponsor.getNome()+"', indirizzo='"+sponsor.getIndirizzo()+"', telefono='"+sponsor.getTelefono()+"' WHERE nome='"+nomeSponsor+"';";
+        String sql = "UPDATE sponsor set nomesponsor='"+sponsor.getNome()+"', indirizzo='"+sponsor.getIndirizzo()+"', telefono='"+sponsor.getTelefono()+"' WHERE nomesponsor='"+nomeSponsor+"';";
         Statement stmt = null;
         Connection connection = null;
         
@@ -108,7 +107,6 @@ public class SponsorDao {
             stmt = connection.createStatement();
             stmt.executeUpdate(sql);
             connection.commit();
-            JOptionPane.showMessageDialog(null, "Sponsor aggirnato con successo");
         }catch(SQLException e) {
             throw new ExceptionDao("ERRORE AGGIORNAMENTO SPONSOR FALLITA "+e);
         }

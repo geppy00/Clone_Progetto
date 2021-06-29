@@ -18,11 +18,11 @@ import view.AdminView;
 public class ModificaDatiProcuratore extends javax.swing.JFrame {
     
     /*CONTROLLORE PER GESTIRE GLI ERRORI*/
-    ControlloConvalidazione controlloConvalidazione = new ControlloConvalidazione();
+    private ControlloConvalidazione controlloConvalidazione = new ControlloConvalidazione();
     private static final String FORMAT = "yyyy/MM/dd";
     
     /*DATI DEL PROCURATORE*/
-    ArrayList<Procuratore> datiProcuratore =  new ArrayList<Procuratore>();
+    private ArrayList<Procuratore> datiProcuratore =  new ArrayList<Procuratore>();
     
     public ModificaDatiProcuratore() {
         initComponents();
@@ -306,7 +306,7 @@ public class ModificaDatiProcuratore extends javax.swing.JFrame {
                 try {
                     dataNascitaPresoSql = new java.sql.Date(cambiaDataNascitaJDC.getDate().getTime());
                 } catch(NullPointerException nex) {
-                        JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nUNO O PIU' CAMPI MANCANTI", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nUNO O PIU' CAMPI MANCANTI", "ERRORE", JOptionPane.ERROR_MESSAGE);
                 }
 
                 if(controlloConvalidazione.controlloModificaProcuratore(matricolaNuova, nomeNuovo, cognomeNuovo, sessoNuovo, nazioneNuova, indirizzoNuovo, telefonoNuovo, codiceFiscaleNuovo, ibanNuovo, String.valueOf(dataNascitaPresoSql)) == true) {

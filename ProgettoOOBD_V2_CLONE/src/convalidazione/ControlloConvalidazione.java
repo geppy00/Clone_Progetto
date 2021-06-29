@@ -32,5 +32,33 @@ public class ControlloConvalidazione {
             return false;
     }
     
+    public boolean controlloRegistraNuovoProfilo(String username, String password, String confermaPassword, String id) {
+        if(username != null && !(username.equals("")) && password != null && !(password.equals("")) && confermaPassword != null && !(confermaPassword.equals("")) && id != null && !(id.equals("")))
+            return true;
+        else
+            return false;
+    }
+    
+    public boolean controlloRegistraSponsor(String nome, String indirizzo, String telefono) {
+        if(nome != null && !(nome.equals("")) && indirizzo != null && !(indirizzo.equals("")) && telefono != null && !(telefono.equals("")) && telefono.length() <= 15)
+            return true;
+        else
+            return false;
+    }
+    
+    public boolean controlloCercaSponsor(String idSponsor) {
+        if(idSponsor != null && !(idSponsor.equals("")) && idSponsor.length() > 0)
+            return true;
+        else
+            return false;
+    }
+    
+    public boolean controlloModificaSponsor(String nomeNuovo, String indirizzoNuovo, String telefonoNuovo) {
+        if(nomeNuovo != null && !(nomeNuovo.equals("")) && nomeNuovo != null && !(nomeNuovo.equals("")) && nomeNuovo != null && !(nomeNuovo.equals("")) && nomeNuovo.length() <= 15)
+            return true;
+        else
+            return false;
+    }
+    
     
 }
