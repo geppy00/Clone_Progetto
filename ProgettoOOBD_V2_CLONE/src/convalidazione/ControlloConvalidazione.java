@@ -54,11 +54,31 @@ public class ControlloConvalidazione {
     }
     
     public boolean controlloModificaSponsor(String nomeNuovo, String indirizzoNuovo, String telefonoNuovo) {
-        if(nomeNuovo != null && !(nomeNuovo.equals("")) && nomeNuovo != null && !(nomeNuovo.equals("")) && nomeNuovo != null && !(nomeNuovo.equals("")) && nomeNuovo.length() <= 15)
+        if(nomeNuovo != null && !(nomeNuovo.equals("")) && indirizzoNuovo != null && !(indirizzoNuovo.equals("")) && telefonoNuovo != null && !(telefonoNuovo.equals("")) && telefonoNuovo.length() <= 15)
             return true;
         else
             return false;
     }
     
+    public boolean controlloRegistraClub(String nome, String indirizzo, String telefono) {
+        if(nome != null && !(nome.equals("")) && indirizzo != null && !(indirizzo.equals("")) && telefono != null && !(telefono.equals("")) && telefono.length() <= 15)
+            return true;
+        else
+            return false;
+    }
+    
+    public boolean controlloCercaClub(String idClub) {
+        if(idClub != null && !(idClub.equals("")) && idClub.length() > 0)
+            return true;
+        else
+            return false;
+    }
+    
+    public boolean controlloModificaClub(String nomeNuovo, String indirizzoNuovo, String telefonoNuovo) {
+        if(nomeNuovo != null && !(nomeNuovo.equals("")) && indirizzoNuovo != null && !(indirizzoNuovo.equals("")) && telefonoNuovo != null && !(telefonoNuovo.equals("")) && telefonoNuovo.length() <= 15)
+            return true;
+        else
+            return false;
+    }
     
 }

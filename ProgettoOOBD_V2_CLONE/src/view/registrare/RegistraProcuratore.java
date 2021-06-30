@@ -12,7 +12,7 @@ import view.SezioneProcuratoreView;
 public class RegistraProcuratore extends javax.swing.JFrame {
 
     /*CONTROLLORE PER GESTIRE GLI ERRORI*/
-    ControlloConvalidazione controlloConvalidazione = new ControlloConvalidazione();
+    private ControlloConvalidazione controlloConvalidazione = new ControlloConvalidazione();
    
     public RegistraProcuratore() {
         initComponents();

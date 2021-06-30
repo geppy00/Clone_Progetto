@@ -317,7 +317,6 @@ public class ModificaDatiProcuratore extends javax.swing.JFrame {
                         Logger.getLogger(ModificaDatiProcuratore.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
-
                 else
                     JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nUNO O PIU' CAMPI MANCANTI", "ERRORE", JOptionPane.ERROR_MESSAGE);
             }

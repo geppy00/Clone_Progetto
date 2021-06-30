@@ -16,10 +16,10 @@ ADMIN
 -(MODIFICA Atleta) controllare i campi obbligatori
 -(RICERCA ATLETA) Pulire la tabella quando si cerca un altra persona e il campo di ricerca se l'ha trovato
 -(RICERCA Atleta) aggiustare perche quando cerchi procuratore non esistente dice procuratore trovato
--(QUANDO REGISTRI CLUB) mettere un jpannel
--(QUANDO ModificaCLUB) mettere un jpannel se i campi sono vuoiti
--(RICERCA CLUB) Pulire la tabella quando si cerca un altra persona e il campo di ricerca se l'ha trovato
--(RICERCA CLUB) aggiustare perche quando cerchi procuratore non esistente dice procuratore trovato
+-(QUANDO REGISTRI CLUB) mettere un jpannel (✓ FATTO :D)
+-(QUANDO ModificaCLUB) mettere un jpannel se i campi sono vuoiti (✓ FATTO :D)
+-(RICERCA CLUB) Pulire la tabella quando si cerca un altra persona e il campo di ricerca se l'ha trovato (✓ FATTO :D)
+-(RICERCA CLUB) aggiustare perche quando cerchi procuratore non esistente dice procuratore trovato (✓ FATTO :D)
 -(registrare SPONSOR) far uscire un jpannel se non si inserisce niente (✓ FATTO :D)
 -(QUANDO REGISTRI SPONSOR) mettere un jpannel (✓ FATTO :D)
 -(quando cerchi uno sponsor non esistente) mettere un jpannel (✓ FATTO :D)

@@ -2,15 +2,19 @@
 package view.registrare;
 
 import controller.ControllerClub;
+import convalidazione.ControlloConvalidazione;
 import dao.ExceptionDao;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import view.SezioneClub;
 
 
 public class RegistraClub extends javax.swing.JFrame {
 
-
+    /*CONTROLLORE PER GESTIRE GLI ERRORI*/
+    private ControlloConvalidazione controlloConvalidazione = new ControlloConvalidazione();
+    
     public RegistraClub() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -115,12 +119,16 @@ public class RegistraClub extends javax.swing.JFrame {
         String telefono = inputTelefonoJTF.getText();
         
         
-        
-        try {
-            controllerClub.registraClub(nome, indirizzo, telefono);
-        } catch (ExceptionDao ex) {
-            Logger.getLogger(RegistraClub.class.getName()).log(Level.SEVERE, null, ex);
+        if(controlloConvalidazione.controlloRegistraClub(nome, indirizzo, telefono) == true) {
+            try {
+                controllerClub.registraClub(nome, indirizzo, telefono);
+                JOptionPane.showMessageDialog(this, "✓ REGISTRAZIONE EFFETTUATA CON SUCCESSO", "REGISTRAZIONE", JOptionPane.INFORMATION_MESSAGE);
+            } catch (ExceptionDao ex) {
+                Logger.getLogger(RegistraClub.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
+        else
+            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nUNO O PIU' CAMPI MANCANTI", "ERRORE", JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_btnRegistraJBActionPerformed
 
 
