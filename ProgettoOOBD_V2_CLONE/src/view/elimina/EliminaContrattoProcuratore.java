@@ -11,13 +11,15 @@ public class EliminaContrattoProcuratore extends javax.swing.JFrame {
 
     private String idProcuratore;
     private int numeroContratto;
+    private String idAtleta;
     
     /*COSTRUTTORI*/
-    public EliminaContrattoProcuratore(String idProcuratore, int numeroContratto) {
+    public EliminaContrattoProcuratore(String idProcuratore, int numeroContratto, String idAtleta) {
         initComponents();
         this.setLocationRelativeTo(null);
         this.idProcuratore = idProcuratore;
         this.numeroContratto = numeroContratto;
+        this.idAtleta = idAtleta;
         
         adviceJL.setText("SEI SICURO DI VOLER ELIMINARE IL CONTRATTO NUMERO "+this.getNumeroContratto()+" ?");
     }
@@ -85,7 +87,7 @@ public class EliminaContrattoProcuratore extends javax.swing.JFrame {
         ControllerProcuratore controllerProcuratore = new ControllerProcuratore();
         
         try {
-            controllerProcuratore.eliminaContratto(this.getNumeroContratto());
+            controllerProcuratore.eliminaContratto(this.getNumeroContratto(), this.getIdAtleta());
             SezioneEliminaContrattoProcuratore sezioneEliminaContrattoProcuratore = new SezioneEliminaContrattoProcuratore(this.getIdProcuratore());
             sezioneEliminaContrattoProcuratore.setVisible(true);
             this.setVisible(false);
@@ -115,6 +117,14 @@ public class EliminaContrattoProcuratore extends javax.swing.JFrame {
 
     public void setNumeroContratto(int numeroContratto) {
         this.numeroContratto = numeroContratto;
+    }
+    
+    public String getIdAtleta() {
+        return idAtleta;
+    }
+
+    public void setIdAtleta(String idAtleta) {
+        this.idAtleta = idAtleta;
     }
     
     /*MAIN*/

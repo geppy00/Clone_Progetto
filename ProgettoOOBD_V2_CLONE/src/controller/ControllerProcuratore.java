@@ -138,9 +138,9 @@ import model.Sponsor;
         return null;
     }
     
-    public void eliminaContratto(int numeroContratto) throws ExceptionDao {
-        if(numeroContratto > 0) {
-            Contratto contratto = new Contratto(numeroContratto);
+    public void eliminaContratto(int numeroContratto, String idAtleta) throws ExceptionDao {
+        if(numeroContratto > 0 && idAtleta != null && idAtleta.length() > 0) {
+            Contratto contratto = new Contratto(idAtleta, numeroContratto);
             Procuratore procuratore = new Procuratore();
             procuratore.eliminaContratto(contratto);
         }

@@ -147,8 +147,10 @@ public class SezioneEliminaContrattoProcuratore extends javax.swing.JFrame {
             evt.consume();
             int row = tblDatiContrattoJT.getSelectedRow(); 
             int idContratto = Integer.parseInt((String) tblDatiContrattoJT.getValueAt(row, 0));
+            String idAtleta = (String) tblDatiContrattoJT.getValueAt(row, 1);
+            System.out.println("IDATLETA= "+idAtleta);
             
-            EliminaContrattoProcuratore eliminaContrattoProcuratore = new EliminaContrattoProcuratore(this.getIdProcuratore(), idContratto);
+            EliminaContrattoProcuratore eliminaContrattoProcuratore = new EliminaContrattoProcuratore(this.getIdProcuratore(), idContratto, idAtleta);
             eliminaContrattoProcuratore.setVisible(true);
             this.setVisible(false);
         }

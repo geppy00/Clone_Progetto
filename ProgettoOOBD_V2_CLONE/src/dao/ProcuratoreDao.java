@@ -259,6 +259,27 @@ public class ProcuratoreDao {
         return null;
     }
     
+    public void associaClubConAtleta(Contratto contratto) throws ExceptionDao {
+        String sql = "UPDATE atleta set codclub = "+contratto.getIdClub()+" WHERE codfiscale='"+contratto.getIdAtleta()+"'";
+        Statement stmt = null;
+        Connection connection = null;
+        
+        try {
+            connection = new DataAccessObject().connectionToDatabase();
+            connection.setAutoCommit(false);
+            stmt = connection.createStatement();
+            stmt.executeUpdate(sql);
+            connection.commit();
+        }catch(SQLException e){
+            throw new ExceptionDao("ERRORE AGGIORNAMENTO ATLETA FALLITA "+e);
+        }
+        
+        finally{
+            FinallyException finallyException = new FinallyException();
+            finallyException.finallyException();
+        }
+        
+    }
     
     public void registraContratto(Contratto contratto, String conChi) throws ExceptionDao {
         String sql = null;
@@ -285,10 +306,13 @@ public class ProcuratoreDao {
             throw new ExceptionDao("ERRORE REGISTRAZIONE CONTRATTO FALLITA "+e);
         }
         
-        finally{
+         finally{
             FinallyException finallyException = new FinallyException();
             finallyException.finallyException();
         }
+        
+        if(conChi.equals("CLUB"))
+            this.associaClubConAtleta(contratto);
     }
     
     
@@ -445,6 +469,28 @@ public class ProcuratoreDao {
         return datiContratto;
     }
     
+    public void eliminaAssociazioneContratto(Contratto contratto) throws ExceptionDao {
+         String sql = "UPDATE atleta SET codclub = NULL WHERE codfiscale='"+contratto.getIdAtleta()+"'";
+        Statement stmt = null;
+        Connection connection = null;
+        
+        try {
+            connection = new DataAccessObject().connectionToDatabase();
+            connection.setAutoCommit(false);
+            stmt = connection.createStatement();
+            stmt.executeUpdate(sql);
+            connection.commit();
+        }catch(SQLException e){
+            throw new ExceptionDao("ERRORE AGGIORNAMENTO ATLETA FALLITA "+e);
+        }
+        
+        finally{
+            FinallyException finallyException = new FinallyException();
+            finallyException.finallyException();
+        }
+        
+    }
+    
     public void eliminaContratto(Contratto contratto) throws ExceptionDao {
         String sql= "DELETE FROM contratto WHERE numero_contratto = ?;";
         PreparedStatement pStmt = null;
@@ -464,6 +510,8 @@ public class ProcuratoreDao {
             FinallyException finallyException = new FinallyException();
             finallyException.finallyException();
         }
+        
+        this.eliminaAssociazioneContratto(contratto);
     }
     
     public double prendiMaxValoreContratto(String idProc) throws ExceptionDao {

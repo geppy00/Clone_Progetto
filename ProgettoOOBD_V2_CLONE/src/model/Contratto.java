@@ -46,6 +46,11 @@ public class Contratto {
         this.idSponsor = idSponsor;
     }
     
+    public Contratto(String idAtleta, int numeroContratto) {
+        this.idAtleta = idAtleta;
+        this.numeroContratto = numeroContratto;
+    }
+    
     public Contratto(String idAtleta) {
         this.idAtleta = idAtleta;
     }

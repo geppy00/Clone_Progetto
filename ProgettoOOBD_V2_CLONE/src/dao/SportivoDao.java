@@ -19,35 +19,65 @@ public class SportivoDao {
     private String nomeUtente;
     
     public void registraSportivo(Atleta atleta) throws ExceptionDao {
-        String sql = "INSERT INTO atleta(nome, cognome, sexo, nazione, indirizzo, datanascita, telefono, codfiscale, ruolo_atleta, peso, codprocuratore, iban_atleta, codclub) VALUES(?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?, ?, ?)";
+        String sql;
         PreparedStatement pStmt = null;
         Connection connection = null;
-            
-        try{
-            connection = new DataAccessObject().connectionToDatabase();
-            pStmt = connection.prepareStatement(sql);
-            pStmt.setString(1, atleta.getNome());
-            pStmt.setString(2, atleta.getCognmome());
-            pStmt.setString(3, atleta.getSesso());
-            pStmt.setString(4, atleta.getNazione());
-            pStmt.setString(5, atleta.getIndirizzo());
-            pStmt.setDate(6, atleta.getDataNascita());
-            pStmt.setString(7, atleta.getTelefono());
-            pStmt.setString(8, atleta.getCodiceFiscale());
-            pStmt.setString(9, atleta.getRuolo());
-            pStmt.setDouble(10, atleta.getPeso());
-            pStmt.setString(11, atleta.getIdProcuratore());
-            pStmt.setString(12, atleta.getIban());
-            pStmt.setInt(13, atleta.getIdClub());
-            pStmt.execute();
-        }catch(SQLException e) {
-            throw new ExceptionDao("ERRORE REGISTRAZIONE PROCURATORE FALLITA "+e);
+        System.out.println("IDCLUB DAO= "+atleta.getIdClub());
+        if(atleta.getIdClub() > 0) {
+            sql = "INSERT INTO atleta(nome, cognome, sexo, nazione, indirizzo, datanascita, telefono, codfiscale, ruolo_atleta, peso, codprocuratore, iban_atleta, codclub) VALUES(?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?, ?, ?)";
+            try{
+                connection = new DataAccessObject().connectionToDatabase();
+                pStmt = connection.prepareStatement(sql);
+                pStmt.setString(1, atleta.getNome());
+                pStmt.setString(2, atleta.getCognmome());
+                pStmt.setString(3, atleta.getSesso());
+                pStmt.setString(4, atleta.getNazione());
+                pStmt.setString(5, atleta.getIndirizzo());
+                pStmt.setDate(6, atleta.getDataNascita());
+                pStmt.setString(7, atleta.getTelefono());
+                pStmt.setString(8, atleta.getCodiceFiscale());
+                pStmt.setString(9, atleta.getRuolo());
+                pStmt.setDouble(10, atleta.getPeso());
+                pStmt.setString(11, atleta.getIdProcuratore());
+                pStmt.setString(12, atleta.getIban());
+                pStmt.setInt(13, atleta.getIdClub());
+                pStmt.execute();
+            }catch(SQLException e) {
+                throw new ExceptionDao("ERRORE REGISTRAZIONE PROCURATORE FALLITA "+e);
+            }
+            finally {
+                FinallyException finallyException = new FinallyException();
+                finallyException.finallyException();
+            }
+        }
+        else {
+            sql = "INSERT INTO atleta(nome, cognome, sexo, nazione, indirizzo, datanascita, telefono, codfiscale, ruolo_atleta, peso, codprocuratore, iban_atleta) VALUES(?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?, ?)";
+            try{
+                connection = new DataAccessObject().connectionToDatabase();
+                pStmt = connection.prepareStatement(sql);
+                pStmt.setString(1, atleta.getNome());
+                pStmt.setString(2, atleta.getCognmome());
+                pStmt.setString(3, atleta.getSesso());
+                pStmt.setString(4, atleta.getNazione());
+                pStmt.setString(5, atleta.getIndirizzo());
+                pStmt.setDate(6, atleta.getDataNascita());
+                pStmt.setString(7, atleta.getTelefono());
+                pStmt.setString(8, atleta.getCodiceFiscale());
+                pStmt.setString(9, atleta.getRuolo());
+                pStmt.setDouble(10, atleta.getPeso());
+                pStmt.setString(11, atleta.getIdProcuratore());
+                pStmt.setString(12, atleta.getIban());
+                pStmt.execute();
+            }catch(SQLException e) {
+                throw new ExceptionDao("ERRORE REGISTRAZIONE PROCURATORE FALLITA "+e);
+            }
+            finally {
+                FinallyException finallyException = new FinallyException();
+                finallyException.finallyException();
+            }
         }
             
-        finally {
-            FinallyException finallyException = new FinallyException();
-            finallyException.finallyException();
-        }
+        
     }
     
     public ArrayList<Atleta> cercaSportivo(Atleta atleta) throws ExceptionDao {
