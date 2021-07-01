@@ -94,17 +94,37 @@ public class SportivoDao {
         return datiAtleta;
     }
     
-    public void eliminaSportivo(Atleta atleta) throws ExceptionDao {
-        String sql= "DELETE FROM atleta WHERE codfiscale = ?;";
+    public void eliminaAtletaLogin(Atleta atleta) throws ExceptionDao {
+        String sql= "DELETE FROM login WHERE opzuser = 'Atleta' AND codatleta = '"+atleta.getCodiceFiscale()+"' AND codclub IS NULL AND codprocuratore IS NULL AND codsponsor IS NULL";
         PreparedStatement pStmt = null;
         Connection connection = null;
         
         try {
             connection = new DataAccessObject().connectionToDatabase();
             pStmt = connection.prepareStatement(sql);
+            pStmt.executeUpdate();
+        }catch(SQLException e) {
+            throw new ExceptionDao("ERRORE ELIMINAZIONE LOGIN ATLETA FALLITA "+e);
+        }
+        
+        finally {
+            FinallyException finallyException = new FinallyException();
+            finallyException.finallyException();
+        }
+    }
+    
+    public void eliminaSportivo(Atleta atleta) throws ExceptionDao {
+        String sql= "DELETE FROM atleta WHERE codfiscale = ?;";
+        PreparedStatement pStmt = null;
+        Connection connection = null;
+        
+        this.eliminaAtletaLogin(atleta);
+        
+        try {
+            connection = new DataAccessObject().connectionToDatabase();
+            pStmt = connection.prepareStatement(sql);
             pStmt.setString(1, atleta.getCodiceFiscale());
             pStmt.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Atleta eliminato con successo");
         }catch(SQLException e) {
             throw new ExceptionDao("ERRORE ELIMINAZIONE ATLETA FALLITA "+e);
         }

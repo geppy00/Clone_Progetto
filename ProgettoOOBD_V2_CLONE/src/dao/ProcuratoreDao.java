@@ -97,10 +97,31 @@ public class ProcuratoreDao {
         return datiProcuratore;
     }
     
+    public void eliminaProcuratoreLogin(Procuratore procuratore) throws ExceptionDao {
+        String sql= "DELETE FROM login WHERE opzuser = 'Procuratore' AND codprocuratore = '"+procuratore.getCode_procuratore()+"' AND codclub IS NULL AND codatleta IS NULL AND codsponsor IS NULL";
+        PreparedStatement pStmt = null;
+        Connection connection = null;
+        
+        try {
+            connection = new DataAccessObject().connectionToDatabase();
+            pStmt = connection.prepareStatement(sql);
+            pStmt.executeUpdate();
+        }catch(SQLException e) {
+            throw new ExceptionDao("ERRORE ELIMINAZIONE LOGIN ATLETA FALLITA "+e);
+        }
+        
+        finally {
+            FinallyException finallyException = new FinallyException();
+            finallyException.finallyException();
+        }
+    }
+    
     public void eliminaProcuratore(Procuratore procuratore) throws ExceptionDao {
         String sql= "DELETE FROM procuratore WHERE code_procuratore = ?;";
         PreparedStatement pStmt = null;
         Connection connection = null;
+        
+        this.eliminaProcuratoreLogin(procuratore);
         
         try {
             connection = new DataAccessObject().connectionToDatabase();

@@ -39,6 +39,11 @@ public class Club {
     public Club(int idClub) {
         this.idClub = idClub;
     }
+    
+    public Club(int idClub, String nomeClub) {
+        this.idClub = idClub;
+        this.nomeClub = nomeClub;
+    }
    
     /*GET AND SET*/
     public int getIdClub() {

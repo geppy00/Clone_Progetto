@@ -76,10 +76,31 @@ public class SponsorDao {
         return datiSponsor;
     }
     
+    public void eliminaSponsorLogin(Sponsor sponsor) throws ExceptionDao {
+        String sql= "DELETE FROM login WHERE opzuser = 'Sponsor' AND codsponsor = "+sponsor.getIdSponsor()+" AND codclub IS NULL AND codatleta IS NULL AND codprocuratore IS NULL;";
+        PreparedStatement pStmt = null;
+        Connection connection = null;
+        
+        try {
+            connection = new DataAccessObject().connectionToDatabase();
+            pStmt = connection.prepareStatement(sql);
+            pStmt.executeUpdate();
+        }catch(SQLException e) {
+            throw new ExceptionDao("ERRORE ELIMINAZIONE LOGIN ATLETA FALLITA "+e);
+        }
+        
+        finally {
+            FinallyException finallyException = new FinallyException();
+            finallyException.finallyException();
+        }
+    }
+    
     public void eliminaSponsor(Sponsor sponsor) throws ExceptionDao {
         String sql= "DELETE FROM sponsor WHERE nomesponsor = ?;";
         PreparedStatement pStmt = null;
         Connection connection = null;
+        
+        this.eliminaSponsorLogin(sponsor);
         
         try {
             connection = new DataAccessObject().connectionToDatabase();

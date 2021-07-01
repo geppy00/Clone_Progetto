@@ -29,9 +29,9 @@ public class ControllerSponsor {
         return null;
     }
     
-    public boolean eliminaSponsor(String nomeSponsor) throws ExceptionDao {
-        if(nomeSponsor != null && nomeSponsor.length() > 0) {
-            Sponsor sponsor = new Sponsor(nomeSponsor);
+    public boolean eliminaSponsor(String nomeSponsor, int idSponsor) throws ExceptionDao {
+        if(nomeSponsor != null && nomeSponsor.length() > 0 && idSponsor > 0) {
+            Sponsor sponsor = new Sponsor(nomeSponsor, idSponsor);
             Admin admin = new Admin();
             admin.eliminaSponsor(sponsor);
             return true;

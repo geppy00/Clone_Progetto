@@ -31,6 +31,11 @@ public class Sponsor {
         this.nome = nome;
     }
     
+    public Sponsor(String nome, int idSponsor) {
+        this.nome = nome;
+        this.idSponsor = idSponsor;
+    }
+    
     /*RELAZIONI*/
     private ArrayList<Atleta> listaAtleta = new ArrayList<Atleta>();
     

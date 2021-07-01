@@ -19,6 +19,7 @@ public class EliminaSponsor extends javax.swing.JFrame {
     
     /*DATI PER LO SPONSOR*/
     private ArrayList<Sponsor> datiSponsor = new ArrayList<Sponsor>();
+    private int idSponsor;
     
     public EliminaSponsor() {
         initComponents();
@@ -163,7 +164,9 @@ public class EliminaSponsor extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "SPONSOR "+nomeSponsorPreso+" NON ESISTE\nNON POSSIBILE ELIMINARLO", "ERRORE", JOptionPane.ERROR_MESSAGE);
             else {
                 try {
-                    controllerSponsor.eliminaSponsor(nomeSponsorPreso);
+                    this.setIdSponsor((Integer) visualizzaDatiSponsorJT.getModel().getValueAt(0, 0));
+                    System.out.println("IDSPONSOR TABELLA= "+this.getIdSponsor());
+                    controllerSponsor.eliminaSponsor(nomeSponsorPreso, this.getIdSponsor());
                     DefaultTableModel tblModel = (DefaultTableModel)visualizzaDatiSponsorJT.getModel();
                     tblModel.setRowCount(0);
                     JOptionPane.showMessageDialog(this, "✓ ELIMINAZIONE EFFETTUATA CON SUCCESSO", "ELIMINAZIONE", JOptionPane.INFORMATION_MESSAGE);
@@ -174,7 +177,17 @@ public class EliminaSponsor extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnEliminaSponsorJBActionPerformed
 
+    /*GET AND SET*/
+    public int getIdSponsor() {
+        return idSponsor;
+    }
+
+    public void setIdSponsor(int idSponsor) {
+        this.idSponsor = idSponsor;
+    }
+
     
+    /*MAIN*/
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

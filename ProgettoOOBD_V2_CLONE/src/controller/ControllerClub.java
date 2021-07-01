@@ -29,9 +29,9 @@ public class ControllerClub {
         return null;
     }
     
-    public void eliminaClub(String nomeClub) throws ExceptionDao {
-        if(nomeClub != null && nomeClub.length() > 0) {
-            Club club = new Club(nomeClub);
+    public void eliminaClub(String nomeClub, int idClub) throws ExceptionDao {
+        if(nomeClub != null && nomeClub.length() > 0 && idClub > 0) {
+            Club club = new Club(idClub, nomeClub);
             Admin admin = new Admin();
             admin.eliminaClub(club);
         }

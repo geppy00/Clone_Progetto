@@ -18,8 +18,9 @@ public class EliminaClub extends javax.swing.JFrame {
     /*CONTROLLORE PER GESTIRE GLI ERRORI*/
     private ControlloConvalidazione controlloConvalidazione = new ControlloConvalidazione();
     
-    /*DATI DEL PROCURATORE*/
+    /*DATI DEL CLUB*/
     private ArrayList<Club> datiClub = new ArrayList<Club>();
+    private int idClub; 
     
     /*COSTRUTTORE*/
     public EliminaClub() {
@@ -167,7 +168,9 @@ public class EliminaClub extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "CLUB "+nomeClubCercare+" NON ESISTE\nNON POSSIBILE ELIMINARLO", "ERRORE", JOptionPane.ERROR_MESSAGE);
             else {
                 try {
-                    controllerClub.eliminaClub(nomeClubCercare);
+                    this.setIdClub((Integer) datiClubTabellaJT.getModel().getValueAt(0, 0));
+                    System.out.println("IDCLUB DALLA TABELLA= "+this.getIdClub());
+                    controllerClub.eliminaClub(nomeClubCercare, this.getIdClub());
                     DefaultTableModel tblModel = (DefaultTableModel)datiClubTabellaJT.getModel();
                     tblModel.setRowCount(0);
                     JOptionPane.showMessageDialog(this, "✓ ELIMINAZIONE EFFETTUATA CON SUCCESSO", "ELIMINAZIONE", JOptionPane.INFORMATION_MESSAGE);
@@ -178,7 +181,18 @@ public class EliminaClub extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnEliminaJBActionPerformed
 
+    /*GET AND SET*/
+    public int getIdClub() {
+        return idClub;
+    }
 
+    public void setIdClub(int idClub) {
+        this.idClub = idClub;
+    }
+
+
+
+    /*MAIN*/
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
