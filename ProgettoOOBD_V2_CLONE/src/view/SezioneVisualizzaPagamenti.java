@@ -2,6 +2,7 @@
 package view;
 
 import controller.ControllerClub;
+import convalidazione.ControlloConvalidazione;
 import dao.DataAccessObject;
 import dao.ExceptionDao;
 import java.awt.Toolkit;
@@ -24,8 +25,13 @@ import view.registrare.RegistraClub;
 
 public class SezioneVisualizzaPagamenti extends javax.swing.JFrame {
     
+    /*DATI IMPORTANTI*/
+    private ArrayList<Stipendio> datiStipendio = new ArrayList<Stipendio>();
     private String[] tbData;
     private String idClub;
+    
+    /*CONTROLLORE PER GESTIRE GLI ERRORI*/
+    private ControlloConvalidazione controlloConvalidazione = new ControlloConvalidazione();
     
     public void visualizzaTuttiPagamenti() throws ExceptionDao {
         PreparedStatement pStmt = null;
@@ -78,7 +84,7 @@ public class SezioneVisualizzaPagamenti extends javax.swing.JFrame {
         this.idClub = idClub;
         //visualizzaTuttiPagamenti();
         try {
-            visualizzaTuttiPagamenti();
+            this.visualizzaTuttiPagamenti();
         } catch (ExceptionDao ex) {
             Logger.getLogger(SezioneVisualizzaPagamenti.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -229,63 +235,73 @@ public class SezioneVisualizzaPagamenti extends javax.swing.JFrame {
     private void btnCercaAtletaJBActionPerformed(java.awt.event.ActionEvent evt) {                                                 
         String idAtleta = inputIdAtletaJTF.getText();
         ControllerClub controllerClub = new ControllerClub();
-        ArrayList<Stipendio> datiStipendio = new ArrayList<Stipendio>();
         
-        try {
-            datiStipendio = controllerClub.cercaPagamentiAtleta(idAtleta, Integer.parseInt(this.getIdClub()));
-            if(datiStipendio != null) {
-                DefaultTableModel tblModel = (DefaultTableModel)visualizzaDatiPagamentiJB.getModel();
-                tblModel.setRowCount(0);
-                datiStipendio.forEach((Stipendio stipendio) -> {
-                    tblModel.addRow(new Object[]{
-                        stipendio.getIdStipendio(),
-                        stipendio.getValoreStipendio(),
-                        stipendio.getStatusPagamento(),
-                        stipendio.getDataPagamento(),
-                        stipendio.getIdAtleta(),
-                        stipendio.getIdClub()
+        if(controlloConvalidazione.controlloVisuallizzaPagamentiAtleta(idAtleta) == true) {
+            try {
+                datiStipendio = controllerClub.cercaPagamentiAtleta(idAtleta, Integer.parseInt(this.getIdClub()));
+                if(datiStipendio.isEmpty())
+                    JOptionPane.showMessageDialog(this, "ATLETA "+idAtleta+" NON TROVATO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                else {
+                    DefaultTableModel tblModel = (DefaultTableModel)visualizzaDatiPagamentiJB.getModel();
+                    tblModel.setRowCount(0);
+                    datiStipendio.forEach((Stipendio stipendio) -> {
+                        tblModel.addRow(new Object[]{
+                            stipendio.getIdStipendio(),
+                            stipendio.getValoreStipendio(),
+                            stipendio.getStatusPagamento(),
+                            stipendio.getDataPagamento(),
+                            stipendio.getIdAtleta(),
+                            stipendio.getIdClub()
+                        });
+                        visualizzaDatiPagamentiJB.setModel(tblModel);
                     });
-                    visualizzaDatiPagamentiJB.setModel(tblModel);
-                });
+                }
+            } catch (ExceptionDao ex) {
+                Logger.getLogger(SezioneVisualizzaPagamenti.class.getName()).log(Level.SEVERE, null, ex);
             }
-            else {
-                Toolkit.getDefaultToolkit().beep();
-                JOptionPane.showMessageDialog(null, "!! ERRORE !!\nNON E' STATO POSSIBILE RICAVARE TUTTI I PAGAMENTI");
-            }
-        } catch (ExceptionDao ex) {
-            Logger.getLogger(SezioneVisualizzaPagamenti.class.getName()).log(Level.SEVERE, null, ex);
         }
+        else
+            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nCAMPO DI RICERCA MANCANTE", "ERRORE", JOptionPane.ERROR_MESSAGE);
     }                                                
 
     private void btnCercaDataPagamentoJBActionPerformed(java.awt.event.ActionEvent evt) {                                                        
-        java.sql.Date dataPagamento = new java.sql.Date(inputDataPagamentoJDC.getDate().getTime());
         ControllerClub controllerClub = new ControllerClub();
-        ArrayList<Stipendio> datiStipendio = new ArrayList<Stipendio>();
-        
+        java.sql.Date dataPagamento = null;
         try {
-            datiStipendio = controllerClub.cercaPagamentiDataPagamento(dataPagamento, Integer.parseInt(this.getIdClub()));
-            if(datiStipendio != null) {
-                DefaultTableModel tblModel = (DefaultTableModel)visualizzaDatiPagamentiJB.getModel();
-                tblModel.setRowCount(0);
-                datiStipendio.forEach((Stipendio stipendio) -> {
-                    tblModel.addRow(new Object[]{
-                        stipendio.getIdStipendio(),
-                        stipendio.getValoreStipendio(),
-                        stipendio.getStatusPagamento(),
-                        stipendio.getDataPagamento(),
-                        stipendio.getIdAtleta(),
-                        stipendio.getIdClub()
-                    });
-                    visualizzaDatiPagamentiJB.setModel(tblModel);
-                });
-            }
-            else {
-                Toolkit.getDefaultToolkit().beep();
-                JOptionPane.showMessageDialog(null, "!! ERRORE !!\nNON E' STATO POSSIBILE RICAVARE TUTTI I PAGAMENTI");
-            }
-        } catch (ExceptionDao ex) {
-            Logger.getLogger(SezioneVisualizzaPagamenti.class.getName()).log(Level.SEVERE, null, ex);
+            dataPagamento = new java.sql.Date(inputDataPagamentoJDC.getDate().getTime());
+        }catch(NullPointerException nex) {
+            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nINSERISCI UNA DATA VALIDA", "ERRORE", JOptionPane.ERROR_MESSAGE);
         }
+        
+        
+        if(controlloConvalidazione.controlloVisuallizzaPagamentiData(String.valueOf(dataPagamento)) == true) {
+            try {
+                datiStipendio = controllerClub.cercaPagamentiDataPagamento(dataPagamento, Integer.parseInt(this.getIdClub()));
+                if(datiStipendio.isEmpty())
+                    JOptionPane.showMessageDialog(this, "DATA "+String.valueOf(dataPagamento)+" DEL PAGAMENTO NON ESISTE", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                else {
+                    DefaultTableModel tblModel = (DefaultTableModel)visualizzaDatiPagamentiJB.getModel();
+                    tblModel.setRowCount(0);
+                    datiStipendio.forEach((Stipendio stipendio) -> {
+                        tblModel.addRow(new Object[]{
+                            stipendio.getIdStipendio(),
+                            stipendio.getValoreStipendio(),
+                            stipendio.getStatusPagamento(),
+                            stipendio.getDataPagamento(),
+                            stipendio.getIdAtleta(),
+                            stipendio.getIdClub()
+                        });
+                        visualizzaDatiPagamentiJB.setModel(tblModel);
+                    });
+                }
+            } catch (ExceptionDao ex) {
+                Logger.getLogger(SezioneVisualizzaPagamenti.class.getName()).log(Level.SEVERE, null, ex);
+            } catch(NullPointerException nex) {
+                JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nINSERISCI UNA DATA VALIDA", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        else
+            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nCAMPO DI RICERCA MANCANTE", "ERRORE", JOptionPane.ERROR_MESSAGE);
     }                                                       
 
     private void btnRipristinaJBActionPerformed(java.awt.event.ActionEvent evt) {                                                

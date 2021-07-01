@@ -160,7 +160,7 @@ public class GestioneEventiAtleta extends javax.swing.JFrame {
     }//GEN-LAST:event_tblDatiEventoJTMouseClicked
 
     /*METODI*/
-    public void stampaDati() throws ExceptionDao {
+    private void stampaDati() throws ExceptionDao {
         PreparedStatement pStmt = null;
         Connection connection = null;
         ResultSet rs = null;

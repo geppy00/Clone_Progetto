@@ -35,7 +35,6 @@ PROCURATORE
 
 ATLETA
 -far scrivere dell'accesso da procuratore il nome utente (✓ FATTO :D)
--far cancellere l'evento che partecipero
 -far funzionare il logout (✓ FATTO :D)
 
 SPONSOR
@@ -46,10 +45,13 @@ SPONSOR
 
 CLUB
 -far scrivere dell'accesso da procuratore il nome utente (✓ FATTO :D)
--settare campi della tabella non editabili
+-settare campi della tabella non editabili (✓ FATTO :D)
+-controllare i campi obbligatori per i pagamenti (registrare, modificare, visualizzare ed eliminare) (✓ FATTO :D)  
 
 EXTRA
 -quando si elimina un utente viene eliminato (nel database) anche il suo corrispettivo login (✓ FATTO :D)
 -quando si registra un atleta non per forza si deve inserire l'id del club ma lo si inserirà dopo aver registrato il contratto nel sistema (✓ FATTO :D)
 -quando si elimina un contratto si elimina la relazione con esso nell'atleta (✓ FATTO :D)
+-aggiungere un segnale acustico per ogni errore(codice per generarlo: Toolkit.getDefaultToolkit().beep())
+
   

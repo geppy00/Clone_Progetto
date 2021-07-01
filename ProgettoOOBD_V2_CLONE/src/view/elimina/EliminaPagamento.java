@@ -2,6 +2,7 @@
 package view.elimina;
 
 import controller.ControllerClub;
+import convalidazione.ControlloConvalidazione;
 import dao.ExceptionDao;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -11,8 +12,14 @@ import view.modificaDati.ModificaPagamento;
 
 
 public class EliminaPagamento extends javax.swing.JFrame {
-     
+    
+    /*DATI IMPORTANTI*/ 
+    private String idAtletaCercare; 
     private String idClub;
+    private double importo;
+    
+    /*CONTROLLORE PER GESTIRE GLI ERRORI*/
+    private ControlloConvalidazione controlloConvalidazione = new ControlloConvalidazione();
      
     /*COSTRUTTORI*/
     public EliminaPagamento(String idClub) {
@@ -150,21 +157,31 @@ public class EliminaPagamento extends javax.swing.JFrame {
 
     /*ACTION PERFOMED*/
     private void btnCercaJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCercaJBActionPerformed
-       String idAtletaCercare = inputIdDestinatarioJTF.getText();
-       java.sql.Date dataPagamentoCercare = new java.sql.Date(inputDataCercareJDC.getDate().getTime());
+       this.setIdAtletaCercare(inputIdDestinatarioJTF.getText());
        ControllerClub controllerClub = new ControllerClub();
+       java.sql.Date dataPagamentoCercare = null;
        
-       try {
-            double importo = controllerClub.cercaPagamento(dataPagamentoCercare, Integer.parseInt(this.getIdClub()), idAtletaCercare);
-            if(importo == -1)
-                JOptionPane.showMessageDialog(null, "!! PAGAMENTO NON TROVATO !!");
-            else {
-                JOptionPane.showMessageDialog(null, "PAGAMENTO TROVATO CON SUCCESSO");
-                inputImportoJTF.setText(Double.toString(importo));
-            }
-        } catch (ExceptionDao ex) {
-            Logger.getLogger(ModificaPagamento.class.getName()).log(Level.SEVERE, null, ex);
+       try{
+            dataPagamentoCercare = new java.sql.Date(inputDataCercareJDC.getDate().getTime());
+        }catch(NullPointerException nex) {
+            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nINSERISCI UNA DATA VALIDA", "ERRORE", JOptionPane.ERROR_MESSAGE);
         }
+       
+        if(controlloConvalidazione.controlloCercaPagamento(String.valueOf(dataPagamentoCercare), this.getIdAtletaCercare()) == true) {
+            try {
+                importo = controllerClub.cercaPagamento(dataPagamentoCercare, Integer.parseInt(this.getIdClub()), this.getIdAtletaCercare());
+                if(importo == -1)
+                    JOptionPane.showMessageDialog(this, "IMPORTO NON TROVATO\nNON POSSIBILE ELIMINARLO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                else {
+                    JOptionPane.showMessageDialog(this, "✓ PAGAMENTO TROVATO CON SUCCESSO", "RICERCA", JOptionPane.INFORMATION_MESSAGE);
+                    inputImportoJTF.setText(Double.toString(importo));
+                }
+            }catch (ExceptionDao ex) {
+                Logger.getLogger(ModificaPagamento.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        else
+            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nUNO O PIU' CAMPI MANCANTI PER LA RICERCA", "ERRORE", JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_btnCercaJBActionPerformed
 
     private void btnAnnullaJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnnullaJBActionPerformed
@@ -175,15 +192,38 @@ public class EliminaPagamento extends javax.swing.JFrame {
 
     private void btnEliminaJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminaJBActionPerformed
         ControllerClub controllerClub = new ControllerClub();
-        double importo = Double.parseDouble(inputImportoJTF.getText());
-        String idAtletaCercare = inputIdDestinatarioJTF.getText();
-        java.sql.Date dataPagamentoCercare = new java.sql.Date(inputDataCercareJDC.getDate().getTime());
+        this.setIdAtletaCercare(inputIdDestinatarioJTF.getText());
+        java.sql.Date dataPagamentoCercare = null;
         
         try {
-            controllerClub.eliminaPagamento(dataPagamentoCercare, Integer.parseInt(this.getIdClub()), idAtletaCercare, importo);
-        } catch (ExceptionDao ex) {
-            Logger.getLogger(ModificaPagamento.class.getName()).log(Level.SEVERE, null, ex);
+            importo = Double.parseDouble(inputImportoJTF.getText());
+        }catch(NumberFormatException nfe) {
+            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nNON POSSIBILE ELIMINARE", "ERRORE", JOptionPane.ERROR_MESSAGE);
         }
+        
+        
+        
+        try{
+            dataPagamentoCercare = new java.sql.Date(inputDataCercareJDC.getDate().getTime());
+        }catch(NullPointerException nex) {
+            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nINSERISCI UNA DATA VALIDA", "ERRORE", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        if(controlloConvalidazione.controlloCercaPagamento(String.valueOf(dataPagamentoCercare), this.getIdAtletaCercare()) == true) {
+            try {
+                importo = controllerClub.cercaPagamento(dataPagamentoCercare, Integer.parseInt(this.getIdClub()), idAtletaCercare);
+                if(importo == -1)
+                    JOptionPane.showMessageDialog(this, "IMPORTO NON TROVATO\nNON POSSIBILE ELIMINARLO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                else{
+                    controllerClub.eliminaPagamento(dataPagamentoCercare, Integer.parseInt(this.getIdClub()), this.getIdAtletaCercare(), importo);
+                    JOptionPane.showMessageDialog(this, "✓ ELIMINAZIONE DEL PAGAMENTO EFFETTUATA CON SUCCESSO", "ELIMINAZIONE", JOptionPane.INFORMATION_MESSAGE);
+                }
+            } catch (ExceptionDao ex) {
+                Logger.getLogger(ModificaPagamento.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        else
+            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nUNO O PIU' CAMPI MANCANTI PER LA RICERCA NON POSSIBILE EFFETTUARE L'ELIMINAZIONE", "ERRORE", JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_btnEliminaJBActionPerformed
 
 
@@ -194,6 +234,14 @@ public class EliminaPagamento extends javax.swing.JFrame {
 
     public void setIdClub(String idClub) {
         this.idClub = idClub;
+    }
+    
+    public String getIdAtletaCercare() {
+        return idAtletaCercare;
+    }
+
+    public void setIdAtletaCercare(String idAtletaCercare) {
+        this.idAtletaCercare = idAtletaCercare;
     }
     
     /*MAIN*/

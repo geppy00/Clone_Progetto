@@ -115,6 +115,7 @@ public class SezionePagamentoView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTornaIndietroJBActionPerformed
 
     private void btnEffettuaPagamentoJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEffettuaPagamentoJBActionPerformed
+
         RegistraPagamento registraPagamento = new RegistraPagamento(this.getIdClub());
         registraPagamento.setVisible(true);
         this.setVisible(false);

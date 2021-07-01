@@ -102,4 +102,32 @@ public class ControlloConvalidazione {
             return false;
     }
     
+    //CLUB
+    public boolean controlloRegistraPagamento(String importo, String idDestinatario) {
+        if(importo != null && !(importo.equals("")) && Integer.parseInt(importo) > 0 && idDestinatario != null && !(idDestinatario.equals("")))
+            return true;
+        else
+            return false;
+    }
+    
+    public boolean controlloVisuallizzaPagamentiAtleta(String idAtleta) {
+        if(idAtleta != null && !(idAtleta.equals("")))
+            return true;
+        else
+            return false;
+    }
+    
+    public boolean controlloVisuallizzaPagamentiData(String dataRicerca) {
+        if(dataRicerca != null && !(dataRicerca.equals("")))
+            return true;
+        else
+            return false;
+    }
+    
+    public boolean controlloCercaPagamento(String dataPagamento, String idDestinatario) {
+        if(dataPagamento != null && !(dataPagamento.equals("")) && idDestinatario != null && !(idDestinatario.equals("")))
+            return true;
+        else
+            return false;
+    }
 }
