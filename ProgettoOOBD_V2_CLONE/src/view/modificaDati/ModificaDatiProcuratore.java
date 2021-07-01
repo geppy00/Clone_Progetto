@@ -306,7 +306,7 @@ public class ModificaDatiProcuratore extends javax.swing.JFrame {
                 try {
                     dataNascitaPresoSql = new java.sql.Date(cambiaDataNascitaJDC.getDate().getTime());
                 } catch(NullPointerException nex) {
-                    JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nUNO O PIU' CAMPI MANCANTI", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nINSERISCI UNA DATA VALIDA", "ERRORE", JOptionPane.ERROR_MESSAGE);
                 }
 
                 if(controlloConvalidazione.controlloModificaProcuratore(matricolaNuova, nomeNuovo, cognomeNuovo, sessoNuovo, nazioneNuova, indirizzoNuovo, telefonoNuovo, codiceFiscaleNuovo, ibanNuovo, String.valueOf(dataNascitaPresoSql)) == true) {

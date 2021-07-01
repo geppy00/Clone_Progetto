@@ -2,6 +2,7 @@
 package view.registrare;
 
 import controller.ControllerSportivo;
+import convalidazione.ControlloConvalidazione;
 import dao.DataAccessObject;
 import dao.ExceptionDao;
 import java.sql.Connection;
@@ -12,13 +13,16 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import refactorCode.FinallyException;
 import view.SezioneAtletaView;
 
 public class RegistrareSportivo extends javax.swing.JFrame {
 
-   
+    /*CONTROLLORE PER GESTIRE GLI ERRORI*/
+    private ControlloConvalidazione controlloConvalidazione = new ControlloConvalidazione();
+    
     /*COSTRUTTORE*/
     public RegistrareSportivo() {
         initComponents();
@@ -55,7 +59,7 @@ public class RegistrareSportivo extends javax.swing.JFrame {
             pStmt.close();
             connection.close();
         } catch(SQLException e) {
-            throw new ExceptionDao("ERRORE RICERCA ATLETA FALLITA "+e);
+            throw new ExceptionDao("ERRORE RICERCA CLUB FALLITA "+e);
         }
         
         finally {
@@ -314,17 +318,31 @@ public class RegistrareSportivo extends javax.swing.JFrame {
 
     private void btnRegistraJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistraJBActionPerformed
         ControllerSportivo controllerSportivo = new ControllerSportivo();
+        java.sql.Date dataNascitaPresoSql = null;
+        float pesoPreso = 0;
 
         String nomePreso = inputNomeJTF.getText();
         String cognomePreso = inputCognomeJTF.getText();
         String sessoPreso = (String) inputSessoJTF.getSelectedItem();
         String nazionePreso = inputNazioneJTF.getText();
-        java.sql.Date dataNascitaPresoSql = new java.sql.Date(DataNascitaJDC.getDate().getTime());
+
+        try {
+        dataNascitaPresoSql = new java.sql.Date(DataNascitaJDC.getDate().getTime());
+        } catch(NullPointerException nex) {
+            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nINSERIRE UNA DATA VALIDA", "ERRORE", JOptionPane.ERROR_MESSAGE);
+        }
+
         String telefonoPreso = inputTelefonoJTF.getText();
         String codiceFiscalePreso = inputCodiceFiscaleJTF.getText();
         String ruoloAtletaPreso = inputRuoloAtletaJTF.getText();
         String pesoStr = inputPesoJTF.getText();
-        float pesoPreso = Float.parseFloat(pesoStr);
+        
+        try {
+            pesoPreso = Float.parseFloat(pesoStr);
+        } catch(NumberFormatException nex) {
+            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nINSERIRE UN NUMERO VALIDO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+        }
+        
         String ibanPreso = inputIbanAtletaJTF.getText();
         String idProcuratore = inputIDProcuratoreJTF.getText();
         String indirizzoPreso = inputIndirizzoJTF.getText();
@@ -334,13 +352,18 @@ public class RegistrareSportivo extends javax.swing.JFrame {
             idClub = 0;
         else
             idClub = Integer.parseInt(inputIdClubJTF.getText());
-       
-        System.out.println("IDCLUB VIEW= "+idClub);
-        try {
-            controllerSportivo.registraSportivo(nomePreso, cognomePreso, sessoPreso, nazionePreso, indirizzoPreso, dataNascitaPresoSql, telefonoPreso, codiceFiscalePreso, ruoloAtletaPreso, pesoPreso, idProcuratore, ibanPreso, idClub);
-                } catch (ExceptionDao ex) {
-            Logger.getLogger(RegistrareSportivo.class.getName()).log(Level.SEVERE, null, ex);
+
+        String strDate = String.valueOf(dataNascitaPresoSql);
+        if(controlloConvalidazione.controlloRegistraAtleta(nomePreso, cognomePreso, nazionePreso, indirizzoPreso, strDate, codiceFiscalePreso) == true) {
+            try {
+                controllerSportivo.registraSportivo(nomePreso, cognomePreso, sessoPreso, nazionePreso, indirizzoPreso, dataNascitaPresoSql, telefonoPreso, codiceFiscalePreso, ruoloAtletaPreso, pesoPreso, idProcuratore, ibanPreso, idClub);
+                JOptionPane.showMessageDialog(this, "✓ REGISTRAZIONE EFFETTUATA CON SUCCESSO", "REGISTRAZIONE", JOptionPane.INFORMATION_MESSAGE);
+                    } catch (ExceptionDao ex) {
+                Logger.getLogger(RegistrareSportivo.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
+        else
+            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nUNO O PIU' CAMPI MANCANTI", "ERRORE", JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_btnRegistraJBActionPerformed
 
    

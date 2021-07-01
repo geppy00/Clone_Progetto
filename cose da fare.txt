@@ -10,12 +10,12 @@ ADMIN
 -(RICERCA procuratore) controllato il vincolo con le altre tabelle (✓ FATTO :D)
 -(MODIFICA Procuratore) controllare i campi obbligatori (✓ FATTO :D)
 -(MODIFICA Procuratore) AGGIUSTARE LA MODIFICA (✓ FATTO :D)
--(registrare atleta) controllare i campi obbligatori
--(registrare atleta) METTERE UN  JPANNEL QUANDO REGISTRO
--(MODIFICA Atleta e registra) togliere idclub
--(MODIFICA Atleta) controllare i campi obbligatori
--(RICERCA ATLETA) Pulire la tabella quando si cerca un altra persona e il campo di ricerca se l'ha trovato
--(RICERCA Atleta) aggiustare perche quando cerchi procuratore non esistente dice procuratore trovato
+-(registrare atleta) controllare i campi obbligatori (✓ FATTO :D)
+-(registrare atleta) METTERE UN  JPANNEL QUANDO REGISTRO (✓ FATTO :D)
+-(MODIFICA Atleta e registra) rivedere idclub (✓ FATTO :D)
+-(MODIFICA Atleta) controllare i campi obbligatori (✓ FATTO :D)
+-(RICERCA ATLETA) Pulire la tabella quando si cerca un altra persona e il campo di ricerca se l'ha trovato (✓ FATTO :D)
+-(RICERCA Atleta) aggiustare perche quando cerchi procuratore non esistente dice procuratore trovato (✓ FATTO :D)
 -(QUANDO REGISTRI CLUB) mettere un jpannel (✓ FATTO :D)
 -(QUANDO ModificaCLUB) mettere un jpannel se i campi sono vuoiti (✓ FATTO :D)
 -(RICERCA CLUB) Pulire la tabella quando si cerca un altra persona e il campo di ricerca se l'ha trovato (✓ FATTO :D)
@@ -36,7 +36,7 @@ PROCURATORE
 ATLETA
 -far scrivere dell'accesso da procuratore il nome utente (✓ FATTO :D)
 -far cancellere l'evento che partecipero
--far funzionare il logout
+-far funzionare il logout (✓ FATTO :D)
 
 SPONSOR
 -far scrivere dell'accesso da procuratore il nome utente (✓ FATTO :D)

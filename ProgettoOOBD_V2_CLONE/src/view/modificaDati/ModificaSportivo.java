@@ -2,16 +2,25 @@
 package view.modificaDati;
 
 import controller.ControllerSportivo;
+import convalidazione.ControlloConvalidazione;
 import dao.ExceptionDao;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import model.Atleta;
 import view.SezioneAtletaView;
 
 public class ModificaSportivo extends javax.swing.JFrame {
+    
+    /*CONTROLLORE PER GESTIRE GLI ERRORI*/
+    private ControlloConvalidazione controlloConvalidazione = new ControlloConvalidazione();
+    private static final String FORMAT = "yyyy/MM/dd";
+    
+    /*DATI DEL ATLETA*/
+    private ArrayList<Atleta> datiAtleta =  new ArrayList<Atleta>();
     
     public ModificaSportivo() {
         initComponents();
@@ -252,28 +261,36 @@ public class ModificaSportivo extends javax.swing.JFrame {
     private void btnCercaJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCercaJBActionPerformed
         ControllerSportivo controllerSportivo = new ControllerSportivo();
         String CodiceFiscalePreso = inputCodiceFiscaleJTF.getText();
-        ArrayList<Atleta> datiAtleta =  new ArrayList<Atleta>();
         
-        try {
-            datiAtleta = controllerSportivo.cercaSportivo(CodiceFiscalePreso);
-            datiAtleta.forEach((Atleta atleta)->{
-                inputCodiceFiscaleModificatoJTF.setText(atleta.getCodiceFiscale());
-                inputCognomeJTF.setText(atleta.getCognmome());
-                inputDataNascitaJDC.setDate(atleta.getDataNascita());
-                inputIbanJTF.setText(atleta.getIban());
-                inputIndirizzoJTF.setText(atleta.getIndirizzo());
-                inputNazioneJTF.setText(atleta.getNazione());
-                inputNomeJTF.setText(atleta.getNome());
-                String pesoSTR = Float.toString(atleta.getPeso());
-                inputPesoJTF.setText(pesoSTR);
-                inputProcuratoreAssociatoJTF.setText(atleta.getIdProcuratore());
-                inputRuoloJTF.setText(atleta.getRuolo());
-                inputSessoJTF.setText(atleta.getSesso());
-                inputTelefonoJTF.setText(atleta.getTelefono());
-            });
-        } catch (ExceptionDao ex) {
-            Logger.getLogger(ModificaSportivo.class.getName()).log(Level.SEVERE, null, ex);
+        if(controlloConvalidazione.controlloCercaAtleta(CodiceFiscalePreso) == true) {
+            try {
+                datiAtleta = controllerSportivo.cercaSportivo(CodiceFiscalePreso);
+                if(datiAtleta.isEmpty())
+                    JOptionPane.showMessageDialog(this, "ATLETA "+CodiceFiscalePreso+" NON TROVATO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                else {
+                    JOptionPane.showMessageDialog(this, "✓ ATLETA "+CodiceFiscalePreso+" TROVATO CON SUCCESSO", "RICERCA", JOptionPane.INFORMATION_MESSAGE);
+                    datiAtleta.forEach((Atleta atleta)->{
+                        inputCodiceFiscaleModificatoJTF.setText(atleta.getCodiceFiscale());
+                        inputCognomeJTF.setText(atleta.getCognmome());
+                        inputDataNascitaJDC.setDate(atleta.getDataNascita());
+                        inputIbanJTF.setText(atleta.getIban());
+                        inputIndirizzoJTF.setText(atleta.getIndirizzo());
+                        inputNazioneJTF.setText(atleta.getNazione());
+                        inputNomeJTF.setText(atleta.getNome());
+                        String pesoSTR = Float.toString(atleta.getPeso());
+                        inputPesoJTF.setText(pesoSTR);
+                        inputProcuratoreAssociatoJTF.setText(atleta.getIdProcuratore());
+                        inputRuoloJTF.setText(atleta.getRuolo());
+                        inputSessoJTF.setText(atleta.getSesso());
+                        inputTelefonoJTF.setText(atleta.getTelefono());
+                    });
+                }
+            } catch (ExceptionDao ex) {
+                Logger.getLogger(ModificaSportivo.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
+        else
+            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nSCRIVERE NEL CAMPO IL CODICE FISCALE DA CERCARE", "ERRORE", JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_btnCercaJBActionPerformed
 
     private void btnTornaIndietroJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTornaIndietroJBActionPerformed
@@ -285,28 +302,47 @@ public class ModificaSportivo extends javax.swing.JFrame {
     private void btnAggiornaJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAggiornaJBActionPerformed
         ControllerSportivo controllerSportivo = new ControllerSportivo();
         String codiceFiscalePreso = inputCodiceFiscaleJTF.getText();
-        
-        String nome = inputNomeJTF.getText();
-        String cognome = inputCognomeJTF.getText();
-        String sesso = inputSessoJTF.getText();
-        String nazionalita = inputNazioneJTF.getText();
-        String indirizzo = inputIndirizzoJTF.getText();
-        java.sql.Date dataNascitaSql = new java.sql.Date(inputDataNascitaJDC.getDate().getTime()); 
-        String telefono = inputTelefonoJTF.getText();
-        String codiceFiscale = inputCodiceFiscaleModificatoJTF.getText();
-        String ruolo = inputRuoloJTF.getText();
-        String pesoStr = inputPesoJTF.getText();
-        float peso = Float.parseFloat(pesoStr);
-        String idProcuratore = inputProcuratoreAssociatoJTF.getText();
-        String iban = inputIbanJTF.getText();
-        int idClub = Integer.parseInt(inputIdClubJTF.getText());
-        
-        
-        try {
-            controllerSportivo.aggiornaSportivo(codiceFiscalePreso, nome, cognome, sesso, nazionalita, indirizzo, dataNascitaSql, telefono, codiceFiscale, ruolo, peso, idProcuratore, iban, idClub);
-        } catch (ExceptionDao ex) {
-            Logger.getLogger(ModificaSportivo.class.getName()).log(Level.SEVERE, null, ex);
+        java.sql.Date dataNascitaSql = null;
+        if(controlloConvalidazione.controlloCercaAtleta(codiceFiscalePreso) == true) {
+            if(datiAtleta.isEmpty())
+                JOptionPane.showMessageDialog(this, "ATLETA "+codiceFiscalePreso+" NON ESISTE\nNON POSSIBILE MODIFICARLO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            else {
+                String nome = inputNomeJTF.getText();
+                String cognome = inputCognomeJTF.getText();
+                String sesso = inputSessoJTF.getText();
+                String nazionalita = inputNazioneJTF.getText();
+                String indirizzo = inputIndirizzoJTF.getText();
+                
+                try {
+                    dataNascitaSql = new java.sql.Date(inputDataNascitaJDC.getDate().getTime());
+                } catch(NullPointerException nex) {
+                    JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nINSERISCI UNA DATA VALIDA", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                }
+                
+                String telefono = inputTelefonoJTF.getText();
+                String codiceFiscale = inputCodiceFiscaleModificatoJTF.getText();
+                String ruolo = inputRuoloJTF.getText();
+                String pesoStr = inputPesoJTF.getText();
+                float peso = Float.parseFloat(pesoStr);
+                String idProcuratore = inputProcuratoreAssociatoJTF.getText();
+                String iban = inputIbanJTF.getText();
+                int idClub = Integer.parseInt(inputIdClubJTF.getText());
+
+                String strDate = String.valueOf(dataNascitaSql);
+                if(controlloConvalidazione.controlloModificaAtleta(nome, cognome, nazionalita, indirizzo, strDate, codiceFiscale, sesso, telefono, ruolo, pesoStr, idProcuratore, iban) == true) {
+                    try {
+                        controllerSportivo.aggiornaSportivo(codiceFiscalePreso, nome, cognome, sesso, nazionalita, indirizzo, dataNascitaSql, telefono, codiceFiscale, ruolo, peso, idProcuratore, iban, idClub);
+                        JOptionPane.showMessageDialog(this, "✓ MODIFICA DELL'ATLETA "+codiceFiscalePreso+" EFFETTUATA CON SUCCESSO", "MODIFICA", JOptionPane.INFORMATION_MESSAGE);
+                    } catch (ExceptionDao ex) {
+                        Logger.getLogger(ModificaSportivo.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                else
+                    JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nUNO O PIU' CAMPI MANCANTI", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            }
         }
+        else
+            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nINSERIRE IL CODICE FISCALE PER TROVARE IL PROCURATORE DA MODIFICARE", "ERRORE", JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_btnAggiornaJBActionPerformed
 
     public static void main(String args[]) {

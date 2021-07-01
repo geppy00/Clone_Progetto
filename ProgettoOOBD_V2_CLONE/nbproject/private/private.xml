@@ -12,14 +12,10 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/peppe/OneDrive/Desktop/ALL%20MY%20SHIT/File%20progetto%20OO-BD/BACKUP%20PROGETTO/src/controller/ControllerSportivo.java</file>
             <file>file:/C:/Users/peppe/OneDrive/Desktop/ALL%20MY%20SHIT/File%20progetto%20OO-BD/BACKUP%20PROGETTO/src/view/registrare/RegistrareSportivo.java</file>
-            <file>file:/C:/Users/peppe/OneDrive/Desktop/ALL%20MY%20SHIT/File%20progetto%20OO-BD/BACKUP%20PROGETTO/src/view/SezioneEliminaContrattoProcuratore.java</file>
-            <file>file:/C:/Users/peppe/OneDrive/Desktop/ALL%20MY%20SHIT/File%20progetto%20OO-BD/BACKUP%20PROGETTO/src/model/Contratto.java</file>
-            <file>file:/C:/Users/peppe/OneDrive/Desktop/ALL%20MY%20SHIT/File%20progetto%20OO-BD/BACKUP%20PROGETTO/src/dao/ProcuratoreDao.java</file>
-            <file>file:/C:/Users/peppe/OneDrive/Desktop/ALL%20MY%20SHIT/File%20progetto%20OO-BD/BACKUP%20PROGETTO/src/controller/ControllerProcuratore.java</file>
-            <file>file:/C:/Users/peppe/OneDrive/Desktop/ALL%20MY%20SHIT/File%20progetto%20OO-BD/BACKUP%20PROGETTO/src/view/elimina/EliminaContrattoProcuratore.java</file>
-            <file>file:/C:/Users/peppe/OneDrive/Desktop/ALL%20MY%20SHIT/File%20progetto%20OO-BD/BACKUP%20PROGETTO/src/view/registrare/RegistraContrattoClub.java</file>
+            <file>file:/C:/Users/peppe/OneDrive/Desktop/ALL%20MY%20SHIT/File%20progetto%20OO-BD/BACKUP%20PROGETTO/src/convalidazione/ControlloConvalidazione.java</file>
+            <file>file:/C:/Users/peppe/OneDrive/Desktop/ALL%20MY%20SHIT/File%20progetto%20OO-BD/BACKUP%20PROGETTO/src/view/modificaDati/ModificaSportivo.java</file>
+            <file>file:/C:/Users/peppe/OneDrive/Desktop/ALL%20MY%20SHIT/File%20progetto%20OO-BD/BACKUP%20PROGETTO/src/view/modificaDati/ModificaDatiProcuratore.java</file>
         </group>
     </open-files>
 </project-private>

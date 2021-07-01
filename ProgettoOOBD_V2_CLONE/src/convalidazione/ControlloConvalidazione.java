@@ -81,4 +81,25 @@ public class ControlloConvalidazione {
             return false;
     }
     
+    public boolean controlloRegistraAtleta(String nome, String cognome, String nazione, String indirizzo, String dataNascita, String codiceFiscale) {
+        if(nome != null && !(nome.equals("")) && cognome != null && !(cognome.equals("")) && nazione != null && !(nazione.equals("")) && indirizzo != null && !(indirizzo.equals("")) && dataNascita != null && !(dataNascita.equals("")) && codiceFiscale != null && !(codiceFiscale.equals("")))
+            return true;
+        else
+            return false;
+    }
+    
+    public boolean controlloCercaAtleta(String codiceFiscale) {
+        if(codiceFiscale != null && !(codiceFiscale.equals("")))
+            return true;
+        else
+            return false;
+    }
+    
+    public boolean controlloModificaAtleta(String nome, String cognome, String nazione, String indirizzo, String dataNascita, String codiceFiscale, String sesso, String telefono, String ruolo,String pesoStr, String idProcuratore, String iban) {
+        if(nome != null && !(nome.equals("")) && cognome != null && !(cognome.equals("")) && nazione != null && !(nazione.equals("")) && indirizzo != null && !(indirizzo.equals("")) && dataNascita != null && !(dataNascita.equals("")) && codiceFiscale != null && !(codiceFiscale.equals("")) && sesso != null && !(sesso.equals("")) && telefono != null && !(telefono.equals("")) && ruolo != null && !(ruolo.equals("")) && pesoStr != null && !(pesoStr.equals("")) && idProcuratore != null && !(idProcuratore.equals("")) && iban != null && !(iban.equals("")))
+            return true;
+        else
+            return false;
+    }
+    
 }
