@@ -55,6 +55,6 @@ EXTRA
 -quando si elimina un utente viene eliminato (nel database) anche il suo corrispettivo login (✓ FATTO :D)
 -quando si registra un atleta non per forza si deve inserire l'id del club ma lo si inserirà dopo aver registrato il contratto nel sistema (✓ FATTO :D)
 -quando si elimina un contratto si elimina la relazione con esso nell'atleta (✓ FATTO :D)
--aggiungere un segnale acustico per ogni errore(codice per generarlo: Toolkit.getDefaultToolkit().beep())
+-aggiungere un segnale acustico per ogni errore(codice per generarlo: Toolkit.getDefaultToolkit().beep()) (✓ FATTO :D)
 
   

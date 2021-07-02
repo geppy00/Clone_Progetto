@@ -4,6 +4,7 @@ package view.elimina;
 import controller.ControllerSponsor;
 import convalidazione.ControlloConvalidazione;
 import dao.ExceptionDao;
+import java.awt.Toolkit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -102,6 +103,7 @@ public class ConfermaEliminazioneEvento extends javax.swing.JFrame {
             }
         }
         else {
+            Toolkit.getDefaultToolkit().beep();
             JOptionPane.showMessageDialog(this, "CI E' STATO UN PROBLEMA NEL RICAVARE I DATI\nRIPROVA A SELEZIONE QUESTO EVENTO", "WARNING", JOptionPane.WARNING_MESSAGE);
             this.setVisible(false);
         }

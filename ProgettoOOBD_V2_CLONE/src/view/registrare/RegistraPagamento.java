@@ -5,6 +5,7 @@ import controller.ControllerClub;
 import convalidazione.ControlloConvalidazione;
 import dao.DataAccessObject;
 import dao.ExceptionDao;
+import java.awt.Toolkit;
 import java.sql.Connection;
 import view.SezionePagamentoView;
 import  java.sql.Date;
@@ -51,8 +52,6 @@ public class RegistraPagamento extends javax.swing.JFrame {
         Connection connection = null;
         ResultSet rs = null;
         String sql = "SELECT atleta.codfiscale, atleta.nome, atleta.cognome FROM atleta join club on atleta.codclub=club.idclub WHERE atleta.codclub="+Integer.parseInt(this.getIdClubStr())+";";
-        
-        System.out.println("SQL="+sql);
         
         try {
             connection = new DataAccessObject().connectionToDatabase();
@@ -197,6 +196,7 @@ public class RegistraPagamento extends javax.swing.JFrame {
         try{
             importo = Float.parseFloat(importoStr);
         }catch(NumberFormatException nex) {
+            Toolkit.getDefaultToolkit().beep();
             JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nINSERIRE UN NUMERO VALIDO", "ERRORE", JOptionPane.ERROR_MESSAGE);
         }
         
@@ -211,8 +211,10 @@ public class RegistraPagamento extends javax.swing.JFrame {
                 Logger.getLogger(RegistraPagamento.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        else
+        else {
+            Toolkit.getDefaultToolkit().beep();
             JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nUNO O PIU' CAMPI MANCANTI", "ERRORE", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnPagaJBActionPerformed
 
     private void btnAnnullaJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnnullaJBActionPerformed

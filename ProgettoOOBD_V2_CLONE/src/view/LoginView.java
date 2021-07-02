@@ -119,10 +119,10 @@ public class LoginView extends javax.swing.JFrame {
             setIdCopiato(loginController.verificaLogin(userName, password, scelta));
             System.out.println("CODICE ACCESSO "+getIdCopiato());
             if(getIdCopiato() == null){ 
-                JOptionPane.showMessageDialog(null, "Dati Sbagliati!!");
+                JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nDATI SBAGLIATI", "ERRORE", JOptionPane.ERROR_MESSAGE);
              
             }else{
-               JOptionPane.showMessageDialog(null, "Dati corretti");
+               JOptionPane.showMessageDialog(this, "DATI CORRETI\n\t\tBENVENUTO", "ACCESSO", JOptionPane.INFORMATION_MESSAGE);
                
                //HO SCELTO DI USARE LO SWITCH PERCHE' VA DIRETTAMENTE NEL CASO INTERESSATO
                switch(scelta) {

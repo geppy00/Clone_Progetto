@@ -5,6 +5,7 @@ import controller.ControllerSportivo;
 import convalidazione.ControlloConvalidazione;
 import dao.DataAccessObject;
 import dao.ExceptionDao;
+import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -327,8 +328,9 @@ public class RegistrareSportivo extends javax.swing.JFrame {
         String nazionePreso = inputNazioneJTF.getText();
 
         try {
-        dataNascitaPresoSql = new java.sql.Date(DataNascitaJDC.getDate().getTime());
+            dataNascitaPresoSql = new java.sql.Date(DataNascitaJDC.getDate().getTime());
         } catch(NullPointerException nex) {
+            Toolkit.getDefaultToolkit().beep();
             JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nINSERIRE UNA DATA VALIDA", "ERRORE", JOptionPane.ERROR_MESSAGE);
         }
 
@@ -340,6 +342,7 @@ public class RegistrareSportivo extends javax.swing.JFrame {
         try {
             pesoPreso = Float.parseFloat(pesoStr);
         } catch(NumberFormatException nex) {
+            Toolkit.getDefaultToolkit().beep();
             JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nINSERIRE UN NUMERO VALIDO", "ERRORE", JOptionPane.ERROR_MESSAGE);
         }
         
@@ -362,8 +365,10 @@ public class RegistrareSportivo extends javax.swing.JFrame {
                 Logger.getLogger(RegistrareSportivo.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        else
+        else {
+            Toolkit.getDefaultToolkit().beep();
             JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nUNO O PIU' CAMPI MANCANTI", "ERRORE", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnRegistraJBActionPerformed
 
    

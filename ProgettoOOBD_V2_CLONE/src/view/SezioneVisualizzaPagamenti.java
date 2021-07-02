@@ -239,8 +239,10 @@ public class SezioneVisualizzaPagamenti extends javax.swing.JFrame {
         if(controlloConvalidazione.controlloVisuallizzaPagamentiAtleta(idAtleta) == true) {
             try {
                 datiStipendio = controllerClub.cercaPagamentiAtleta(idAtleta, Integer.parseInt(this.getIdClub()));
-                if(datiStipendio.isEmpty())
+                if(datiStipendio.isEmpty()) {
+                    Toolkit.getDefaultToolkit().beep();
                     JOptionPane.showMessageDialog(this, "ATLETA "+idAtleta+" NON TROVATO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                }
                 else {
                     DefaultTableModel tblModel = (DefaultTableModel)visualizzaDatiPagamentiJB.getModel();
                     tblModel.setRowCount(0);
@@ -260,8 +262,10 @@ public class SezioneVisualizzaPagamenti extends javax.swing.JFrame {
                 Logger.getLogger(SezioneVisualizzaPagamenti.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        else
+        else {
+            Toolkit.getDefaultToolkit().beep();
             JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nCAMPO DI RICERCA MANCANTE", "ERRORE", JOptionPane.ERROR_MESSAGE);
+        }
     }                                                
 
     private void btnCercaDataPagamentoJBActionPerformed(java.awt.event.ActionEvent evt) {                                                        
@@ -270,6 +274,7 @@ public class SezioneVisualizzaPagamenti extends javax.swing.JFrame {
         try {
             dataPagamento = new java.sql.Date(inputDataPagamentoJDC.getDate().getTime());
         }catch(NullPointerException nex) {
+            Toolkit.getDefaultToolkit().beep();
             JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nINSERISCI UNA DATA VALIDA", "ERRORE", JOptionPane.ERROR_MESSAGE);
         }
         
@@ -277,8 +282,10 @@ public class SezioneVisualizzaPagamenti extends javax.swing.JFrame {
         if(controlloConvalidazione.controlloVisuallizzaPagamentiData(String.valueOf(dataPagamento)) == true) {
             try {
                 datiStipendio = controllerClub.cercaPagamentiDataPagamento(dataPagamento, Integer.parseInt(this.getIdClub()));
-                if(datiStipendio.isEmpty())
+                if(datiStipendio.isEmpty()) {
+                    Toolkit.getDefaultToolkit().beep();
                     JOptionPane.showMessageDialog(this, "DATA "+String.valueOf(dataPagamento)+" DEL PAGAMENTO NON ESISTE", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                }
                 else {
                     DefaultTableModel tblModel = (DefaultTableModel)visualizzaDatiPagamentiJB.getModel();
                     tblModel.setRowCount(0);
@@ -297,11 +304,14 @@ public class SezioneVisualizzaPagamenti extends javax.swing.JFrame {
             } catch (ExceptionDao ex) {
                 Logger.getLogger(SezioneVisualizzaPagamenti.class.getName()).log(Level.SEVERE, null, ex);
             } catch(NullPointerException nex) {
+                Toolkit.getDefaultToolkit().beep();
                 JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nINSERISCI UNA DATA VALIDA", "ERRORE", JOptionPane.ERROR_MESSAGE);
             }
         }
-        else
+        else {
+            Toolkit.getDefaultToolkit().beep();
             JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nCAMPO DI RICERCA MANCANTE", "ERRORE", JOptionPane.ERROR_MESSAGE);
+        }
     }                                                       
 
     private void btnRipristinaJBActionPerformed(java.awt.event.ActionEvent evt) {                                                

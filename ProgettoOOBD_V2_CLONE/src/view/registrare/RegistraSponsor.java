@@ -4,6 +4,7 @@ package view.registrare;
 import controller.ControllerSponsor;
 import convalidazione.ControlloConvalidazione;
 import dao.ExceptionDao;
+import java.awt.Toolkit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -131,8 +132,10 @@ public class RegistraSponsor extends javax.swing.JFrame {
                 Logger.getLogger(RegistraSponsor.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        else
+        else {
+            Toolkit.getDefaultToolkit().beep();
             JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nUNO O PIU' CAMPI MANCANTI", "ERRORE", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnRegistraJBActionPerformed
 
    

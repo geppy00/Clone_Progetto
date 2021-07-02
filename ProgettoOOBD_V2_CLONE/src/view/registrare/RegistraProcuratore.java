@@ -4,6 +4,7 @@ package view.registrare;
 import controller.ControllerProcuratore;
 import convalidazione.ControlloConvalidazione;
 import dao.ExceptionDao;
+import java.awt.Toolkit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -226,6 +227,7 @@ public class RegistraProcuratore extends javax.swing.JFrame {
         try {
             dataNascitaPresoSql = new java.sql.Date(dataNascitaJDC.getDate().getTime());
         }catch(NullPointerException nex) {
+                Toolkit.getDefaultToolkit().beep();
                 JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nINSERIRE UNA DATA VALIDA", "ERRORE", JOptionPane.ERROR_MESSAGE);
             }
 
@@ -242,8 +244,10 @@ public class RegistraProcuratore extends javax.swing.JFrame {
                 Logger.getLogger(RegistraProcuratore.class.getName()).log(Level.SEVERE, null, ex);
             } 
         }
-        else
+        else {
+            Toolkit.getDefaultToolkit().beep();
             JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nUNO O PIU' CAMPI MANCANTI", "ERRORE", JOptionPane.ERROR_MESSAGE);
+        }
 
     }//GEN-LAST:event_btnRegistraJBActionPerformed
 

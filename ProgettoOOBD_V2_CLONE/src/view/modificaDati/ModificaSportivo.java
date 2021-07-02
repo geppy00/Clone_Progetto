@@ -4,6 +4,7 @@ package view.modificaDati;
 import controller.ControllerSportivo;
 import convalidazione.ControlloConvalidazione;
 import dao.ExceptionDao;
+import java.awt.Toolkit;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -265,8 +266,10 @@ public class ModificaSportivo extends javax.swing.JFrame {
         if(controlloConvalidazione.controlloCercaAtleta(CodiceFiscalePreso) == true) {
             try {
                 datiAtleta = controllerSportivo.cercaSportivo(CodiceFiscalePreso);
-                if(datiAtleta.isEmpty())
+                if(datiAtleta.isEmpty()) {
+                    Toolkit.getDefaultToolkit().beep();
                     JOptionPane.showMessageDialog(this, "ATLETA "+CodiceFiscalePreso+" NON TROVATO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                }
                 else {
                     JOptionPane.showMessageDialog(this, "✓ ATLETA "+CodiceFiscalePreso+" TROVATO CON SUCCESSO", "RICERCA", JOptionPane.INFORMATION_MESSAGE);
                     datiAtleta.forEach((Atleta atleta)->{
@@ -289,8 +292,10 @@ public class ModificaSportivo extends javax.swing.JFrame {
                 Logger.getLogger(ModificaSportivo.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        else
+        else {
+            Toolkit.getDefaultToolkit().beep();
             JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nSCRIVERE NEL CAMPO IL CODICE FISCALE DA CERCARE", "ERRORE", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnCercaJBActionPerformed
 
     private void btnTornaIndietroJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTornaIndietroJBActionPerformed
@@ -304,8 +309,10 @@ public class ModificaSportivo extends javax.swing.JFrame {
         String codiceFiscalePreso = inputCodiceFiscaleJTF.getText();
         java.sql.Date dataNascitaSql = null;
         if(controlloConvalidazione.controlloCercaAtleta(codiceFiscalePreso) == true) {
-            if(datiAtleta.isEmpty())
+            if(datiAtleta.isEmpty()) {
+                Toolkit.getDefaultToolkit().beep();
                 JOptionPane.showMessageDialog(this, "ATLETA "+codiceFiscalePreso+" NON ESISTE\nNON POSSIBILE MODIFICARLO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            }
             else {
                 String nome = inputNomeJTF.getText();
                 String cognome = inputCognomeJTF.getText();
@@ -316,6 +323,7 @@ public class ModificaSportivo extends javax.swing.JFrame {
                 try {
                     dataNascitaSql = new java.sql.Date(inputDataNascitaJDC.getDate().getTime());
                 } catch(NullPointerException nex) {
+                    Toolkit.getDefaultToolkit().beep();
                     JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nINSERISCI UNA DATA VALIDA", "ERRORE", JOptionPane.ERROR_MESSAGE);
                 }
                 
@@ -337,12 +345,16 @@ public class ModificaSportivo extends javax.swing.JFrame {
                         Logger.getLogger(ModificaSportivo.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
-                else
+                else {
+                    Toolkit.getDefaultToolkit().beep();
                     JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nUNO O PIU' CAMPI MANCANTI", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                }
             }
         }
-        else
+        else {
+            Toolkit.getDefaultToolkit().beep();
             JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nINSERIRE IL CODICE FISCALE PER TROVARE IL PROCURATORE DA MODIFICARE", "ERRORE", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnAggiornaJBActionPerformed
 
     public static void main(String args[]) {

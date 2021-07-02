@@ -4,6 +4,7 @@ package view.registrare;
 import controller.ControllerProcuratore;
 import convalidazione.ControlloConvalidazione;
 import dao.ExceptionDao;
+import java.awt.Toolkit;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -272,8 +273,10 @@ public class RegistrareContrattoSponsor extends javax.swing.JFrame {
         if(controlloConvalidazione.controlloAtleta(idAtleta) == true) {
             try {
                 datiAtleta = controllerProcuratore.cercaSportivo(idAtleta);
-                if(datiAtleta.isEmpty())
+                if(datiAtleta.isEmpty()) {
+                    Toolkit.getDefaultToolkit().beep();
                     JOptionPane.showMessageDialog(this, "ATLETA "+idAtleta+" NON TROVATO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                }
                 else {
                     JOptionPane.showMessageDialog(this, "✓ ATLETA "+idAtleta+" TROVATO CON SUCCESSO", "RICERCA", JOptionPane.INFORMATION_MESSAGE);
                     datiAtleta.forEach((Atleta atleta)->{
@@ -287,8 +290,10 @@ public class RegistrareContrattoSponsor extends javax.swing.JFrame {
                 Logger.getLogger(RegistraContrattoClub.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        else
+        else {
+            Toolkit.getDefaultToolkit().beep();
             JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nSCRIVERE NEL CAMPO IL CODICE FISCALE DELL'ATLETA DA CERCARE", "ERRORE", JOptionPane.ERROR_MESSAGE);
+        }
         
     }//GEN-LAST:event_btnCercaJBActionPerformed
 
@@ -302,6 +307,7 @@ public class RegistrareContrattoSponsor extends javax.swing.JFrame {
                 if(controlloConvalidazione.controllaNome(nomeSponsor) == true)
                     nomeSponsorJTF.setText(nomeSponsor);
                 else {
+                    Toolkit.getDefaultToolkit().beep();
                     nomeSponsorJTF.setText(" ");
                     JOptionPane.showMessageDialog(this, "SPONSOR CON ID "+idSponsor+" NON TROVATO", "ERRORE", JOptionPane.ERROR_MESSAGE);
                 }
@@ -309,8 +315,10 @@ public class RegistrareContrattoSponsor extends javax.swing.JFrame {
                 Logger.getLogger(RegistrareContrattoSponsor.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        else
+        else {
+            Toolkit.getDefaultToolkit().beep();
             JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nSCRIVERE L'ID DELLO SPONSOR DA CERCARE", "ERRORE", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_inputIdSponsorJTFActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -327,14 +335,18 @@ public class RegistrareContrattoSponsor extends javax.swing.JFrame {
             idSponsor = Integer.parseInt(inputIdSponsorJTF.getText());
             valContratto = Float.parseFloat(inputValoreContrttoJTF.getText());
         }catch(NullPointerException npe) {
+            Toolkit.getDefaultToolkit().beep();
             JOptionPane.showMessageDialog(this, "INSERIRE UNA DATA VALIDA", "WARNING", JOptionPane.WARNING_MESSAGE);
         }catch(NumberFormatException nfe) {
+            Toolkit.getDefaultToolkit().beep();
             JOptionPane.showMessageDialog(this, "INSERIRE UN NUMERO VALIDO", "WARNING", JOptionPane.WARNING_MESSAGE);
         }
         
         if(controlloConvalidazione.controllaStipulaContratto(idAtleta, String.valueOf(idSponsor), String.valueOf(dataInizio), String.valueOf(dataFine), String.valueOf(valContratto)) == true) {
-            if(datiAtleta.isEmpty())
+            if(datiAtleta.isEmpty()) {
+                Toolkit.getDefaultToolkit().beep();
                 JOptionPane.showMessageDialog(this, "ATLETA CON CODICE FISCALE "+idAtleta+" NON ESISTE\n\t\tNON POSSIBILE MODIFICARLO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            }
             else {
                 try {
                     controllerProcuratore.registraContratto(idAtleta, idSponsor, dataInizio, dataFine, valContratto, "SPONSOR");
@@ -343,8 +355,10 @@ public class RegistrareContrattoSponsor extends javax.swing.JFrame {
                 }
             }
         }
-        else
+        else {
+            Toolkit.getDefaultToolkit().beep();
             JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nUNO O PIU' CAMPI MANCANTI", "ERRORE", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

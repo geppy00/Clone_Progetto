@@ -4,6 +4,7 @@ package view.elimina;
 import controller.ControllerClub;
 import convalidazione.ControlloConvalidazione;
 import dao.ExceptionDao;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -135,8 +136,10 @@ public class EliminaClub extends javax.swing.JFrame {
                 DefaultTableModel tblModel = (DefaultTableModel)datiClubTabellaJT.getModel();
                 tblModel.setRowCount(0);
                 datiClub = controllerClub.cercaClub(nomeClubCercare);
-                if(datiClub.isEmpty())
+                if(datiClub.isEmpty()) {
+                    Toolkit.getDefaultToolkit().beep();
                     JOptionPane.showMessageDialog(this, "CLUB "+nomeClubCercare+" NON TROVATO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                }
                 else {
                     JOptionPane.showMessageDialog(this, "✓ CLUB "+nomeClubCercare+" TROVATO", "TROVATO", JOptionPane.INFORMATION_MESSAGE);
                     datiClub.forEach((Club club) -> {
@@ -153,23 +156,28 @@ public class EliminaClub extends javax.swing.JFrame {
                 Logger.getLogger(EliminaClub.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        else
+        else {
+            Toolkit.getDefaultToolkit().beep();
             JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nSCRIVERE NEL CAMPO IL CLUB DA CERCARE", "ERRORE", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnCercaJBActionPerformed
 
     private void btnEliminaJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminaJBActionPerformed
         ControllerClub controllerClub = new ControllerClub();
         String nomeClubCercare = inputNomeJTF.getText();
         
-        if(controlloConvalidazione.controlloCercaClub(nomeClubCercare) == false)
+        if(controlloConvalidazione.controlloCercaClub(nomeClubCercare) == false) {
+            Toolkit.getDefaultToolkit().beep();
             JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nSCRIVERE NEL CAMPO IL CLUB DA ELIMINARE", "ERRORE", JOptionPane.ERROR_MESSAGE);
+        }
         else {
-            if(datiClub.isEmpty())
+            if(datiClub.isEmpty()) {
+                Toolkit.getDefaultToolkit().beep();
                 JOptionPane.showMessageDialog(this, "CLUB "+nomeClubCercare+" NON ESISTE\nNON POSSIBILE ELIMINARLO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            }
             else {
                 try {
                     this.setIdClub((Integer) datiClubTabellaJT.getModel().getValueAt(0, 0));
-                    System.out.println("IDCLUB DALLA TABELLA= "+this.getIdClub());
                     controllerClub.eliminaClub(nomeClubCercare, this.getIdClub());
                     DefaultTableModel tblModel = (DefaultTableModel)datiClubTabellaJT.getModel();
                     tblModel.setRowCount(0);

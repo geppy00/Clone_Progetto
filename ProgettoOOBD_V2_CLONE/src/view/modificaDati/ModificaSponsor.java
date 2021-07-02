@@ -4,6 +4,7 @@ package view.modificaDati;
 import controller.ControllerSponsor;
 import convalidazione.ControlloConvalidazione;
 import dao.ExceptionDao;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -160,8 +161,10 @@ public class ModificaSponsor extends javax.swing.JFrame {
         if(controlloConvalidazione.controlloCercaSponsor(nomeSponsorCercare) == true) {
             try {
                 datiSponsor = controllerSponsor.cercaSponsor(nomeSponsorCercare);
-                if(datiSponsor.isEmpty())
+                if(datiSponsor.isEmpty()) {
+                    Toolkit.getDefaultToolkit().beep();
                     JOptionPane.showMessageDialog(this, "SPONSOR "+nomeSponsorCercare+" NON TROVATO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                }
                 else {
                     JOptionPane.showMessageDialog(this, "✓ SPONSOR "+nomeSponsorCercare+" TROVATO CON SUCCESSO", "RICERCA", JOptionPane.INFORMATION_MESSAGE);
                     datiSponsor.forEach((Sponsor sponsor) -> {
@@ -174,8 +177,10 @@ public class ModificaSponsor extends javax.swing.JFrame {
                 Logger.getLogger(ModificaSponsor.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        else
+        else {
+            Toolkit.getDefaultToolkit().beep();
             JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nSCRIVERE NEL CAMPO LO SPONSOR DA CERCARE", "ERRORE", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnCercaJBActionPerformed
 
     private void btnAggiornaJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAggiornaJBActionPerformed
@@ -183,8 +188,10 @@ public class ModificaSponsor extends javax.swing.JFrame {
         String nomeSponsorCercare = inputNomeSponsorCercareJTF.getText();
         
         if(controlloConvalidazione.controlloCercaSponsor(nomeSponsorCercare) == true) {
-            if(datiSponsor.isEmpty())
-                    JOptionPane.showMessageDialog(this, "SPONSOR "+nomeSponsorCercare+" NON ESISTE\nNON POSSIBILE MODIFICARLO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            if(datiSponsor.isEmpty()) {
+                Toolkit.getDefaultToolkit().beep();
+                JOptionPane.showMessageDialog(this, "SPONSOR "+nomeSponsorCercare+" NON ESISTE\nNON POSSIBILE MODIFICARLO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            }
             else {
                 String nomeDaAggiornare = inputNomeSponsorJTF.getText();
                 String indirizzoDaAggiornare = inputIndirizzoJTF.getText();
@@ -198,12 +205,16 @@ public class ModificaSponsor extends javax.swing.JFrame {
                         Logger.getLogger(ModificaSponsor.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
-                else
+                else {
+                    Toolkit.getDefaultToolkit().beep();
                     JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nUNO O PIU' CAMPI MANCANTI", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                }
             }
         }
-        else
+        else {
+            Toolkit.getDefaultToolkit().beep();
             JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nSCRIVERE NEL CAMPO LO SPONSOR DA CERCARE\nPER POTERLO MODIFICARE", "ERRORE", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnAggiornaJBActionPerformed
 
    

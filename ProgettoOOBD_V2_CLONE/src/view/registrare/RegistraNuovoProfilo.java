@@ -5,6 +5,7 @@ import controller.ControllerLogin;
 import convalidazione.ControlloConvalidazione;
 import dao.DataAccessObject;
 import dao.ExceptionDao;
+import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -30,6 +31,7 @@ public class RegistraNuovoProfilo extends javax.swing.JFrame {
         try {
             stampaDatiUtenteNellaTabella();
         } catch (ExceptionDao ex) {
+            Toolkit.getDefaultToolkit().beep();
             //Logger.getLogger(RegistraNuovoProfilo.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(this, "NON E' STATO POSSIBILE STAMPARE I DATI NELLA TABELLA\n\t\tRIPROVA", "ERRORE", JOptionPane.ERROR_MESSAGE);
         }
@@ -301,21 +303,27 @@ public class RegistraNuovoProfilo extends javax.swing.JFrame {
         
         if(controlloConvalidazione.controlloRegistraNuovoProfilo(username, password, confermaPassword, idCorrispodente) == true) {
             if(!(password.equals(confermaPassword))) {
+               Toolkit.getDefaultToolkit().beep();
                JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nPASSWORD NON COINCIDONO", "ERRORE", JOptionPane.ERROR_MESSAGE);
-            } else {
+            } 
+            else {
                 try {
                     boolean check = controllerLogin.registraUtenteLogin(opzUser, username, password, idCorrispodente);
                     if(check == true)
                         JOptionPane.showMessageDialog(this, "✓ REGISTRAZIONE DELL'UTENTE EFFETTUATA CON SUCCESSO", "REGISTRAZIONE", JOptionPane.INFORMATION_MESSAGE);
-                    else
+                    else {
+                        Toolkit.getDefaultToolkit().beep();
                         JOptionPane.showMessageDialog(this, "!! REGISTRAZIONE FALLITA !!", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                    }
                 }catch (ExceptionDao ex) {
                         Logger.getLogger(RegistraNuovoProfilo.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
-        else
+        else {
+            Toolkit.getDefaultToolkit().beep();
             JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nUNO O PIU' CAMPI MANCANTI", "ERRORE", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnRegistraJBActionPerformed
 
     private void opzUserJCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opzUserJCBActionPerformed

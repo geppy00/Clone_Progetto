@@ -4,6 +4,7 @@ package view.registrare;
 import controller.ControllerSponsor;
 import convalidazione.ControlloConvalidazione;
 import dao.ExceptionDao;
+import java.awt.Toolkit;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.Date;
@@ -41,7 +42,8 @@ public class RegistraEventoSponsor extends javax.swing.JFrame {
         try {
             java.sql.Time timeValue = new java.sql.Time(formatter.parse(oraStr).getTime());
             return timeValue;
-        } catch(NullPointerException nex){
+        } catch(NullPointerException nex) {
+            Toolkit.getDefaultToolkit().beep();
             JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nINSERIRE UN ORARIO VALIDO", "ERRORE", JOptionPane.ERROR_MESSAGE);
         } catch (ParseException ex) {
             Logger.getLogger(RegistraEventoSponsor.class.getName()).log(Level.SEVERE, null, ex);
@@ -226,6 +228,7 @@ public class RegistraEventoSponsor extends javax.swing.JFrame {
             oraInizio = localDateFormat.format(dataInizio);
             oraFine = localDateFormat.format(dataFine);
         }catch(NullPointerException nex) {
+            Toolkit.getDefaultToolkit().beep();
             JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nINSERIRE UNA DATA CON ORARIO VALIDA", "ERRORE", JOptionPane.ERROR_MESSAGE);
         }
         java.sql.Time oraInizioTime = stringToTime(oraInizio);
@@ -234,6 +237,7 @@ public class RegistraEventoSponsor extends javax.swing.JFrame {
         try {
             gettoneValue = Double.parseDouble(inputGettoneEventoJTF.getText());
         }catch(NumberFormatException nfe) {
+            Toolkit.getDefaultToolkit().beep();
             JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nINSERIRE UN NUMERO VALIDO", "ERRORE", JOptionPane.ERROR_MESSAGE);
         }
 
@@ -245,11 +249,15 @@ public class RegistraEventoSponsor extends javax.swing.JFrame {
                     Logger.getLogger(RegistraEventoSponsor.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            else
+            else {
+                Toolkit.getDefaultToolkit().beep();
                 JOptionPane.showMessageDialog(this, "DESCRIZIONE MASSIMO 280 CARATTERI", "WARNING", JOptionPane.WARNING_MESSAGE);
+            }
         }
-        else
+        else {
+            Toolkit.getDefaultToolkit().beep();
             JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nUNO O PIU' CAMPI MANCANTI", "ERRORE", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnCreaEventoJBActionPerformed
 
     private void btnTornaIndietroJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTornaIndietroJBActionPerformed

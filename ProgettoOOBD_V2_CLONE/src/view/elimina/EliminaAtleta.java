@@ -4,6 +4,7 @@ package view.elimina;
 import controller.ControllerSportivo;
 import convalidazione.ControlloConvalidazione;
 import dao.ExceptionDao;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -126,8 +127,10 @@ public class EliminaAtleta extends javax.swing.JFrame {
         if(controlloConvalidazione.controlloCercaAtleta(codiceFiscaleAtletaPreso) == true) {
             try {
                 datiAtleta = controllerSportivo.cercaSportivo(codiceFiscaleAtletaPreso);
-                if(datiAtleta.isEmpty())
+                if(datiAtleta.isEmpty()) {
+                    Toolkit.getDefaultToolkit().beep();
                     JOptionPane.showMessageDialog(this, "ATLETA "+codiceFiscaleAtletaPreso+" NON TROVATO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                }
                 else{
                     JOptionPane.showMessageDialog(this, "✓ ATLETA "+codiceFiscaleAtletaPreso+" TROVATO", "TROVATO", JOptionPane.INFORMATION_MESSAGE);
                     DefaultTableModel tblModel = (DefaultTableModel)tableAtletaJT.getModel();
@@ -154,19 +157,25 @@ public class EliminaAtleta extends javax.swing.JFrame {
                 Logger.getLogger(EliminaAtleta.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        else
+        else {
+            Toolkit.getDefaultToolkit().beep();
             JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nSCRIVERE NEL CAMPO IL CODICE FISCALE DA CERCARE", "ERRORE", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnCercaJBActionPerformed
 
     private void btnEliminaJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminaJBActionPerformed
         ControllerSportivo controllerSportivo = new ControllerSportivo();
         String codiceFiscaleAtletaPreso = InputCodiceFiscaleJTF.getText();
         
-        if(controlloConvalidazione.controlloCercaAtleta(codiceFiscaleAtletaPreso) == false)
+        if(controlloConvalidazione.controlloCercaAtleta(codiceFiscaleAtletaPreso) == false) {
+            Toolkit.getDefaultToolkit().beep();
             JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nSCRIVERE NEL CAMPO IL CODICE FISCALE DA ELIMINARE", "ERRORE", JOptionPane.ERROR_MESSAGE);
+        }
         else{
-            if(datiAtleta.isEmpty())
+            if(datiAtleta.isEmpty()) {
+                Toolkit.getDefaultToolkit().beep();
                 JOptionPane.showMessageDialog(this, "ATLETA "+codiceFiscaleAtletaPreso+" NON ESISTE\nNON POSSIBILE ELIMINARLO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            }
             else {
                 try {
                     controllerSportivo.eliminaSportivo(codiceFiscaleAtletaPreso);

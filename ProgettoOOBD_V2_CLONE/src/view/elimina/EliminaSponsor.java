@@ -4,6 +4,7 @@ package view.elimina;
 import controller.ControllerSponsor;
 import convalidazione.ControlloConvalidazione;
 import dao.ExceptionDao;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -130,9 +131,11 @@ public class EliminaSponsor extends javax.swing.JFrame {
         if(controlloConvalidazione.controlloCercaSponsor(nomeSponsorPreso) == true) {
             try {
                 datiSponsor = controllerSponsor.cercaSponsor(nomeSponsorPreso);
-                if(datiSponsor.isEmpty())
+                if(datiSponsor.isEmpty()) {
+                    Toolkit.getDefaultToolkit().beep();
                     JOptionPane.showMessageDialog(this, "SPONSOR "+nomeSponsorPreso+" NON TROVATO", "ERRORE", JOptionPane.ERROR_MESSAGE);
-                else{
+                }
+                else {
                     DefaultTableModel tblModel = (DefaultTableModel)visualizzaDatiSponsorJT.getModel();
                     tblModel.setRowCount(0);
                     datiSponsor.forEach((Sponsor sponsor) -> {
@@ -149,23 +152,28 @@ public class EliminaSponsor extends javax.swing.JFrame {
                 Logger.getLogger(EliminaSponsor.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        else
+        else {
+            Toolkit.getDefaultToolkit().beep();
             JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nSCRIVERE NEL CAMPO LO SPONSOR DA CERCARE", "ERRORE", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnCercaSponsorJBActionPerformed
 
     private void btnEliminaSponsorJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminaSponsorJBActionPerformed
         ControllerSponsor controllerSponsor = new ControllerSponsor();
         String nomeSponsorPreso = inputNomeSponsorJTF.getText();
         
-        if(controlloConvalidazione.controlloCercaSponsor(nomeSponsorPreso) == false)
+        if(controlloConvalidazione.controlloCercaSponsor(nomeSponsorPreso) == false) {
+            Toolkit.getDefaultToolkit().beep();
             JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nSCRIVERE NEL CAMPO LO SPONSOR DA ELIMINARE", "ERRORE", JOptionPane.ERROR_MESSAGE);
+        }
         else {
-            if(datiSponsor.isEmpty())
+            if(datiSponsor.isEmpty()) {
+                Toolkit.getDefaultToolkit().beep();
                 JOptionPane.showMessageDialog(this, "SPONSOR "+nomeSponsorPreso+" NON ESISTE\nNON POSSIBILE ELIMINARLO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            }
             else {
                 try {
                     this.setIdSponsor((Integer) visualizzaDatiSponsorJT.getModel().getValueAt(0, 0));
-                    System.out.println("IDSPONSOR TABELLA= "+this.getIdSponsor());
                     controllerSponsor.eliminaSponsor(nomeSponsorPreso, this.getIdSponsor());
                     DefaultTableModel tblModel = (DefaultTableModel)visualizzaDatiSponsorJT.getModel();
                     tblModel.setRowCount(0);

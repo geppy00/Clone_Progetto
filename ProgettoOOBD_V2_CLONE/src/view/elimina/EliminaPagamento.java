@@ -4,6 +4,7 @@ package view.elimina;
 import controller.ControllerClub;
 import convalidazione.ControlloConvalidazione;
 import dao.ExceptionDao;
+import java.awt.Toolkit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -164,14 +165,17 @@ public class EliminaPagamento extends javax.swing.JFrame {
        try{
             dataPagamentoCercare = new java.sql.Date(inputDataCercareJDC.getDate().getTime());
         }catch(NullPointerException nex) {
+            Toolkit.getDefaultToolkit().beep();
             JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nINSERISCI UNA DATA VALIDA", "ERRORE", JOptionPane.ERROR_MESSAGE);
         }
        
         if(controlloConvalidazione.controlloCercaPagamento(String.valueOf(dataPagamentoCercare), this.getIdAtletaCercare()) == true) {
             try {
                 importo = controllerClub.cercaPagamento(dataPagamentoCercare, Integer.parseInt(this.getIdClub()), this.getIdAtletaCercare());
-                if(importo == -1)
+                if(importo == -1) {
+                    Toolkit.getDefaultToolkit().beep();
                     JOptionPane.showMessageDialog(this, "IMPORTO NON TROVATO\nNON POSSIBILE ELIMINARLO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                }
                 else {
                     JOptionPane.showMessageDialog(this, "✓ PAGAMENTO TROVATO CON SUCCESSO", "RICERCA", JOptionPane.INFORMATION_MESSAGE);
                     inputImportoJTF.setText(Double.toString(importo));
@@ -180,8 +184,10 @@ public class EliminaPagamento extends javax.swing.JFrame {
                 Logger.getLogger(ModificaPagamento.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        else
+        else {
+            Toolkit.getDefaultToolkit().beep();
             JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nUNO O PIU' CAMPI MANCANTI PER LA RICERCA", "ERRORE", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnCercaJBActionPerformed
 
     private void btnAnnullaJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnnullaJBActionPerformed
@@ -198,6 +204,7 @@ public class EliminaPagamento extends javax.swing.JFrame {
         try {
             importo = Double.parseDouble(inputImportoJTF.getText());
         }catch(NumberFormatException nfe) {
+            Toolkit.getDefaultToolkit().beep();
             JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nNON POSSIBILE ELIMINARE", "ERRORE", JOptionPane.ERROR_MESSAGE);
         }
         
@@ -206,14 +213,17 @@ public class EliminaPagamento extends javax.swing.JFrame {
         try{
             dataPagamentoCercare = new java.sql.Date(inputDataCercareJDC.getDate().getTime());
         }catch(NullPointerException nex) {
+            Toolkit.getDefaultToolkit().beep();
             JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nINSERISCI UNA DATA VALIDA", "ERRORE", JOptionPane.ERROR_MESSAGE);
         }
         
         if(controlloConvalidazione.controlloCercaPagamento(String.valueOf(dataPagamentoCercare), this.getIdAtletaCercare()) == true) {
             try {
                 importo = controllerClub.cercaPagamento(dataPagamentoCercare, Integer.parseInt(this.getIdClub()), idAtletaCercare);
-                if(importo == -1)
+                if(importo == -1) {
+                    Toolkit.getDefaultToolkit().beep();
                     JOptionPane.showMessageDialog(this, "IMPORTO NON TROVATO\nNON POSSIBILE ELIMINARLO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                }
                 else{
                     controllerClub.eliminaPagamento(dataPagamentoCercare, Integer.parseInt(this.getIdClub()), this.getIdAtletaCercare(), importo);
                     JOptionPane.showMessageDialog(this, "✓ ELIMINAZIONE DEL PAGAMENTO EFFETTUATA CON SUCCESSO", "ELIMINAZIONE", JOptionPane.INFORMATION_MESSAGE);
@@ -222,8 +232,10 @@ public class EliminaPagamento extends javax.swing.JFrame {
                 Logger.getLogger(ModificaPagamento.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        else
+        else {
+            Toolkit.getDefaultToolkit().beep();
             JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nUNO O PIU' CAMPI MANCANTI PER LA RICERCA NON POSSIBILE EFFETTUARE L'ELIMINAZIONE", "ERRORE", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnEliminaJBActionPerformed
 
 

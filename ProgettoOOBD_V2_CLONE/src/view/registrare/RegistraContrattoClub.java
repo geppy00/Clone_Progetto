@@ -4,6 +4,7 @@ package view.registrare;
 import controller.ControllerProcuratore;
 import convalidazione.ControlloConvalidazione;
 import dao.ExceptionDao;
+import java.awt.Toolkit;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -309,14 +310,18 @@ public class RegistraContrattoClub extends javax.swing.JFrame {
             idClub = Integer.parseInt(inputIdClubJTF.getText());
             valContratto = Float.parseFloat(inputValContrattoJTF.getText());
         }catch(NullPointerException npe) {
+            Toolkit.getDefaultToolkit().beep();
             JOptionPane.showMessageDialog(this, "INSERIRE UNA DATA VALIDA", "WARNING", JOptionPane.WARNING_MESSAGE);
         }catch(NumberFormatException nfe) {
+            Toolkit.getDefaultToolkit().beep();
             JOptionPane.showMessageDialog(this, "INSERIRE UN NUMERO VALIDO", "WARNING", JOptionPane.WARNING_MESSAGE);
         }
         
         if(controlloConvalidazione.controllaStipulaContratto(idAtleta, String.valueOf(idClub), String.valueOf(dataInizio), String.valueOf(dataFine), String.valueOf(valContratto)) == true) {
-            if(datiAtleta.isEmpty())
+            if(datiAtleta.isEmpty()) {
+                Toolkit.getDefaultToolkit().beep();
                 JOptionPane.showMessageDialog(this, "ATLETA CON CODICE FISCALE "+idAtleta+" NON ESISTE\n\t\tNON POSSIBILE MODIFICARLO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            }
             else {
                 try {
                     controllerProcuratore.registraContratto(idAtleta, idClub, dataInizio, dataFine, valContratto, "CLUB");
@@ -326,8 +331,10 @@ public class RegistraContrattoClub extends javax.swing.JFrame {
                 }
             }
         }
-        else
+        else {
+            Toolkit.getDefaultToolkit().beep();
             JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nUNO O PIU' CAMPI MANCANTI", "ERRORE", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnStipulaContrattoActionPerformed
 
     private void btnCercaJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCercaJBActionPerformed
@@ -337,8 +344,10 @@ public class RegistraContrattoClub extends javax.swing.JFrame {
         if(controlloConvalidazione.controlloAtleta(idAtleta) == true) {
             try {
                 datiAtleta = controllerProcuratore.cercaSportivo(idAtleta);
-                if(datiAtleta.isEmpty())
+                if(datiAtleta.isEmpty()) {
+                    Toolkit.getDefaultToolkit().beep();
                     JOptionPane.showMessageDialog(this, "ATLETA "+idAtleta+" NON TROVATO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                }
                 else {
                     JOptionPane.showMessageDialog(this, "✓ ATLETA "+idAtleta+" TROVATO CON SUCCESSO", "RICERCA", JOptionPane.INFORMATION_MESSAGE);
                     datiAtleta.forEach((Atleta atleta)->{
@@ -352,8 +361,10 @@ public class RegistraContrattoClub extends javax.swing.JFrame {
                 Logger.getLogger(RegistraContrattoClub.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        else
+        else {
+            Toolkit.getDefaultToolkit().beep();
             JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nSCRIVERE NEL CAMPO IL CODICE FISCALE DELL'ATLETA DA CERCARE", "ERRORE", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnCercaJBActionPerformed
 
     private void inputIdClubJTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputIdClubJTFActionPerformed
@@ -366,6 +377,7 @@ public class RegistraContrattoClub extends javax.swing.JFrame {
                 if(controlloConvalidazione.controllaNome(nomeClub) == true)
                     inputNomeClubJTF.setText(nomeClub);
                 else {
+                    Toolkit.getDefaultToolkit().beep();
                     inputNomeClubJTF.setText(" ");
                     JOptionPane.showMessageDialog(this, "CLUB CON ID "+idClub+" NON TROVATO", "ERRORE", JOptionPane.ERROR_MESSAGE);
                 }
@@ -373,8 +385,10 @@ public class RegistraContrattoClub extends javax.swing.JFrame {
                 Logger.getLogger(RegistraContrattoClub.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        else
+        else {
+            Toolkit.getDefaultToolkit().beep();
             JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nSCRIVERE L'ID DEL CLUB DA CERCARE", "ERRORE", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_inputIdClubJTFActionPerformed
 
     

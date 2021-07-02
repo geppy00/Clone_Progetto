@@ -4,6 +4,7 @@ package view.modificaDati;
 import controller.ControllerProcuratore;
 import convalidazione.ControlloConvalidazione;
 import dao.ExceptionDao;
+import java.awt.Toolkit;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -258,8 +259,10 @@ public class ModificaDatiProcuratore extends javax.swing.JFrame {
         if(controlloConvalidazione.controlloCercaProcuratore(matricolaCopiata) == true) {
             try {
                 datiProcuratore = controllerProcuratore.cercaProcuratore(matricolaCopiata);
-                if(datiProcuratore.isEmpty())
+                if(datiProcuratore.isEmpty()) {
+                    Toolkit.getDefaultToolkit().beep();
                     JOptionPane.showMessageDialog(this, "PROCURATORE "+matricolaCopiata+" NON TROVATO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                }
                 else{
                     JOptionPane.showMessageDialog(this, "✓ PROCURATORE "+matricolaCopiata+" TROVATO CON SUCCESSO", "RICERCA", JOptionPane.INFORMATION_MESSAGE);
                     datiProcuratore.forEach((Procuratore procuratore)->{
@@ -279,8 +282,10 @@ public class ModificaDatiProcuratore extends javax.swing.JFrame {
                     Logger.getLogger(ModificaDatiProcuratore.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        else
+        else {
+            Toolkit.getDefaultToolkit().beep();
             JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nSCRIVERE NEL CAMPO LA MATRICOLA DA CERCARE", "ERRORE", JOptionPane.ERROR_MESSAGE);
+        }
         
     }//GEN-LAST:event_btnCercaJTFActionPerformed
 
@@ -290,8 +295,10 @@ public class ModificaDatiProcuratore extends javax.swing.JFrame {
         String matricolaDaModificare = inputMatricolaDaCercareJTF.getText();
         
         if(controlloConvalidazione.controlloCercaProcuratore(matricolaDaModificare) == true) {
-            if(datiProcuratore.isEmpty())
+            if(datiProcuratore.isEmpty()) {
+                Toolkit.getDefaultToolkit().beep();
                 JOptionPane.showMessageDialog(this, "PROCURATORE "+matricolaDaModificare+" NON ESISTE\nNON POSSIBILE MODIFICARLO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            }
             else {
                 String matricolaNuova = inputMatricolaJTF.getText();
                 String nomeNuovo = inputNomeJTF.getText();
@@ -306,6 +313,7 @@ public class ModificaDatiProcuratore extends javax.swing.JFrame {
                 try {
                     dataNascitaPresoSql = new java.sql.Date(cambiaDataNascitaJDC.getDate().getTime());
                 } catch(NullPointerException nex) {
+                    Toolkit.getDefaultToolkit().beep();
                     JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nINSERISCI UNA DATA VALIDA", "ERRORE", JOptionPane.ERROR_MESSAGE);
                 }
 
@@ -317,12 +325,16 @@ public class ModificaDatiProcuratore extends javax.swing.JFrame {
                         Logger.getLogger(ModificaDatiProcuratore.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
-                else
+                else {
+                    Toolkit.getDefaultToolkit().beep();
                     JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nUNO O PIU' CAMPI MANCANTI", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                }
             }
         }
-        else
+        else {
+            Toolkit.getDefaultToolkit().beep();
             JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nINSERIRE LA MATRICOLA PER TROVARE IL PROCURATORE DA MODIFICARE", "ERRORE", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnModificaJBActionPerformed
 
     /*MAIN*/

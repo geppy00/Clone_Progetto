@@ -4,6 +4,7 @@ package view.modificaDati;
 import controller.ControllerClub;
 import convalidazione.ControlloConvalidazione;
 import dao.ExceptionDao;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -169,8 +170,10 @@ public class ModificaDatiClub extends javax.swing.JFrame {
         if(controlloConvalidazione.controlloCercaClub(nomeClubCercare) == true) {
             try {
                 datiClub = controllerClub.cercaClub(nomeClubCercare);
-                if(datiClub.isEmpty())
+                if(datiClub.isEmpty()) {
+                    Toolkit.getDefaultToolkit().beep();
                     JOptionPane.showMessageDialog(this, "CLUB "+nomeClubCercare+" NON TROVATO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                }
                 else {
                     JOptionPane.showMessageDialog(this, "✓ CLUB "+nomeClubCercare+" TROVATO CON SUCCESSO", "RICERCA", JOptionPane.INFORMATION_MESSAGE);
                     datiClub.forEach((Club club) -> {
@@ -183,8 +186,10 @@ public class ModificaDatiClub extends javax.swing.JFrame {
                 Logger.getLogger(ModificaDatiClub.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        else
+        else {
+            Toolkit.getDefaultToolkit().beep();
             JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nSCRIVERE NEL CAMPO IL CLUB DA CERCARE", "ERRORE", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnCercaJBActionPerformed
 
     private void btnModificaJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificaJBActionPerformed
@@ -192,8 +197,10 @@ public class ModificaDatiClub extends javax.swing.JFrame {
         String nomeClubCercare = inputNomeCercareJTF.getText();
         
         if(controlloConvalidazione.controlloCercaClub(nomeClubCercare) == true) {
-            if(datiClub.isEmpty())
+            if(datiClub.isEmpty()) {
+                Toolkit.getDefaultToolkit().beep();
                 JOptionPane.showMessageDialog(this, "CLUB "+nomeClubCercare+" NON ESISTE\nNON POSSIBILE MODIFICARLO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            }
             else {
                 String nome = inputNomeJTF.getText();
                 String indirizzo = inputIndirizzoJTF.getText();
@@ -206,12 +213,16 @@ public class ModificaDatiClub extends javax.swing.JFrame {
                         Logger.getLogger(ModificaDatiClub.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
-                else
+                else {
+                    Toolkit.getDefaultToolkit().beep();
                     JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nUNO O PIU' CAMPI MANCANTI", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                }
             }
         }
-        else
+        else {
+            Toolkit.getDefaultToolkit().beep();
             JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nINSERIRE IL NOME PER TROVARE IL CLUB DA MODIFICARE", "ERRORE", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnModificaJBActionPerformed
 
 

@@ -3,6 +3,7 @@ package view;
 
 import dao.DataAccessObject;
 import dao.ExceptionDao;
+import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -33,6 +34,7 @@ public class SezioneEliminaContrattoProcuratore extends javax.swing.JFrame {
             this.stampaDatiTabella();
         } catch (ExceptionDao ex) {
             //Logger.getLogger(SezioneEliminaContrattoProcuratore.class.getName()).log(Level.SEVERE, null, ex);
+            Toolkit.getDefaultToolkit().beep();
             JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nERRORE FATALE NON E' STATO POSSIBILE RICAVARE I DATI RIPROVARE", "ERRORE FATALE", JOptionPane.ERROR_MESSAGE);
             SezioneGestioneContrattiView sezioneGestioneContrattiView = new SezioneGestioneContrattiView(this.getIdProcuratore());
             sezioneGestioneContrattiView.setVisible(true);

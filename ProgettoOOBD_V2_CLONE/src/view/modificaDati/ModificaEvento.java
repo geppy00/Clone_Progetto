@@ -4,6 +4,7 @@ package view.modificaDati;
 import controller.ControllerSponsor;
 import convalidazione.ControlloConvalidazione;
 import dao.ExceptionDao;
+import java.awt.Toolkit;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -53,6 +54,7 @@ public class ModificaEvento extends javax.swing.JFrame {
             try {
                 datiEvento = controllerSponsor.prendiDatiEvento(this.getIdEvento());
                 if(datiEvento.isEmpty()) {
+                    Toolkit.getDefaultToolkit().beep();
                     JOptionPane.showMessageDialog(this, "EVENTO CON ID UGUALE AD "+this.getIdEvento()+" NON TROVATO\nNON POSSIBILE MODIFICARLO", "ERRORE", JOptionPane.ERROR_MESSAGE);
                     ElencoEventiView elencoEventiView = new ElencoEventiView(this.getIdSponsor());
                     elencoEventiView.setVisible(true);
@@ -72,11 +74,13 @@ public class ModificaEvento extends javax.swing.JFrame {
                     });
                 }
             } catch (ExceptionDao ex) {
+                Toolkit.getDefaultToolkit().beep();
                 //Logger.getLogger(ModificaEvento.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(this, "CI E' STATO UN PROBLEMA NEL RICAVARE I DATI\nCI SCUSIAMO PER L'INCONVENINETE", "WARNING", JOptionPane.WARNING_MESSAGE);
             }
         }
         else {
+            Toolkit.getDefaultToolkit().beep();
             JOptionPane.showMessageDialog(this, "CI E' STATO UN PROBLEMA NEL RICAVARE I DATI\nRIPROVA A SELEZIONE QUESTO EVENTO", "WARNING", JOptionPane.WARNING_MESSAGE);
             ElencoEventiView elencoEventiView = new ElencoEventiView(this.getIdSponsor());
             elencoEventiView.setVisible(true);
@@ -91,6 +95,7 @@ public class ModificaEvento extends javax.swing.JFrame {
             java.sql.Time timeValue = new java.sql.Time(formatter.parse(oraStr).getTime());
             return timeValue;
         } catch (ParseException ex) {
+            Toolkit.getDefaultToolkit().beep();
             //Logger.getLogger(RegistraEventoSponsor.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nINSERIRE UN ORARIO VALIDO", "ERRORE", JOptionPane.ERROR_MESSAGE);
         }
@@ -299,6 +304,7 @@ public class ModificaEvento extends javax.swing.JFrame {
             dataInizio = new java.sql.Date(inputDataInizioJDC.getDate().getTime());
             dataFine = new java.sql.Date(inputDataFineJDC.getDate().getTime());
             }catch(NullPointerException nex) {
+                Toolkit.getDefaultToolkit().beep();
                 JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nINSERIRE UNA DATA VALIDA", "ERRORE", JOptionPane.ERROR_MESSAGE);
             }
             
@@ -310,7 +316,8 @@ public class ModificaEvento extends javax.swing.JFrame {
             try {
                 gettoneValue = Double.parseDouble(inputGettoneEventoJTF.getText());
             }catch(NumberFormatException nfe) {
-                 JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nINSERIRE UN NUMERO VALIDO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                Toolkit.getDefaultToolkit().beep();
+                JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nINSERIRE UN NUMERO VALIDO", "ERRORE", JOptionPane.ERROR_MESSAGE);
             }
             
             String descrizione = inputDescrizioneJTA.getText();
@@ -318,6 +325,7 @@ public class ModificaEvento extends javax.swing.JFrame {
             if(controlloConvalidazione.controlloDescrizioneEvento(descrizione) == true) {
                 if(controlloConvalidazione.controlloModificaEvento(String.valueOf(dataInizio), String.valueOf(dataFine), titolo, titolo, String.valueOf(gettoneValue), String.valueOf(oraInizioTime), String.valueOf(oraFineTime)) == true) {
                     if(datiEvento.isEmpty()) {
+                        Toolkit.getDefaultToolkit().beep();
                         JOptionPane.showMessageDialog(this, "EVENTO CON ID "+this.getIdEvento()+" NON ESISTE\nNON POSSIBILE MODIFICARLO", "ERRORE", JOptionPane.ERROR_MESSAGE);
                         ElencoEventiView elencoEventiView = new ElencoEventiView(this.getIdSponsor());
                         elencoEventiView.setVisible(true);
@@ -336,10 +344,13 @@ public class ModificaEvento extends javax.swing.JFrame {
                     }
                 }
             }
-            else
+            else {
+                Toolkit.getDefaultToolkit().beep();
                 JOptionPane.showMessageDialog(this, "DESCRIZIONE MASSIMO 280 CARATTERI", "WARNING", JOptionPane.WARNING_MESSAGE);
+            }
         }
         else {
+            Toolkit.getDefaultToolkit().beep();
             JOptionPane.showMessageDialog(this, "CI E' STATO UN PROBLEMA NEL RICAVARE I DATI\nRIPROVA A SELEZIONE QUESTO EVENTO", "WARNING", JOptionPane.WARNING_MESSAGE);
             ElencoEventiView elencoEventiView = new ElencoEventiView(this.getIdSponsor());
             elencoEventiView.setVisible(true);

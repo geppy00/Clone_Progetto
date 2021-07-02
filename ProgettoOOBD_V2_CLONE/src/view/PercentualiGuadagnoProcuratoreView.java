@@ -5,6 +5,7 @@ import controller.ControllerProcuratore;
 import convalidazione.ControlloConvalidazione;
 import dao.DataAccessObject;
 import dao.ExceptionDao;
+import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -40,6 +41,7 @@ public class PercentualiGuadagnoProcuratoreView extends javax.swing.JFrame {
         try {
             this.stampaDatiAtltetaTbl();
         } catch (ExceptionDao ex) {
+            Toolkit.getDefaultToolkit().beep();
             JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nERRORE FATALE PROVARE AD RIAPRIRE LA FINESTRA", "ERRORE", JOptionPane.ERROR_MESSAGE);
             ProcuratoreView procuratoreView = new ProcuratoreView(this.getIdProcuratore());
             procuratoreView.setVisible(true);
@@ -301,8 +303,10 @@ public class PercentualiGuadagnoProcuratoreView extends javax.swing.JFrame {
             String nomeAtletaMigliorGuadagno = controllerProcuratore.prendiAtletaMaggiorGuadagno(this.getIdProcuratore());
             if(controlloConvalidazione.controlloAtleta(nomeAtletaMigliorGuadagno) == true)
                 atletaMigliorGuadagnoJTF.setText(nomeAtletaMigliorGuadagno);
-            else
+            else {
+                Toolkit.getDefaultToolkit().beep();
                 JOptionPane.showMessageDialog(this, "NON E' STATO POSSIBILE RICERCARE L'ATLETA MIGLIORE\n\t\tRIPROVARE", "WARNING", JOptionPane.WARNING_MESSAGE);
+            }
         } catch (ExceptionDao ex) {
             Logger.getLogger(PercentualiGuadagnoProcuratoreView.class.getName()).log(Level.SEVERE, null, ex);
         }

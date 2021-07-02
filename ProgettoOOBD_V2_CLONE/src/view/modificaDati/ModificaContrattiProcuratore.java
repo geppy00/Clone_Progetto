@@ -4,6 +4,7 @@ package view.modificaDati;
 import controller.ControllerProcuratore;
 import convalidazione.ControlloConvalidazione;
 import dao.ExceptionDao;
+import java.awt.Toolkit;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -36,6 +37,7 @@ public class ModificaContrattiProcuratore extends javax.swing.JFrame {
         else if(flag.equals("SPONSOR")) 
             inputIdClubJTF.setEditable(false);
         else {
+            Toolkit.getDefaultToolkit().beep();
             JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nERRORE FATALE NON E' STATO POSSIBILE RICAVARE I DATI RIPROVARE", "ERRORE FATALE", JOptionPane.ERROR_MESSAGE);
             System.exit(0);
         }
@@ -196,6 +198,7 @@ public class ModificaContrattiProcuratore extends javax.swing.JFrame {
             try {
                 datiContratto = controllerProcuratore.prendiDatiContratto(idContratto);
                 if(datiContratto.isEmpty()) {
+                    Toolkit.getDefaultToolkit().beep();
                     JOptionPane.showMessageDialog(this, "CONTRATTO CON "+this.getIdContratto()+" NON ESISTE\nNON POSSIBILE MODIFICARLO\n\t\t\tRIPROVARE", "ERRORE", JOptionPane.ERROR_MESSAGE);
                     SezioneGestioneContrattiView sezioneGestioneContrattiView = new SezioneGestioneContrattiView(this.getIdProcuratore());
                     sezioneGestioneContrattiView.setVisible(true);
@@ -225,6 +228,7 @@ public class ModificaContrattiProcuratore extends javax.swing.JFrame {
             }
         }
         else {
+            Toolkit.getDefaultToolkit().beep();
             JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nERRORE FATALE NON E' STATO POSSIBILE RICAVARE I DATI RIPROVARE", "ERRORE FATALE", JOptionPane.ERROR_MESSAGE);
             SezioneGestioneContrattiView sezioneGestioneContrattiView = new SezioneGestioneContrattiView(this.getIdProcuratore());
             sezioneGestioneContrattiView.setVisible(true);
@@ -259,8 +263,10 @@ public class ModificaContrattiProcuratore extends javax.swing.JFrame {
             idClub = Integer.parseInt(inputIdClubJTF.getText());
       
         if(controlloConvalidazione.controllaId(String.valueOf(this.getIdContratto())) == true) {
-            if(datiContratto.isEmpty())
+            if(datiContratto.isEmpty()) {
+                Toolkit.getDefaultToolkit().beep();
                 JOptionPane.showMessageDialog(this, "CONTRATTO NUMERO "+this.getIdContratto()+" NON ESISTE\nNON POSSIBILE MODIFICARLO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            }
             else{
                 try {
                     dataInizio = new java.sql.Date(inputDataInizioJDC.getDate().getTime());
@@ -268,8 +274,10 @@ public class ModificaContrattiProcuratore extends javax.swing.JFrame {
                     valoreContrattuale = Float.parseFloat(inputValoreContrattualeJTF.getText());
                     numeroContratto = Integer.parseInt(inputIdContrattoJTF.getText());
                 }catch(NullPointerException npe) {
+                    Toolkit.getDefaultToolkit().beep();
                     JOptionPane.showMessageDialog(this, "INSERIRE UNA DATA VALIDA", "WARNING", JOptionPane.WARNING_MESSAGE);
                 }catch(NumberFormatException nfe) {
+                    Toolkit.getDefaultToolkit().beep();
                     JOptionPane.showMessageDialog(this, "INSERIRE UN NUMERO VALIDO", "WARNING", JOptionPane.WARNING_MESSAGE);
                 }
 
@@ -282,17 +290,22 @@ public class ModificaContrattiProcuratore extends javax.swing.JFrame {
                             sezioneGestioneContrattiView.setVisible(true);
                             this.setVisible(false);
                         }
-                        else
+                        else {
+                            Toolkit.getDefaultToolkit().beep();
                             JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nUNO O PIU' CAMPI MANCANTI", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                        }
                     } catch (ExceptionDao ex) {
                         Logger.getLogger(ModificaContrattiProcuratore.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
-                else
+                else {
+                    Toolkit.getDefaultToolkit().beep();
                     JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nUNO O PIU' CAMPI MANCANTI", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                }
             }
         }
         else {
+            Toolkit.getDefaultToolkit().beep();
             JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nERRORE FATALE NON E' STATO POSSIBILE RICAVARE I DATI RIPROVARE", "ERRORE FATALE", JOptionPane.ERROR_MESSAGE);
             SezioneGestioneContrattiView sezioneGestioneContrattiView = new SezioneGestioneContrattiView(this.getIdProcuratore());
             sezioneGestioneContrattiView.setVisible(true);
