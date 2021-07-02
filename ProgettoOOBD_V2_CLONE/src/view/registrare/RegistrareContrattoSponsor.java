@@ -2,6 +2,7 @@
 package view.registrare;
 
 import controller.ControllerProcuratore;
+import convalidazione.ControlloConvalidazione;
 import dao.ExceptionDao;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -15,7 +16,13 @@ import view.SezioneGestioneContrattiView;
 
 public class RegistrareContrattoSponsor extends javax.swing.JFrame {
 
+    /*CONTROLLORE PER GESTIRE GLI ERRORI*/
+    private ControlloConvalidazione controlloConvalidazione = new ControlloConvalidazione();
+    
+    /*DATI IMPORTANTI*/
     private String idProcuratore;
+    private ArrayList<Atleta> datiAtleta = new ArrayList<Atleta>();
+    private DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");  
     
     /*COSTRUTTORE*/
     public RegistrareContrattoSponsor(String idProcuratore) {
@@ -261,25 +268,27 @@ public class RegistrareContrattoSponsor extends javax.swing.JFrame {
     private void btnCercaJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCercaJBActionPerformed
         ControllerProcuratore controllerProcuratore = new ControllerProcuratore();
         String idAtleta = inputCfAtletaJTF.getText();
-        ArrayList<Atleta> datiAtleta = new ArrayList<Atleta>();
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");  
         
-        try {
-            datiAtleta = controllerProcuratore.cercaSportivo(idAtleta);
-            if(datiAtleta == null)
-                JOptionPane.showMessageDialog(null, "ATLETA NON TROVATO");
-            else {
-                JOptionPane.showMessageDialog(null, "ATLETA TROVATO");
-                datiAtleta.forEach((Atleta atleta)->{
-                    nomeJTF.setText(atleta.getNome());
-                    cognomeJTF.setText(atleta.getCognmome());
-                    dataNascitaJTF.setText(dateFormat.format(atleta.getDataNascita()));
-                    ruoloJTF.setText(atleta.getRuolo());
-                });
+        if(controlloConvalidazione.controlloAtleta(idAtleta) == true) {
+            try {
+                datiAtleta = controllerProcuratore.cercaSportivo(idAtleta);
+                if(datiAtleta.isEmpty())
+                    JOptionPane.showMessageDialog(this, "ATLETA "+idAtleta+" NON TROVATO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                else {
+                    JOptionPane.showMessageDialog(this, "✓ ATLETA "+idAtleta+" TROVATO CON SUCCESSO", "RICERCA", JOptionPane.INFORMATION_MESSAGE);
+                    datiAtleta.forEach((Atleta atleta)->{
+                        nomeJTF.setText(atleta.getNome());
+                        cognomeJTF.setText(atleta.getCognmome());
+                        dataNascitaJTF.setText(dateFormat.format(atleta.getDataNascita()));
+                        ruoloJTF.setText(atleta.getRuolo());
+                    });
+                }
+            } catch (ExceptionDao ex) {
+                Logger.getLogger(RegistraContrattoClub.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } catch (ExceptionDao ex) {
-            Logger.getLogger(RegistraContrattoClub.class.getName()).log(Level.SEVERE, null, ex);
         }
+        else
+            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nSCRIVERE NEL CAMPO IL CODICE FISCALE DELL'ATLETA DA CERCARE", "ERRORE", JOptionPane.ERROR_MESSAGE);
         
     }//GEN-LAST:event_btnCercaJBActionPerformed
 
@@ -287,36 +296,55 @@ public class RegistrareContrattoSponsor extends javax.swing.JFrame {
         ControllerProcuratore controllerProcuratore = new ControllerProcuratore();
         int idSponsor = Integer.parseInt(inputIdSponsorJTF.getText());
         
-        try {
-            String nomeSponsor = controllerProcuratore.cercaSponsor(idSponsor);
-            if(nomeSponsor != null)
-                nomeSponsorJTF.setText(nomeSponsor);
-            else {
-                nomeSponsorJTF.setText(" ");
-                JOptionPane.showMessageDialog(null, "ID "+idSponsor+" NON CORRISPODENTE");
+        if(controlloConvalidazione.controllaId(String.valueOf(idSponsor)) == true) {
+            try {
+                String nomeSponsor = controllerProcuratore.cercaSponsor(idSponsor);
+                if(controlloConvalidazione.controllaNome(nomeSponsor) == true)
+                    nomeSponsorJTF.setText(nomeSponsor);
+                else {
+                    nomeSponsorJTF.setText(" ");
+                    JOptionPane.showMessageDialog(this, "SPONSOR CON ID "+idSponsor+" NON TROVATO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                }
+            } catch (ExceptionDao ex) {
+                Logger.getLogger(RegistrareContrattoSponsor.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } catch (ExceptionDao ex) {
-            Logger.getLogger(RegistrareContrattoSponsor.class.getName()).log(Level.SEVERE, null, ex);
         }
+        else
+            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nSCRIVERE L'ID DELLO SPONSOR DA CERCARE", "ERRORE", JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_inputIdSponsorJTFActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         ControllerProcuratore controllerProcuratore = new ControllerProcuratore();
         String idAtleta = inputCfAtletaJTF.getText();
-        int idSponsor = Integer.parseInt(inputIdSponsorJTF.getText());
-        java.sql.Date dataInizio = new java.sql.Date(inputDataInizioJDC.getDate().getTime());
-        java.sql.Date dataFine = new java.sql.Date(inputDataFineJDC.getDate().getTime());
-        float valContratto = Float.parseFloat(inputValoreContrttoJTF.getText());
+        int idSponsor = 0;
+        java.sql.Date dataInizio = null;
+        java.sql.Date dataFine = null;
+        float valContratto = 0;        
         
         try {
-            boolean check = controllerProcuratore.registraContratto(idAtleta, idSponsor, dataInizio, dataFine, valContratto, "SPONSOR");
-            if(check == true)
-                JOptionPane.showMessageDialog(null, "CONTRATTO REGISTRATO");
-            else
-                JOptionPane.showMessageDialog(null, "!! ERRORE DURANTE LA REGISTRAZIONE CONTRATTO !!");
-        } catch (ExceptionDao ex) {
-            Logger.getLogger(RegistraContrattoClub.class.getName()).log(Level.SEVERE, null, ex);
+            dataInizio = new java.sql.Date(inputDataInizioJDC.getDate().getTime());
+            dataFine = new java.sql.Date(inputDataFineJDC.getDate().getTime());
+            idSponsor = Integer.parseInt(inputIdSponsorJTF.getText());
+            valContratto = Float.parseFloat(inputValoreContrttoJTF.getText());
+        }catch(NullPointerException npe) {
+            JOptionPane.showMessageDialog(this, "INSERIRE UNA DATA VALIDA", "WARNING", JOptionPane.WARNING_MESSAGE);
+        }catch(NumberFormatException nfe) {
+            JOptionPane.showMessageDialog(this, "INSERIRE UN NUMERO VALIDO", "WARNING", JOptionPane.WARNING_MESSAGE);
         }
+        
+        if(controlloConvalidazione.controllaStipulaContratto(idAtleta, String.valueOf(idSponsor), String.valueOf(dataInizio), String.valueOf(dataFine), String.valueOf(valContratto)) == true) {
+            if(datiAtleta.isEmpty())
+                JOptionPane.showMessageDialog(this, "ATLETA CON CODICE FISCALE "+idAtleta+" NON ESISTE\n\t\tNON POSSIBILE MODIFICARLO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            else {
+                try {
+                    controllerProcuratore.registraContratto(idAtleta, idSponsor, dataInizio, dataFine, valContratto, "SPONSOR");
+                } catch (ExceptionDao ex) {
+                    Logger.getLogger(RegistraContrattoClub.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        else
+            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nUNO O PIU' CAMPI MANCANTI", "ERRORE", JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

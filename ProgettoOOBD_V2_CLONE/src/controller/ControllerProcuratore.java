@@ -120,12 +120,15 @@ import model.Sponsor;
     }
     
     
-    public void modificaContratto(int numeroContratto, String idAtleta, int idSponsor, int idClub, java.sql.Date dataInizio,  java.sql.Date dataFine, float valContratto) throws ExceptionDao {
+    public boolean modificaContratto(int numeroContratto, String idAtleta, int idSponsor, int idClub, java.sql.Date dataInizio,  java.sql.Date dataFine, float valContratto) throws ExceptionDao {
         if(numeroContratto > 0 && idAtleta != null && idAtleta.length() > 0 && dataInizio != null && dataFine != null && valContratto > 0) {
             Contratto contratto = new Contratto(numeroContratto, idAtleta, idSponsor, idClub, dataInizio, dataFine, valContratto);
             Procuratore procuratore = new Procuratore();
             procuratore.modificaContratto(contratto);
+            return true;
         }
+        else
+            return false;
     }
     
     public ArrayList<Contratto> prendiDatiContratto(int idContratto) throws ExceptionDao {

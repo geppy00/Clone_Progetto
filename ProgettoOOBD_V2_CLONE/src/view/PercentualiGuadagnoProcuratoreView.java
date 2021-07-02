@@ -2,6 +2,7 @@
 package view;
 
 import controller.ControllerProcuratore;
+import convalidazione.ControlloConvalidazione;
 import dao.DataAccessObject;
 import dao.ExceptionDao;
 import java.sql.Connection;
@@ -19,7 +20,10 @@ import javax.swing.table.DefaultTableModel;
 import refactorCode.FinallyException;
 
 public class PercentualiGuadagnoProcuratoreView extends javax.swing.JFrame {
-
+    /*CONTROLLORE PER GESTIRE GLI ERRORI*/
+    private ControlloConvalidazione controlloConvalidazione = new ControlloConvalidazione();
+    
+    /*DATI IMPORTANTI*/
     private String idProcuratore;
     private ArrayList<Double> datiPagamentiClub = new ArrayList<Double>();
     private ArrayList<Double> datiPagamentiSponsor = new ArrayList<Double>();
@@ -28,14 +32,18 @@ public class PercentualiGuadagnoProcuratoreView extends javax.swing.JFrame {
     
     /*COSTRUTTORI*/
     public PercentualiGuadagnoProcuratoreView(String idProcuratore) {
+        
+        initComponents();
+        this.setLocationRelativeTo(null);
+        this.idProcuratore = idProcuratore;
+
         try {
-            initComponents();
-            this.setLocationRelativeTo(null);
-            this.idProcuratore = idProcuratore;
-           
-            stampaDatiAtltetaTbl();
+            this.stampaDatiAtltetaTbl();
         } catch (ExceptionDao ex) {
-            Logger.getLogger(PercentualiGuadagnoProcuratoreView.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nERRORE FATALE PROVARE AD RIAPRIRE LA FINESTRA", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            ProcuratoreView procuratoreView = new ProcuratoreView(this.getIdProcuratore());
+            procuratoreView.setVisible(true);
+            this.setVisible(false);
         }
     }
     
@@ -291,7 +299,10 @@ public class PercentualiGuadagnoProcuratoreView extends javax.swing.JFrame {
         
         try {
             String nomeAtletaMigliorGuadagno = controllerProcuratore.prendiAtletaMaggiorGuadagno(this.getIdProcuratore());
-            atletaMigliorGuadagnoJTF.setText(nomeAtletaMigliorGuadagno);
+            if(controlloConvalidazione.controlloAtleta(nomeAtletaMigliorGuadagno) == true)
+                atletaMigliorGuadagnoJTF.setText(nomeAtletaMigliorGuadagno);
+            else
+                JOptionPane.showMessageDialog(this, "NON E' STATO POSSIBILE RICERCARE L'ATLETA MIGLIORE\n\t\tRIPROVARE", "WARNING", JOptionPane.WARNING_MESSAGE);
         } catch (ExceptionDao ex) {
             Logger.getLogger(PercentualiGuadagnoProcuratoreView.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -299,7 +310,7 @@ public class PercentualiGuadagnoProcuratoreView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCalcolaJBActionPerformed
 
     /*METODI*/
-    public String prendiNomeSponsor() throws ExceptionDao {
+    private String prendiNomeSponsor() throws ExceptionDao {
        ControllerProcuratore controllerProcuratore = new ControllerProcuratore();
        return controllerProcuratore.prendiNomeSponsorPerContratti();
     }

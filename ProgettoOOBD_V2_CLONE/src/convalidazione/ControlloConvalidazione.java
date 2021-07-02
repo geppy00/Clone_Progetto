@@ -173,4 +173,40 @@ public class ControlloConvalidazione {
         else
             return false;
     }
+    
+    //PROCURATORE
+    public boolean controlloAtleta(String datoAtleta) {
+        if(datoAtleta != null && !(datoAtleta.equals("")))
+            return true;
+        else
+            return false;
+    }
+    
+    public boolean controllaId(String id) {
+        if(id != null && !(id.equals("")))
+            return true;
+        else
+            return false;
+    }
+    
+    public boolean controllaNome(String nome) {
+        if(nome != null && !(nome.equals("")))
+            return true;
+        else
+            return false;
+    }
+    
+    public boolean controllaStipulaContratto(String idAtleta, String id, String dataInizio, String dataFine, String valore) {
+        if(idAtleta != null && !(idAtleta.equals("")) && id != null && !(id.equals("")) && dataInizio != null && !(dataInizio.equals("")) && dataFine != null && !(dataFine.equals("")) && valore != null && !(valore.equals("")))
+            return true;
+        else
+            return false;
+    }
+    
+    public boolean controllaModificaContratto(String idClub, String idSponsor, String dataInizio, String dataFine, String valore){
+        if(idClub != null && !(idClub.equals("")) && idSponsor != null && !(idSponsor.equals("")) && dataInizio != null && !(dataInizio.equals("")) && dataFine != null && !(dataFine.equals("")) && valore != null && !(valore.equals("")))
+            return true;
+        else
+            return false;
+    }
 }

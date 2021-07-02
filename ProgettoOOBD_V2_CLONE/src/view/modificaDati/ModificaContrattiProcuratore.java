@@ -2,6 +2,7 @@
 package view.modificaDati;
 
 import controller.ControllerProcuratore;
+import convalidazione.ControlloConvalidazione;
 import dao.ExceptionDao;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -15,8 +16,13 @@ import view.SezioneGestioneContrattiView;
 
 public class ModificaContrattiProcuratore extends javax.swing.JFrame {
 
+    /*CONTROLLORE PER GESTIRE GLI ERRORI*/
+    private ControlloConvalidazione controlloConvalidazione = new ControlloConvalidazione();
+    
+    /*DATI IMPORTANTI*/
     private String idProcuratore;
     private int idContratto;
+    private ArrayList<Contratto> datiContratto = new ArrayList<Contratto>();
     
     /*COSTRUTTORI*/
     public ModificaContrattiProcuratore(String idProcuratore, int idContratto, String flag) {
@@ -30,7 +36,7 @@ public class ModificaContrattiProcuratore extends javax.swing.JFrame {
         else if(flag.equals("SPONSOR")) 
             inputIdClubJTF.setEditable(false);
         else {
-            JOptionPane.showMessageDialog(null, "!! ERRORE INPUT DATI !!");
+            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nERRORE FATALE NON E' STATO POSSIBILE RICAVARE I DATI RIPROVARE", "ERRORE FATALE", JOptionPane.ERROR_MESSAGE);
             System.exit(0);
         }
         
@@ -184,31 +190,45 @@ public class ModificaContrattiProcuratore extends javax.swing.JFrame {
 
     /*METODI*/
     private void stampaDatiContratto(int idContratto) {
-        ArrayList<Contratto> datiContratto = new ArrayList<Contratto>();
         ControllerProcuratore controllerProcuratore = new ControllerProcuratore();
         
-        try {
-            datiContratto = controllerProcuratore.prendiDatiContratto(idContratto);
-           
-            datiContratto.forEach((Contratto contratto)->{
-                if(contratto.getIdSponsor() == 0)
-                    inputIdSponsorJTF.setText("");
-                else
-                    inputIdSponsorJTF.setText(String.valueOf(contratto.getIdSponsor()));
-                
-                if(contratto.getIdClub() == 0)
-                    inputIdClubJTF.setText("");
-                else
-                    inputIdClubJTF.setText(String.valueOf(contratto.getIdClub()));
-                
-                inputDataInizioJDC.setDate(contratto.getDataStart());
-                inputDataFineJDC.setDate(contratto.getDataEnd());
-                inputValoreContrattualeJTF.setText(String.valueOf(contratto.getValoreContratto()));
-                inputIdAtletaJTF.setText(contratto.getIdAtleta());
-                inputIdContrattoJTF.setText(String.valueOf(contratto.getNumeroContratto()));
-            });
-        } catch (ExceptionDao ex) {
-            Logger.getLogger(ModificaContrattiProcuratore.class.getName()).log(Level.SEVERE, null, ex);
+        if(controlloConvalidazione.controllaId(String.valueOf(this.getIdContratto())) == true) {
+            try {
+                datiContratto = controllerProcuratore.prendiDatiContratto(idContratto);
+                if(datiContratto.isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "CONTRATTO CON "+this.getIdContratto()+" NON ESISTE\nNON POSSIBILE MODIFICARLO\n\t\t\tRIPROVARE", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                    SezioneGestioneContrattiView sezioneGestioneContrattiView = new SezioneGestioneContrattiView(this.getIdProcuratore());
+                    sezioneGestioneContrattiView.setVisible(true);
+                    this.setVisible(false);
+                }
+                else {
+                    datiContratto.forEach((Contratto contratto)->{
+                        if(contratto.getIdSponsor() == 0)
+                            inputIdSponsorJTF.setText("");
+                        else
+                            inputIdSponsorJTF.setText(String.valueOf(contratto.getIdSponsor()));
+
+                        if(contratto.getIdClub() == 0)
+                            inputIdClubJTF.setText("");
+                        else
+                            inputIdClubJTF.setText(String.valueOf(contratto.getIdClub()));
+
+                        inputDataInizioJDC.setDate(contratto.getDataStart());
+                        inputDataFineJDC.setDate(contratto.getDataEnd());
+                        inputValoreContrattualeJTF.setText(String.valueOf(contratto.getValoreContratto()));
+                        inputIdAtletaJTF.setText(contratto.getIdAtleta());
+                        inputIdContrattoJTF.setText(String.valueOf(contratto.getNumeroContratto()));
+                    });
+                }
+            } catch (ExceptionDao ex) {
+                Logger.getLogger(ModificaContrattiProcuratore.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nERRORE FATALE NON E' STATO POSSIBILE RICAVARE I DATI RIPROVARE", "ERRORE FATALE", JOptionPane.ERROR_MESSAGE);
+            SezioneGestioneContrattiView sezioneGestioneContrattiView = new SezioneGestioneContrattiView(this.getIdProcuratore());
+            sezioneGestioneContrattiView.setVisible(true);
+            this.setVisible(false);
         }
     }
     
@@ -221,6 +241,12 @@ public class ModificaContrattiProcuratore extends javax.swing.JFrame {
 
     private void btnModificaJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificaJBActionPerformed
         int idSponsor, idClub;
+        ControllerProcuratore controllerProcuratore = new ControllerProcuratore();
+        String idAtleta = inputIdAtletaJTF.getText();
+        java.sql.Date dataInizio = null;
+        java.sql.Date dataFine = null;        
+        float valoreContrattuale = 0;
+        int numeroContratto = 0;
         
         if(inputIdSponsorJTF.getText().equals(""))
             idSponsor = 0;
@@ -231,23 +257,48 @@ public class ModificaContrattiProcuratore extends javax.swing.JFrame {
             idClub = 0;
         else
             idClub = Integer.parseInt(inputIdClubJTF.getText());
-        
-        int numeroContratto = Integer.parseInt(inputIdContrattoJTF.getText());
-        String idAtleta = inputIdAtletaJTF.getText();
-        java.sql.Date dataInizio = new java.sql.Date(inputDataInizioJDC.getDate().getTime());
-        java.sql.Date dataFine = new java.sql.Date(inputDataFineJDC.getDate().getTime());
-        float valoreContrattuale = Float.parseFloat(inputValoreContrattualeJTF.getText());
-        
-        ControllerProcuratore controllerProcuratore = new ControllerProcuratore();
-        try {
-            controllerProcuratore.modificaContratto(numeroContratto, idAtleta, idSponsor, idClub, dataInizio, dataFine, valoreContrattuale);
-            
+      
+        if(controlloConvalidazione.controllaId(String.valueOf(this.getIdContratto())) == true) {
+            if(datiContratto.isEmpty())
+                JOptionPane.showMessageDialog(this, "CONTRATTO NUMERO "+this.getIdContratto()+" NON ESISTE\nNON POSSIBILE MODIFICARLO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            else{
+                try {
+                    dataInizio = new java.sql.Date(inputDataInizioJDC.getDate().getTime());
+                    dataFine = new java.sql.Date(inputDataFineJDC.getDate().getTime());
+                    valoreContrattuale = Float.parseFloat(inputValoreContrattualeJTF.getText());
+                    numeroContratto = Integer.parseInt(inputIdContrattoJTF.getText());
+                }catch(NullPointerException npe) {
+                    JOptionPane.showMessageDialog(this, "INSERIRE UNA DATA VALIDA", "WARNING", JOptionPane.WARNING_MESSAGE);
+                }catch(NumberFormatException nfe) {
+                    JOptionPane.showMessageDialog(this, "INSERIRE UN NUMERO VALIDO", "WARNING", JOptionPane.WARNING_MESSAGE);
+                }
+
+                if(controlloConvalidazione.controllaModificaContratto(String.valueOf(idClub), String.valueOf(idSponsor), String.valueOf(dataInizio), String.valueOf(dataFine), String.valueOf(valoreContrattuale)) == true) {
+                    try {
+                        boolean check = controllerProcuratore.modificaContratto(numeroContratto, idAtleta, idSponsor, idClub, dataInizio, dataFine, valoreContrattuale);
+                        if(check == true) {
+                            JOptionPane.showMessageDialog(this, "✓ MODIFICA DEL CONTRATTO CON ID "+this.getIdContratto()+" EFFETTUATA CON SUCCESSO", "MODIFICA", JOptionPane.INFORMATION_MESSAGE);
+                            SezioneGestioneContrattiView sezioneGestioneContrattiView = new SezioneGestioneContrattiView(this.getIdProcuratore());
+                            sezioneGestioneContrattiView.setVisible(true);
+                            this.setVisible(false);
+                        }
+                        else
+                            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nUNO O PIU' CAMPI MANCANTI", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                    } catch (ExceptionDao ex) {
+                        Logger.getLogger(ModificaContrattiProcuratore.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                else
+                    JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nUNO O PIU' CAMPI MANCANTI", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nERRORE FATALE NON E' STATO POSSIBILE RICAVARE I DATI RIPROVARE", "ERRORE FATALE", JOptionPane.ERROR_MESSAGE);
             SezioneGestioneContrattiView sezioneGestioneContrattiView = new SezioneGestioneContrattiView(this.getIdProcuratore());
             sezioneGestioneContrattiView.setVisible(true);
             this.setVisible(false);
-        } catch (ExceptionDao ex) {
-            Logger.getLogger(ModificaContrattiProcuratore.class.getName()).log(Level.SEVERE, null, ex);
         }
+            
     }//GEN-LAST:event_btnModificaJBActionPerformed
 
     

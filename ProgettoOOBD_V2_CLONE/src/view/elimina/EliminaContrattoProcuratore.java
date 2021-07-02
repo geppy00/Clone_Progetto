@@ -2,16 +2,23 @@
 package view.elimina;
 
 import controller.ControllerProcuratore;
+import convalidazione.ControlloConvalidazione;
 import dao.ExceptionDao;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import view.SezioneEliminaContrattoProcuratore;
+import view.SezioneGestioneContrattiView;
 
 public class EliminaContrattoProcuratore extends javax.swing.JFrame {
 
+    /*DATI IMPORTANTI*/
     private String idProcuratore;
     private int numeroContratto;
     private String idAtleta;
+    
+    /*CONTROLLORE PER GESTIRE GLI ERRORI*/
+    private ControlloConvalidazione controlloConvalidazione = new ControlloConvalidazione();
     
     /*COSTRUTTORI*/
     public EliminaContrattoProcuratore(String idProcuratore, int numeroContratto, String idAtleta) {
@@ -86,13 +93,22 @@ public class EliminaContrattoProcuratore extends javax.swing.JFrame {
     private void btnYesJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnYesJBActionPerformed
         ControllerProcuratore controllerProcuratore = new ControllerProcuratore();
         
-        try {
-            controllerProcuratore.eliminaContratto(this.getNumeroContratto(), this.getIdAtleta());
-            SezioneEliminaContrattoProcuratore sezioneEliminaContrattoProcuratore = new SezioneEliminaContrattoProcuratore(this.getIdProcuratore());
-            sezioneEliminaContrattoProcuratore.setVisible(true);
+        if(controlloConvalidazione.controllaId(String.valueOf(this.getNumeroContratto())) == true && controlloConvalidazione.controllaId(this.getIdAtleta()) == true) {
+            try {
+                controllerProcuratore.eliminaContratto(this.getNumeroContratto(), this.getIdAtleta());
+                JOptionPane.showMessageDialog(this, "✓ ELIMINAZIONE DEL CONTRATTO NUMERO "+this.getNumeroContratto()+" EFFETTUATA CON SUCCESSO", "ELIMINAZIONE", JOptionPane.INFORMATION_MESSAGE);
+                SezioneEliminaContrattoProcuratore sezioneEliminaContrattoProcuratore = new SezioneEliminaContrattoProcuratore(this.getIdProcuratore());
+                sezioneEliminaContrattoProcuratore.setVisible(true);
+                this.setVisible(false);
+            } catch (ExceptionDao ex) {
+                Logger.getLogger(EliminaContrattoProcuratore.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nERRORE FATALE NON E' STATO POSSIBILE RICAVARE I DATI RIPROVARE", "ERRORE FATALE", JOptionPane.ERROR_MESSAGE);
+            SezioneGestioneContrattiView sezioneGestioneContrattiView = new SezioneGestioneContrattiView(this.getIdProcuratore());
+            sezioneGestioneContrattiView.setVisible(true);
             this.setVisible(false);
-        } catch (ExceptionDao ex) {
-            Logger.getLogger(EliminaContrattoProcuratore.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnYesJBActionPerformed
 
