@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 import view.SezioneEventiView;
 import java.text.DateFormat;
 import java.text.ParseException;
+import java.util.Calendar;
 
 public class RegistraEventoSponsor extends javax.swing.JFrame {
 
@@ -77,6 +78,11 @@ public class RegistraEventoSponsor extends javax.swing.JFrame {
         dataEventoJL.setText("Data/Ora Inizio Evento");
 
         scegliDataInizioJDC.setDateFormatString("yyyy-MM-dd HH:mm:ss");
+        scegliDataInizioJDC.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                scegliDataInizioJDCPropertyChange(evt);
+            }
+        });
 
         luogoEventoJL.setText("Luogo Evento");
 
@@ -251,6 +257,17 @@ public class RegistraEventoSponsor extends javax.swing.JFrame {
         sezioneEventiView.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnTornaIndietroJBActionPerformed
+
+    private void scegliDataInizioJDCPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_scegliDataInizioJDCPropertyChange
+        Date dataInizio = new Date();
+        dataInizio = scegliDataInizioJDC.getDate();
+        if (dataInizio == null) {  
+            // Il form è stato appena creato e nessuna data è stata inserita
+            dataInizio = Calendar.getInstance().getTime();
+            scegliDataInizioJDC.setDate(dataInizio);
+        }
+        scegliDataFineJDC.setMinSelectableDate(dataInizio);
+    }//GEN-LAST:event_scegliDataInizioJDCPropertyChange
 
     
     /*GET AND SET*/

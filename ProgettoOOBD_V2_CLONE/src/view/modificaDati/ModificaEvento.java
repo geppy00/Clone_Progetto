@@ -9,6 +9,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -150,6 +152,12 @@ public class ModificaEvento extends javax.swing.JFrame {
 
         dataInizioJL.setText("data Inizio ");
 
+        inputDataInizioJDC.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                inputDataInizioJDCPropertyChange(evt);
+            }
+        });
+
         oraInizioJL.setText("Ora Inizio");
 
         dataFineJL.setText("data Fine");
@@ -203,15 +211,14 @@ public class ModificaEvento extends javax.swing.JFrame {
                                             .addComponent(inputDataFineJDC, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(78, 78, 78)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(oraFineJL)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(inputOraFineJTF))
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(oraInizioJL)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(inputOraInizioJTF, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addComponent(oraFineJL)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(inputOraFineJTF))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addComponent(oraInizioJL)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(inputOraInizioJTF, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(indirizzoJL)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -340,6 +347,17 @@ public class ModificaEvento extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_btnModificaJBActionPerformed
+
+    private void inputDataInizioJDCPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_inputDataInizioJDCPropertyChange
+        Date dataInizio = new Date();
+        dataInizio = inputDataInizioJDC.getDate();
+        if (dataInizio == null) {  
+            // Il form è stato appena creato e nessuna data è stata inserita
+            dataInizio = Calendar.getInstance().getTime();
+            inputDataInizioJDC.setDate(dataInizio);
+        }
+        inputDataFineJDC.setMinSelectableDate(dataInizio);
+    }//GEN-LAST:event_inputDataInizioJDCPropertyChange
 
     /*GET AND SET*/
     public String getIdSponsor() {

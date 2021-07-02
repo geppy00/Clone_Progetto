@@ -203,6 +203,9 @@
       </Properties>
     </Component>
     <Component class="com.toedter.calendar.JDateChooser" name="inputDataInizioJDC">
+      <Events>
+        <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="inputDataInizioJDCPropertyChange"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="oraInizioJL">
       <Properties>
