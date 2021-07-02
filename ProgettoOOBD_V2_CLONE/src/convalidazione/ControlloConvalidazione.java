@@ -130,4 +130,47 @@ public class ControlloConvalidazione {
         else
             return false;
     }
+    
+    //SPONSOR
+    public boolean controlloRegistraEvento(String inizioEvento, String fineEvento, String louogo, String titolo, String gettone){
+        if(inizioEvento != null && !(inizioEvento.equals("")) && fineEvento != null && !(fineEvento.equals("")) && louogo != null && !(louogo.equals("")) && titolo != null && !(titolo.equals("")) && gettone != null && !(gettone.equals("")))
+            return true;
+        else
+            return false;
+    }
+    
+    public boolean controlloDescrizioneEvento(String descrizione){  
+        if(descrizione.length() > 280)
+            return false;
+        else
+            return true;
+    }
+    
+    public boolean controlloIdEvento(String idEvento) {
+        if(idEvento != null && !(idEvento.equals("")) && Integer.parseInt(idEvento) > 0)
+            return true;
+        else
+            return false;
+    }
+    
+    public boolean controlloModificaEvento(String DatainizioEvento, String DatafineEvento, String louogo, String titolo, String gettone, String oraInizio, String oraFine) {
+        if(DatainizioEvento != null && !(DatainizioEvento.equals("")) && DatafineEvento != null && !(DatafineEvento.equals("")) && louogo != null && !(louogo.equals("")) && titolo != null && !(titolo.equals("")) && gettone != null && !(gettone.equals("")) && oraInizio != null && !(oraInizio.equals("")) && oraFine != null && !(oraFine.equals("")))
+            return true;
+        else
+            return false;
+    }
+    
+    public boolean controlloEliminaEventoNome(String nomeEvento) {
+        if(nomeEvento != null && !(nomeEvento.equals("")))
+            return true;
+        else
+            return false;
+    }
+    
+    public boolean controlloEliminaEventoData(String dataEvento) {
+        if(dataEvento != null && !(dataEvento.equals("")))
+            return true;
+        else
+            return false;
+    }
 }

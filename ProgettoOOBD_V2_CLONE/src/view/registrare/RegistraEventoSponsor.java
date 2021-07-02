@@ -2,6 +2,7 @@
 package view.registrare;
 
 import controller.ControllerSponsor;
+import convalidazione.ControlloConvalidazione;
 import dao.ExceptionDao;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
@@ -15,7 +16,11 @@ import java.text.ParseException;
 
 public class RegistraEventoSponsor extends javax.swing.JFrame {
 
+    /*DATI IMPORTANTI*/
     private String idSponsor;
+    
+    /*CONTROLLORE PER GESTIRE GLI ERRORI*/
+    private ControlloConvalidazione controlloConvalidazione = new ControlloConvalidazione();
     
     /*COSTRUTTORI*/
     public RegistraEventoSponsor(String idSponsor) {
@@ -35,6 +40,8 @@ public class RegistraEventoSponsor extends javax.swing.JFrame {
         try {
             java.sql.Time timeValue = new java.sql.Time(formatter.parse(oraStr).getTime());
             return timeValue;
+        } catch(NullPointerException nex){
+            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nINSERIRE UN ORARIO VALIDO", "ERRORE", JOptionPane.ERROR_MESSAGE);
         } catch (ParseException ex) {
             Logger.getLogger(RegistraEventoSponsor.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -195,33 +202,48 @@ public class RegistraEventoSponsor extends javax.swing.JFrame {
 
     /*ACTION PERFOMED*/
     private void btnCreaEventoJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreaEventoJBActionPerformed
-       String descrizione = inputDescrizioneJTA.getText();
-       String titolo = inputTitoloJTF.getText();
-       String luogo = inputLuogoEventoJTF.getText();
-       java.sql.Date dataInizio = new java.sql.Date(scegliDataInizioJDC.getDate().getTime());
-       java.sql.Date dataFine = new java.sql.Date(scegliDataFineJDC.getDate().getTime());
-       
-       SimpleDateFormat localDateFormat = new SimpleDateFormat("HH:mm:ss"); //RIGA 171 E 172 SERVONO PER RICAVRE L'ORARIO
-       String oraInizio = localDateFormat.format(dataInizio);
-       String oraFine = localDateFormat.format(dataFine);
-       
-       java.sql.Time oraInizioTime = stringToTime(oraInizio);
-       java.sql.Time oraFineTime = stringToTime(oraFine);
-       
-       double gettoneValue = Double.parseDouble(inputGettoneEventoJTF.getText());
-       
-       if(descrizione == null || descrizione.length() > 280) {
-           JOptionPane.showMessageDialog(null, "!! Hai sfiorato la soglia MASSIMA(280 caratteri) !!");
-       }
-       else {
-            ControllerSponsor controllerSponsor = new ControllerSponsor();
-            try {
-                controllerSponsor.registraEvento(gettoneValue, titolo, luogo, dataInizio, oraInizioTime, dataFine, oraFineTime, Integer.parseInt(this.getIdSponsor()), descrizione);
-            } catch (ExceptionDao ex) {
-                Logger.getLogger(RegistraEventoSponsor.class.getName()).log(Level.SEVERE, null, ex);
-           }
+        ControllerSponsor controllerSponsor = new ControllerSponsor();
+        String descrizione = inputDescrizioneJTA.getText();
+        String titolo = inputTitoloJTF.getText();
+        String luogo = inputLuogoEventoJTF.getText();
+        java.sql.Date dataInizio = null;
+        java.sql.Date dataFine = null;
+        SimpleDateFormat localDateFormat = null;
+        String oraInizio = null;
+        String oraFine = null;
+        double gettoneValue = 0;
+                
+        try {
+            dataInizio = new java.sql.Date(scegliDataInizioJDC.getDate().getTime());
+            dataFine = new java.sql.Date(scegliDataFineJDC.getDate().getTime());
+            localDateFormat = new SimpleDateFormat("HH:mm:ss"); //RIGA 171 E 172 SERVONO PER RICAVRE L'ORARIO
+            oraInizio = localDateFormat.format(dataInizio);
+            oraFine = localDateFormat.format(dataFine);
+        }catch(NullPointerException nex) {
+            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nINSERIRE UNA DATA CON ORARIO VALIDA", "ERRORE", JOptionPane.ERROR_MESSAGE);
         }
-           
+        java.sql.Time oraInizioTime = stringToTime(oraInizio);
+        java.sql.Time oraFineTime = stringToTime(oraFine);
+
+        try {
+            gettoneValue = Double.parseDouble(inputGettoneEventoJTF.getText());
+        }catch(NumberFormatException nfe) {
+            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nINSERIRE UN NUMERO VALIDO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+        }
+
+        if(controlloConvalidazione.controlloRegistraEvento(String.valueOf(dataInizio), String.valueOf(dataFine), luogo, titolo, String.valueOf(gettoneValue)) == true) {
+            if(controlloConvalidazione.controlloDescrizioneEvento(descrizione) == true) {
+                try {
+                    controllerSponsor.registraEvento(gettoneValue, titolo, luogo, dataInizio, oraInizioTime, dataFine, oraFineTime, Integer.parseInt(this.getIdSponsor()), descrizione);
+                } catch (ExceptionDao ex) {
+                    Logger.getLogger(RegistraEventoSponsor.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            else
+                JOptionPane.showMessageDialog(this, "DESCRIZIONE MASSIMO 280 CARATTERI", "WARNING", JOptionPane.WARNING_MESSAGE);
+        }
+        else
+            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nUNO O PIU' CAMPI MANCANTI", "ERRORE", JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_btnCreaEventoJBActionPerformed
 
     private void btnTornaIndietroJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTornaIndietroJBActionPerformed

@@ -2,6 +2,7 @@
 package view.modificaDati;
 
 import controller.ControllerSponsor;
+import convalidazione.ControlloConvalidazione;
 import dao.ExceptionDao;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -17,7 +18,12 @@ import view.ElencoEventiView;
 import view.registrare.RegistraEventoSponsor;
 
 public class ModificaEvento extends javax.swing.JFrame {
-
+    
+    /*CONTROLLORE PER GESTIRE GLI ERRORI*/
+    private ControlloConvalidazione controlloConvalidazione = new ControlloConvalidazione();
+    
+    /*DATI IMPORTANTI*/
+    private ArrayList<Evento> datiEvento = new ArrayList<Evento>();
     private int idEvento;
     private String idSponsor;
     
@@ -28,7 +34,7 @@ public class ModificaEvento extends javax.swing.JFrame {
         this.idSponsor = idSponsor;
         this.idEvento = idEvento;
    
-        stampaDati();
+        this.stampaDati();
     }
     
     public ModificaEvento() {
@@ -38,37 +44,42 @@ public class ModificaEvento extends javax.swing.JFrame {
 
     /*METODI*/
     private void stampaDati() {
-        ArrayList<Evento> datiEvento = new ArrayList<Evento>();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
-        
         ControllerSponsor controllerSponsor = new ControllerSponsor();
         
-        try {
-            datiEvento = controllerSponsor.prendiDatiEvento(this.getIdEvento());
-            if(datiEvento == null)
-                JOptionPane.showMessageDialog(null, "!! ERRORE NELLA RACCOLTA DATI !!");
-        } catch (ExceptionDao ex) {
-            Logger.getLogger(ModificaEvento.class.getName()).log(Level.SEVERE, null, ex);
+        if(controlloConvalidazione.controlloIdEvento(String.valueOf(this.getIdEvento())) == true) {
+            try {
+                datiEvento = controllerSponsor.prendiDatiEvento(this.getIdEvento());
+                if(datiEvento.isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "EVENTO CON ID UGUALE AD "+this.getIdEvento()+" NON TROVATO\nNON POSSIBILE MODIFICARLO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                    ElencoEventiView elencoEventiView = new ElencoEventiView(this.getIdSponsor());
+                    elencoEventiView.setVisible(true);
+                    this.setVisible(false);
+                }
+                else {
+                    datiEvento.forEach((Evento evento) -> {
+                        idEventoJTF.setText(String.valueOf(this.getIdEvento()));
+                        inputGettoneEventoJTF.setText(String.valueOf(evento.getGettoneValue()));
+                        inputTitoloJTF.setText(evento.getTitolo());
+                        inpuIndirizzoJTF.setText(evento.getLuogoEvento());
+                        inputDataInizioJDC.setDate(evento.getDataInizio());
+                        inputOraInizioJTF.setText(String.valueOf(evento.getOraInizio()));
+                        inputDataFineJDC.setDate(evento.getDataFine());
+                        inputOraFineJTF.setText(String.valueOf(evento.getOraFine()));
+                        inputDescrizioneJTA.setText(evento.getDescrizione());
+                    });
+                }
+            } catch (ExceptionDao ex) {
+                //Logger.getLogger(ModificaEvento.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, "CI E' STATO UN PROBLEMA NEL RICAVARE I DATI\nCI SCUSIAMO PER L'INCONVENINETE", "WARNING", JOptionPane.WARNING_MESSAGE);
+            }
         }
-        
-        datiEvento.forEach((Evento evento) -> {
-            idEventoJTF.setText(String.valueOf(this.getIdEvento()));
-            
-            inputGettoneEventoJTF.setText(String.valueOf(evento.getGettoneValue()));
-            inputTitoloJTF.setText(evento.getTitolo());
-            inpuIndirizzoJTF.setText(evento.getLuogoEvento());
-            inputDataInizioJDC.setDate(evento.getDataInizio());
-            
-            java.sql.Time oraInizioSql = evento.getOraInizio();
-            inputOraInizioJTF.setText(String.valueOf(oraInizioSql));
-            
-            inputDataFineJDC.setDate(evento.getDataFine());
-            
-            java.sql.Time oraFineSql = evento.getOraFine();
-            inputOraFineJTF.setText(String.valueOf(oraFineSql));
-            
-            inputDescrizioneJTA.setText(evento.getDescrizione());
-        });
+        else {
+            JOptionPane.showMessageDialog(this, "CI E' STATO UN PROBLEMA NEL RICAVARE I DATI\nRIPROVA A SELEZIONE QUESTO EVENTO", "WARNING", JOptionPane.WARNING_MESSAGE);
+            ElencoEventiView elencoEventiView = new ElencoEventiView(this.getIdSponsor());
+            elencoEventiView.setVisible(true);
+            this.setVisible(false);
+        }
     }
     
     private java.sql.Time stringToTime(String oraStr) {
@@ -78,7 +89,8 @@ public class ModificaEvento extends javax.swing.JFrame {
             java.sql.Time timeValue = new java.sql.Time(formatter.parse(oraStr).getTime());
             return timeValue;
         } catch (ParseException ex) {
-            Logger.getLogger(RegistraEventoSponsor.class.getName()).log(Level.SEVERE, null, ex);
+            //Logger.getLogger(RegistraEventoSponsor.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nINSERIRE UN ORARIO VALIDO", "ERRORE", JOptionPane.ERROR_MESSAGE);
         }
         
         return null;
@@ -269,24 +281,62 @@ public class ModificaEvento extends javax.swing.JFrame {
     private void btnModificaJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificaJBActionPerformed
         ControllerSponsor controllerSponsor = new ControllerSponsor();
         
-        String titolo = inputTitoloJTF.getText();
-        String indirizzo = inpuIndirizzoJTF.getText();
-        java.sql.Date dataInizio = new java.sql.Date(inputDataInizioJDC.getDate().getTime());
-        String oraInizio = inputOraInizioJTF.getText();
-        java.sql.Time oraInizioTime = stringToTime(oraInizio);
-        java.sql.Date dataFine = new java.sql.Date(inputDataFineJDC.getDate().getTime());
-        String oraFine = inputOraFineJTF.getText();
-        java.sql.Time oraFineTime = stringToTime(oraFine);
-        double gettoneValue = Double.parseDouble(inputGettoneEventoJTF.getText());
-        String descrizione = inputDescrizioneJTA.getText();
-       
-        try {
-            controllerSponsor.aggiornaEvento(gettoneValue, this.getIdEvento(), titolo, indirizzo, dataInizio, oraInizioTime, dataFine, oraFineTime, Integer.parseInt(this.getIdSponsor()), descrizione);
+        if(controlloConvalidazione.controlloIdEvento(String.valueOf(this.getIdEvento())) == true) {
+            String titolo = inputTitoloJTF.getText();
+            String indirizzo = inpuIndirizzoJTF.getText();
+            java.sql.Date dataInizio = null;
+            java.sql.Date dataFine = null;
+            double gettoneValue = 0;
+            
+            try {
+            dataInizio = new java.sql.Date(inputDataInizioJDC.getDate().getTime());
+            dataFine = new java.sql.Date(inputDataFineJDC.getDate().getTime());
+            }catch(NullPointerException nex) {
+                JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nINSERIRE UNA DATA VALIDA", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            }
+            
+            String oraInizio = inputOraInizioJTF.getText();
+            java.sql.Time oraInizioTime = stringToTime(oraInizio);
+            String oraFine = inputOraFineJTF.getText();
+            java.sql.Time oraFineTime = stringToTime(oraFine);
+            
+            try {
+                gettoneValue = Double.parseDouble(inputGettoneEventoJTF.getText());
+            }catch(NumberFormatException nfe) {
+                 JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nINSERIRE UN NUMERO VALIDO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            }
+            
+            String descrizione = inputDescrizioneJTA.getText();
+            
+            if(controlloConvalidazione.controlloDescrizioneEvento(descrizione) == true) {
+                if(controlloConvalidazione.controlloModificaEvento(String.valueOf(dataInizio), String.valueOf(dataFine), titolo, titolo, String.valueOf(gettoneValue), String.valueOf(oraInizioTime), String.valueOf(oraFineTime)) == true) {
+                    if(datiEvento.isEmpty()) {
+                        JOptionPane.showMessageDialog(this, "EVENTO CON ID "+this.getIdEvento()+" NON ESISTE\nNON POSSIBILE MODIFICARLO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                        ElencoEventiView elencoEventiView = new ElencoEventiView(this.getIdSponsor());
+                        elencoEventiView.setVisible(true);
+                        this.setVisible(false);
+                    }
+                    else {
+                        try {
+                            controllerSponsor.aggiornaEvento(gettoneValue, this.getIdEvento(), titolo, indirizzo, dataInizio, oraInizioTime, dataFine, oraFineTime, Integer.parseInt(this.getIdSponsor()), descrizione);
+                            JOptionPane.showMessageDialog(this, "✓ MODIFICA DELL' EVENTO CON ID"+this.getIdEvento()+" EFFETTUATA CON SUCCESSO", "MODIFICA", JOptionPane.INFORMATION_MESSAGE);
+                            ElencoEventiView elencoEventiView = new ElencoEventiView(this.getIdSponsor());
+                            elencoEventiView.setVisible(true);
+                            this.setVisible(false);
+                        } catch (ExceptionDao ex) {
+                            Logger.getLogger(ModificaEvento.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                }
+            }
+            else
+                JOptionPane.showMessageDialog(this, "DESCRIZIONE MASSIMO 280 CARATTERI", "WARNING", JOptionPane.WARNING_MESSAGE);
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "CI E' STATO UN PROBLEMA NEL RICAVARE I DATI\nRIPROVA A SELEZIONE QUESTO EVENTO", "WARNING", JOptionPane.WARNING_MESSAGE);
             ElencoEventiView elencoEventiView = new ElencoEventiView(this.getIdSponsor());
             elencoEventiView.setVisible(true);
             this.setVisible(false);
-        } catch (ExceptionDao ex) {
-            Logger.getLogger(ModificaEvento.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }//GEN-LAST:event_btnModificaJBActionPerformed

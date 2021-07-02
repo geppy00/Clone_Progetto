@@ -26,11 +26,11 @@ public class ElencoPartecipantiSponsor extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.idSponsor = idSponsor;
         
-         tblDatiPartecipantiJT.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
-         tblDatiPartecipantiJT.getTableHeader().setOpaque(false);
-         tblDatiPartecipantiJT.getTableHeader().setBackground(new Color(32, 136, 203));
-         tblDatiPartecipantiJT.getTableHeader().setForeground(new Color(255,255,255));
-         tblDatiPartecipantiJT.setRowHeight(25);
+        tblDatiPartecipantiJT.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
+        tblDatiPartecipantiJT.getTableHeader().setOpaque(false);
+        tblDatiPartecipantiJT.getTableHeader().setBackground(new Color(32, 136, 203));
+        tblDatiPartecipantiJT.getTableHeader().setForeground(new Color(255,255,255));
+        tblDatiPartecipantiJT.setRowHeight(25);
         try {
             stampaDatiTabella();
         } catch (ExceptionDao ex) {
@@ -102,12 +102,19 @@ public class ElencoPartecipantiSponsor extends javax.swing.JFrame {
             new String [] {
                 "ID Partecipante", "CF Atleta", "Partecipante", "ID Evento", "Evento", "Data Inizo", "Data Fine"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tblDatiPartecipantiJT.setFocusable(false);
         tblDatiPartecipantiJT.setIntercellSpacing(new java.awt.Dimension(0, 0));
         tblDatiPartecipantiJT.setRequestFocusEnabled(false);
         tblDatiPartecipantiJT.setRowHeight(25);
-        tblDatiPartecipantiJT.setRowMargin(0);
         tblDatiPartecipantiJT.setSelectionBackground(new java.awt.Color(232, 57, 95));
         tblDatiPartecipantiJT.setShowVerticalLines(false);
         tblDatiPartecipantiJT.getTableHeader().setReorderingAllowed(false);

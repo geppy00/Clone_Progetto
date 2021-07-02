@@ -2,6 +2,7 @@
 package view.elimina;
 
 import controller.ControllerSponsor;
+import convalidazione.ControlloConvalidazione;
 import dao.DataAccessObject;
 import dao.ExceptionDao;
 import java.sql.Connection;
@@ -22,8 +23,13 @@ import view.SezioneEventiView;
 
 public class EliminaEvento extends javax.swing.JFrame {
 
+    /*CONTROLLORE PER GESTIRE GLI ERRORI*/
+    private ControlloConvalidazione controlloConvalidazione = new ControlloConvalidazione();
+    
+    /*DATI IMPORTANTI*/
     private String idSponsor;
     private int idEvento;
+    private ArrayList<Evento> datiEvento = new ArrayList<Evento>();
 
     /*COSTRUTTORI*/
     public EliminaEvento(String idSponsor) {
@@ -227,35 +233,38 @@ public class EliminaEvento extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTornaIndietroJBActionPerformed
 
     private void btnCercaNomeJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCercaNomeJBActionPerformed
-        ArrayList<Evento> datiEvento = new ArrayList<Evento>();
         ControllerSponsor controllerSponsor = new ControllerSponsor();
         String nomeEvento = inputNomeEventoJTF.getText();
         
-        try {
-            DefaultTableModel tblModel = (DefaultTableModel)tblDatiEventoJT.getModel();
-            tblModel.setRowCount(0);
-            datiEvento = controllerSponsor.cercaNomeEvento(nomeEvento, Integer.parseInt(this.getIdSponsor()));
-            if(datiEvento != null){
-                JOptionPane.showMessageDialog(null, "Evento con titolo: "+nomeEvento+" trovato");
-                datiEvento.forEach((Evento evento) -> {
-                    tblModel.addRow(new Object[]{
-                        evento.getIdEvento(),
-                        evento.getTitolo(),
-                        evento.getLuogoEvento(),
-                        evento.getDataInizio(),
-                        evento.getOraInizio(),
-                        evento.getDataFine(),
-                        evento.getOraFine(),
-                        evento.getGettoneValue(),
+        if(controlloConvalidazione.controlloEliminaEventoNome(nomeEvento) == true) {
+            try {
+                datiEvento = controllerSponsor.cercaNomeEvento(nomeEvento, Integer.parseInt(this.getIdSponsor()));
+                if(datiEvento.isEmpty())
+                    JOptionPane.showMessageDialog(this, "EVENTO CON NOME "+nomeEvento+" NON TROVATO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                else {
+                    JOptionPane.showMessageDialog(this, "✓ EVENTO CON NOME "+nomeEvento+" TROVATO", "TROVATO", JOptionPane.INFORMATION_MESSAGE);
+                    DefaultTableModel tblModel = (DefaultTableModel)tblDatiEventoJT.getModel();
+                    tblModel.setRowCount(0);
+                    datiEvento.forEach((Evento evento) -> {
+                        tblModel.addRow(new Object[]{
+                            evento.getIdEvento(),
+                            evento.getTitolo(),
+                            evento.getLuogoEvento(),
+                            evento.getDataInizio(),
+                            evento.getOraInizio(),
+                            evento.getDataFine(),
+                            evento.getOraFine(),
+                            evento.getGettoneValue(),
+                        });
+                        tblDatiEventoJT.setModel(tblModel);
                     });
-                    tblDatiEventoJT.setModel(tblModel);
-                });
-            }
-            else
-                JOptionPane.showMessageDialog(null, "Evento con titolo: "+nomeEvento+" non trovato");
-        } catch (ExceptionDao ex) {
-            Logger.getLogger(EliminaEvento.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } catch (ExceptionDao ex) {
+                Logger.getLogger(EliminaEvento.class.getName()).log(Level.SEVERE, null, ex);
+            } 
         }
+        else
+            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nSCRIVERE NEL CAMPO IL NOME DELL'EVENTO DA CERCARE", "ERRORE", JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_btnCercaNomeJBActionPerformed
 
     private void btnRispristinaJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRispristinaJBActionPerformed
@@ -269,34 +278,45 @@ public class EliminaEvento extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRispristinaJBActionPerformed
 
     private void btnCercaDataJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCercaDataJBActionPerformed
-        java.sql.Date dataEvento = new java.sql.Date(inputDataEventoJDC.getDate().getTime());
-        ArrayList<Evento> datiEvento = new ArrayList<Evento>();
         ControllerSponsor controllerSponsor = new ControllerSponsor();
+        java.sql.Date dataEvento = null;
+        try{
+            dataEvento = new java.sql.Date(inputDataEventoJDC.getDate().getTime());
+        }catch(NullPointerException npe) {
+            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nSCRIVERE UNA DATA VALIDA DA CERCARE", "WARNING", JOptionPane.WARNING_MESSAGE);
+        }        
         
-         try {
-            DefaultTableModel tblModel = (DefaultTableModel)tblDatiEventoJT.getModel();
-            tblModel.setRowCount(0);
-            datiEvento = controllerSponsor.cercaDataEvento(dataEvento, Integer.parseInt(this.getIdSponsor()));
-            if(datiEvento != null){
-                JOptionPane.showMessageDialog(null, "Evento con Data: "+dataEvento+" trovato");
-                datiEvento.forEach((Evento evento) -> {
-                    tblModel.addRow(new Object[]{
-                        evento.getIdEvento(),
-                        evento.getTitolo(),
-                        evento.getLuogoEvento(),
-                        evento.getDataInizio(),
-                        evento.getOraInizio(),
-                        evento.getDataFine(),
-                        evento.getOraFine(),
+        
+        if(controlloConvalidazione.controlloEliminaEventoData(String.valueOf(dataEvento)) == true) {
+            try {
+                datiEvento = controllerSponsor.cercaDataEvento(dataEvento, Integer.parseInt(this.getIdSponsor()));
+                if(datiEvento.isEmpty())
+                    JOptionPane.showMessageDialog(this, "EVENTO CON DATA "+dataEvento+" NON TROVATO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                else {
+                    JOptionPane.showMessageDialog(this, "✓ EVENTO CON DATA "+dataEvento+" TROVATO", "TROVATO", JOptionPane.INFORMATION_MESSAGE);
+                    DefaultTableModel tblModel = (DefaultTableModel)tblDatiEventoJT.getModel();
+                    tblModel.setRowCount(0);
+                    datiEvento.forEach((Evento evento) -> {
+                        tblModel.addRow(new Object[]{
+                            evento.getIdEvento(),
+                            evento.getTitolo(),
+                            evento.getLuogoEvento(),
+                            evento.getDataInizio(),
+                            evento.getOraInizio(),
+                            evento.getDataFine(),
+                            evento.getOraFine(),
+                        });
+                        tblDatiEventoJT.setModel(tblModel);
                     });
-                    tblDatiEventoJT.setModel(tblModel);
-                });
+                }
+            } catch (ExceptionDao ex) {
+                Logger.getLogger(EliminaEvento.class.getName()).log(Level.SEVERE, null, ex);
+            } catch(NullPointerException nex){
+                JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nNON E' STATO POSSIBILE STAMPARE I DATI PERCHE' LA DATA INSERITA NON E' VALIDA", "WARNING", JOptionPane.WARNING_MESSAGE);
             }
-            else
-                JOptionPane.showMessageDialog(null, "Evento con Data: "+dataEvento+" non trovato");
-        } catch (ExceptionDao ex) {
-            Logger.getLogger(EliminaEvento.class.getName()).log(Level.SEVERE, null, ex);
         }
+        else
+            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nSCRIVERE NEL CAMPO LA DATA DELL'EVENTO DA CERCARE", "ERRORE", JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_btnCercaDataJBActionPerformed
 
     private void tblDatiEventoJTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDatiEventoJTMouseClicked

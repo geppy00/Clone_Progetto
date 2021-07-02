@@ -12,13 +12,14 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/peppe/OneDrive/Desktop/ALL%20MY%20SHIT/File%20progetto%20OO-BD/BACKUP%20PROGETTO/src/view/registrare/RegistraPagamento.java</file>
-            <file>file:/C:/Users/peppe/OneDrive/Desktop/ALL%20MY%20SHIT/File%20progetto%20OO-BD/BACKUP%20PROGETTO/src/view/modificaDati/ModificaPagamento.java</file>
-            <file>file:/C:/Users/peppe/OneDrive/Desktop/ALL%20MY%20SHIT/File%20progetto%20OO-BD/BACKUP%20PROGETTO/src/view/SezioneVisualizzaPagamenti.java</file>
-            <file>file:/C:/Users/peppe/OneDrive/Desktop/ALL%20MY%20SHIT/File%20progetto%20OO-BD/BACKUP%20PROGETTO/src/view/elimina/EliminaPagamento.java</file>
+            <file>file:/C:/Users/peppe/OneDrive/Desktop/ALL%20MY%20SHIT/File%20progetto%20OO-BD/BACKUP%20PROGETTO/src/view/modificaDati/ModificaEvento.java</file>
+            <file>file:/C:/Users/peppe/OneDrive/Desktop/ALL%20MY%20SHIT/File%20progetto%20OO-BD/BACKUP%20PROGETTO/src/view/SezioneEventiView.java</file>
+            <file>file:/C:/Users/peppe/OneDrive/Desktop/ALL%20MY%20SHIT/File%20progetto%20OO-BD/BACKUP%20PROGETTO/src/view/elimina/EliminaProcuratore.java</file>
             <file>file:/C:/Users/peppe/OneDrive/Desktop/ALL%20MY%20SHIT/File%20progetto%20OO-BD/BACKUP%20PROGETTO/src/convalidazione/ControlloConvalidazione.java</file>
-            <file>file:/C:/Users/peppe/OneDrive/Desktop/ALL%20MY%20SHIT/File%20progetto%20OO-BD/BACKUP%20PROGETTO/src/view/SezionePagamentoView.java</file>
-            <file>file:/C:/Users/peppe/OneDrive/Desktop/ALL%20MY%20SHIT/File%20progetto%20OO-BD/BACKUP%20PROGETTO/src/view/registrare/RegistraNuovoProfilo.java</file>
+            <file>file:/C:/Users/peppe/OneDrive/Desktop/ALL%20MY%20SHIT/File%20progetto%20OO-BD/BACKUP%20PROGETTO/src/view/elimina/EliminaEvento.java</file>
+            <file>file:/C:/Users/peppe/OneDrive/Desktop/ALL%20MY%20SHIT/File%20progetto%20OO-BD/BACKUP%20PROGETTO/src/view/elimina/ConfermaEliminazioneEvento.java</file>
+            <file>file:/C:/Users/peppe/OneDrive/Desktop/ALL%20MY%20SHIT/File%20progetto%20OO-BD/BACKUP%20PROGETTO/src/view/ElencoPartecipantiSponsor.java</file>
+            <file>file:/C:/Users/peppe/OneDrive/Desktop/ALL%20MY%20SHIT/File%20progetto%20OO-BD/BACKUP%20PROGETTO/src/view/registrare/RegistraEventoSponsor.java</file>
         </group>
     </open-files>
 </project-private>

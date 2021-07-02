@@ -2,12 +2,18 @@
 package view.elimina;
 
 import controller.ControllerSponsor;
+import convalidazione.ControlloConvalidazione;
 import dao.ExceptionDao;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class ConfermaEliminazioneEvento extends javax.swing.JFrame {
 
+    /*CONTROLLORE PER GESTIRE GLI ERRORI*/
+    private ControlloConvalidazione controlloConvalidazione = new ControlloConvalidazione();
+    
+    /*DATI IMPORTANTI*/
     private String idSponsor;
     private int idEvento;
     
@@ -86,12 +92,20 @@ public class ConfermaEliminazioneEvento extends javax.swing.JFrame {
     private void btnYesJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnYesJBActionPerformed
         ControllerSponsor controllerSponsor = new ControllerSponsor();
         
-        try {
-            controllerSponsor.eliminaEvento(this.getIdEvento(), Integer.parseInt(this.getIdSponsor()));
-            this.setVisible(false);
-        } catch (ExceptionDao ex) {
-            Logger.getLogger(ConfermaEliminazioneEvento.class.getName()).log(Level.SEVERE, null, ex);
+        if(controlloConvalidazione.controlloIdEvento(String.valueOf(this.getIdEvento())) == true) {
+            try {
+                controllerSponsor.eliminaEvento(this.getIdEvento(), Integer.parseInt(this.getIdSponsor()));
+                JOptionPane.showMessageDialog(this, "✓ ELIMINAZIONE EFFETTUATA CON SUCCESSO", "ELIMINAZIONE", JOptionPane.INFORMATION_MESSAGE);
+                this.setVisible(false);
+            } catch (ExceptionDao ex) {
+                Logger.getLogger(ConfermaEliminazioneEvento.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
+        else {
+            JOptionPane.showMessageDialog(this, "CI E' STATO UN PROBLEMA NEL RICAVARE I DATI\nRIPROVA A SELEZIONE QUESTO EVENTO", "WARNING", JOptionPane.WARNING_MESSAGE);
+            this.setVisible(false);
+        }
+            
     }//GEN-LAST:event_btnYesJBActionPerformed
 
 
