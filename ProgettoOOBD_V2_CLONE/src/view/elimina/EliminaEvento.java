@@ -60,9 +60,9 @@ public class EliminaEvento extends javax.swing.JFrame {
         inputNomeEventoJTF = new javax.swing.JTextField();
         btnCercaNomeJB = new javax.swing.JButton();
         dataJL = new javax.swing.JLabel();
-        inputDataEventoJDC = new com.toedter.calendar.JDateChooser();
         btnCercaDataJB = new javax.swing.JButton();
         btnRispristinaJB = new javax.swing.JButton();
+        inputDataEventoJDC = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -107,8 +107,6 @@ public class EliminaEvento extends javax.swing.JFrame {
         });
 
         dataJL.setText("Data Evento");
-
-        inputDataEventoJDC.setDateFormatString("yyyy-MM-dd");
 
         btnCercaDataJB.setText("CERCA");
         btnCercaDataJB.addActionListener(new java.awt.event.ActionListener() {
@@ -172,8 +170,8 @@ public class EliminaEvento extends javax.swing.JFrame {
                         .addGap(104, 104, 104)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(dataJL)
-                            .addComponent(inputDataEventoJDC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnCercaDataJB))
+                            .addComponent(btnCercaDataJB)
+                            .addComponent(inputDataEventoJDC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnTornaIndietroJB, javax.swing.GroupLayout.DEFAULT_SIZE, 52, Short.MAX_VALUE)

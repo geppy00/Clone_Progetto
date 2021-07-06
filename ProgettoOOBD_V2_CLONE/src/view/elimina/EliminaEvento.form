@@ -79,8 +79,8 @@
                       <EmptySpace min="-2" pref="104" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="dataJL" min="-2" max="-2" attributes="0"/>
-                          <Component id="inputDataEventoJDC" min="-2" max="-2" attributes="0"/>
                           <Component id="btnCercaDataJB" min="-2" max="-2" attributes="0"/>
+                          <Component id="inputDataEventoJDC" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -152,11 +152,6 @@
         <Property name="text" type="java.lang.String" value="Data Evento"/>
       </Properties>
     </Component>
-    <Component class="com.toedter.calendar.JDateChooser" name="inputDataEventoJDC">
-      <Properties>
-        <Property name="dateFormatString" type="java.lang.String" value="yyyy-MM-dd"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JButton" name="btnCercaDataJB">
       <Properties>
         <Property name="text" type="java.lang.String" value="CERCA"/>
@@ -172,6 +167,8 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRispristinaJBActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="com.toedter.calendar.JDateChooser" name="inputDataEventoJDC">
     </Component>
   </SubComponents>
 </Form>

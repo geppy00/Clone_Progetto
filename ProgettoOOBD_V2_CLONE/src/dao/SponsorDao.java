@@ -310,7 +310,29 @@ public class SponsorDao {
         return datiEvento;
     }
     
+    private void eliminaInvitati(Evento evento) throws ExceptionDao {
+        String sql= "DELETE FROM invitatti WHERE idevento = ?;";
+        PreparedStatement pStmt = null;
+        Connection connection = null;
+        
+        try {
+            connection = new DataAccessObject().connectionToDatabase();
+            pStmt = connection.prepareStatement(sql);
+            pStmt.setInt(1, evento.getIdEvento());
+            pStmt.executeUpdate();
+        }catch(SQLException e) {
+            throw new ExceptionDao("ERRORE INVITATTI SPONSOR FALLITA "+e);
+        }
+        
+        finally{
+            FinallyException finallyException = new FinallyException();
+            finallyException.finallyException();
+        }
+    }
+    
     public void eliminaEvento(Evento evento) throws ExceptionDao {
+        this.eliminaInvitati(evento);
+        
         String sql= "DELETE FROM evento WHERE idevento = ? AND idsponsor = ?;";
         PreparedStatement pStmt = null;
         Connection connection = null;
@@ -321,9 +343,8 @@ public class SponsorDao {
             pStmt.setInt(1, evento.getIdEvento());
             pStmt.setInt(2, evento.getIdSponsor());
             pStmt.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Evento eliminato con successo");
         }catch(SQLException e) {
-            throw new ExceptionDao("ERRORE ELIMINAZIONE SPONSOR FALLITA "+e);
+            throw new ExceptionDao("ERRORE ELIMINAZIONE EVENTO FALLITA "+e);
         }
         
         finally{

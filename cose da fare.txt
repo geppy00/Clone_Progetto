@@ -44,7 +44,8 @@ SPONSOR
 -controllo della data fine evento (✓ FATTO :D)
 -controllare i campi obbligatori per la creazione di un evento (✓ FATTO :D)
 -controllare i campi obbligatori per la modifica di un evento (✓ FATTO :D)
--controllare i campi obbligatori per i pagamenti (registrare, modificare, visualizzare ed eliminare) (✓ FATTO :D)  
+-controllare i campi obbligatori per i pagamenti (registrare, modificare, visualizzare ed eliminare) (✓ FATTO :D)
+-Aggiustare eliminazione evento vincolo con la tabella invitatti (✓ FATTO :D)  
 
 CLUB
 -far scrivere dell'accesso da procuratore il nome utente (✓ FATTO :D)

@@ -349,6 +349,7 @@ public class RegistrareContrattoSponsor extends javax.swing.JFrame {
             }
             else {
                 try {
+                    JOptionPane.showMessageDialog(this, "✓ REGISTRAZIONE DEL CONTRATTO EFFETTUATA CON SUCCESSO", "REGISTRAZIONE", JOptionPane.INFORMATION_MESSAGE);
                     controllerProcuratore.registraContratto(idAtleta, idSponsor, dataInizio, dataFine, valContratto, "SPONSOR");
                 } catch (ExceptionDao ex) {
                     Logger.getLogger(RegistraContrattoClub.class.getName()).log(Level.SEVERE, null, ex);
