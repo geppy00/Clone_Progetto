@@ -320,6 +320,7 @@ public class ModificaDatiProcuratore extends javax.swing.JFrame {
 
     private void btnLogoutJB1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutJB1ActionPerformed
         this.setVisible(false);
+        System.exit(0);
     }//GEN-LAST:event_btnLogoutJB1ActionPerformed
 
     private void btnCloseMessageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseMessageActionPerformed

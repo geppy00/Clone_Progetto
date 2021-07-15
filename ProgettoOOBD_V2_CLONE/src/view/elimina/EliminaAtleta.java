@@ -297,6 +297,7 @@ public class EliminaAtleta extends javax.swing.JFrame {
 
     private void btnLogoutJB1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutJB1ActionPerformed
         this.setVisible(false);
+        System.exit(0);
     }//GEN-LAST:event_btnLogoutJB1ActionPerformed
 
     private void btnTornaIndietroJB1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTornaIndietroJB1ActionPerformed

@@ -113,6 +113,7 @@ public class ScegliContrattoView extends javax.swing.JFrame {
 
     private void btnLogoutJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutJBActionPerformed
         this.setVisible(false);
+        System.exit(0);
     }//GEN-LAST:event_btnLogoutJBActionPerformed
 
     private void btnClubJBMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClubJBMouseEntered

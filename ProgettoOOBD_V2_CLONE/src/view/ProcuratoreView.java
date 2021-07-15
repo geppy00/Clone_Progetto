@@ -232,10 +232,13 @@ public class ProcuratoreView extends javax.swing.JFrame {
 
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
         this.setVisible(false);
+        System.exit(0);
     }//GEN-LAST:event_btnCloseActionPerformed
 
     private void btnLogoutJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutJBActionPerformed
-         this.setVisible(false);
+        LoginView loginView = new LoginView();
+        loginView.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnLogoutJBActionPerformed
 
     

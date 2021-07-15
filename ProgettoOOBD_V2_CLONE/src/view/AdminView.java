@@ -275,7 +275,8 @@ public class AdminView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAtletaActionPerformed
 
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
-         this.setVisible(false);
+        this.setVisible(false);
+        System.exit(0);
     }//GEN-LAST:event_btnCloseActionPerformed
 
     private void btnClubJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClubJBActionPerformed
@@ -345,7 +346,9 @@ public class AdminView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSponsorMouseExited
 
     private void btnLogoutJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutJBActionPerformed
-         this.setVisible(false);
+        LoginView loginView = new LoginView();
+        loginView.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnLogoutJBActionPerformed
 
     /*GET AND SET*/

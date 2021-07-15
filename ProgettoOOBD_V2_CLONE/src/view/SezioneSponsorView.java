@@ -206,6 +206,7 @@ public class SezioneSponsorView extends javax.swing.JFrame {
 
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
         this.setVisible(false);
+        System.exit(0);
     }//GEN-LAST:event_btnCloseActionPerformed
 
     private void btnLogoutJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutJBActionPerformed

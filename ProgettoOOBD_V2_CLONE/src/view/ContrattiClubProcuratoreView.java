@@ -219,6 +219,7 @@ public class ContrattiClubProcuratoreView extends javax.swing.JFrame {
 
     private void btnLogoutJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutJBActionPerformed
         this.setVisible(false);
+        System.exit(0);
     }//GEN-LAST:event_btnLogoutJBActionPerformed
 
      /*GET AND SET*/
