@@ -3,6 +3,8 @@ package view.registrare;
 
 import controller.ControllerSponsor;
 import convalidazione.ControlloConvalidazione;
+import convalidazione.MessageError;
+import convalidazione.PermessoPerNonScrivere;
 import convalidazione.PermessoPerScrivere;
 import dao.ExceptionDao;
 import java.awt.Color;
@@ -25,6 +27,7 @@ public class RegistraEventoSponsor extends javax.swing.JFrame {
     
     /*CONTROLLORE PER GESTIRE GLI ERRORI*/
     private ControlloConvalidazione controlloConvalidazione = new ControlloConvalidazione();
+    MessageError messageError = new MessageError();
     
     /*COSTRUTTORI*/
     public RegistraEventoSponsor(String idSponsor) {
@@ -46,7 +49,7 @@ public class RegistraEventoSponsor extends javax.swing.JFrame {
         } catch(NullPointerException nex) {
             Toolkit.getDefaultToolkit().beep();
             //JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nINSERIRE UN ORARIO VALIDO", "ERRORE", JOptionPane.ERROR_MESSAGE);
-            this.messaggioErrore(false, true, "warning", "Inserisca Un Orario Valido");
+            messageError.showMessage(false, true, "warning", "Inserisca Un Orario Valido", errorMessage, jPMessage, btnCloseMessage);
         } catch (ParseException ex) {
             Logger.getLogger(RegistraEventoSponsor.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -286,7 +289,7 @@ public class RegistraEventoSponsor extends javax.swing.JFrame {
             oraFine = localDateFormat.format(dataFine);
         }catch(NullPointerException nex) {
             Toolkit.getDefaultToolkit().beep();
-            this.messaggioErrore(false, true, "warning", "Inserisca Una Data con Orario Valido");
+            messageError.showMessage(false, true, "warning", "Inserisca Una Data con Orario Valido", errorMessage, jPMessage, btnCloseMessage);
         }
         java.sql.Time oraInizioTime = stringToTime(oraInizio);
         java.sql.Time oraFineTime = stringToTime(oraFine);
@@ -295,26 +298,32 @@ public class RegistraEventoSponsor extends javax.swing.JFrame {
             gettoneValue = Double.parseDouble(inputGettoneEventoJTF.getText());
         }catch(NumberFormatException nfe) {
             Toolkit.getDefaultToolkit().beep();
-            this.messaggioErrore(false, true, "warning", "Inserisca Un Numero Valido");
+            messageError.showMessage(false, true, "warning", "Inserisca Un Numero Valido", errorMessage, jPMessage, btnCloseMessage);
         }
 
-        if(controlloConvalidazione.controlloRegistraEvento(String.valueOf(dataInizio), String.valueOf(dataFine), luogo, titolo, String.valueOf(gettoneValue)) == true) {
-            if(controlloConvalidazione.controlloDescrizioneEvento(descrizione) == true) {
-                try {
-                    this.jPMessage.setVisible(false);
+        
+        if(controlloConvalidazione.controlloDescrizioneEvento(descrizione) == true) {
+            try {
+                this.jPMessage.setVisible(false);
+                if(controlloConvalidazione.controlloRegistraEvento(String.valueOf(dataInizio), String.valueOf(dataFine), luogo, titolo, String.valueOf(gettoneValue)) == true) {
                     controllerSponsor.registraEvento(gettoneValue, titolo, luogo, dataInizio, oraInizioTime, dataFine, oraFineTime, Integer.parseInt(this.getIdSponsor()), descrizione);
-                } catch (ExceptionDao ex) {
-                    Logger.getLogger(RegistraEventoSponsor.class.getName()).log(Level.SEVERE, null, ex);
+                    messageError.showMessage(false, true, "success", "Registrazione Effettuata Con Successo", errorMessage, jPMessage, btnCloseMessage);
+                    inputTitoloJTF.setText("");
+                    inputLuogoEventoJTF.setText("");
+                    inputGettoneEventoJTF.setText("");
+                    inputDescrizioneJTA.setText("");
                 }
-            }
-            else {
-                Toolkit.getDefaultToolkit().beep();
-                this.messaggioErrore(false, true, "warning", "Inserisca Al Massimo 280 Caratteri");
+                else {
+                    Toolkit.getDefaultToolkit().beep();
+                    messageError.showMessage(false, true, "warning", "Uno O Più Campi Obbliggatori Sono Vuoti", errorMessage, jPMessage, btnCloseMessage);
+                }
+            } catch (ExceptionDao ex) {
+                Logger.getLogger(RegistraEventoSponsor.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         else {
             Toolkit.getDefaultToolkit().beep();
-            this.messaggioErrore(false, true, "warning", "Uno O Più Campi Obbliggatori Sono Vuoti");
+            messageError.showMessage(false, true, "warning", "Inserisca Al Massimo 280 Caratteri", errorMessage, jPMessage, btnCloseMessage);
         }
     }//GEN-LAST:event_btnCreaEventoJBActionPerformed
 
@@ -345,7 +354,7 @@ public class RegistraEventoSponsor extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAnnullaActionPerformed
 
     private void inputTitoloJTFFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputTitoloJTFFocusGained
-        if(inputTitoloJTF.getText().equals("Titolo Dell'Evento")){
+        if(inputTitoloJTF.getText().equals("Titolo Dell'Evento")) {
             inputTitoloJTF.setText("");
             inputTitoloJTF.setForeground(new Color(255,255,255));
             
@@ -353,7 +362,7 @@ public class RegistraEventoSponsor extends javax.swing.JFrame {
     }//GEN-LAST:event_inputTitoloJTFFocusGained
 
     private void inputTitoloJTFFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputTitoloJTFFocusLost
-        if(inputTitoloJTF.getText().equals("")){
+        if(inputTitoloJTF.getText().equals("")) {
             inputTitoloJTF.setText("Titolo Dell'Evento");
             inputTitoloJTF.setForeground(new Color(255,255,255));
             
@@ -361,7 +370,7 @@ public class RegistraEventoSponsor extends javax.swing.JFrame {
     }//GEN-LAST:event_inputTitoloJTFFocusLost
 
     private void inputLuogoEventoJTFFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputLuogoEventoJTFFocusGained
-        if(inputLuogoEventoJTF.getText().equals("Luogo Evento")){
+        if(inputLuogoEventoJTF.getText().equals("Luogo Evento")) {
             inputLuogoEventoJTF.setText("");
             inputLuogoEventoJTF.setForeground(new Color(255,255,255));
             
@@ -369,7 +378,7 @@ public class RegistraEventoSponsor extends javax.swing.JFrame {
     }//GEN-LAST:event_inputLuogoEventoJTFFocusGained
 
     private void inputLuogoEventoJTFFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputLuogoEventoJTFFocusLost
-       if(inputLuogoEventoJTF.getText().equals("")){
+       if(inputLuogoEventoJTF.getText().equals("")) {
             inputLuogoEventoJTF.setText("Luogo Evento");
             inputLuogoEventoJTF.setForeground(new Color(255,255,255));
             
@@ -377,10 +386,10 @@ public class RegistraEventoSponsor extends javax.swing.JFrame {
     }//GEN-LAST:event_inputLuogoEventoJTFFocusLost
 
     private void inputGettoneEventoJTFFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputGettoneEventoJTFFocusGained
-        if(inputGettoneEventoJTF.getText().equals("Gettone")){
+        if(inputGettoneEventoJTF.getText().equals("Gettone")) {
             inputGettoneEventoJTF.setText("");
             inputGettoneEventoJTF.setForeground(new Color(255,255,255));
-           //inputGettoneEventoJTF.setDocument(new PermessoPerScrivere());
+            inputGettoneEventoJTF.setDocument(new PermessoPerScrivere());
             
         }
         
@@ -388,14 +397,14 @@ public class RegistraEventoSponsor extends javax.swing.JFrame {
 
     private void inputGettoneEventoJTFFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputGettoneEventoJTFFocusLost
       if(inputGettoneEventoJTF.getText().equals("")){
+            inputGettoneEventoJTF.setDocument(new PermessoPerNonScrivere());
             inputGettoneEventoJTF.setText("Gettone");
             inputGettoneEventoJTF.setForeground(new Color(255,255,255));
-            
         }
     }//GEN-LAST:event_inputGettoneEventoJTFFocusLost
 
     private void inputDescrizioneJTAFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputDescrizioneJTAFocusGained
-        if(inputDescrizioneJTA.getText().equals("Descrizione")){
+        if(inputDescrizioneJTA.getText().equals("Descrizione")) {
             inputDescrizioneJTA.setText("");
             inputDescrizioneJTA.setForeground(new Color(255,255,255));
             
@@ -403,10 +412,9 @@ public class RegistraEventoSponsor extends javax.swing.JFrame {
     }//GEN-LAST:event_inputDescrizioneJTAFocusGained
 
     private void inputDescrizioneJTAFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputDescrizioneJTAFocusLost
-         if(inputDescrizioneJTA.getText().equals("")){
+         if(inputDescrizioneJTA.getText().equals("")) {
             inputDescrizioneJTA.setText("Descrizione");
-            inputDescrizioneJTA.setForeground(new Color(255,255,255));
-            
+            inputDescrizioneJTA.setForeground(new Color(255,255,255));       
         }
     }//GEN-LAST:event_inputDescrizioneJTAFocusLost
 
@@ -414,23 +422,6 @@ public class RegistraEventoSponsor extends javax.swing.JFrame {
         
     }//GEN-LAST:event_inputGettoneEventoJTFActionPerformed
 
-    public void messaggioErrore(boolean valueFalse,boolean valueTrue, String controll, String messaggio){
-        
-                    if(controll.equals("success")){
-                        jPMessage.setVisible(valueFalse);
-                        errorMessage.setText(messaggio);
-                        jPMessage.setBackground(new Color(46,204,113));
-                        btnCloseMessage.setBackground(new Color(46,204,113));
-                        jPMessage.setVisible(valueTrue);
-                    }else if(controll.equals("warning")){
-                        jPMessage.setVisible(valueFalse);
-                        errorMessage.setText(messaggio);
-                        jPMessage.setBackground(new Color(231,76,60));
-                        btnCloseMessage.setBackground(new Color(231,76,60));
-                        jPMessage.setVisible(valueTrue);
-                    }
-                    
-    }
     
     /*GET AND SET*/
     public String getIdSponsor() {

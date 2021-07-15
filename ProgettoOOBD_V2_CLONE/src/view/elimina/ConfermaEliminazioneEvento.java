@@ -3,7 +3,9 @@ package view.elimina;
 
 import controller.ControllerSponsor;
 import convalidazione.ControlloConvalidazione;
+import convalidazione.MessageError;
 import dao.ExceptionDao;
+import java.awt.Color;
 import java.awt.Toolkit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,6 +26,8 @@ public class ConfermaEliminazioneEvento extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.idSponsor = idSponsor;
         this.idEvento = idEvento;
+        
+        jMessagge.setVisible(false);
     }
     
     public ConfermaEliminazioneEvento() {
@@ -39,11 +43,11 @@ public class ConfermaEliminazioneEvento extends javax.swing.JFrame {
         adviceJL = new javax.swing.JLabel();
         btnNoJB = new javax.swing.JButton();
         btnYesJB = new javax.swing.JButton();
-        btnLogoutJB1 = new javax.swing.JButton();
         jMessagge = new javax.swing.JPanel();
         jLMessaggio = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        btnCloseMessagio = new javax.swing.JLabel();
+        btnCloseMessagio = new javax.swing.JButton();
+        btnLogoutJB2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -86,19 +90,6 @@ public class ConfermaEliminazioneEvento extends javax.swing.JFrame {
         });
         jPanel1.add(btnYesJB, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 130, 112, 48));
 
-        btnLogoutJB1.setBackground(new java.awt.Color(11, 58, 151));
-        btnLogoutJB1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_multiply_32px_1.png"))); // NOI18N
-        btnLogoutJB1.setBorder(null);
-        btnLogoutJB1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnLogoutJB1.setFocusPainted(false);
-        btnLogoutJB1.setFocusable(false);
-        btnLogoutJB1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLogoutJB1ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnLogoutJB1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 0, -1, 40));
-
         jMessagge.setBackground(new java.awt.Color(231, 76, 60));
 
         jLMessaggio.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
@@ -111,12 +102,14 @@ public class ConfermaEliminazioneEvento extends javax.swing.JFrame {
         jLabel3.setFocusable(false);
 
         btnCloseMessagio.setBackground(new java.awt.Color(231, 76, 60));
-        btnCloseMessagio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_delete_20px.png"))); // NOI18N
+        btnCloseMessagio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_multiply_32px_1.png"))); // NOI18N
+        btnCloseMessagio.setBorder(null);
         btnCloseMessagio.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCloseMessagio.setFocusPainted(false);
         btnCloseMessagio.setFocusable(false);
-        btnCloseMessagio.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnCloseMessagioMouseClicked(evt);
+        btnCloseMessagio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCloseMessagioActionPerformed(evt);
             }
         });
 
@@ -127,19 +120,36 @@ public class ConfermaEliminazioneEvento extends javax.swing.JFrame {
             .addGroup(jMessaggeLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(51, 51, 51)
-                .addComponent(jLMessaggio, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
-                .addComponent(btnCloseMessagio, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLMessaggio, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnCloseMessagio, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jMessaggeLayout.setVerticalGroup(
             jMessaggeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLMessaggio, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(btnCloseMessagio, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(btnCloseMessagio, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addGroup(jMessaggeLayout.createSequentialGroup()
+                .addGroup(jMessaggeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLMessaggio, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         jPanel1.add(jMessagge, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, 320, 30));
+
+        btnLogoutJB2.setBackground(new java.awt.Color(11, 58, 151));
+        btnLogoutJB2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_multiply_32px_1.png"))); // NOI18N
+        btnLogoutJB2.setBorder(null);
+        btnLogoutJB2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnLogoutJB2.setFocusPainted(false);
+        btnLogoutJB2.setFocusable(false);
+        btnLogoutJB2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutJB2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnLogoutJB2, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 0, -1, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -158,36 +168,40 @@ public class ConfermaEliminazioneEvento extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNoJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNoJBActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_btnNoJBActionPerformed
+
+    private void btnYesJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnYesJBActionPerformed
        ControllerSponsor controllerSponsor = new ControllerSponsor();
+       MessageError messageError = new MessageError();
         
         if(controlloConvalidazione.controlloIdEvento(String.valueOf(this.getIdEvento())) == true) {
             try {
                 controllerSponsor.eliminaEvento(this.getIdEvento(), Integer.parseInt(this.getIdSponsor()));
-                JOptionPane.showMessageDialog(this, "✓ ELIMINAZIONE EFFETTUATA CON SUCCESSO", "ELIMINAZIONE", JOptionPane.INFORMATION_MESSAGE);
-                this.setVisible(false);
+                //JOptionPane.showMessageDialog(this, "✓ ELIMINAZIONE EFFETTUATA CON SUCCESSO", "ELIMINAZIONE", JOptionPane.INFORMATION_MESSAGE);
+                messageError.showMessage(false, true, "success", "Eliminazione Effettuata Con Successo", jLMessaggio, jMessagge, btnCloseMessagio);
+                btnYesJB.setEnabled(false);
+                btnNoJB.setEnabled(false);
+                btnYesJB.setForeground(new Color(255, 255, 255));
+                btnNoJB.setForeground(new Color(255, 255, 255));
             } catch (ExceptionDao ex) {
                 Logger.getLogger(ConfermaEliminazioneEvento.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         else {
             Toolkit.getDefaultToolkit().beep();
-            JOptionPane.showMessageDialog(this, "CI E' STATO UN PROBLEMA NEL RICAVARE I DATI\nRIPROVA A SELEZIONE QUESTO EVENTO", "WARNING", JOptionPane.WARNING_MESSAGE);
-            this.setVisible(false);
+            //JOptionPane.showMessageDialog(this, "CI E' STATO UN PROBLEMA NEL RICAVARE I DATI\nRIPROVA A SELEZIONE QUESTO EVENTO", "WARNING", JOptionPane.WARNING_MESSAGE);
+            messageError.showMessage(false, true, "warning", "Errore Nell'Eliminazione", jLMessaggio, jMessagge, btnCloseMessagio);
         }
-    }//GEN-LAST:event_btnNoJBActionPerformed
-
-    private void btnYesJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnYesJBActionPerformed
-        this.setVisible(false);
     }//GEN-LAST:event_btnYesJBActionPerformed
 
-    private void btnLogoutJB1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutJB1ActionPerformed
+    private void btnCloseMessagioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseMessagioActionPerformed
         this.setVisible(false);
-        System.exit(0);
-    }//GEN-LAST:event_btnLogoutJB1ActionPerformed
+    }//GEN-LAST:event_btnCloseMessagioActionPerformed
 
-    private void btnCloseMessagioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCloseMessagioMouseClicked
-        jMessagge.setVisible(false);
-    }//GEN-LAST:event_btnCloseMessagioMouseClicked
+    private void btnLogoutJB2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutJB2ActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_btnLogoutJB2ActionPerformed
 
 
     /*GET AND SET*/
@@ -219,8 +233,8 @@ public class ConfermaEliminazioneEvento extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel adviceJL;
-    private javax.swing.JLabel btnCloseMessagio;
-    private javax.swing.JButton btnLogoutJB1;
+    private javax.swing.JButton btnCloseMessagio;
+    private javax.swing.JButton btnLogoutJB2;
     private javax.swing.JButton btnNoJB;
     private javax.swing.JButton btnYesJB;
     private javax.swing.JLabel jLMessaggio;

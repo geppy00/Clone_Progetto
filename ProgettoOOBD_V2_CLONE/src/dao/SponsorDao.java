@@ -157,8 +157,7 @@ public class SponsorDao {
             pStmt.setInt(8, evento.getIdSponsor());
             pStmt.setString(9, evento.getDescrizione());
             pStmt.execute();
-            JOptionPane.showMessageDialog(null, "REGISTRAZIONE EVENTO EFFETTUATA CON SUCCESSO");
-        }catch(SQLException e) {
+        } catch(SQLException e) {
             throw new ExceptionDao("ERRORE REGISTRAZIONE EVENTO FALLITA "+e);
         }
         
