@@ -5,6 +5,8 @@ import controller.ControllerClub;
 import convalidazione.ControlloConvalidazione;
 import dao.DataAccessObject;
 import dao.ExceptionDao;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Toolkit;
 import java.sql.Connection;
 import view.SezionePagamentoView;
@@ -34,6 +36,13 @@ public class RegistraPagamento extends javax.swing.JFrame {
         initComponents();
         this.idClubStr = idClub;
         this.setLocationRelativeTo(null);
+        
+        jPMessage.setVisible(false);
+        
+        elencoAtletiJT.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
+        elencoAtletiJT.getTableHeader().setOpaque(false);
+        elencoAtletiJT.getTableHeader().setBackground(new Color(32, 136, 203));
+        elencoAtletiJT.getTableHeader().setForeground(new Color(255,255,255));
         
         try {
             this.stampaDati();
@@ -84,36 +93,84 @@ public class RegistraPagamento extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        importoJL = new javax.swing.JLabel();
-        inputImportoJTF = new javax.swing.JTextField();
-        btnPagaJB = new javax.swing.JButton();
-        idDestinatarioJL = new javax.swing.JLabel();
-        inputIdDestinatarioJTF = new javax.swing.JTextField();
+        jPanel1 = new javax.swing.JPanel();
         btnAnnullaJB = new javax.swing.JButton();
+        btnPagaJB = new javax.swing.JButton();
+        inputImportoJTF = new javax.swing.JTextField();
+        inputIdDestinatarioJTF = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         elencoAtletiJT = new javax.swing.JTable();
-        elencoAtletiJL = new javax.swing.JLabel();
+        jPMessage = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        errorMessage = new javax.swing.JLabel();
+        btnCloseMessage = new javax.swing.JButton();
+        btnLogoutJB = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
-        importoJL.setText("INSERISCI IMPORTO");
+        jPanel1.setBackground(new java.awt.Color(11, 58, 151));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnPagaJB.setText("PAGA");
-        btnPagaJB.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPagaJBActionPerformed(evt);
-            }
-        });
-
-        idDestinatarioJL.setText("ID Destinatario");
-
-        btnAnnullaJB.setText("ANNULLA");
+        btnAnnullaJB.setBackground(new java.awt.Color(231, 76, 60));
+        btnAnnullaJB.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        btnAnnullaJB.setForeground(new java.awt.Color(255, 255, 255));
+        btnAnnullaJB.setText("Annulla");
+        btnAnnullaJB.setBorder(null);
+        btnAnnullaJB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAnnullaJB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAnnullaJBActionPerformed(evt);
             }
         });
+        jPanel1.add(btnAnnullaJB, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 400, 110, 30));
 
+        btnPagaJB.setBackground(new java.awt.Color(46, 204, 113));
+        btnPagaJB.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        btnPagaJB.setForeground(new java.awt.Color(255, 255, 255));
+        btnPagaJB.setText("Paga");
+        btnPagaJB.setBorder(null);
+        btnPagaJB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnPagaJB.setFocusPainted(false);
+        btnPagaJB.setFocusable(false);
+        btnPagaJB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPagaJBActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnPagaJB, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 400, 100, 30));
+
+        inputImportoJTF.setBackground(new java.awt.Color(9, 46, 119));
+        inputImportoJTF.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        inputImportoJTF.setForeground(new java.awt.Color(231, 231, 231));
+        inputImportoJTF.setText("L'Importo");
+        inputImportoJTF.setBorder(null);
+        inputImportoJTF.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                inputImportoJTFFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                inputImportoJTFFocusLost(evt);
+            }
+        });
+        jPanel1.add(inputImportoJTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, 293, 30));
+
+        inputIdDestinatarioJTF.setBackground(new java.awt.Color(9, 46, 119));
+        inputIdDestinatarioJTF.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        inputIdDestinatarioJTF.setForeground(new java.awt.Color(231, 231, 231));
+        inputIdDestinatarioJTF.setText("ID Destinatario");
+        inputIdDestinatarioJTF.setBorder(null);
+        inputIdDestinatarioJTF.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                inputIdDestinatarioJTFFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                inputIdDestinatarioJTFFocusLost(evt);
+            }
+        });
+        jPanel1.add(inputIdDestinatarioJTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 130, 293, 30));
+
+        elencoAtletiJT.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         elencoAtletiJT.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -130,56 +187,82 @@ public class RegistraPagamento extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        elencoAtletiJT.setSelectionBackground(new java.awt.Color(232, 57, 95));
+        elencoAtletiJT.setShowVerticalLines(false);
+        elencoAtletiJT.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(elencoAtletiJT);
 
-        elencoAtletiJL.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        elencoAtletiJL.setText("ELENCO ATLETI");
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 170, 591, 220));
+
+        jPMessage.setBackground(new java.awt.Color(46, 204, 113));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_info_26px.png"))); // NOI18N
+
+        errorMessage.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        errorMessage.setForeground(new java.awt.Color(255, 255, 255));
+        errorMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        errorMessage.setText("Contratto stabilitto con sucesso ");
+
+        btnCloseMessage.setBackground(new java.awt.Color(46, 204, 113));
+        btnCloseMessage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_multiply_32px_1.png"))); // NOI18N
+        btnCloseMessage.setBorder(null);
+        btnCloseMessage.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCloseMessage.setFocusPainted(false);
+        btnCloseMessage.setFocusable(false);
+        btnCloseMessage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCloseMessageActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPMessageLayout = new javax.swing.GroupLayout(jPMessage);
+        jPMessage.setLayout(jPMessageLayout);
+        jPMessageLayout.setHorizontalGroup(
+            jPMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPMessageLayout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(errorMessage, javax.swing.GroupLayout.DEFAULT_SIZE, 478, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(btnCloseMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPMessageLayout.setVerticalGroup(
+            jPMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPMessageLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(errorMessage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnCloseMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        jPanel1.add(jPMessage, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, 590, 40));
+
+        btnLogoutJB.setBackground(new java.awt.Color(11, 58, 151));
+        btnLogoutJB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_multiply_32px_1.png"))); // NOI18N
+        btnLogoutJB.setBorder(null);
+        btnLogoutJB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnLogoutJB.setFocusPainted(false);
+        btnLogoutJB.setFocusable(false);
+        btnLogoutJB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutJBActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnLogoutJB, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 0, -1, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(importoJL)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(inputImportoJTF, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(idDestinatarioJL)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(inputIdDestinatarioJTF)))
-                        .addGap(18, 18, 18)
-                        .addComponent(btnPagaJB, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnAnnullaJB))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(elencoAtletiJL, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(13, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 723, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(importoJL)
-                            .addComponent(inputImportoJTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(idDestinatarioJL)
-                            .addComponent(inputIdDestinatarioJTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(btnAnnullaJB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnPagaJB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(26, 26, 26)
-                .addComponent(elencoAtletiJL)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 463, Short.MAX_VALUE)
         );
 
         pack();
@@ -223,6 +306,46 @@ public class RegistraPagamento extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnAnnullaJBActionPerformed
 
+    private void btnCloseMessageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseMessageActionPerformed
+        jPMessage.setVisible(false);
+    }//GEN-LAST:event_btnCloseMessageActionPerformed
+
+    private void btnLogoutJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutJBActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_btnLogoutJBActionPerformed
+
+    private void inputImportoJTFFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputImportoJTFFocusGained
+         if(inputImportoJTF.getText().equals("L'Importo")){
+            inputImportoJTF.setText("");
+            inputImportoJTF.setForeground(new Color(255,255,255));
+            
+        }
+    }//GEN-LAST:event_inputImportoJTFFocusGained
+
+    private void inputImportoJTFFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputImportoJTFFocusLost
+        if(inputImportoJTF.getText().equals("")){
+            inputImportoJTF.setText("L'Importo");
+            inputImportoJTF.setForeground(new Color(255,255,255));
+            
+        }
+    }//GEN-LAST:event_inputImportoJTFFocusLost
+
+    private void inputIdDestinatarioJTFFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputIdDestinatarioJTFFocusGained
+        if(inputIdDestinatarioJTF.getText().equals("ID Destinatario")){
+            inputIdDestinatarioJTF.setText("");
+            inputIdDestinatarioJTF.setForeground(new Color(255,255,255));
+            
+        }
+    }//GEN-LAST:event_inputIdDestinatarioJTFFocusGained
+
+    private void inputIdDestinatarioJTFFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputIdDestinatarioJTFFocusLost
+        if(inputIdDestinatarioJTF.getText().equals("")){
+            inputIdDestinatarioJTF.setText("ID Destinatario");
+            inputIdDestinatarioJTF.setForeground(new Color(255,255,255));
+            
+        }
+    }//GEN-LAST:event_inputIdDestinatarioJTFFocusLost
+
     
     /*GET AND SET*/
     public String getIdClubStr() {
@@ -254,13 +377,16 @@ public class RegistraPagamento extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAnnullaJB;
+    private javax.swing.JButton btnCloseMessage;
+    private javax.swing.JButton btnLogoutJB;
     private javax.swing.JButton btnPagaJB;
-    private javax.swing.JLabel elencoAtletiJL;
     private javax.swing.JTable elencoAtletiJT;
-    private javax.swing.JLabel idDestinatarioJL;
-    private javax.swing.JLabel importoJL;
+    private javax.swing.JLabel errorMessage;
     private javax.swing.JTextField inputIdDestinatarioJTF;
     private javax.swing.JTextField inputImportoJTF;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPMessage;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

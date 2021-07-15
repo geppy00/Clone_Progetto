@@ -3,12 +3,16 @@ package view;
 
 import dao.DataAccessObject;
 import dao.ExceptionDao;
+import java.awt.Color;
+import java.awt.Font;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
@@ -24,6 +28,14 @@ public class ContrattiSponsorProcuratoreView extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.idProcuratore = idProcuratore;
+        
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        jLDataAttuale.setText(dtf.format(LocalDateTime.now()));
+        
+         tblDatiContrattiSponsorJT.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
+         tblDatiContrattiSponsorJT.getTableHeader().setOpaque(false);
+         tblDatiContrattiSponsorJT.getTableHeader().setBackground(new Color(32, 136, 203));
+         tblDatiContrattiSponsorJT.getTableHeader().setForeground(new Color(255,255,255));
         
         try {
             stampaDatiTabella();
@@ -80,12 +92,20 @@ public class ContrattiSponsorProcuratoreView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblDatiContrattiSponsorJT = new javax.swing.JTable();
-        btnTornaIndietroJB = new javax.swing.JButton();
+        jLDataAttuale = new javax.swing.JLabel();
+        btnClose = new javax.swing.JButton();
+        btnAnnullaJB = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
+        jPanel1.setBackground(new java.awt.Color(11, 58, 151));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        tblDatiContrattiSponsorJT.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tblDatiContrattiSponsorJT.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -102,6 +122,9 @@ public class ContrattiSponsorProcuratoreView extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblDatiContrattiSponsorJT.setFocusable(false);
+        tblDatiContrattiSponsorJT.setSelectionBackground(new java.awt.Color(232, 57, 95));
+        tblDatiContrattiSponsorJT.getTableHeader().setReorderingAllowed(false);
         tblDatiContrattiSponsorJT.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblDatiContrattiSponsorJTMouseClicked(evt);
@@ -109,34 +132,48 @@ public class ContrattiSponsorProcuratoreView extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblDatiContrattiSponsorJT);
 
-        btnTornaIndietroJB.setText("TORNA INDIETRO");
-        btnTornaIndietroJB.addActionListener(new java.awt.event.ActionListener() {
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, 990, 210));
+
+        jLDataAttuale.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLDataAttuale.setForeground(new java.awt.Color(255, 255, 255));
+        jLDataAttuale.setText("13/01/2023");
+        jPanel1.add(jLDataAttuale, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 130, -1, -1));
+
+        btnClose.setBackground(new java.awt.Color(11, 58, 151));
+        btnClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_multiply_32px_1.png"))); // NOI18N
+        btnClose.setBorder(null);
+        btnClose.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnClose.setFocusPainted(false);
+        btnClose.setFocusable(false);
+        btnClose.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTornaIndietroJBActionPerformed(evt);
+                btnCloseActionPerformed(evt);
             }
         });
+        jPanel1.add(btnClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 0, -1, 40));
+
+        btnAnnullaJB.setBackground(new java.awt.Color(11, 58, 151));
+        btnAnnullaJB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_left_32px_2.png"))); // NOI18N
+        btnAnnullaJB.setBorder(null);
+        btnAnnullaJB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAnnullaJB.setFocusPainted(false);
+        btnAnnullaJB.setFocusable(false);
+        btnAnnullaJB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAnnullaJBActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnAnnullaJB, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 380, 40, 23));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(353, Short.MAX_VALUE)
-                .addComponent(btnTornaIndietroJB, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(296, 296, 296))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1078, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnTornaIndietroJB, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE)
         );
 
         pack();
@@ -155,11 +192,15 @@ public class ContrattiSponsorProcuratoreView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tblDatiContrattiSponsorJTMouseClicked
 
-    private void btnTornaIndietroJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTornaIndietroJBActionPerformed
-        SezioneGestioneContrattiView sezioneGestioneContrattiView = new SezioneGestioneContrattiView(this.getIdProcuratore());
+    private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_btnCloseActionPerformed
+
+    private void btnAnnullaJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnnullaJBActionPerformed
+         SezioneGestioneContrattiView sezioneGestioneContrattiView = new SezioneGestioneContrattiView(this.getIdProcuratore());
         sezioneGestioneContrattiView.setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_btnTornaIndietroJBActionPerformed
+    }//GEN-LAST:event_btnAnnullaJBActionPerformed
 
      /*GET AND SET*/
     public String getIdProcuratore() {
@@ -180,7 +221,10 @@ public class ContrattiSponsorProcuratoreView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnTornaIndietroJB;
+    private javax.swing.JButton btnAnnullaJB;
+    private javax.swing.JButton btnClose;
+    private javax.swing.JLabel jLDataAttuale;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblDatiContrattiSponsorJT;
     // End of variables declaration//GEN-END:variables

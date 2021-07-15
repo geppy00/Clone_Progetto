@@ -3,6 +3,9 @@ package view;
 
 import controller.ControllerSportivo;
 import dao.ExceptionDao;
+import java.awt.Color;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -20,8 +23,10 @@ public class AtletaView extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.idAtleta = idAtleta;
         
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        jLDataAttuale.setText(dtf.format(LocalDateTime.now()));
         try {
-            jLabel4.setText(controllerSportivo.prendiNomeUtente(this.getIdAtleta()));
+            jLCurrentAccount.setText("Current Account: "+controllerSportivo.prendiNomeUtente(this.getIdAtleta()));
         } catch (ExceptionDao ex) {
             Logger.getLogger(AtletaView.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -36,138 +41,199 @@ public class AtletaView extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
         btnEntroitiJB = new javax.swing.JButton();
         btnGestioneEventiJB = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
+        btnClose = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
+        jLDataAttuale = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        btnLogoutJB = new javax.swing.JButton();
+        jLCurrentAccount = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        btnLogoutJB1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnEntroitiJB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_euro_64px.png"))); // NOI18N
+        jPanel2.setBackground(new java.awt.Color(11, 58, 151));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnEntroitiJB.setBackground(new java.awt.Color(1, 180, 245));
+        btnEntroitiJB.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnEntroitiJB.setForeground(new java.awt.Color(255, 255, 255));
+        btnEntroitiJB.setText("Introito");
+        btnEntroitiJB.setActionCommand("Procutore");
         btnEntroitiJB.setBorder(null);
-        btnEntroitiJB.setFocusable(false);
+        btnEntroitiJB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEntroitiJB.setFocusPainted(false);
+        btnEntroitiJB.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnEntroitiJBMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnEntroitiJBMouseExited(evt);
+            }
+        });
         btnEntroitiJB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEntroitiJBActionPerformed(evt);
             }
         });
-        jPanel1.add(btnEntroitiJB, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, 170, 110));
+        jPanel2.add(btnEntroitiJB, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, 250, 100));
 
-        btnGestioneEventiJB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_baby_calendar_64px.png"))); // NOI18N
+        btnGestioneEventiJB.setBackground(new java.awt.Color(1, 180, 245));
+        btnGestioneEventiJB.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnGestioneEventiJB.setForeground(new java.awt.Color(255, 255, 255));
+        btnGestioneEventiJB.setText("Gestione Evento");
         btnGestioneEventiJB.setBorder(null);
+        btnGestioneEventiJB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnGestioneEventiJB.setFocusable(false);
+        btnGestioneEventiJB.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnGestioneEventiJBMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnGestioneEventiJBMouseExited(evt);
+            }
+        });
         btnGestioneEventiJB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGestioneEventiJBActionPerformed(evt);
             }
         });
-        jPanel1.add(btnGestioneEventiJB, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 160, 180, 110));
+        jPanel2.add(btnGestioneEventiJB, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 180, 250, 100));
 
-        jPanel2.setBackground(new java.awt.Color(46, 117, 233));
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        btnClose.setBackground(new java.awt.Color(11, 58, 151));
+        btnClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_multiply_32px_1.png"))); // NOI18N
+        btnClose.setBorder(null);
+        btnClose.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnClose.setFocusPainted(false);
+        btnClose.setFocusable(false);
+        btnClose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCloseActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 10, -1, 40));
 
-        jPanel3.setBackground(new java.awt.Color(46, 117, 233));
+        jPanel3.setBackground(new java.awt.Color(246, 0, 107));
+        jPanel3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jPanel3.setFocusable(false);
 
-        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jLDataAttuale.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLDataAttuale.setForeground(new java.awt.Color(255, 255, 255));
+        jLDataAttuale.setText("13/01/2023");
 
-        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel1.setFont(new java.awt.Font("Gadugi", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("ATLETA PORTALE");
-
-        jLabel3.setFont(new java.awt.Font("Gadugi", 1, 16)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("USER:");
-
-        jLabel4.setFont(new java.awt.Font("Gadugi", 1, 16)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Portale Atleta");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 251, Short.MAX_VALUE)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(111, 111, 111)))
-                .addContainerGap())
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(jLDataAttuale, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 236, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(22, 22, 22))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(21, 21, 21)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLDataAttuale)
+                    .addComponent(jLabel2))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
-        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 760, 100));
+        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 330, 510, 60));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 650, 80));
-
-        btnLogoutJB1.setBackground(new java.awt.Color(255, 255, 255));
-        btnLogoutJB1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_logout_rounded_left_32px_2.png"))); // NOI18N
-        btnLogoutJB1.setBorder(null);
-        btnLogoutJB1.setFocusable(false);
-        btnLogoutJB1.addActionListener(new java.awt.event.ActionListener() {
+        btnLogoutJB.setBackground(new java.awt.Color(11, 58, 151));
+        btnLogoutJB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_shutdown_32px_1.png"))); // NOI18N
+        btnLogoutJB.setBorder(null);
+        btnLogoutJB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnLogoutJB.setFocusPainted(false);
+        btnLogoutJB.setFocusable(false);
+        btnLogoutJB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLogoutJB1ActionPerformed(evt);
+                btnLogoutJBActionPerformed(evt);
             }
         });
-        jPanel1.add(btnLogoutJB1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 330, -1, -1));
+        jPanel2.add(btnLogoutJB, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 420, -1, 40));
+
+        jLCurrentAccount.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLCurrentAccount.setForeground(new java.awt.Color(255, 255, 255));
+        jLCurrentAccount.setText("Current Account:");
+        jPanel2.add(jLCurrentAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 80, 160, 20));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI Black", 0, 20)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Sportivo System");
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, -1, -1));
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 770, 500));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 652, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 765, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 2, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 377, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /*ACTION PERFOMED*/
+    private void btnLogoutJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutJBActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_btnLogoutJBActionPerformed
+
+    private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_btnCloseActionPerformed
+
     private void btnGestioneEventiJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGestioneEventiJBActionPerformed
-        GestioneEventiAtleta gestioneEventiAtleta = new GestioneEventiAtleta(this.getIdAtleta());
-        gestioneEventiAtleta.setVisible(true);
+        SezioneAtletaView sezioneAtletaView = new SezioneAtletaView();
+        sezioneAtletaView.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnGestioneEventiJBActionPerformed
 
+    private void btnGestioneEventiJBMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGestioneEventiJBMouseExited
+        btnGestioneEventiJB.setBackground(new Color(1,180,245));
+        btnGestioneEventiJB.setForeground(new Color(255,255,255));
+    }//GEN-LAST:event_btnGestioneEventiJBMouseExited
+
+    private void btnGestioneEventiJBMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGestioneEventiJBMouseEntered
+        btnGestioneEventiJB.setBackground(new Color(34,87,191));
+        btnGestioneEventiJB.setForeground(new Color(231,231,231));
+    }//GEN-LAST:event_btnGestioneEventiJBMouseEntered
+
     private void btnEntroitiJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntroitiJBActionPerformed
-        SezioneIntroitiAtleta sezioneIntroitiAtleta = new SezioneIntroitiAtleta(this.getIdAtleta());
-        sezioneIntroitiAtleta.setVisible(true);
+        SezioneProcuratoreView procuratoreView = new SezioneProcuratoreView();
+        procuratoreView.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnEntroitiJBActionPerformed
 
-    private void btnLogoutJB1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutJB1ActionPerformed
-        LoginView loginView = new LoginView();  
-        loginView.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_btnLogoutJB1ActionPerformed
+    private void btnEntroitiJBMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEntroitiJBMouseExited
+        btnEntroitiJB.setBackground(new Color(1,180,245));
+        btnEntroitiJB.setForeground(new Color(255,255,255));
+    }//GEN-LAST:event_btnEntroitiJBMouseExited
+
+    private void btnEntroitiJBMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEntroitiJBMouseEntered
+        btnEntroitiJB.setBackground(new Color(34,87,191));
+        btnEntroitiJB.setForeground(new Color(231,231,231));
+    }//GEN-LAST:event_btnEntroitiJBMouseEntered
 
     
     /*GET AND SET*/
@@ -188,15 +254,16 @@ public class AtletaView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnClose;
     private javax.swing.JButton btnEntroitiJB;
     private javax.swing.JButton btnGestioneEventiJB;
-    private javax.swing.JButton btnLogoutJB1;
+    private javax.swing.JButton btnLogoutJB;
+    private javax.swing.JLabel jLCurrentAccount;
+    private javax.swing.JLabel jLDataAttuale;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     // End of variables declaration//GEN-END:variables
 }

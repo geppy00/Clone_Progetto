@@ -2,6 +2,7 @@
 package view;
 
 import dao.ExceptionDao;
+import java.awt.Color;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import view.elimina.EliminaPagamento;
@@ -28,98 +29,190 @@ public class SezionePagamentoView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         btnEffettuaPagamentoJB = new javax.swing.JButton();
         btnVisualizzaPagamentiJB = new javax.swing.JButton();
-        btnModificaPagamentiJB = new javax.swing.JButton();
         btnEliminaPagamentoJB = new javax.swing.JButton();
+        btnModificaPagamentiJB = new javax.swing.JButton();
+        btnClose = new javax.swing.JButton();
         btnTornaIndietroJB = new javax.swing.JButton();
+        jLCurrentAccount = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
-        btnEffettuaPagamentoJB.setText("EFFETTUA PAGAMENTO");
+        jPanel1.setBackground(new java.awt.Color(11, 58, 151));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnEffettuaPagamentoJB.setBackground(new java.awt.Color(1, 180, 245));
+        btnEffettuaPagamentoJB.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnEffettuaPagamentoJB.setForeground(new java.awt.Color(255, 255, 255));
+        btnEffettuaPagamentoJB.setText("Effetua Pagamento");
+        btnEffettuaPagamentoJB.setActionCommand("Procutore");
+        btnEffettuaPagamentoJB.setBorder(null);
+        btnEffettuaPagamentoJB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEffettuaPagamentoJB.setFocusPainted(false);
+        btnEffettuaPagamentoJB.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnEffettuaPagamentoJBMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnEffettuaPagamentoJBMouseExited(evt);
+            }
+        });
         btnEffettuaPagamentoJB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEffettuaPagamentoJBActionPerformed(evt);
             }
         });
+        jPanel1.add(btnEffettuaPagamentoJB, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 140, 250, 80));
 
-        btnVisualizzaPagamentiJB.setText("VISUALIZZA PAGAMENTI");
+        btnVisualizzaPagamentiJB.setBackground(new java.awt.Color(1, 180, 245));
+        btnVisualizzaPagamentiJB.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnVisualizzaPagamentiJB.setForeground(new java.awt.Color(255, 255, 255));
+        btnVisualizzaPagamentiJB.setText("Visualizza Pagamento");
+        btnVisualizzaPagamentiJB.setBorder(null);
+        btnVisualizzaPagamentiJB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnVisualizzaPagamentiJB.setFocusable(false);
+        btnVisualizzaPagamentiJB.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnVisualizzaPagamentiJBMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnVisualizzaPagamentiJBMouseExited(evt);
+            }
+        });
         btnVisualizzaPagamentiJB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVisualizzaPagamentiJBActionPerformed(evt);
             }
         });
+        jPanel1.add(btnVisualizzaPagamentiJB, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 140, 250, 80));
 
-        btnModificaPagamentiJB.setText("MODIFICA PAGAMENTI");
-        btnModificaPagamentiJB.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnModificaPagamentiJBActionPerformed(evt);
+        btnEliminaPagamentoJB.setBackground(new java.awt.Color(1, 180, 245));
+        btnEliminaPagamentoJB.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnEliminaPagamentoJB.setForeground(new java.awt.Color(255, 255, 255));
+        btnEliminaPagamentoJB.setText("Delete Pagemento");
+        btnEliminaPagamentoJB.setBorder(null);
+        btnEliminaPagamentoJB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEliminaPagamentoJB.setFocusable(false);
+        btnEliminaPagamentoJB.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnEliminaPagamentoJBMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnEliminaPagamentoJBMouseExited(evt);
             }
         });
-
-        btnEliminaPagamentoJB.setText("ANNULLA PAGAMENTO");
         btnEliminaPagamentoJB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminaPagamentoJBActionPerformed(evt);
             }
         });
+        jPanel1.add(btnEliminaPagamentoJB, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 230, 250, 80));
 
-        btnTornaIndietroJB.setText("TORNA INDIETRO");
+        btnModificaPagamentiJB.setBackground(new java.awt.Color(1, 180, 245));
+        btnModificaPagamentiJB.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnModificaPagamentiJB.setForeground(new java.awt.Color(255, 255, 255));
+        btnModificaPagamentiJB.setText("Update Pagamento");
+        btnModificaPagamentiJB.setBorder(null);
+        btnModificaPagamentiJB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnModificaPagamentiJB.setFocusable(false);
+        btnModificaPagamentiJB.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnModificaPagamentiJBMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnModificaPagamentiJBMouseExited(evt);
+            }
+        });
+        btnModificaPagamentiJB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificaPagamentiJBActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnModificaPagamentiJB, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 230, 250, 80));
+
+        btnClose.setBackground(new java.awt.Color(11, 58, 151));
+        btnClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_multiply_32px_1.png"))); // NOI18N
+        btnClose.setBorder(null);
+        btnClose.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnClose.setFocusPainted(false);
+        btnClose.setFocusable(false);
+        btnClose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCloseActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 10, -1, 40));
+
+        btnTornaIndietroJB.setBackground(new java.awt.Color(11, 58, 151));
+        btnTornaIndietroJB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_left_32px_2.png"))); // NOI18N
+        btnTornaIndietroJB.setBorder(null);
+        btnTornaIndietroJB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnTornaIndietroJB.setFocusPainted(false);
+        btnTornaIndietroJB.setFocusable(false);
         btnTornaIndietroJB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTornaIndietroJBActionPerformed(evt);
             }
         });
+        jPanel1.add(btnTornaIndietroJB, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 360, -1, 40));
+
+        jLCurrentAccount.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLCurrentAccount.setForeground(new java.awt.Color(255, 255, 255));
+        jLCurrentAccount.setText("Current Account:");
+        jPanel1.add(jLCurrentAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 80, 160, 20));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI Black", 0, 20)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Sportivo System");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(btnEffettuaPagamentoJB)
-                .addGap(18, 18, 18)
-                .addComponent(btnVisualizzaPagamentiJB, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnModificaPagamentiJB, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnEliminaPagamentoJB, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(29, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnTornaIndietroJB)
-                .addContainerGap())
+            .addGap(0, 774, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 774, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(97, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnEffettuaPagamentoJB, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
-                    .addComponent(btnVisualizzaPagamentiJB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnModificaPagamentiJB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnEliminaPagamentoJB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(41, 41, 41)
-                .addComponent(btnTornaIndietroJB)
-                .addContainerGap())
+            .addGap(0, 456, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 456, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /*ACTION PERFOMED*/
-    private void btnTornaIndietroJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTornaIndietroJBActionPerformed
-        ClubView clubView = new ClubView(this.getIdClub());
-        clubView.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_btnTornaIndietroJBActionPerformed
+    private void btnEffettuaPagamentoJBMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEffettuaPagamentoJBMouseEntered
+        btnEffettuaPagamentoJB.setBackground(new Color(34,87,191));
+        btnEffettuaPagamentoJB.setForeground(new Color(231,231,231));
+    }//GEN-LAST:event_btnEffettuaPagamentoJBMouseEntered
+
+    private void btnEffettuaPagamentoJBMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEffettuaPagamentoJBMouseExited
+        btnEffettuaPagamentoJB.setBackground(new Color(1,180,245));
+        btnEffettuaPagamentoJB.setForeground(new Color(255,255,255));
+    }//GEN-LAST:event_btnEffettuaPagamentoJBMouseExited
 
     private void btnEffettuaPagamentoJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEffettuaPagamentoJBActionPerformed
-
-        RegistraPagamento registraPagamento = new RegistraPagamento(this.getIdClub());
+       RegistraPagamento registraPagamento = new RegistraPagamento(this.getIdClub());
         registraPagamento.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnEffettuaPagamentoJBActionPerformed
+
+    private void btnVisualizzaPagamentiJBMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVisualizzaPagamentiJBMouseEntered
+        btnVisualizzaPagamentiJB.setBackground(new Color(34,87,191));
+        btnVisualizzaPagamentiJB.setForeground(new Color(231,231,231));
+    }//GEN-LAST:event_btnVisualizzaPagamentiJBMouseEntered
+
+    private void btnVisualizzaPagamentiJBMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVisualizzaPagamentiJBMouseExited
+        btnVisualizzaPagamentiJB.setBackground(new Color(1,180,245));
+        btnVisualizzaPagamentiJB.setForeground(new Color(255,255,255));
+    }//GEN-LAST:event_btnVisualizzaPagamentiJBMouseExited
 
     private void btnVisualizzaPagamentiJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisualizzaPagamentiJBActionPerformed
         SezioneVisualizzaPagamenti sezioneVisualizzaPagamenti = null;
@@ -128,17 +221,47 @@ public class SezionePagamentoView extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnVisualizzaPagamentiJBActionPerformed
 
-    private void btnModificaPagamentiJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificaPagamentiJBActionPerformed
-        ModificaPagamento modificaPagamento = new ModificaPagamento(this.getIdClub());
-        modificaPagamento.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_btnModificaPagamentiJBActionPerformed
+    private void btnEliminaPagamentoJBMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminaPagamentoJBMouseEntered
+        btnEliminaPagamentoJB.setBackground(new Color(34,87,191));
+        btnEliminaPagamentoJB.setForeground(new Color(231,231,231));
+    }//GEN-LAST:event_btnEliminaPagamentoJBMouseEntered
+
+    private void btnEliminaPagamentoJBMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminaPagamentoJBMouseExited
+        btnEliminaPagamentoJB.setBackground(new Color(1,180,245));
+        btnEliminaPagamentoJB.setForeground(new Color(255,255,255));
+    }//GEN-LAST:event_btnEliminaPagamentoJBMouseExited
 
     private void btnEliminaPagamentoJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminaPagamentoJBActionPerformed
         EliminaPagamento eliminaPagamento = new EliminaPagamento(this.getIdClub());
         eliminaPagamento.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnEliminaPagamentoJBActionPerformed
+
+    private void btnModificaPagamentiJBMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModificaPagamentiJBMouseEntered
+        btnModificaPagamentiJB.setBackground(new Color(34,87,191));
+        btnModificaPagamentiJB.setForeground(new Color(231,231,231));
+    }//GEN-LAST:event_btnModificaPagamentiJBMouseEntered
+
+    private void btnModificaPagamentiJBMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModificaPagamentiJBMouseExited
+        btnModificaPagamentiJB.setBackground(new Color(1,180,245));
+        btnModificaPagamentiJB.setForeground(new Color(255,255,255));
+    }//GEN-LAST:event_btnModificaPagamentiJBMouseExited
+
+    private void btnModificaPagamentiJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificaPagamentiJBActionPerformed
+        ModificaPagamento modificaPagamento = new ModificaPagamento(this.getIdClub());
+        modificaPagamento.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnModificaPagamentiJBActionPerformed
+
+    private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_btnCloseActionPerformed
+
+    private void btnTornaIndietroJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTornaIndietroJBActionPerformed
+        ClubView clubView = new ClubView(this.getIdClub());
+        clubView.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnTornaIndietroJBActionPerformed
 
     /*GET AND SET*/
     public String getIdClub() {
@@ -160,10 +283,14 @@ public class SezionePagamentoView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnClose;
     private javax.swing.JButton btnEffettuaPagamentoJB;
     private javax.swing.JButton btnEliminaPagamentoJB;
     private javax.swing.JButton btnModificaPagamentiJB;
     private javax.swing.JButton btnTornaIndietroJB;
     private javax.swing.JButton btnVisualizzaPagamentiJB;
+    private javax.swing.JLabel jLCurrentAccount;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

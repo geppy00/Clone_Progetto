@@ -12,14 +12,14 @@ public class ControlloConvalidazione {
     
     //ADMIN
     public boolean controlloRegistraProcuratore(String matricolaPresa, String nomePreso, String cognomePreso, String nazionePresa, String indirizzoPreso, String dataNascitaPresoSql, String codiceFiscalePreso) {
-        if(matricolaPresa != null && !(matricolaPresa.equals("")) && nomePreso != null && !(nomePreso.equals("")) && cognomePreso != null && !(cognomePreso.equals("")) && nazionePresa != null && !(nazionePresa.equals("")) &&  indirizzoPreso != null && !(indirizzoPreso.equals("")) && dataNascitaPresoSql != null && !(dataNascitaPresoSql.equals("")) && codiceFiscalePreso != null && !(codiceFiscalePreso.equals(""))) 
+        if(matricolaPresa != null && !(matricolaPresa.equals("")) || !(matricolaPresa.equals("Matricola")) && nomePreso != null && !(nomePreso.equals("")) || !(nomePreso.equals("Nome")) && cognomePreso != null && !(cognomePreso.equals("")) || !(cognomePreso.equals("Cognome")) && nazionePresa != null && !(nazionePresa.equals("")) || !(nazionePresa.equals("Nazione")) && indirizzoPreso != null && !(indirizzoPreso.equals("")) || !(indirizzoPreso.equals("Indirizzo")) && dataNascitaPresoSql != null && !(dataNascitaPresoSql.equals("")) && codiceFiscalePreso != null && !(codiceFiscalePreso.equals("")) || !(codiceFiscalePreso.equals("Codice Fiscale"))) 
             return true;
         else
             return false;
     }
     
     public boolean controlloCercaProcuratore(String matricolaProcuratore) {
-        if(matricolaProcuratore != null && !(matricolaProcuratore.equals("")))
+        if(matricolaProcuratore != null && !(matricolaProcuratore.equals("")) || !(matricolaProcuratore.equals("Matricola da Eliminare")) || !(matricolaProcuratore.equals("Matricola")))
             return true;
         else
             return false;
@@ -33,21 +33,21 @@ public class ControlloConvalidazione {
     }
     
     public boolean controlloRegistraNuovoProfilo(String username, String password, String confermaPassword, String id) {
-        if(username != null && !(username.equals("")) && password != null && !(password.equals("")) && confermaPassword != null && !(confermaPassword.equals("")) && id != null && !(id.equals("")))
+        if(username != null && !(username.equals("")) || !(username.equals("User Name")) && password != null && !(password.equals("")) || !(password.equals("Password")) && confermaPassword != null && !(confermaPassword.equals("")) || !(confermaPassword.equals("Conferma Password")) && id != null && !(id.equals("")) || !(id.equals("ID Corrispondente")))
             return true;
         else
             return false;
     }
     
     public boolean controlloRegistraSponsor(String nome, String indirizzo, String telefono) {
-        if(nome != null && !(nome.equals("")) && indirizzo != null && !(indirizzo.equals("")) && telefono != null && !(telefono.equals("")) && telefono.length() <= 15)
+        if(nome != null && !(nome.equals("")) || !(nome.equals("Nome")) && indirizzo != null && !(indirizzo.equals("")) || !(indirizzo.equals("Indirizzo")) && telefono != null && !(telefono.equals("")) || !(telefono.equals("Telefono")) && telefono.length() <= 15)
             return true;
         else
             return false;
     }
     
     public boolean controlloCercaSponsor(String idSponsor) {
-        if(idSponsor != null && !(idSponsor.equals("")) && idSponsor.length() > 0)
+        if(idSponsor != null && !(idSponsor.equals("")) || !(idSponsor.equals("Nome Sponsor")) && idSponsor.length() > 0)
             return true;
         else
             return false;
@@ -61,14 +61,14 @@ public class ControlloConvalidazione {
     }
     
     public boolean controlloRegistraClub(String nome, String indirizzo, String telefono) {
-        if(nome != null && !(nome.equals("")) && indirizzo != null && !(indirizzo.equals("")) && telefono != null && !(telefono.equals("")) && telefono.length() <= 15)
+        if(nome != null && !(nome.equals("")) || !(nome.equals("Nome Club")) && indirizzo != null && !(indirizzo.equals("")) || !(indirizzo.equals("Indirizzo")) && telefono != null && !(telefono.equals("")) || !(telefono.equals("Telefono")) && telefono.length() <= 15)
             return true;
         else
             return false;
     }
     
     public boolean controlloCercaClub(String idClub) {
-        if(idClub != null && !(idClub.equals("")) && idClub.length() > 0)
+        if(idClub != null && !(idClub.equals("")) || !(idClub.equals("Nome Club")) && idClub.length() > 0)
             return true;
         else
             return false;
@@ -82,14 +82,14 @@ public class ControlloConvalidazione {
     }
     
     public boolean controlloRegistraAtleta(String nome, String cognome, String nazione, String indirizzo, String dataNascita, String codiceFiscale) {
-        if(nome != null && !(nome.equals("")) && cognome != null && !(cognome.equals("")) && nazione != null && !(nazione.equals("")) && indirizzo != null && !(indirizzo.equals("")) && dataNascita != null && !(dataNascita.equals("")) && codiceFiscale != null && !(codiceFiscale.equals("")))
+        if(nome != null && !(nome.equals("")) || !(nome.equals("Nome")) && cognome != null && !(cognome.equals("")) || !(cognome.equals("Cognome")) && nazione != null && !(nazione.equals("")) || !(nazione.equals("Nazione")) && indirizzo != null && !(indirizzo.equals("")) || !(indirizzo.equals("Indirizzo")) && dataNascita != null && !(dataNascita.equals("")) && codiceFiscale != null && !(codiceFiscale.equals("")) || !(codiceFiscale.equals("Codice Fiscale")))
             return true;
         else
             return false;
     }
     
     public boolean controlloCercaAtleta(String codiceFiscale) {
-        if(codiceFiscale != null && !(codiceFiscale.equals("")))
+        if(codiceFiscale != null && !(codiceFiscale.equals("")) || !(codiceFiscale.equals("Codice Fiscale")))
             return true;
         else
             return false;
@@ -104,14 +104,14 @@ public class ControlloConvalidazione {
     
     //CLUB
     public boolean controlloRegistraPagamento(String importo, String idDestinatario) {
-        if(importo != null && !(importo.equals("")) && Integer.parseInt(importo) > 0 && idDestinatario != null && !(idDestinatario.equals("")))
+        if(importo != null && !(importo.equals("")) || !(importo.equals("L'Importo")) && Integer.parseInt(importo) > 0 && idDestinatario != null && !(idDestinatario.equals("")) || !(idDestinatario.equals("ID Destinatario")))
             return true;
         else
             return false;
     }
     
     public boolean controlloVisuallizzaPagamentiAtleta(String idAtleta) {
-        if(idAtleta != null && !(idAtleta.equals("")))
+        if(idAtleta != null && !(idAtleta.equals("")) || !(idAtleta.equals("ID Atleta")))
             return true;
         else
             return false;
@@ -125,7 +125,7 @@ public class ControlloConvalidazione {
     }
     
     public boolean controlloCercaPagamento(String dataPagamento, String idDestinatario) {
-        if(dataPagamento != null && !(dataPagamento.equals("")) && idDestinatario != null && !(idDestinatario.equals("")))
+        if(dataPagamento != null && !(dataPagamento.equals("")) && idDestinatario != null && !(idDestinatario.equals("")) || !(idDestinatario.equals("ID Destinatario")))
             return true;
         else
             return false;
@@ -133,14 +133,14 @@ public class ControlloConvalidazione {
     
     //SPONSOR
     public boolean controlloRegistraEvento(String inizioEvento, String fineEvento, String louogo, String titolo, String gettone){
-        if(inizioEvento != null && !(inizioEvento.equals("")) && fineEvento != null && !(fineEvento.equals("")) && louogo != null && !(louogo.equals("")) && titolo != null && !(titolo.equals("")) && gettone != null && !(gettone.equals("")))
+        if(inizioEvento != null && !(inizioEvento.equals("")) && fineEvento != null && !(fineEvento.equals("")) && louogo != null && !(louogo.equals("")) || !(louogo.equals("Luogo Evento")) && titolo != null && !(titolo.equals("")) || !(titolo.equals("Titolo Dell'Evento")) && gettone != null && !(gettone.equals("")) || !(gettone.equals("Gettone")))
             return true;
         else
             return false;
     }
     
     public boolean controlloDescrizioneEvento(String descrizione){  
-        if(descrizione.length() > 280)
+        if(descrizione.length() > 280 || descrizione.equals("Descrizione"))
             return false;
         else
             return true;
@@ -176,28 +176,28 @@ public class ControlloConvalidazione {
     
     //PROCURATORE
     public boolean controlloAtleta(String datoAtleta) {
-        if(datoAtleta != null && !(datoAtleta.equals("")))
+        if(datoAtleta != null && !(datoAtleta.equals("")) || !(datoAtleta.equals("Codice Fiscale Dell'Atleta")))
             return true;
         else
             return false;
     }
     
     public boolean controllaId(String id) {
-        if(id != null && !(id.equals("")))
+        if(id != null && !(id.equals("")) || !(id.equals("ID Club")) || !(id.equals("ID Sponsor")))
             return true;
         else
             return false;
     }
     
     public boolean controllaNome(String nome) {
-        if(nome != null && !(nome.equals("")))
+        if(nome != null && !(nome.equals("")) || !(nome.equals("Nome Club")) || !(nome.equals("Nome Sponsor")))
             return true;
         else
             return false;
     }
     
     public boolean controllaStipulaContratto(String idAtleta, String id, String dataInizio, String dataFine, String valore) {
-        if(idAtleta != null && !(idAtleta.equals("")) && id != null && !(id.equals("")) && dataInizio != null && !(dataInizio.equals("")) && dataFine != null && !(dataFine.equals("")) && valore != null && !(valore.equals("")))
+        if(idAtleta != null && !(idAtleta.equals("")) || !(idAtleta.equals("Codice Fiscale Dell'Atleta")) && id != null && !(id.equals("")) || !(id.equals("ID Club")) || !(id.equals("ID Sponsor")) && dataInizio != null && !(dataInizio.equals("")) && dataFine != null && !(dataFine.equals("")) && valore != null && !(valore.equals("")) || !(valore.equals("Valore Contrattuale")))
             return true;
         else
             return false;

@@ -3,12 +3,16 @@ package view;
 
 import dao.DataAccessObject;
 import dao.ExceptionDao;
+import java.awt.Color;
+import java.awt.Font;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
@@ -23,6 +27,14 @@ public class SezionePagamentiClubAtleta extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.idAtleta = idAtleta;
+        
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            jLDataAttuale.setText(dtf.format(LocalDateTime.now()));
+            
+            tblPagamentiClubJT.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
+            tblPagamentiClubJT.getTableHeader().setOpaque(false);
+            tblPagamentiClubJT.getTableHeader().setBackground(new Color(32, 136, 203));
+            tblPagamentiClubJT.getTableHeader().setForeground(new Color(255,255,255));
         
         try {
             stampaDatiTabella();
@@ -74,12 +86,21 @@ public class SezionePagamentiClubAtleta extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblPagamentiClubJT = new javax.swing.JTable();
-        btnTornaIndietroJB = new javax.swing.JButton();
+        jLDataAttuale = new javax.swing.JLabel();
+        jLCurrentAccount = new javax.swing.JLabel();
+        btnTornaIndietroJB1 = new javax.swing.JButton();
+        btnClose = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
+        jPanel1.setBackground(new java.awt.Color(11, 58, 151));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        tblPagamentiClubJT.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tblPagamentiClubJT.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -96,47 +117,71 @@ public class SezionePagamentiClubAtleta extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblPagamentiClubJT.setFocusable(false);
+        tblPagamentiClubJT.setSelectionBackground(new java.awt.Color(232, 57, 95));
+        tblPagamentiClubJT.setShowVerticalLines(false);
+        tblPagamentiClubJT.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tblPagamentiClubJT);
 
-        btnTornaIndietroJB.setText("Torna Indietro");
-        btnTornaIndietroJB.addActionListener(new java.awt.event.ActionListener() {
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, 727, 200));
+
+        jLDataAttuale.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLDataAttuale.setForeground(new java.awt.Color(255, 255, 255));
+        jLDataAttuale.setText("13/01/2023");
+        jPanel1.add(jLDataAttuale, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, -1, -1));
+
+        jLCurrentAccount.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLCurrentAccount.setForeground(new java.awt.Color(255, 255, 255));
+        jLCurrentAccount.setText("Current Account:");
+        jPanel1.add(jLCurrentAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 100, 150, 20));
+
+        btnTornaIndietroJB1.setBackground(new java.awt.Color(11, 58, 151));
+        btnTornaIndietroJB1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_left_32px_2.png"))); // NOI18N
+        btnTornaIndietroJB1.setBorder(null);
+        btnTornaIndietroJB1.setFocusable(false);
+        btnTornaIndietroJB1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTornaIndietroJBActionPerformed(evt);
+                btnTornaIndietroJB1ActionPerformed(evt);
             }
         });
+        jPanel1.add(btnTornaIndietroJB1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, 40, 40));
+
+        btnClose.setBackground(new java.awt.Color(11, 58, 151));
+        btnClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_multiply_32px_1.png"))); // NOI18N
+        btnClose.setBorder(null);
+        btnClose.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnClose.setFocusPainted(false);
+        btnClose.setFocusable(false);
+        btnClose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCloseActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 0, -1, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 727, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(290, 290, 290)
-                .addComponent(btnTornaIndietroJB, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 818, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(btnTornaIndietroJB, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 449, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /*ACTION PERFOMED*/
-    private void btnTornaIndietroJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTornaIndietroJBActionPerformed
+    private void btnTornaIndietroJB1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTornaIndietroJB1ActionPerformed
         SezioneIntroitiAtleta sezioneIntroitiAtleta = new SezioneIntroitiAtleta(this.getIdAtleta());
         sezioneIntroitiAtleta.setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_btnTornaIndietroJBActionPerformed
+    }//GEN-LAST:event_btnTornaIndietroJB1ActionPerformed
+
+    private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_btnCloseActionPerformed
 
      /*GET AND SET*/
     public String getIdAtleta() {
@@ -157,7 +202,11 @@ public class SezionePagamentiClubAtleta extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnTornaIndietroJB;
+    private javax.swing.JButton btnClose;
+    private javax.swing.JButton btnTornaIndietroJB1;
+    private javax.swing.JLabel jLCurrentAccount;
+    private javax.swing.JLabel jLDataAttuale;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblPagamentiClubJT;
     // End of variables declaration//GEN-END:variables

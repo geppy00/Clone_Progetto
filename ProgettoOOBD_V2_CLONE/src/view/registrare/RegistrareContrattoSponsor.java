@@ -4,6 +4,7 @@ package view.registrare;
 import controller.ControllerProcuratore;
 import convalidazione.ControlloConvalidazione;
 import dao.ExceptionDao;
+import java.awt.Color;
 import java.awt.Toolkit;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -30,6 +31,8 @@ public class RegistrareContrattoSponsor extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.idProcuratore = idProcuratore;
+        
+        jPMessage.setVisible(false);
     }
     
     public RegistrareContrattoSponsor() {
@@ -42,218 +45,255 @@ public class RegistrareContrattoSponsor extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel2 = new javax.swing.JLabel();
-        titoloJL = new javax.swing.JLabel();
-        cfAtletaJL = new javax.swing.JLabel();
-        inputCfAtletaJTF = new javax.swing.JTextField();
-        btnCercaJB = new javax.swing.JButton();
-        nomeJL = new javax.swing.JLabel();
-        nomeJTF = new javax.swing.JTextField();
-        cognomeJL = new javax.swing.JLabel();
-        cognomeJTF = new javax.swing.JTextField();
-        dataNascitaJL = new javax.swing.JLabel();
-        dataNascitaJTF = new javax.swing.JTextField();
-        ruoloJL = new javax.swing.JLabel();
-        ruoloJTF = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        idSponsorJL = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
         inputIdSponsorJTF = new javax.swing.JTextField();
-        nomeSponsorJL = new javax.swing.JLabel();
         nomeSponsorJTF = new javax.swing.JTextField();
-        dataInizioJL = new javax.swing.JLabel();
-        inputDataInizioJDC = new com.toedter.calendar.JDateChooser();
-        dataFineJL = new javax.swing.JLabel();
         inputDataFineJDC = new com.toedter.calendar.JDateChooser();
+        inputDataInizioJDC = new com.toedter.calendar.JDateChooser();
+        inputValoreContrttoJTF = new javax.swing.JTextField();
+        ruoloJTF = new javax.swing.JTextField();
+        cognomeJTF = new javax.swing.JTextField();
+        inputCfAtletaJTF = new javax.swing.JTextField();
+        nomeJTF = new javax.swing.JTextField();
+        dataNascitaJTF = new javax.swing.JTextField();
+        btnCercaJB = new javax.swing.JButton();
         btnAnnullaJB = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-        valContrattoJL = new javax.swing.JLabel();
-        inputValoreContrttoJTF = new javax.swing.JTextField();
+        jPMessage = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        errorMessage = new javax.swing.JLabel();
+        btnCloseMessage = new javax.swing.JButton();
+        btnLogoutJB1 = new javax.swing.JButton();
 
         jLabel2.setText("jLabel2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
-        titoloJL.setText("REGISTRARE CONTRATTO SPONSOR");
+        jPanel1.setBackground(new java.awt.Color(11, 58, 151));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        cfAtletaJL.setText("CF Atleta");
-
-        btnCercaJB.setText("CERCA");
-        btnCercaJB.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCercaJBActionPerformed(evt);
+        inputIdSponsorJTF.setBackground(new java.awt.Color(9, 46, 119));
+        inputIdSponsorJTF.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        inputIdSponsorJTF.setForeground(new java.awt.Color(231, 231, 231));
+        inputIdSponsorJTF.setText("ID Sponsor");
+        inputIdSponsorJTF.setBorder(null);
+        inputIdSponsorJTF.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                inputIdSponsorJTFFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                inputIdSponsorJTFFocusLost(evt);
             }
         });
-
-        nomeJL.setText("Nome");
-
-        nomeJTF.setEditable(false);
-        nomeJTF.setToolTipText("");
-
-        cognomeJL.setText("Cognome");
-
-        cognomeJTF.setEditable(false);
-
-        dataNascitaJL.setText("Data di Nascita");
-
-        dataNascitaJTF.setEditable(false);
-
-        ruoloJL.setText("Ruolo");
-
-        ruoloJTF.setEditable(false);
-
-        jLabel1.setText("__________________________________________________________________________________________________");
-
-        idSponsorJL.setText("ID Sponsor");
-        idSponsorJL.setToolTipText("");
-
         inputIdSponsorJTF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 inputIdSponsorJTFActionPerformed(evt);
             }
         });
-
-        nomeSponsorJL.setText("Nome Sponsor");
+        jPanel1.add(inputIdSponsorJTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 280, 250, 30));
 
         nomeSponsorJTF.setEditable(false);
+        nomeSponsorJTF.setBackground(new java.awt.Color(9, 46, 119));
+        nomeSponsorJTF.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        nomeSponsorJTF.setForeground(new java.awt.Color(231, 231, 231));
+        nomeSponsorJTF.setText("Nome Sponsor");
+        nomeSponsorJTF.setToolTipText("");
+        nomeSponsorJTF.setBorder(null);
+        nomeSponsorJTF.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                nomeSponsorJTFFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                nomeSponsorJTFFocusLost(evt);
+            }
+        });
+        jPanel1.add(nomeSponsorJTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 280, 230, 30));
+        jPanel1.add(inputDataFineJDC, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 320, 230, 30));
+        jPanel1.add(inputDataInizioJDC, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 320, 250, 30));
 
-        dataInizioJL.setText("Data Inizio");
+        inputValoreContrttoJTF.setBackground(new java.awt.Color(9, 46, 119));
+        inputValoreContrttoJTF.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        inputValoreContrttoJTF.setForeground(new java.awt.Color(231, 231, 231));
+        inputValoreContrttoJTF.setText("Valore Contrattuale");
+        inputValoreContrttoJTF.setBorder(null);
+        inputValoreContrttoJTF.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                inputValoreContrttoJTFFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                inputValoreContrttoJTFFocusLost(evt);
+            }
+        });
+        jPanel1.add(inputValoreContrttoJTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 360, 490, 30));
 
-        dataFineJL.setText("Data Fine");
+        ruoloJTF.setEditable(false);
+        ruoloJTF.setBackground(new java.awt.Color(9, 46, 119));
+        ruoloJTF.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        ruoloJTF.setForeground(new java.awt.Color(231, 231, 231));
+        ruoloJTF.setText("Ruolo");
+        ruoloJTF.setBorder(null);
+        jPanel1.add(ruoloJTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 210, 230, 30));
 
-        btnAnnullaJB.setText("ANNULLA");
+        cognomeJTF.setEditable(false);
+        cognomeJTF.setBackground(new java.awt.Color(9, 46, 119));
+        cognomeJTF.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        cognomeJTF.setForeground(new java.awt.Color(231, 231, 231));
+        cognomeJTF.setText("Cognome");
+        cognomeJTF.setBorder(null);
+        jPanel1.add(cognomeJTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 170, 230, 30));
+
+        inputCfAtletaJTF.setBackground(new java.awt.Color(9, 46, 119));
+        inputCfAtletaJTF.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        inputCfAtletaJTF.setForeground(new java.awt.Color(231, 231, 231));
+        inputCfAtletaJTF.setText("Codice Fiscale Dell'Atleta");
+        inputCfAtletaJTF.setBorder(null);
+        inputCfAtletaJTF.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                inputCfAtletaJTFFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                inputCfAtletaJTFFocusLost(evt);
+            }
+        });
+        inputCfAtletaJTF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inputCfAtletaJTFActionPerformed(evt);
+            }
+        });
+        jPanel1.add(inputCfAtletaJTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, 410, 30));
+
+        nomeJTF.setEditable(false);
+        nomeJTF.setBackground(new java.awt.Color(9, 46, 119));
+        nomeJTF.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        nomeJTF.setForeground(new java.awt.Color(231, 231, 231));
+        nomeJTF.setText("Nome");
+        nomeJTF.setToolTipText("");
+        nomeJTF.setBorder(null);
+        jPanel1.add(nomeJTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 170, 250, 30));
+
+        dataNascitaJTF.setEditable(false);
+        dataNascitaJTF.setBackground(new java.awt.Color(9, 46, 119));
+        dataNascitaJTF.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        dataNascitaJTF.setForeground(new java.awt.Color(231, 231, 231));
+        dataNascitaJTF.setText("Data Nascita");
+        dataNascitaJTF.setBorder(null);
+        jPanel1.add(dataNascitaJTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 210, 250, 30));
+
+        btnCercaJB.setBackground(new java.awt.Color(46, 204, 113));
+        btnCercaJB.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        btnCercaJB.setForeground(new java.awt.Color(255, 255, 255));
+        btnCercaJB.setText("Cerca");
+        btnCercaJB.setBorder(null);
+        btnCercaJB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCercaJB.setFocusPainted(false);
+        btnCercaJB.setFocusable(false);
+        btnCercaJB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCercaJBActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnCercaJB, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 120, 80, 30));
+
+        btnAnnullaJB.setBackground(new java.awt.Color(231, 76, 60));
+        btnAnnullaJB.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        btnAnnullaJB.setForeground(new java.awt.Color(255, 255, 255));
+        btnAnnullaJB.setText("Annulla");
+        btnAnnullaJB.setBorder(null);
+        btnAnnullaJB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAnnullaJB.setFocusPainted(false);
+        btnAnnullaJB.setFocusable(false);
         btnAnnullaJB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAnnullaJBActionPerformed(evt);
             }
         });
+        jPanel1.add(btnAnnullaJB, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 410, 80, 30));
 
-        jButton1.setText("REGISTRA");
+        jButton1.setBackground(new java.awt.Color(46, 204, 113));
+        jButton1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("Registra");
+        jButton1.setBorder(null);
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton1.setFocusPainted(false);
+        jButton1.setFocusable(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 410, 80, 30));
 
-        valContrattoJL.setText("Valore Contratto");
+        jPMessage.setBackground(new java.awt.Color(46, 204, 113));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_info_26px.png"))); // NOI18N
+
+        errorMessage.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        errorMessage.setForeground(new java.awt.Color(255, 255, 255));
+        errorMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        errorMessage.setText("Contratto stabilitto con sucesso ");
+
+        btnCloseMessage.setBackground(new java.awt.Color(46, 204, 113));
+        btnCloseMessage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_multiply_32px_1.png"))); // NOI18N
+        btnCloseMessage.setBorder(null);
+        btnCloseMessage.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCloseMessage.setFocusPainted(false);
+        btnCloseMessage.setFocusable(false);
+        btnCloseMessage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCloseMessageActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPMessageLayout = new javax.swing.GroupLayout(jPMessage);
+        jPMessage.setLayout(jPMessageLayout);
+        jPMessageLayout.setHorizontalGroup(
+            jPMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPMessageLayout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(errorMessage, javax.swing.GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(btnCloseMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPMessageLayout.setVerticalGroup(
+            jPMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPMessageLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(errorMessage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnCloseMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        jPanel1.add(jPMessage, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 60, 490, 40));
+
+        btnLogoutJB1.setBackground(new java.awt.Color(11, 58, 151));
+        btnLogoutJB1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_multiply_32px_1.png"))); // NOI18N
+        btnLogoutJB1.setBorder(null);
+        btnLogoutJB1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnLogoutJB1.setFocusPainted(false);
+        btnLogoutJB1.setFocusable(false);
+        btnLogoutJB1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutJB1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnLogoutJB1, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 10, -1, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(dataNascitaJL)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(dataNascitaJTF))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(nomeJL)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(nomeJTF, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(ruoloJL)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(ruoloJTF, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(cognomeJL)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cognomeJTF, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(42, 42, 42))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addComponent(valContrattoJL)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(inputValoreContrttoJTF))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addComponent(idSponsorJL)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(inputIdSponsorJTF, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addComponent(dataInizioJL)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(inputDataInizioJDC, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                .addGap(119, 119, 119)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(nomeSponsorJL)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(nomeSponsorJTF, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(dataFineJL)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(inputDataFineJDC, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnAnnullaJB)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(cfAtletaJL)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(inputCfAtletaJTF, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnCercaJB)
-                                .addGap(212, 212, 212))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(titoloJL)
-                                .addGap(226, 226, 226))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jButton1)
-                                .addContainerGap())))))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 704, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(titoloJL)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cfAtletaJL)
-                    .addComponent(inputCfAtletaJTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCercaJB))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nomeJL)
-                    .addComponent(nomeJTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cognomeJL)
-                    .addComponent(cognomeJTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(dataNascitaJL)
-                    .addComponent(dataNascitaJTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ruoloJL, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ruoloJTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(idSponsorJL)
-                    .addComponent(inputIdSponsorJTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nomeSponsorJL)
-                    .addComponent(nomeSponsorJTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(dataInizioJL)
-                    .addComponent(dataFineJL)
-                    .addComponent(inputDataInizioJDC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(inputDataFineJDC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(17, 17, 17)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(valContrattoJL)
-                    .addComponent(inputValoreContrttoJTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAnnullaJB, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 501, Short.MAX_VALUE)
         );
 
         pack();
@@ -362,6 +402,74 @@ public class RegistrareContrattoSponsor extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void btnCloseMessageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseMessageActionPerformed
+        jPMessage.setVisible(false);
+    }//GEN-LAST:event_btnCloseMessageActionPerformed
+
+    private void btnLogoutJB1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutJB1ActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_btnLogoutJB1ActionPerformed
+
+    private void inputCfAtletaJTFFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputCfAtletaJTFFocusGained
+       if(inputCfAtletaJTF.getText().equals("Codice Fiscale Dell'Atleta")){
+            inputCfAtletaJTF.setText("");
+            inputCfAtletaJTF.setForeground(new Color(255,255,255));
+        }
+    }//GEN-LAST:event_inputCfAtletaJTFFocusGained
+
+    private void inputCfAtletaJTFFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputCfAtletaJTFFocusLost
+        if(inputCfAtletaJTF.getText().equals("")){
+            inputCfAtletaJTF.setText("Codice Fiscale Dell'Atleta");
+            inputCfAtletaJTF.setForeground(new Color(255,255,255));
+        }
+    }//GEN-LAST:event_inputCfAtletaJTFFocusLost
+
+    private void inputIdSponsorJTFFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputIdSponsorJTFFocusGained
+        if(inputIdSponsorJTF.getText().equals("ID Sponsor")){
+            inputIdSponsorJTF.setText("");
+            inputIdSponsorJTF.setForeground(new Color(255,255,255));
+        }
+    }//GEN-LAST:event_inputIdSponsorJTFFocusGained
+
+    private void inputIdSponsorJTFFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputIdSponsorJTFFocusLost
+        if(inputIdSponsorJTF.getText().equals("")){
+            inputIdSponsorJTF.setText("ID Sponsor");
+            inputIdSponsorJTF.setForeground(new Color(255,255,255));
+        }
+    }//GEN-LAST:event_inputIdSponsorJTFFocusLost
+
+    private void nomeSponsorJTFFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nomeSponsorJTFFocusGained
+       if(nomeSponsorJTF.getText().equals("Nome Sponsor")){
+            nomeSponsorJTF.setText("");
+            nomeSponsorJTF.setForeground(new Color(255,255,255));
+        }
+    }//GEN-LAST:event_nomeSponsorJTFFocusGained
+
+    private void nomeSponsorJTFFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nomeSponsorJTFFocusLost
+       if(nomeSponsorJTF.getText().equals("")){
+            nomeSponsorJTF.setText("Nome Sponsor");
+            nomeSponsorJTF.setForeground(new Color(255,255,255));
+        }
+    }//GEN-LAST:event_nomeSponsorJTFFocusLost
+
+    private void inputValoreContrttoJTFFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputValoreContrttoJTFFocusGained
+         if(inputValoreContrttoJTF.getText().equals("Valore Contrattuale")){
+            inputValoreContrttoJTF.setText("");
+            inputValoreContrttoJTF.setForeground(new Color(255,255,255));
+        }
+    }//GEN-LAST:event_inputValoreContrttoJTFFocusGained
+
+    private void inputValoreContrttoJTFFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputValoreContrttoJTFFocusLost
+       if(inputValoreContrttoJTF.getText().equals("")){
+            inputValoreContrttoJTF.setText("Valore Contrattuale");
+            inputValoreContrttoJTF.setForeground(new Color(255,255,255));
+        }
+    }//GEN-LAST:event_inputValoreContrttoJTFFocusLost
+
+    private void inputCfAtletaJTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputCfAtletaJTFActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inputCfAtletaJTFActionPerformed
+
 
     /*GET AND SET*/
     public String getIdProcuratore() {
@@ -385,14 +493,11 @@ public class RegistrareContrattoSponsor extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAnnullaJB;
     private javax.swing.JButton btnCercaJB;
-    private javax.swing.JLabel cfAtletaJL;
-    private javax.swing.JLabel cognomeJL;
+    private javax.swing.JButton btnCloseMessage;
+    private javax.swing.JButton btnLogoutJB1;
     private javax.swing.JTextField cognomeJTF;
-    private javax.swing.JLabel dataFineJL;
-    private javax.swing.JLabel dataInizioJL;
-    private javax.swing.JLabel dataNascitaJL;
     private javax.swing.JTextField dataNascitaJTF;
-    private javax.swing.JLabel idSponsorJL;
+    private javax.swing.JLabel errorMessage;
     private javax.swing.JTextField inputCfAtletaJTF;
     private com.toedter.calendar.JDateChooser inputDataFineJDC;
     private com.toedter.calendar.JDateChooser inputDataInizioJDC;
@@ -401,13 +506,10 @@ public class RegistrareContrattoSponsor extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel nomeJL;
+    private javax.swing.JPanel jPMessage;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField nomeJTF;
-    private javax.swing.JLabel nomeSponsorJL;
     private javax.swing.JTextField nomeSponsorJTF;
-    private javax.swing.JLabel ruoloJL;
     private javax.swing.JTextField ruoloJTF;
-    private javax.swing.JLabel titoloJL;
-    private javax.swing.JLabel valContrattoJL;
     // End of variables declaration//GEN-END:variables
 }

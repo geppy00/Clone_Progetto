@@ -3,6 +3,8 @@ package view;
 
 import dao.DataAccessObject;
 import dao.ExceptionDao;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,6 +12,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -29,6 +33,19 @@ public class SezioneEliminaContrattoProcuratore extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.idProcuratore = idProcuratore;
+        
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        jLDataAttuale.setText(dtf.format(LocalDateTime.now()));
+        
+         tblContrattiClubJT.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
+         tblContrattiClubJT.getTableHeader().setOpaque(false);
+         tblContrattiClubJT.getTableHeader().setBackground(new Color(32, 136, 203));
+         tblContrattiClubJT.getTableHeader().setForeground(new Color(255,255,255));
+         
+         tblContrattiSponsorJT.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
+         tblContrattiSponsorJT.getTableHeader().setOpaque(false);
+         tblContrattiSponsorJT.getTableHeader().setBackground(new Color(32, 136, 203));
+         tblContrattiSponsorJT.getTableHeader().setForeground(new Color(255,255,255));
         
         try {
             this.stampaDatiTabella();
@@ -121,23 +138,22 @@ public class SezioneEliminaContrattoProcuratore extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnTornaIndietroJB = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblContrattiClubJT = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblContrattiSponsorJT = new javax.swing.JTable();
-        contrattiConClubJL = new javax.swing.JLabel();
-        contrattiConSponsorJL = new javax.swing.JLabel();
+        btnClose = new javax.swing.JButton();
+        jLDataAttuale = new javax.swing.JLabel();
+        btnLogoutJB = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
-        btnTornaIndietroJB.setText("TORNA INDIETRO");
-        btnTornaIndietroJB.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTornaIndietroJBActionPerformed(evt);
-            }
-        });
+        jPanel1.setBackground(new java.awt.Color(11, 58, 151));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        tblContrattiClubJT.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tblContrattiClubJT.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -154,6 +170,10 @@ public class SezioneEliminaContrattoProcuratore extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblContrattiClubJT.setFocusable(false);
+        tblContrattiClubJT.setSelectionBackground(new java.awt.Color(232, 57, 95));
+        tblContrattiClubJT.setShowVerticalLines(false);
+        tblContrattiClubJT.getTableHeader().setReorderingAllowed(false);
         tblContrattiClubJT.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblContrattiClubJTMouseClicked(evt);
@@ -161,6 +181,9 @@ public class SezioneEliminaContrattoProcuratore extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblContrattiClubJT);
 
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, 720, 150));
+
+        tblContrattiSponsorJT.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tblContrattiSponsorJT.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -177,6 +200,10 @@ public class SezioneEliminaContrattoProcuratore extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblContrattiSponsorJT.setFocusable(false);
+        tblContrattiSponsorJT.setSelectionBackground(new java.awt.Color(232, 57, 95));
+        tblContrattiSponsorJT.setShowVerticalLines(false);
+        tblContrattiSponsorJT.getTableHeader().setReorderingAllowed(false);
         tblContrattiSponsorJT.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblContrattiSponsorJTMouseClicked(evt);
@@ -184,56 +211,52 @@ public class SezioneEliminaContrattoProcuratore extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tblContrattiSponsorJT);
 
-        contrattiConClubJL.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        contrattiConClubJL.setText("CONTRATTI CON CLUB");
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 270, 720, 170));
 
-        contrattiConSponsorJL.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        contrattiConSponsorJL.setText("CONTRATTI CON SPONSOR");
+        btnClose.setBackground(new java.awt.Color(11, 58, 151));
+        btnClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_multiply_32px_1.png"))); // NOI18N
+        btnClose.setBorder(null);
+        btnClose.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnClose.setFocusPainted(false);
+        btnClose.setFocusable(false);
+        btnClose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCloseActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 0, 40, 40));
+
+        jLDataAttuale.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLDataAttuale.setForeground(new java.awt.Color(255, 255, 255));
+        jLDataAttuale.setText("13/01/2023");
+        jPanel1.add(jLDataAttuale, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 80, -1, -1));
+
+        btnLogoutJB.setBackground(new java.awt.Color(11, 58, 151));
+        btnLogoutJB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_left_32px_2.png"))); // NOI18N
+        btnLogoutJB.setBorder(null);
+        btnLogoutJB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnLogoutJB.setFocusPainted(false);
+        btnLogoutJB.setFocusable(false);
+        btnLogoutJB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutJBActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnLogoutJB, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 450, -1, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
-                    .addComponent(contrattiConClubJL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE)
-                    .addComponent(contrattiConSponsorJL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(296, 296, 296)
-                .addComponent(btnTornaIndietroJB, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(contrattiConClubJL)
-                    .addComponent(contrattiConSponsorJL))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37)
-                .addComponent(btnTornaIndietroJB, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    /*ACTION PERFOMED*/
-    private void btnTornaIndietroJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTornaIndietroJBActionPerformed
-        SezioneGestioneContrattiView sezioneGestioneContrattiView = new SezioneGestioneContrattiView(this.getIdProcuratore());
-        sezioneGestioneContrattiView.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_btnTornaIndietroJBActionPerformed
 
     private void tblContrattiClubJTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblContrattiClubJTMouseClicked
         if(evt.getClickCount() == 2 && !evt.isConsumed()) {
@@ -260,6 +283,16 @@ public class SezioneEliminaContrattoProcuratore extends javax.swing.JFrame {
             this.setVisible(false);
         }
     }//GEN-LAST:event_tblContrattiSponsorJTMouseClicked
+
+    private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_btnCloseActionPerformed
+
+    private void btnLogoutJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutJBActionPerformed
+        SezioneGestioneContrattiView sezioneGestioneContrattiView = new SezioneGestioneContrattiView(this.getIdProcuratore());
+        sezioneGestioneContrattiView.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnLogoutJBActionPerformed
 
       /*GET AND SET*/
     public String getIdProcuratore() {
@@ -298,9 +331,10 @@ public class SezioneEliminaContrattoProcuratore extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnTornaIndietroJB;
-    private javax.swing.JLabel contrattiConClubJL;
-    private javax.swing.JLabel contrattiConSponsorJL;
+    private javax.swing.JButton btnClose;
+    private javax.swing.JButton btnLogoutJB;
+    private javax.swing.JLabel jLDataAttuale;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tblContrattiClubJT;

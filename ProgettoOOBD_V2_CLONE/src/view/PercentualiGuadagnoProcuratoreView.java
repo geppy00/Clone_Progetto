@@ -5,6 +5,8 @@ import controller.ControllerProcuratore;
 import convalidazione.ControlloConvalidazione;
 import dao.DataAccessObject;
 import dao.ExceptionDao;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,6 +14,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
@@ -37,7 +41,28 @@ public class PercentualiGuadagnoProcuratoreView extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.idProcuratore = idProcuratore;
-
+        
+        
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        jLDataAttuale.setText(dtf.format(LocalDateTime.now()));
+        
+        
+        tblDatiClubJT.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
+        tblDatiClubJT.getTableHeader().setOpaque(false);
+        tblDatiClubJT.getTableHeader().setBackground(new Color(32, 136, 203));
+        tblDatiClubJT.getTableHeader().setForeground(new Color(255,255,255));
+   
+        tblDatiEventiJT.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
+        tblDatiEventiJT.getTableHeader().setOpaque(false);
+        tblDatiEventiJT.getTableHeader().setBackground(new Color(32, 136, 203));
+        tblDatiEventiJT.getTableHeader().setForeground(new Color(255,255,255));
+       
+        tblDatiSponsorJT.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
+        tblDatiSponsorJT.getTableHeader().setOpaque(false);
+        tblDatiSponsorJT.getTableHeader().setBackground(new Color(32, 136, 203));
+        tblDatiSponsorJT.getTableHeader().setForeground(new Color(255,255,255));
+        
+       
         try {
             this.stampaDatiAtltetaTbl();
         } catch (ExceptionDao ex) {
@@ -57,25 +82,33 @@ public class PercentualiGuadagnoProcuratoreView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblDatiClubJT = new javax.swing.JTable();
-        btnAnnullaJB = new javax.swing.JButton();
-        totaleGuadagnojL = new javax.swing.JLabel();
-        totaleGuadagnoJTF = new javax.swing.JTextField();
-        valoreContrattualeJL = new javax.swing.JLabel();
-        totaleValoreContrattualeJTF = new javax.swing.JTextField();
-        totaleGettoniJL = new javax.swing.JLabel();
-        totaleGettoniJTF = new javax.swing.JTextField();
-        btnCalcolaJB = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblDatiSponsorJT = new javax.swing.JTable();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblDatiEventiJT = new javax.swing.JTable();
+        totaleGuadagnojL = new javax.swing.JLabel();
+        totaleGettoniJL = new javax.swing.JLabel();
         atletaMaggiorGuadagnoJL = new javax.swing.JLabel();
-        atletaMigliorGuadagnoJTF = new javax.swing.JTextField();
+        valoreContrattualeJL = new javax.swing.JLabel();
+        btnAnnullaJB = new javax.swing.JButton();
+        btnCalcolaJB = new javax.swing.JButton();
+        totaleGuadagnoJTF = new javax.swing.JLabel();
+        atletaMigliorGuadagnoJTF = new javax.swing.JLabel();
+        totaleGettoniJTF = new javax.swing.JLabel();
+        totaleValoreContrattualeJTF = new javax.swing.JLabel();
+        jLDataAttuale = new javax.swing.JLabel();
+        btnLogoutJB = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
+        jPanel1.setBackground(new java.awt.Color(11, 58, 151));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        tblDatiClubJT.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tblDatiClubJT.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -92,6 +125,10 @@ public class PercentualiGuadagnoProcuratoreView extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblDatiClubJT.setFocusable(false);
+        tblDatiClubJT.setSelectionBackground(new java.awt.Color(232, 57, 95));
+        tblDatiClubJT.setShowVerticalLines(false);
+        tblDatiClubJT.getTableHeader().setReorderingAllowed(false);
         tblDatiClubJT.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblDatiClubJTMouseClicked(evt);
@@ -99,32 +136,9 @@ public class PercentualiGuadagnoProcuratoreView extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblDatiClubJT);
 
-        btnAnnullaJB.setText("ANNULLA");
-        btnAnnullaJB.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAnnullaJBActionPerformed(evt);
-            }
-        });
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 270, 790, 130));
 
-        totaleGuadagnojL.setText("TOTALE GUADAGNO");
-
-        totaleGuadagnoJTF.setEditable(false);
-
-        valoreContrattualeJL.setText("TOTALE VALORE CONTRATTUALE");
-
-        totaleValoreContrattualeJTF.setEditable(false);
-
-        totaleGettoniJL.setText("TOTALE GETTONI");
-
-        totaleGettoniJTF.setEditable(false);
-
-        btnCalcolaJB.setText("CALCOLA");
-        btnCalcolaJB.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCalcolaJBActionPerformed(evt);
-            }
-        });
-
+        tblDatiSponsorJT.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tblDatiSponsorJT.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -141,8 +155,15 @@ public class PercentualiGuadagnoProcuratoreView extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblDatiSponsorJT.setFocusable(false);
+        tblDatiSponsorJT.setSelectionBackground(new java.awt.Color(232, 57, 95));
+        tblDatiSponsorJT.setShowVerticalLines(false);
+        tblDatiSponsorJT.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(tblDatiSponsorJT);
 
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, 790, 140));
+
+        tblDatiEventiJT.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tblDatiEventiJT.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -159,76 +180,111 @@ public class PercentualiGuadagnoProcuratoreView extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblDatiEventiJT.setFocusable(false);
+        tblDatiEventiJT.setSelectionBackground(new java.awt.Color(232, 57, 95));
+        tblDatiEventiJT.setShowVerticalLines(false);
+        tblDatiEventiJT.getTableHeader().setReorderingAllowed(false);
         jScrollPane3.setViewportView(tblDatiEventiJT);
 
-        atletaMaggiorGuadagnoJL.setText("Atleta Maggior Guadagno");
+        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 410, 790, 150));
 
-        atletaMigliorGuadagnoJTF.setEditable(false);
+        totaleGuadagnojL.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        totaleGuadagnojL.setForeground(new java.awt.Color(255, 255, 255));
+        totaleGuadagnojL.setText("Totale");
+        jPanel1.add(totaleGuadagnojL, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 83, -1, -1));
+
+        totaleGettoniJL.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        totaleGettoniJL.setForeground(new java.awt.Color(255, 255, 255));
+        totaleGettoniJL.setText("Gettoni");
+        jPanel1.add(totaleGettoniJL, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 580, -1, -1));
+
+        atletaMaggiorGuadagnoJL.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        atletaMaggiorGuadagnoJL.setForeground(new java.awt.Color(255, 255, 255));
+        atletaMaggiorGuadagnoJL.setText("Atleta Maggior Guadagno");
+        jPanel1.add(atletaMaggiorGuadagnoJL, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 580, -1, -1));
+
+        valoreContrattualeJL.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        valoreContrattualeJL.setForeground(new java.awt.Color(255, 255, 255));
+        valoreContrattualeJL.setText("Contratti");
+        jPanel1.add(valoreContrattualeJL, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 580, -1, -1));
+
+        btnAnnullaJB.setBackground(new java.awt.Color(11, 58, 151));
+        btnAnnullaJB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_left_32px_2.png"))); // NOI18N
+        btnAnnullaJB.setBorder(null);
+        btnAnnullaJB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAnnullaJB.setFocusPainted(false);
+        btnAnnullaJB.setFocusable(false);
+        btnAnnullaJB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAnnullaJBActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnAnnullaJB, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 620, -1, -1));
+
+        btnCalcolaJB.setBackground(new java.awt.Color(46, 204, 113));
+        btnCalcolaJB.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        btnCalcolaJB.setForeground(new java.awt.Color(255, 255, 255));
+        btnCalcolaJB.setText("Calcola");
+        btnCalcolaJB.setBorder(null);
+        btnCalcolaJB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCalcolaJB.setFocusPainted(false);
+        btnCalcolaJB.setFocusable(false);
+        btnCalcolaJB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCalcolaJBActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnCalcolaJB, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 570, 80, 40));
+
+        totaleGuadagnoJTF.setFont(new java.awt.Font("Segoe UI Semibold", 0, 24)); // NOI18N
+        totaleGuadagnoJTF.setForeground(new java.awt.Color(46, 204, 113));
+        totaleGuadagnoJTF.setText("0.000£");
+        jPanel1.add(totaleGuadagnoJTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 80, 130, -1));
+
+        atletaMigliorGuadagnoJTF.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
+        atletaMigliorGuadagnoJTF.setForeground(new java.awt.Color(46, 204, 113));
+        atletaMigliorGuadagnoJTF.setText("Jeft Matamba");
+        jPanel1.add(atletaMigliorGuadagnoJTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(622, 578, -1, -1));
+
+        totaleGettoniJTF.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
+        totaleGettoniJTF.setForeground(new java.awt.Color(46, 204, 113));
+        totaleGettoniJTF.setText("0.000£");
+        jPanel1.add(totaleGettoniJTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 578, 90, -1));
+
+        totaleValoreContrattualeJTF.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
+        totaleValoreContrattualeJTF.setForeground(new java.awt.Color(46, 204, 113));
+        totaleValoreContrattualeJTF.setText("0.000£");
+        jPanel1.add(totaleValoreContrattualeJTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(156, 578, 120, -1));
+
+        jLDataAttuale.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLDataAttuale.setForeground(new java.awt.Color(255, 255, 255));
+        jLDataAttuale.setText("13/01/2023");
+        jPanel1.add(jLDataAttuale, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, -1, -1));
+
+        btnLogoutJB.setBackground(new java.awt.Color(11, 58, 151));
+        btnLogoutJB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_multiply_32px_1.png"))); // NOI18N
+        btnLogoutJB.setBorder(null);
+        btnLogoutJB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnLogoutJB.setFocusPainted(false);
+        btnLogoutJB.setFocusable(false);
+        btnLogoutJB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutJBActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnLogoutJB, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 0, -1, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnAnnullaJB)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(valoreContrattualeJL)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(totaleValoreContrattualeJTF, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(104, 104, 104)
-                                .addComponent(atletaMaggiorGuadagnoJL)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(atletaMigliorGuadagnoJTF, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(78, 78, 78)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(828, 828, 828)
-                                .addComponent(btnCalcolaJB))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(59, 59, 59)
-                                .addComponent(totaleGettoniJL)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(totaleGettoniJTF, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(280, 280, 280)
-                                .addComponent(totaleGuadagnojL)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(totaleGuadagnoJTF, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 126, Short.MAX_VALUE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jScrollPane2))
-                    .addComponent(jScrollPane3))
-                .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 944, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(valoreContrattualeJL)
-                    .addComponent(totaleValoreContrattualeJTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(totaleGettoniJL)
-                    .addComponent(totaleGettoniJTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(totaleGuadagnojL)
-                    .addComponent(totaleGuadagnoJTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(atletaMaggiorGuadagnoJL)
-                    .addComponent(atletaMigliorGuadagnoJTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAnnullaJB)
-                    .addComponent(btnCalcolaJB))
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 703, Short.MAX_VALUE)
         );
 
         pack();
@@ -243,27 +299,7 @@ public class PercentualiGuadagnoProcuratoreView extends javax.swing.JFrame {
 
 
     private void tblDatiClubJTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDatiClubJTMouseClicked
-        //String idAtleta = (String) tblDatiAtletiJT.getModel().getValueAt(evt.getX(), evt.getY());
-        /*int row = tblDatiAtletiJT.getSelectedRow();
-        String idAtleta = (String) tblDatiAtletiJT.getValueAt(row, 0);
-        System.out.println("idAtleta="+idAtleta);
-        
-        ControllerProcuratore controllerProcuratore = new ControllerProcuratore();
-        try {
-            double valoreContrattualeClub = controllerProcuratore.prendiValoreContrattuale(idAtleta);
-            if(valoreContrattualeClub != -1) {
-                montanteContrattoJTF.setText(String.valueOf(valoreContrattualeClub));
-                double guadagnoProcuratore = (3*valoreContrattualeClub)/100;
-                guadagnoJTF.setText(String.valueOf(guadagnoProcuratore));
-            }
-            else {
-                montanteContrattoJTF.setText(" ");
-                guadagnoJTF.setText(" ");
-                JOptionPane.showMessageDialog(null, "!! ATLETA SENZA CONTRATTO !!");
-            }
-        } catch (ExceptionDao ex) {
-            Logger.getLogger(PercentualiGuadagnoProcuratoreView.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
+       
     }//GEN-LAST:event_tblDatiClubJTMouseClicked
 
     private void btnCalcolaJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcolaJBActionPerformed
@@ -282,22 +318,22 @@ public class PercentualiGuadagnoProcuratoreView extends javax.swing.JFrame {
         }
         
         double sommaTotaleContratto = ((sommaContrattiClub + sommaContrattiSponsor) * 3) / 100;
-        System.out.println("SOMMA DEI CONTARTTI = "+sommaTotaleContratto);
+        
         
         for(i = 0; i<datiPagamentiEvento.size(); i++) {
             sommaGettone = sommaGettone + datiPagamentiEvento.get(i);
         }
         
         double sommaTotaleGettoni = (sommaGettone * 10) / 100;
-        System.out.println("SOMMA DEI GETTONI = "+sommaTotaleGettoni);
+        
         
         double sommaTotale = sommaTotaleContratto + sommaTotaleGettoni;
         
-        System.out.println("TOTALE GUADAGNO = "+sommaTotale);
         
-        totaleValoreContrattualeJTF.setText(String.valueOf(sommaTotaleContratto));
-        totaleGettoniJTF.setText(String.valueOf(sommaTotaleGettoni));
-        totaleGuadagnoJTF.setText(String.valueOf(sommaTotale));
+        
+        totaleValoreContrattualeJTF.setText(String.valueOf(sommaTotaleContratto)+"£");
+        totaleGettoniJTF.setText(String.valueOf(sommaTotaleGettoni)+"£");
+        totaleGuadagnoJTF.setText(String.valueOf(sommaTotale)+"£");
         
         try {
             String nomeAtletaMigliorGuadagno = controllerProcuratore.prendiAtletaMaggiorGuadagno(this.getIdProcuratore());
@@ -312,6 +348,10 @@ public class PercentualiGuadagnoProcuratoreView extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_btnCalcolaJBActionPerformed
+  
+    private void btnLogoutJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutJBActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_btnLogoutJBActionPerformed
 
     /*METODI*/
     private String prendiNomeSponsor() throws ExceptionDao {
@@ -436,9 +476,12 @@ public class PercentualiGuadagnoProcuratoreView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel atletaMaggiorGuadagnoJL;
-    private javax.swing.JTextField atletaMigliorGuadagnoJTF;
+    private javax.swing.JLabel atletaMigliorGuadagnoJTF;
     private javax.swing.JButton btnAnnullaJB;
     private javax.swing.JButton btnCalcolaJB;
+    private javax.swing.JButton btnLogoutJB;
+    private javax.swing.JLabel jLDataAttuale;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -446,10 +489,10 @@ public class PercentualiGuadagnoProcuratoreView extends javax.swing.JFrame {
     private javax.swing.JTable tblDatiEventiJT;
     private javax.swing.JTable tblDatiSponsorJT;
     private javax.swing.JLabel totaleGettoniJL;
-    private javax.swing.JTextField totaleGettoniJTF;
-    private javax.swing.JTextField totaleGuadagnoJTF;
+    private javax.swing.JLabel totaleGettoniJTF;
+    private javax.swing.JLabel totaleGuadagnoJTF;
     private javax.swing.JLabel totaleGuadagnojL;
-    private javax.swing.JTextField totaleValoreContrattualeJTF;
+    private javax.swing.JLabel totaleValoreContrattualeJTF;
     private javax.swing.JLabel valoreContrattualeJL;
     // End of variables declaration//GEN-END:variables
 }

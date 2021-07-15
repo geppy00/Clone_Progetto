@@ -3,7 +3,11 @@ package view.registrare;
 
 import controller.ControllerProcuratore;
 import convalidazione.ControlloConvalidazione;
+import convalidazione.MessageError;
+import convalidazione.PermessoPerNonScrivere;
+import convalidazione.PermessoPerScrivere;
 import dao.ExceptionDao;
+import java.awt.Color;
 import java.awt.Toolkit;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -32,11 +36,12 @@ public class RegistraContrattoClub extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.idProcuratore = idProcuratore;
-    }
-    
-    public RegistraContrattoClub() {
+        jPMessage.setVisible(false);
+        
         
     }
+    
+    public RegistraContrattoClub() {}
 
 
     @SuppressWarnings("unchecked")
@@ -44,81 +49,93 @@ public class RegistraContrattoClub extends javax.swing.JFrame {
     private void initComponents() {
 
         jButton1 = new javax.swing.JButton();
-        titoloJL = new javax.swing.JLabel();
-        CfAtletaJL = new javax.swing.JLabel();
-        inputCfAtletaJTF = new javax.swing.JTextField();
-        btnCercaJB = new javax.swing.JButton();
-        adviceJL = new javax.swing.JLabel();
-        nomeJL = new javax.swing.JLabel();
-        nomeJTF = new javax.swing.JTextField();
-        cognomeJL = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
         cognomeJTF = new javax.swing.JTextField();
-        dataNascitaJL = new javax.swing.JLabel();
-        dataNascitaJTF = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
+        nomeJTF = new javax.swing.JTextField();
         ruoloJTF = new javax.swing.JTextField();
-        lineaJL = new javax.swing.JLabel();
-        nomeClubJL = new javax.swing.JLabel();
         inputNomeClubJTF = new javax.swing.JTextField();
-        idClubJL = new javax.swing.JLabel();
+        dataNascitaJTF = new javax.swing.JTextField();
         inputIdClubJTF = new javax.swing.JTextField();
-        dataInizioJL = new javax.swing.JLabel();
         DataInizioJDC = new com.toedter.calendar.JDateChooser();
-        dataFineJL = new javax.swing.JLabel();
-        DataFineJDC = new com.toedter.calendar.JDateChooser();
-        btnStipulaContratto = new javax.swing.JButton();
-        btnAnnullaJB = new javax.swing.JButton();
-        valEconomicoJL = new javax.swing.JLabel();
         inputValContrattoJTF = new javax.swing.JTextField();
+        DataFineJDC = new com.toedter.calendar.JDateChooser();
+        btnCercaJB = new javax.swing.JButton();
+        inputCfAtletaJTF = new javax.swing.JTextField();
+        btnAnnullaJB = new javax.swing.JButton();
+        btnStipulaContratto = new javax.swing.JButton();
+        jPMessage = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        errorMessage = new javax.swing.JLabel();
+        btnCloseMessage = new javax.swing.JButton();
+        btnLogoutJB1 = new javax.swing.JButton();
 
         jButton1.setText("jButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
-        titoloJL.setText("STIPULA UN NUOVO CONTRATTO CLUB");
-
-        CfAtletaJL.setText("Codice Fiscale Atleta");
-
-        btnCercaJB.setText("CERCA");
-        btnCercaJB.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCercaJBActionPerformed(evt);
-            }
-        });
-
-        adviceJL.setText("DATI DELL'ATLETA");
-
-        nomeJL.setText("Nome");
-
-        nomeJTF.setEditable(false);
-
-        cognomeJL.setText("Cognome");
+        jPanel1.setBackground(new java.awt.Color(11, 58, 151));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         cognomeJTF.setEditable(false);
+        cognomeJTF.setBackground(new java.awt.Color(9, 46, 119));
+        cognomeJTF.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        cognomeJTF.setForeground(new java.awt.Color(221, 231, 231));
+        cognomeJTF.setText("Cognome");
+        cognomeJTF.setBorder(null);
+        jPanel1.add(cognomeJTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 190, 310, 30));
 
-        dataNascitaJL.setText("Data Nascita");
-
-        dataNascitaJTF.setEditable(false);
-
-        jLabel1.setText("Ruolo");
+        nomeJTF.setEditable(false);
+        nomeJTF.setBackground(new java.awt.Color(9, 46, 119));
+        nomeJTF.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        nomeJTF.setForeground(new java.awt.Color(221, 231, 231));
+        nomeJTF.setText("Nome ");
+        nomeJTF.setBorder(null);
+        jPanel1.add(nomeJTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 190, 320, 30));
 
         ruoloJTF.setEditable(false);
-
-        lineaJL.setText("_______________________________________________________________________________________________");
-
-        nomeClubJL.setText("Nome Club");
+        ruoloJTF.setBackground(new java.awt.Color(9, 46, 119));
+        ruoloJTF.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        ruoloJTF.setForeground(new java.awt.Color(221, 231, 231));
+        ruoloJTF.setText("Ruolo");
+        ruoloJTF.setBorder(null);
+        jPanel1.add(ruoloJTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 230, 310, 30));
 
         inputNomeClubJTF.setEditable(false);
+        inputNomeClubJTF.setBackground(new java.awt.Color(9, 46, 119));
+        inputNomeClubJTF.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        inputNomeClubJTF.setForeground(new java.awt.Color(221, 231, 231));
+        inputNomeClubJTF.setText("Nome Club");
+        inputNomeClubJTF.setBorder(null);
+        jPanel1.add(inputNomeClubJTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 310, 310, 30));
 
-        idClubJL.setText("ID Club");
+        dataNascitaJTF.setEditable(false);
+        dataNascitaJTF.setBackground(new java.awt.Color(9, 46, 119));
+        dataNascitaJTF.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        dataNascitaJTF.setForeground(new java.awt.Color(221, 231, 231));
+        dataNascitaJTF.setText("Data di Nascita");
+        dataNascitaJTF.setBorder(null);
+        jPanel1.add(dataNascitaJTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 230, 320, 30));
 
+        inputIdClubJTF.setBackground(new java.awt.Color(9, 46, 119));
+        inputIdClubJTF.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        inputIdClubJTF.setForeground(new java.awt.Color(221, 231, 231));
+        inputIdClubJTF.setText("ID Club");
+        inputIdClubJTF.setBorder(null);
+        inputIdClubJTF.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                inputIdClubJTFFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                inputIdClubJTFFocusLost(evt);
+            }
+        });
         inputIdClubJTF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 inputIdClubJTFActionPerformed(evt);
             }
         });
-
-        dataInizioJL.setText("Data Inizio");
+        jPanel1.add(inputIdClubJTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 310, 320, 30));
 
         DataInizioJDC.setMaxSelectableDate(new java.util.Date(253370764884000L));
         DataInizioJDC.setMinSelectableDate(new java.util.Date(-62135769516000L));
@@ -135,155 +152,157 @@ public class RegistraContrattoClub extends javax.swing.JFrame {
                 DataInizioJDCPropertyChange(evt);
             }
         });
+        jPanel1.add(DataInizioJDC, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 350, 320, 30));
 
-        dataFineJL.setText("Data Fine");
+        inputValContrattoJTF.setBackground(new java.awt.Color(9, 46, 119));
+        inputValContrattoJTF.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        inputValContrattoJTF.setForeground(new java.awt.Color(221, 231, 231));
+        inputValContrattoJTF.setText("Valore Contrattuale");
+        inputValContrattoJTF.setBorder(null);
+        inputValContrattoJTF.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                inputValContrattoJTFFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                inputValContrattoJTFFocusLost(evt);
+            }
+        });
+        jPanel1.add(inputValContrattoJTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 390, 640, 30));
 
         DataFineJDC.setMaxSelectableDate(new java.util.Date(253370764884000L));
         DataFineJDC.setMinSelectableDate(new java.util.Date(-62135769516000L));
+        jPanel1.add(DataFineJDC, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 350, 310, 30));
 
-        btnStipulaContratto.setText("REGISTRA");
-        btnStipulaContratto.addActionListener(new java.awt.event.ActionListener() {
+        btnCercaJB.setBackground(new java.awt.Color(46, 204, 113));
+        btnCercaJB.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        btnCercaJB.setForeground(new java.awt.Color(255, 255, 255));
+        btnCercaJB.setText("Cerca");
+        btnCercaJB.setBorder(null);
+        btnCercaJB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCercaJB.setFocusPainted(false);
+        btnCercaJB.setFocusable(false);
+        btnCercaJB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnStipulaContrattoActionPerformed(evt);
+                btnCercaJBActionPerformed(evt);
             }
         });
+        jPanel1.add(btnCercaJB, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 150, 90, 30));
 
-        btnAnnullaJB.setText("ANNULLA");
+        inputCfAtletaJTF.setBackground(new java.awt.Color(9, 46, 119));
+        inputCfAtletaJTF.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        inputCfAtletaJTF.setForeground(new java.awt.Color(231, 231, 231));
+        inputCfAtletaJTF.setText("Codice Fiscale Dell'Atleta");
+        inputCfAtletaJTF.setBorder(null);
+        inputCfAtletaJTF.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                inputCfAtletaJTFFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                inputCfAtletaJTFFocusLost(evt);
+            }
+        });
+        jPanel1.add(inputCfAtletaJTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 150, 550, 30));
+
+        btnAnnullaJB.setBackground(new java.awt.Color(231, 76, 60));
+        btnAnnullaJB.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        btnAnnullaJB.setForeground(new java.awt.Color(255, 255, 255));
+        btnAnnullaJB.setText("Annulla");
+        btnAnnullaJB.setBorder(null);
+        btnAnnullaJB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAnnullaJB.setFocusPainted(false);
+        btnAnnullaJB.setFocusable(false);
         btnAnnullaJB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAnnullaJBActionPerformed(evt);
             }
         });
+        jPanel1.add(btnAnnullaJB, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 430, 80, 30));
 
-        valEconomicoJL.setText("Valore Contrattuale");
+        btnStipulaContratto.setBackground(new java.awt.Color(46, 204, 113));
+        btnStipulaContratto.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        btnStipulaContratto.setForeground(new java.awt.Color(255, 255, 255));
+        btnStipulaContratto.setText("Stabilisce");
+        btnStipulaContratto.setActionCommand("Stabilisca");
+        btnStipulaContratto.setBorder(null);
+        btnStipulaContratto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnStipulaContratto.setFocusPainted(false);
+        btnStipulaContratto.setFocusable(false);
+        btnStipulaContratto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnStipulaContrattoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnStipulaContratto, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 440, 90, 30));
+
+        jPMessage.setBackground(new java.awt.Color(46, 204, 113));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_info_26px.png"))); // NOI18N
+
+        errorMessage.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        errorMessage.setForeground(new java.awt.Color(255, 255, 255));
+        errorMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        errorMessage.setText("Contratto stabilitto con sucesso ");
+
+        btnCloseMessage.setBackground(new java.awt.Color(46, 204, 113));
+        btnCloseMessage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_multiply_32px_1.png"))); // NOI18N
+        btnCloseMessage.setBorder(null);
+        btnCloseMessage.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCloseMessage.setFocusPainted(false);
+        btnCloseMessage.setFocusable(false);
+        btnCloseMessage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCloseMessageActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPMessageLayout = new javax.swing.GroupLayout(jPMessage);
+        jPMessage.setLayout(jPMessageLayout);
+        jPMessageLayout.setHorizontalGroup(
+            jPMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPMessageLayout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(errorMessage, javax.swing.GroupLayout.DEFAULT_SIZE, 528, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(btnCloseMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPMessageLayout.setVerticalGroup(
+            jPMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPMessageLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(errorMessage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnCloseMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        jPanel1.add(jPMessage, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, 640, 40));
+
+        btnLogoutJB1.setBackground(new java.awt.Color(11, 58, 151));
+        btnLogoutJB1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_multiply_32px_1.png"))); // NOI18N
+        btnLogoutJB1.setBorder(null);
+        btnLogoutJB1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnLogoutJB1.setFocusPainted(false);
+        btnLogoutJB1.setFocusable(false);
+        btnLogoutJB1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutJB1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnLogoutJB1, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 10, -1, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lineaJL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnAnnullaJB, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(230, 230, 230)
-                        .addComponent(titoloJL))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(281, 281, 281)
-                        .addComponent(adviceJL))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(164, 164, 164)
-                        .addComponent(CfAtletaJL)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(inputCfAtletaJTF, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCercaJB))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(dataNascitaJL)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(dataNascitaJTF))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(nomeJL)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(nomeJTF, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(35, 35, 35)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(cognomeJL)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cognomeJTF, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(ruoloJTF)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnStipulaContratto, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(dataInizioJL)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(DataInizioJDC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(idClubJL)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(inputIdClubJTF, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(34, 34, 34)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(dataFineJL)
-                            .addComponent(nomeClubJL))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(DataFineJDC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(inputNomeClubJTF, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(valEconomicoJL)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(inputValContrattoJTF, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 873, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(titoloJL)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CfAtletaJL)
-                    .addComponent(inputCfAtletaJTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCercaJB))
-                .addGap(18, 18, 18)
-                .addComponent(adviceJL)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nomeJL)
-                    .addComponent(nomeJTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cognomeJL)
-                    .addComponent(cognomeJTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(dataNascitaJL)
-                            .addComponent(dataNascitaJTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(ruoloJTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lineaJL)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(inputNomeClubJTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(idClubJL)
-                    .addComponent(inputIdClubJTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nomeClubJL))
-                .addGap(37, 37, 37)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(dataInizioJL)
-                    .addComponent(DataInizioJDC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dataFineJL)
-                    .addComponent(DataFineJDC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(valEconomicoJL)
-                    .addComponent(inputValContrattoJTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAnnullaJB, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnStipulaContratto, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 530, Short.MAX_VALUE)
         );
 
         pack();
@@ -298,6 +317,7 @@ public class RegistraContrattoClub extends javax.swing.JFrame {
 
     private void btnStipulaContrattoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStipulaContrattoActionPerformed
         ControllerProcuratore controllerProcuratore = new ControllerProcuratore();
+        MessageError messageError = new MessageError();
         String idAtleta = inputCfAtletaJTF.getText();
         int idClub = 0;
         java.sql.Date dataInizio = null;
@@ -311,21 +331,24 @@ public class RegistraContrattoClub extends javax.swing.JFrame {
             valContratto = Float.parseFloat(inputValContrattoJTF.getText());
         }catch(NullPointerException npe) {
             Toolkit.getDefaultToolkit().beep();
-            JOptionPane.showMessageDialog(this, "INSERIRE UNA DATA VALIDA", "WARNING", JOptionPane.WARNING_MESSAGE);
+             messageError.showMessage(false, true, "warning","Data non Valida, inserisca una Data Valida" ,errorMessage , jPMessage, btnCercaJB);
         }catch(NumberFormatException nfe) {
             Toolkit.getDefaultToolkit().beep();
-            JOptionPane.showMessageDialog(this, "INSERIRE UN NUMERO VALIDO", "WARNING", JOptionPane.WARNING_MESSAGE);
+             messageError.showMessage(false, true, "warning","Inserisce Un Numero Valido" ,errorMessage , jPMessage, btnCercaJB);
         }
         
         if(controlloConvalidazione.controllaStipulaContratto(idAtleta, String.valueOf(idClub), String.valueOf(dataInizio), String.valueOf(dataFine), String.valueOf(valContratto)) == true) {
             if(datiAtleta.isEmpty()) {
                 Toolkit.getDefaultToolkit().beep();
-                JOptionPane.showMessageDialog(this, "ATLETA CON CODICE FISCALE "+idAtleta+" NON ESISTE\n\t\tNON POSSIBILE MODIFICARLO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                 messageError.showMessage(false, true, "warning","L'Atleta Con Codice Fiscale"+idAtleta+" Non Esiste" ,errorMessage , jPMessage, btnCercaJB);
+                
             }
             else {
                 try {
                     controllerProcuratore.registraContratto(idAtleta, idClub, dataInizio, dataFine, valContratto, "CLUB");
-                    JOptionPane.showMessageDialog(this, "✓ REGISTRAZIONE DEL CONTRATTO EFFETTUATA CON SUCCESSO", "REGISTRAZIONE", JOptionPane.INFORMATION_MESSAGE);
+                     messageError.showMessage(false, true, "success","L'Atleta "+idAtleta+"Contratto Stabiltto con Sucesso" ,errorMessage , jPMessage, btnCercaJB);
+                    
+                   
                 } catch (ExceptionDao ex) {
                     Logger.getLogger(RegistraContrattoClub.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -333,12 +356,15 @@ public class RegistraContrattoClub extends javax.swing.JFrame {
         }
         else {
             Toolkit.getDefaultToolkit().beep();
-            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nUNO O PIU' CAMPI MANCANTI", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            messageError.showMessage(false, true, "warning","L'Atleta "+idAtleta+"Mancano Campi Obbligatori da Compilare" ,errorMessage , jPMessage, btnCercaJB);
+               
         }
     }//GEN-LAST:event_btnStipulaContrattoActionPerformed
 
     private void btnCercaJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCercaJBActionPerformed
         ControllerProcuratore controllerProcuratore = new ControllerProcuratore();
+         MessageError messageError = new MessageError();
+         
         String idAtleta = inputCfAtletaJTF.getText();
         
         if(controlloConvalidazione.controlloAtleta(idAtleta) == true) {
@@ -346,10 +372,13 @@ public class RegistraContrattoClub extends javax.swing.JFrame {
                 datiAtleta = controllerProcuratore.cercaSportivo(idAtleta);
                 if(datiAtleta.isEmpty()) {
                     Toolkit.getDefaultToolkit().beep();
-                    JOptionPane.showMessageDialog(this, "ATLETA "+idAtleta+" NON TROVATO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                   
+                    messageError.showMessage(false, true, "warning","L'Atleta "+idAtleta+" Non è Stato Trovato" ,errorMessage , jPMessage, btnCercaJB);
+                    
                 }
                 else {
-                    JOptionPane.showMessageDialog(this, "✓ ATLETA "+idAtleta+" TROVATO CON SUCCESSO", "RICERCA", JOptionPane.INFORMATION_MESSAGE);
+                 
+                    messageError.closeFiestraMessage(jPMessage);
                     datiAtleta.forEach((Atleta atleta)->{
                         nomeJTF.setText(atleta.getNome());
                         cognomeJTF.setText(atleta.getCognmome());
@@ -363,12 +392,14 @@ public class RegistraContrattoClub extends javax.swing.JFrame {
         }
         else {
             Toolkit.getDefaultToolkit().beep();
-            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nSCRIVERE NEL CAMPO IL CODICE FISCALE DELL'ATLETA DA CERCARE", "ERRORE", JOptionPane.ERROR_MESSAGE);
+             //this.messaggioErrore(false, true, "warning", "Campo Vuoto, Scrive Il Codice Fiscale Dell'Atleta");
+             messageError.showMessage(false, true, "warning","Campo Vuoto, Scrive Il Codice Fiscale Dell'Atleta " ,this.errorMessage , this.jPMessage, this.btnCloseMessage);
         }
     }//GEN-LAST:event_btnCercaJBActionPerformed
 
     private void inputIdClubJTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputIdClubJTFActionPerformed
         ControllerProcuratore controllerProcuratore = new ControllerProcuratore();
+        MessageError messageError = new MessageError();
         int idClub = Integer.parseInt(inputIdClubJTF.getText());
         
         if(controlloConvalidazione.controllaId(String.valueOf(idClub)) == true) {
@@ -378,8 +409,8 @@ public class RegistraContrattoClub extends javax.swing.JFrame {
                     inputNomeClubJTF.setText(nomeClub);
                 else {
                     Toolkit.getDefaultToolkit().beep();
-                    inputNomeClubJTF.setText(" ");
-                    JOptionPane.showMessageDialog(this, "CLUB CON ID "+idClub+" NON TROVATO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                    inputNomeClubJTF.setText("");
+                     messageError.showMessage(false, true, "warning","Club con ID"+idClub+" Non è stato Trovato" ,errorMessage , jPMessage, btnCercaJB);
                 }
             } catch (ExceptionDao ex) {
                 Logger.getLogger(RegistraContrattoClub.class.getName()).log(Level.SEVERE, null, ex);
@@ -387,11 +418,10 @@ public class RegistraContrattoClub extends javax.swing.JFrame {
         }
         else {
             Toolkit.getDefaultToolkit().beep();
-            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nSCRIVERE L'ID DEL CLUB DA CERCARE", "ERRORE", JOptionPane.ERROR_MESSAGE);
+             messageError.showMessage(false, true, "warning","Scrive L'ID Del Club" ,errorMessage , jPMessage, btnCercaJB);
+            
         }
     }//GEN-LAST:event_inputIdClubJTFActionPerformed
-
-    
     
     private void DataInizioJDCPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_DataInizioJDCPropertyChange
         Date dataInizio = new Date();
@@ -412,6 +442,63 @@ public class RegistraContrattoClub extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_DataInizioJDCMouseEntered
+
+    private void btnCloseMessageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseMessageActionPerformed
+       jPMessage.setVisible(false);
+    }//GEN-LAST:event_btnCloseMessageActionPerformed
+
+    private void btnLogoutJB1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutJB1ActionPerformed
+       this.setVisible(false);
+    }//GEN-LAST:event_btnLogoutJB1ActionPerformed
+
+    private void inputCfAtletaJTFFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputCfAtletaJTFFocusGained
+        if(inputCfAtletaJTF.getText().equals("Codice Fiscale Dell'Atleta")){
+            inputCfAtletaJTF.setText("");
+            inputCfAtletaJTF.setForeground(new Color(255,255,255));
+            
+        }
+    }//GEN-LAST:event_inputCfAtletaJTFFocusGained
+
+    private void inputCfAtletaJTFFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputCfAtletaJTFFocusLost
+       if(inputCfAtletaJTF.getText().equals("")){
+            inputCfAtletaJTF.setText("Codice Fiscale Dell'Atleta");
+            inputCfAtletaJTF.setForeground(new Color(231,231,231));
+            
+        }
+    }//GEN-LAST:event_inputCfAtletaJTFFocusLost
+
+    private void inputIdClubJTFFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputIdClubJTFFocusGained
+      if(inputIdClubJTF.getText().equals("ID Club")){
+            inputIdClubJTF.setText("");
+            inputIdClubJTF.setForeground(new Color(255,255,255));
+            
+        }
+    }//GEN-LAST:event_inputIdClubJTFFocusGained
+
+    private void inputIdClubJTFFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputIdClubJTFFocusLost
+        if(inputIdClubJTF.getText().equals("")){
+            inputIdClubJTF.setText("ID Club");
+            inputIdClubJTF.setForeground(new Color(231,231,231));
+            
+        }
+    }//GEN-LAST:event_inputIdClubJTFFocusLost
+
+    private void inputValContrattoJTFFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputValContrattoJTFFocusGained
+       if(inputValContrattoJTF.getText().equals("Valore Contrattuale")){
+            inputValContrattoJTF.setText("");
+            inputValContrattoJTF.setForeground(new Color(255,255,255));
+            inputValContrattoJTF.setDocument(new PermessoPerScrivere());
+        }
+    }//GEN-LAST:event_inputValContrattoJTFFocusGained
+
+    private void inputValContrattoJTFFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputValContrattoJTFFocusLost
+       inputValContrattoJTF.setDocument(new PermessoPerNonScrivere());
+        if(inputValContrattoJTF.getText().equals("")){
+            inputValContrattoJTF.setText("Valore Contrattuale");
+            inputValContrattoJTF.setForeground(new Color(255,255,255));
+        }
+       
+    }//GEN-LAST:event_inputValContrattoJTFFocusLost
 
     public void DataInizioJDCMouseClicked(java.awt.event.MouseEvent evt) {
        
@@ -437,32 +524,25 @@ public class RegistraContrattoClub extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel CfAtletaJL;
     private com.toedter.calendar.JDateChooser DataFineJDC;
     private com.toedter.calendar.JDateChooser DataInizioJDC;
-    private javax.swing.JLabel adviceJL;
     private javax.swing.JButton btnAnnullaJB;
     private javax.swing.JButton btnCercaJB;
+    private javax.swing.JButton btnCloseMessage;
+    private javax.swing.JButton btnLogoutJB1;
     private javax.swing.JButton btnStipulaContratto;
-    private javax.swing.JLabel cognomeJL;
     private javax.swing.JTextField cognomeJTF;
-    private javax.swing.JLabel dataFineJL;
-    private javax.swing.JLabel dataInizioJL;
-    private javax.swing.JLabel dataNascitaJL;
     private javax.swing.JTextField dataNascitaJTF;
-    private javax.swing.JLabel idClubJL;
+    private javax.swing.JLabel errorMessage;
     private javax.swing.JTextField inputCfAtletaJTF;
     private javax.swing.JTextField inputIdClubJTF;
     private javax.swing.JTextField inputNomeClubJTF;
     private javax.swing.JTextField inputValContrattoJTF;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel lineaJL;
-    private javax.swing.JLabel nomeClubJL;
-    private javax.swing.JLabel nomeJL;
+    private javax.swing.JPanel jPMessage;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField nomeJTF;
     private javax.swing.JTextField ruoloJTF;
-    private javax.swing.JLabel titoloJL;
-    private javax.swing.JLabel valEconomicoJL;
     // End of variables declaration//GEN-END:variables
 }

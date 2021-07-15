@@ -31,7 +31,7 @@ public class ModificaContrattiProcuratore extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.idProcuratore = idProcuratore;
         this.idContratto = idContratto;
-        
+        jPMessage.setVisible(false);
         if(flag.equals("CLUB")) 
             inputIdSponsorJTF.setEditable(false);
         else if(flag.equals("SPONSOR")) 
@@ -53,198 +53,306 @@ public class ModificaContrattiProcuratore extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        idSponsorJL = new javax.swing.JLabel();
-        inputIdSponsorJTF = new javax.swing.JTextField();
-        idClubJL = new javax.swing.JLabel();
+        DataInizioJDC = new com.toedter.calendar.JDateChooser();
+        jPanel1 = new javax.swing.JPanel();
+        btnLogoutJB1 = new javax.swing.JButton();
+        jPMessage = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        errorMessage = new javax.swing.JLabel();
+        btnCloseMessage = new javax.swing.JButton();
         inputIdClubJTF = new javax.swing.JTextField();
-        dataInizioJL = new javax.swing.JLabel();
-        dataFineJL = new javax.swing.JLabel();
-        inputDataInizioJDC = new com.toedter.calendar.JDateChooser();
-        inputDataFineJDC = new com.toedter.calendar.JDateChooser();
-        valoreContrattualeJL = new javax.swing.JLabel();
-        inputValoreContrattualeJTF = new javax.swing.JTextField();
-        cfAtletaJL = new javax.swing.JLabel();
-        inputIdAtletaJTF = new javax.swing.JTextField();
-        btnAnnullaJB = new javax.swing.JButton();
-        btnModificaJB = new javax.swing.JButton();
-        idContrattoJL = new javax.swing.JLabel();
+        inputIdSponsorJTF = new javax.swing.JTextField();
         inputIdContrattoJTF = new javax.swing.JTextField();
+        inputValoreContrattualeJTF = new javax.swing.JTextField();
+        inputIdAtletaJTF = new javax.swing.JTextField();
+        inputDataFineJDC = new com.toedter.calendar.JDateChooser();
+        inputDataInizioJDC = new com.toedter.calendar.JDateChooser();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        btnModificaJB = new javax.swing.JButton();
+        btnAnnullaJB = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        idSponsorJL.setText("ID Sponsor");
-
-        idClubJL.setText("ID Club");
-
-        dataInizioJL.setText("Data Inizio");
-
-        dataFineJL.setText("Data Fine");
-
-        valoreContrattualeJL.setText("Valore Contrattuale");
-
-        cfAtletaJL.setText("Codice Fiscale Atleta");
-
-        inputIdAtletaJTF.setEditable(false);
-
-        btnAnnullaJB.setText("ANNULLA");
-        btnAnnullaJB.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAnnullaJBActionPerformed(evt);
+        DataInizioJDC.setMaxSelectableDate(new java.util.Date(253370764884000L));
+        DataInizioJDC.setMinSelectableDate(new java.util.Date(-62135769516000L));
+        DataInizioJDC.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                DataInizioJDCMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                DataInizioJDCMouseEntered(evt);
+            }
+        });
+        DataInizioJDC.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                DataInizioJDCPropertyChange(evt);
             }
         });
 
-        btnModificaJB.setText("MODIFICA");
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
+
+        jPanel1.setBackground(new java.awt.Color(11, 58, 151));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnLogoutJB1.setBackground(new java.awt.Color(11, 58, 151));
+        btnLogoutJB1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_multiply_32px_1.png"))); // NOI18N
+        btnLogoutJB1.setBorder(null);
+        btnLogoutJB1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnLogoutJB1.setFocusPainted(false);
+        btnLogoutJB1.setFocusable(false);
+        btnLogoutJB1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutJB1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnLogoutJB1, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 0, -1, 40));
+
+        jPMessage.setBackground(new java.awt.Color(46, 204, 113));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_info_26px.png"))); // NOI18N
+
+        errorMessage.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        errorMessage.setForeground(new java.awt.Color(255, 255, 255));
+        errorMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        errorMessage.setText("Contratto stabilitto con sucesso ");
+
+        btnCloseMessage.setBackground(new java.awt.Color(46, 204, 113));
+        btnCloseMessage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_multiply_32px_1.png"))); // NOI18N
+        btnCloseMessage.setBorder(null);
+        btnCloseMessage.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCloseMessage.setFocusPainted(false);
+        btnCloseMessage.setFocusable(false);
+        btnCloseMessage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCloseMessageActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPMessageLayout = new javax.swing.GroupLayout(jPMessage);
+        jPMessage.setLayout(jPMessageLayout);
+        jPMessageLayout.setHorizontalGroup(
+            jPMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPMessageLayout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(errorMessage, javax.swing.GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(btnCloseMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPMessageLayout.setVerticalGroup(
+            jPMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPMessageLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(errorMessage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnCloseMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        jPanel1.add(jPMessage, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, 510, 40));
+
+        inputIdClubJTF.setBackground(new java.awt.Color(9, 46, 119));
+        inputIdClubJTF.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        inputIdClubJTF.setForeground(new java.awt.Color(221, 231, 231));
+        inputIdClubJTF.setBorder(null);
+        jPanel1.add(inputIdClubJTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 110, 250, 30));
+
+        inputIdSponsorJTF.setBackground(new java.awt.Color(9, 46, 119));
+        inputIdSponsorJTF.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        inputIdSponsorJTF.setForeground(new java.awt.Color(221, 231, 231));
+        inputIdSponsorJTF.setBorder(null);
+        jPanel1.add(inputIdSponsorJTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 110, 250, 30));
+
+        inputIdContrattoJTF.setEditable(false);
+        inputIdContrattoJTF.setBackground(new java.awt.Color(9, 46, 119));
+        inputIdContrattoJTF.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        inputIdContrattoJTF.setForeground(new java.awt.Color(221, 231, 231));
+        inputIdContrattoJTF.setBorder(null);
+        jPanel1.add(inputIdContrattoJTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 290, 250, 30));
+
+        inputValoreContrattualeJTF.setBackground(new java.awt.Color(9, 46, 119));
+        inputValoreContrattualeJTF.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        inputValoreContrattualeJTF.setForeground(new java.awt.Color(221, 231, 231));
+        inputValoreContrattualeJTF.setBorder(null);
+        jPanel1.add(inputValoreContrattualeJTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 230, 510, 30));
+
+        inputIdAtletaJTF.setEditable(false);
+        inputIdAtletaJTF.setBackground(new java.awt.Color(9, 46, 119));
+        inputIdAtletaJTF.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        inputIdAtletaJTF.setForeground(new java.awt.Color(221, 231, 231));
+        inputIdAtletaJTF.setBorder(null);
+        jPanel1.add(inputIdAtletaJTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 290, 250, 30));
+
+        inputDataFineJDC.setMaxSelectableDate(new java.util.Date(253370764884000L));
+        inputDataFineJDC.setMinSelectableDate(new java.util.Date(-62135769516000L));
+        inputDataFineJDC.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                inputDataFineJDCMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                inputDataFineJDCMouseEntered(evt);
+            }
+        });
+        inputDataFineJDC.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                inputDataFineJDCPropertyChange(evt);
+            }
+        });
+        jPanel1.add(inputDataFineJDC, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 170, 250, 30));
+
+        inputDataInizioJDC.setMaxSelectableDate(new java.util.Date(253370764884000L));
+        inputDataInizioJDC.setMinSelectableDate(new java.util.Date(-62135769516000L));
+        inputDataInizioJDC.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                inputDataInizioJDCMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                inputDataInizioJDCMouseEntered(evt);
+            }
+        });
+        inputDataInizioJDC.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                inputDataInizioJDCPropertyChange(evt);
+            }
+        });
+        jPanel1.add(inputDataInizioJDC, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, 250, 30));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("ID Club");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 80, 80, 30));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Data Fine");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 140, 80, 30));
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("ID Sponsor");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 80, 80, 30));
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("ID Contratto");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 260, 100, 30));
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Data Inizio");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 140, 80, 30));
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Valore Contrattuale");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 200, 140, 30));
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("ID Atleta");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 260, 60, 30));
+
+        btnModificaJB.setBackground(new java.awt.Color(46, 204, 113));
+        btnModificaJB.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        btnModificaJB.setForeground(new java.awt.Color(255, 255, 255));
+        btnModificaJB.setText("Modifica");
+        btnModificaJB.setActionCommand("Stabilisca");
+        btnModificaJB.setBorder(null);
+        btnModificaJB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnModificaJB.setFocusPainted(false);
+        btnModificaJB.setFocusable(false);
         btnModificaJB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnModificaJBActionPerformed(evt);
             }
         });
+        jPanel1.add(btnModificaJB, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 350, 90, 30));
 
-        idContrattoJL.setText("ID Contratto");
-
-        inputIdContrattoJTF.setEditable(false);
+        btnAnnullaJB.setBackground(new java.awt.Color(231, 76, 60));
+        btnAnnullaJB.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
+        btnAnnullaJB.setForeground(new java.awt.Color(255, 255, 255));
+        btnAnnullaJB.setText("Annulla");
+        btnAnnullaJB.setBorder(null);
+        btnAnnullaJB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAnnullaJB.setFocusPainted(false);
+        btnAnnullaJB.setFocusable(false);
+        btnAnnullaJB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAnnullaJBActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnAnnullaJB, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 350, 80, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(idContrattoJL)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(inputIdContrattoJTF, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(cfAtletaJL)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(inputIdAtletaJTF))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(valoreContrattualeJL)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(inputValoreContrattualeJTF))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(dataFineJL)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(inputDataFineJDC, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(idSponsorJL)
-                                .addComponent(dataInizioJL))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(inputIdSponsorJTF)
-                                .addComponent(inputDataInizioJDC, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(idClubJL)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(inputIdClubJTF))))
-                .addGap(59, 59, 59)
-                .addComponent(btnAnnullaJB, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45)
-                .addComponent(btnModificaJB, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(34, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(idSponsorJL)
-                                    .addComponent(inputIdSponsorJTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(idClubJL)
-                                    .addComponent(inputIdClubJTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addComponent(dataInizioJL))
-                            .addComponent(inputDataInizioJDC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(21, 21, 21)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(dataFineJL)
-                            .addComponent(inputDataFineJDC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(68, 68, 68)
-                        .addComponent(btnAnnullaJB, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnModificaJB, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(valoreContrattualeJL)
-                    .addComponent(inputValoreContrattualeJTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cfAtletaJL)
-                    .addComponent(inputIdAtletaJTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(idContrattoJL)
-                    .addComponent(inputIdContrattoJTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /*METODI*/
-    private void stampaDatiContratto(int idContratto) {
-        ControllerProcuratore controllerProcuratore = new ControllerProcuratore();
-        
-        if(controlloConvalidazione.controllaId(String.valueOf(this.getIdContratto())) == true) {
-            try {
-                datiContratto = controllerProcuratore.prendiDatiContratto(idContratto);
-                if(datiContratto.isEmpty()) {
-                    Toolkit.getDefaultToolkit().beep();
-                    JOptionPane.showMessageDialog(this, "CONTRATTO CON "+this.getIdContratto()+" NON ESISTE\nNON POSSIBILE MODIFICARLO\n\t\t\tRIPROVARE", "ERRORE", JOptionPane.ERROR_MESSAGE);
-                    SezioneGestioneContrattiView sezioneGestioneContrattiView = new SezioneGestioneContrattiView(this.getIdProcuratore());
-                    sezioneGestioneContrattiView.setVisible(true);
-                    this.setVisible(false);
-                }
-                else {
-                    datiContratto.forEach((Contratto contratto)->{
-                        if(contratto.getIdSponsor() == 0)
-                            inputIdSponsorJTF.setText("");
-                        else
-                            inputIdSponsorJTF.setText(String.valueOf(contratto.getIdSponsor()));
-
-                        if(contratto.getIdClub() == 0)
-                            inputIdClubJTF.setText("");
-                        else
-                            inputIdClubJTF.setText(String.valueOf(contratto.getIdClub()));
-
-                        inputDataInizioJDC.setDate(contratto.getDataStart());
-                        inputDataFineJDC.setDate(contratto.getDataEnd());
-                        inputValoreContrattualeJTF.setText(String.valueOf(contratto.getValoreContratto()));
-                        inputIdAtletaJTF.setText(contratto.getIdAtleta());
-                        inputIdContrattoJTF.setText(String.valueOf(contratto.getNumeroContratto()));
-                    });
-                }
-            } catch (ExceptionDao ex) {
-                Logger.getLogger(ModificaContrattiProcuratore.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        else {
-            Toolkit.getDefaultToolkit().beep();
-            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nERRORE FATALE NON E' STATO POSSIBILE RICAVARE I DATI RIPROVARE", "ERRORE FATALE", JOptionPane.ERROR_MESSAGE);
-            SezioneGestioneContrattiView sezioneGestioneContrattiView = new SezioneGestioneContrattiView(this.getIdProcuratore());
-            sezioneGestioneContrattiView.setVisible(true);
-            this.setVisible(false);
-        }
-    }
-    
-    /*ACTION PERFOMED*/
-    private void btnAnnullaJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnnullaJBActionPerformed
-        SezioneGestioneContrattiView sezioneGestioneContrattiView = new SezioneGestioneContrattiView(this.getIdProcuratore());
-        sezioneGestioneContrattiView.setVisible(true);
+    private void btnLogoutJB1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutJB1ActionPerformed
         this.setVisible(false);
-    }//GEN-LAST:event_btnAnnullaJBActionPerformed
+    }//GEN-LAST:event_btnLogoutJB1ActionPerformed
+
+    private void btnCloseMessageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseMessageActionPerformed
+        jPMessage.setVisible(false);
+    }//GEN-LAST:event_btnCloseMessageActionPerformed
+
+    private void DataInizioJDCMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DataInizioJDCMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DataInizioJDCMouseClicked
+
+    private void DataInizioJDCMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DataInizioJDCMouseEntered
+
+    }//GEN-LAST:event_DataInizioJDCMouseEntered
+
+    private void DataInizioJDCPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_DataInizioJDCPropertyChange
+        
+    }//GEN-LAST:event_DataInizioJDCPropertyChange
+
+    private void inputDataFineJDCMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inputDataFineJDCMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inputDataFineJDCMouseClicked
+
+    private void inputDataFineJDCMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inputDataFineJDCMouseEntered
+
+    }//GEN-LAST:event_inputDataFineJDCMouseEntered
+
+    private void inputDataFineJDCPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_inputDataFineJDCPropertyChange
+       
+    }//GEN-LAST:event_inputDataFineJDCPropertyChange
+
+    private void inputDataInizioJDCMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inputDataInizioJDCMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inputDataInizioJDCMouseClicked
+
+    private void inputDataInizioJDCMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inputDataInizioJDCMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inputDataInizioJDCMouseEntered
+
+    private void inputDataInizioJDCPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_inputDataInizioJDCPropertyChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inputDataInizioJDCPropertyChange
 
     private void btnModificaJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificaJBActionPerformed
-        int idSponsor, idClub;
+         int idSponsor, idClub;
         ControllerProcuratore controllerProcuratore = new ControllerProcuratore();
         String idAtleta = inputIdAtletaJTF.getText();
         java.sql.Date dataInizio = null;
@@ -311,9 +419,60 @@ public class ModificaContrattiProcuratore extends javax.swing.JFrame {
             sezioneGestioneContrattiView.setVisible(true);
             this.setVisible(false);
         }
-            
     }//GEN-LAST:event_btnModificaJBActionPerformed
 
+    private void btnAnnullaJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnnullaJBActionPerformed
+        SezioneGestioneContrattiView sezioneGestioneContrattiView = new SezioneGestioneContrattiView(this.getIdProcuratore());
+        sezioneGestioneContrattiView.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnAnnullaJBActionPerformed
+
+    /*METODI*/
+    private void stampaDatiContratto(int idContratto) {
+        ControllerProcuratore controllerProcuratore = new ControllerProcuratore();
+        
+        if(controlloConvalidazione.controllaId(String.valueOf(this.getIdContratto())) == true) {
+            try {
+                datiContratto = controllerProcuratore.prendiDatiContratto(idContratto);
+                if(datiContratto.isEmpty()) {
+                    Toolkit.getDefaultToolkit().beep();
+                    JOptionPane.showMessageDialog(this, "CONTRATTO CON "+this.getIdContratto()+" NON ESISTE\nNON POSSIBILE MODIFICARLO\n\t\t\tRIPROVARE", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                    SezioneGestioneContrattiView sezioneGestioneContrattiView = new SezioneGestioneContrattiView(this.getIdProcuratore());
+                    sezioneGestioneContrattiView.setVisible(true);
+                    this.setVisible(false);
+                }
+                else {
+                    datiContratto.forEach((Contratto contratto)->{
+                        if(contratto.getIdSponsor() == 0)
+                            inputIdSponsorJTF.setText("");
+                        else
+                            inputIdSponsorJTF.setText(String.valueOf(contratto.getIdSponsor()));
+
+                        if(contratto.getIdClub() == 0)
+                            inputIdClubJTF.setText("");
+                        else
+                            inputIdClubJTF.setText(String.valueOf(contratto.getIdClub()));
+
+                        inputDataInizioJDC.setDate(contratto.getDataStart());
+                        inputDataFineJDC.setDate(contratto.getDataEnd());
+                        inputValoreContrattualeJTF.setText(String.valueOf(contratto.getValoreContratto()));
+                        inputIdAtletaJTF.setText(contratto.getIdAtleta());
+                        inputIdContrattoJTF.setText(String.valueOf(contratto.getNumeroContratto()));
+                    });
+                }
+            } catch (ExceptionDao ex) {
+                Logger.getLogger(ModificaContrattiProcuratore.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        else {
+            Toolkit.getDefaultToolkit().beep();
+            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nERRORE FATALE NON E' STATO POSSIBILE RICAVARE I DATI RIPROVARE", "ERRORE FATALE", JOptionPane.ERROR_MESSAGE);
+            SezioneGestioneContrattiView sezioneGestioneContrattiView = new SezioneGestioneContrattiView(this.getIdProcuratore());
+            sezioneGestioneContrattiView.setVisible(true);
+            this.setVisible(false);
+        }
+    }
+    
     
      /*GET AND SET*/
     public String getIdProcuratore() {
@@ -342,14 +501,12 @@ public class ModificaContrattiProcuratore extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.toedter.calendar.JDateChooser DataInizioJDC;
     private javax.swing.JButton btnAnnullaJB;
+    private javax.swing.JButton btnCloseMessage;
+    private javax.swing.JButton btnLogoutJB1;
     private javax.swing.JButton btnModificaJB;
-    private javax.swing.JLabel cfAtletaJL;
-    private javax.swing.JLabel dataFineJL;
-    private javax.swing.JLabel dataInizioJL;
-    private javax.swing.JLabel idClubJL;
-    private javax.swing.JLabel idContrattoJL;
-    private javax.swing.JLabel idSponsorJL;
+    private javax.swing.JLabel errorMessage;
     private com.toedter.calendar.JDateChooser inputDataFineJDC;
     private com.toedter.calendar.JDateChooser inputDataInizioJDC;
     private javax.swing.JTextField inputIdAtletaJTF;
@@ -357,6 +514,15 @@ public class ModificaContrattiProcuratore extends javax.swing.JFrame {
     private javax.swing.JTextField inputIdContrattoJTF;
     private javax.swing.JTextField inputIdSponsorJTF;
     private javax.swing.JTextField inputValoreContrattualeJTF;
-    private javax.swing.JLabel valoreContrattualeJL;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JPanel jPMessage;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

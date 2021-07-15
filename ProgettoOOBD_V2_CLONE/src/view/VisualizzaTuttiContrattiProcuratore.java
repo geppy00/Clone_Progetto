@@ -4,12 +4,16 @@ package view;
 import controller.ControllerProcuratore;
 import dao.DataAccessObject;
 import dao.ExceptionDao;
+import java.awt.Color;
+import java.awt.Font;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
@@ -29,6 +33,23 @@ public class VisualizzaTuttiContrattiProcuratore extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.idProcuratore = idProcuratore;
+        
+        
+        
+         tblContrattiClubJT.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
+         tblContrattiClubJT.getTableHeader().setOpaque(false);
+         tblContrattiClubJT.getTableHeader().setBackground(new Color(32, 136, 203));
+         tblContrattiClubJT.getTableHeader().setForeground(new Color(255,255,255));
+         
+         tblContrattiSponsorJT.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
+         tblContrattiSponsorJT.getTableHeader().setOpaque(false);
+         tblContrattiSponsorJT.getTableHeader().setBackground(new Color(32, 136, 203));
+         tblContrattiSponsorJT.getTableHeader().setForeground(new Color(255,255,255));
+         
+         tblNessunContrattoJT.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
+         tblNessunContrattoJT.getTableHeader().setOpaque(false);
+         tblNessunContrattoJT.getTableHeader().setBackground(new Color(32, 136, 203));
+         tblNessunContrattoJT.getTableHeader().setForeground(new Color(255,255,255));
         
         try { 
             stampaDati();
@@ -138,26 +159,23 @@ public class VisualizzaTuttiContrattiProcuratore extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnAnnullaJB = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblContrattiClubJT = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblContrattiSponsorJT = new javax.swing.JTable();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblNessunContrattoJT = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        btnAnnullaJB1 = new javax.swing.JButton();
+        btnClose = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
-        btnAnnullaJB.setText("TORNA INDIETRO");
-        btnAnnullaJB.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAnnullaJBActionPerformed(evt);
-            }
-        });
+        jPanel1.setBackground(new java.awt.Color(11, 58, 151));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        tblContrattiClubJT.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tblContrattiClubJT.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -174,8 +192,15 @@ public class VisualizzaTuttiContrattiProcuratore extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblContrattiClubJT.setFocusable(false);
+        tblContrattiClubJT.setSelectionBackground(new java.awt.Color(232, 57, 95));
+        tblContrattiClubJT.setShowVerticalLines(false);
+        tblContrattiClubJT.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tblContrattiClubJT);
 
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, 680, 140));
+
+        tblContrattiSponsorJT.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tblContrattiSponsorJT.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -192,8 +217,15 @@ public class VisualizzaTuttiContrattiProcuratore extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblContrattiSponsorJT.setFocusable(false);
+        tblContrattiSponsorJT.setSelectionBackground(new java.awt.Color(232, 57, 95));
+        tblContrattiSponsorJT.setShowVerticalLines(false);
+        tblContrattiSponsorJT.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(tblContrattiSponsorJT);
 
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 270, 680, 132));
+
+        tblNessunContrattoJT.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tblNessunContrattoJT.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -210,70 +242,64 @@ public class VisualizzaTuttiContrattiProcuratore extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblNessunContrattoJT.setSelectionBackground(new java.awt.Color(232, 57, 95));
+        tblNessunContrattoJT.setShowVerticalLines(false);
+        tblNessunContrattoJT.getTableHeader().setReorderingAllowed(false);
         jScrollPane3.setViewportView(tblNessunContrattoJT);
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("CONTRATTI CON CLUB");
-        jLabel1.setToolTipText("");
-        jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 410, 680, 132));
 
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("CONTRATTI CON SPONSOR");
-        jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnAnnullaJB1.setBackground(new java.awt.Color(11, 58, 151));
+        btnAnnullaJB1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_left_32px_2.png"))); // NOI18N
+        btnAnnullaJB1.setBorder(null);
+        btnAnnullaJB1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAnnullaJB1.setFocusPainted(false);
+        btnAnnullaJB1.setFocusable(false);
+        btnAnnullaJB1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAnnullaJB1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnAnnullaJB1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 560, 40, 23));
 
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("NESSUN CONTRATTO STIPULATO");
+        btnClose.setBackground(new java.awt.Color(11, 58, 151));
+        btnClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_multiply_32px_1.png"))); // NOI18N
+        btnClose.setBorder(null);
+        btnClose.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnClose.setFocusPainted(false);
+        btnClose.setFocusable(false);
+        btnClose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCloseActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 10, -1, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(8, 8, 8)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(btnAnnullaJB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 416, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 421, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 856, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(btnAnnullaJB, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 636, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /*ACTION PERFOMED*/
-    private void btnAnnullaJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnnullaJBActionPerformed
+    private void btnAnnullaJB1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnnullaJB1ActionPerformed
         SezioneGestioneContrattiView sezioneGestioneContrattiView = new SezioneGestioneContrattiView(this.getIdProcuratore());
         sezioneGestioneContrattiView.setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_btnAnnullaJBActionPerformed
+    }//GEN-LAST:event_btnAnnullaJB1ActionPerformed
+
+    private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_btnCloseActionPerformed
 
     
     /*GET AND SET*/
@@ -295,10 +321,9 @@ public class VisualizzaTuttiContrattiProcuratore extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAnnullaJB;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JButton btnAnnullaJB1;
+    private javax.swing.JButton btnClose;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
