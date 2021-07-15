@@ -193,17 +193,17 @@ public class RegistraClub extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLogoutJBActionPerformed
 
     private void inputNomeJTFFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputNomeJTFFocusGained
-      if(inputTelefonoJTF.getText().equals("Nome Club")){
-            inputTelefonoJTF.setText("");
-            inputTelefonoJTF.setForeground(new Color(255,255,255));
+      if(inputNomeJTF.getText().equals("Nome Club")){
+            inputNomeJTF.setText("");
+            inputNomeJTF.setForeground(new Color(255,255,255));
             
         }
     }//GEN-LAST:event_inputNomeJTFFocusGained
 
     private void inputNomeJTFFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputNomeJTFFocusLost
-        if(inputTelefonoJTF.getText().equals("")){
-            inputTelefonoJTF.setText("Nome Club");
-            inputTelefonoJTF.setForeground(new Color(255,255,255));
+        if(inputNomeJTF.getText().equals("")){
+            inputNomeJTF.setText("Nome Club");
+            inputNomeJTF.setForeground(new Color(255,255,255));
             
         }
     }//GEN-LAST:event_inputNomeJTFFocusLost

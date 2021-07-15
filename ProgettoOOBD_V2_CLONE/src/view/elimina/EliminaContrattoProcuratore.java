@@ -3,6 +3,7 @@ package view.elimina;
 
 import controller.ControllerProcuratore;
 import convalidazione.ControlloConvalidazione;
+import convalidazione.MessageError;
 import dao.ExceptionDao;
 import java.awt.Toolkit;
 import java.util.logging.Level;
@@ -20,6 +21,7 @@ public class EliminaContrattoProcuratore extends javax.swing.JFrame {
     
     /*CONTROLLORE PER GESTIRE GLI ERRORI*/
     private ControlloConvalidazione controlloConvalidazione = new ControlloConvalidazione();
+    private MessageError messageError = new MessageError();  
     
     /*COSTRUTTORI*/
     public EliminaContrattoProcuratore(String idProcuratore, int numeroContratto, String idAtleta) {
@@ -44,11 +46,11 @@ public class EliminaContrattoProcuratore extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         btnNoJB = new javax.swing.JButton();
         btnYesJB = new javax.swing.JButton();
-        btnLogoutJB1 = new javax.swing.JButton();
         jMessagge = new javax.swing.JPanel();
         jLMessaggio = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        btnCloseMessagio = new javax.swing.JLabel();
+        btnCloseMessage = new javax.swing.JButton();
+        btnLogoutJB2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -86,19 +88,6 @@ public class EliminaContrattoProcuratore extends javax.swing.JFrame {
         });
         jPanel1.add(btnYesJB, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, 112, 48));
 
-        btnLogoutJB1.setBackground(new java.awt.Color(11, 58, 151));
-        btnLogoutJB1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_multiply_32px_1.png"))); // NOI18N
-        btnLogoutJB1.setBorder(null);
-        btnLogoutJB1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnLogoutJB1.setFocusPainted(false);
-        btnLogoutJB1.setFocusable(false);
-        btnLogoutJB1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLogoutJB1ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnLogoutJB1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 0, -1, 40));
-
         jMessagge.setBackground(new java.awt.Color(231, 76, 60));
 
         jLMessaggio.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
@@ -110,13 +99,15 @@ public class EliminaContrattoProcuratore extends javax.swing.JFrame {
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_info_20px.png"))); // NOI18N
         jLabel3.setFocusable(false);
 
-        btnCloseMessagio.setBackground(new java.awt.Color(231, 76, 60));
-        btnCloseMessagio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_delete_20px.png"))); // NOI18N
-        btnCloseMessagio.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnCloseMessagio.setFocusable(false);
-        btnCloseMessagio.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnCloseMessagioMouseClicked(evt);
+        btnCloseMessage.setBackground(new java.awt.Color(231, 76, 60));
+        btnCloseMessage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_multiply_32px_1.png"))); // NOI18N
+        btnCloseMessage.setBorder(null);
+        btnCloseMessage.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCloseMessage.setFocusPainted(false);
+        btnCloseMessage.setFocusable(false);
+        btnCloseMessage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCloseMessageActionPerformed(evt);
             }
         });
 
@@ -129,17 +120,34 @@ public class EliminaContrattoProcuratore extends javax.swing.JFrame {
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(51, 51, 51)
                 .addComponent(jLMessaggio, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
-                .addComponent(btnCloseMessagio, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                .addComponent(btnCloseMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jMessaggeLayout.setVerticalGroup(
             jMessaggeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLMessaggio, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(btnCloseMessagio, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(jMessaggeLayout.createSequentialGroup()
+                .addGroup(jMessaggeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(btnCloseMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jLMessaggio, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))
+                .addGap(10, 10, 10))
         );
 
         jPanel1.add(jMessagge, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, 360, 30));
+
+        btnLogoutJB2.setBackground(new java.awt.Color(11, 58, 151));
+        btnLogoutJB2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_multiply_32px_1.png"))); // NOI18N
+        btnLogoutJB2.setBorder(null);
+        btnLogoutJB2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnLogoutJB2.setFocusPainted(false);
+        btnLogoutJB2.setFocusable(false);
+        btnLogoutJB2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutJB2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnLogoutJB2, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 0, -1, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -166,7 +174,7 @@ public class EliminaContrattoProcuratore extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNoJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNoJBActionPerformed
-        
+
         SezioneEliminaContrattoProcuratore sezioneEliminaContrattoProcuratore = new SezioneEliminaContrattoProcuratore(this.getIdProcuratore());
         sezioneEliminaContrattoProcuratore.setVisible(true);
         this.setVisible(false);
@@ -178,32 +186,33 @@ public class EliminaContrattoProcuratore extends javax.swing.JFrame {
         if(controlloConvalidazione.controllaId(String.valueOf(this.getNumeroContratto())) == true && controlloConvalidazione.controllaId(this.getIdAtleta()) == true) {
             try {
                 controllerProcuratore.eliminaContratto(this.getNumeroContratto(), this.getIdAtleta());
-                JOptionPane.showMessageDialog(this, "✓ ELIMINAZIONE DEL CONTRATTO NUMERO "+this.getNumeroContratto()+" EFFETTUATA CON SUCCESSO", "ELIMINAZIONE", JOptionPane.INFORMATION_MESSAGE);
-                SezioneEliminaContrattoProcuratore sezioneEliminaContrattoProcuratore = new SezioneEliminaContrattoProcuratore(this.getIdProcuratore());
-                sezioneEliminaContrattoProcuratore.setVisible(true);
-                this.setVisible(false);
+                //JOptionPane.showMessageDialog(this, "✓ ELIMINAZIONE DEL CONTRATTO NUMERO "+this.getNumeroContratto()+" EFFETTUATA CON SUCCESSO", "ELIMINAZIONE", JOptionPane.INFORMATION_MESSAGE);
+                messageError.showMessage(false, true, "success", "Eliminazione Del Contratto Numero "+this.getNumeroContratto()+" Effettuata Con Successo", jLMessaggio, jMessagge, btnCloseMessage);
+                btnYesJB.setEnabled(false);
+                btnNoJB.setEnabled(false);
             } catch (ExceptionDao ex) {
                 Logger.getLogger(EliminaContrattoProcuratore.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         else {
             Toolkit.getDefaultToolkit().beep();
-            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nERRORE FATALE NON E' STATO POSSIBILE RICAVARE I DATI RIPROVARE", "ERRORE FATALE", JOptionPane.ERROR_MESSAGE);
-            SezioneGestioneContrattiView sezioneGestioneContrattiView = new SezioneGestioneContrattiView(this.getIdProcuratore());
-            sezioneGestioneContrattiView.setVisible(true);
-            this.setVisible(false);
+            //JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nERRORE FATALE NON E' STATO POSSIBILE RICAVARE I DATI RIPROVARE", "ERRORE FATALE", JOptionPane.ERROR_MESSAGE);
+            messageError.showMessage(false, true, "warning", "Contratto "+this.getNumeroContratto()+" Non Trovato", jLMessaggio, jMessagge, btnCloseMessage);
+            btnYesJB.setEnabled(false);
+            btnNoJB.setEnabled(false);
         }
 
     }//GEN-LAST:event_btnYesJBActionPerformed
 
-    private void btnLogoutJB1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutJB1ActionPerformed
-        this.setVisible(false);
-        System.exit(0);
-    }//GEN-LAST:event_btnLogoutJB1ActionPerformed
+    private void btnCloseMessageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseMessageActionPerformed
+        this.jMessagge.setVisible(false);
+    }//GEN-LAST:event_btnCloseMessageActionPerformed
 
-    private void btnCloseMessagioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCloseMessagioMouseClicked
-        jMessagge.setVisible(false);
-    }//GEN-LAST:event_btnCloseMessagioMouseClicked
+    private void btnLogoutJB2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutJB2ActionPerformed
+        SezioneEliminaContrattoProcuratore sezioneEliminaContrattoProcuratore = new SezioneEliminaContrattoProcuratore(this.getIdProcuratore());
+        sezioneEliminaContrattoProcuratore.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnLogoutJB2ActionPerformed
 
       /*GET AND SET*/
     public String getIdProcuratore() {
@@ -241,8 +250,8 @@ public class EliminaContrattoProcuratore extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel adviceJL;
-    private javax.swing.JLabel btnCloseMessagio;
-    private javax.swing.JButton btnLogoutJB1;
+    private javax.swing.JButton btnCloseMessage;
+    private javax.swing.JButton btnLogoutJB2;
     private javax.swing.JButton btnNoJB;
     private javax.swing.JButton btnYesJB;
     private javax.swing.JLabel jLMessaggio;

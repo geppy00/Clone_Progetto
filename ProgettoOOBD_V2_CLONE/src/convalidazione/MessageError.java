@@ -6,7 +6,7 @@ import java.awt.Color;
 public class MessageError {
     
     
-    public void showMessage(boolean close, boolean open, String color, String message, javax.swing.JLabel erroMessage,javax.swing.JPanel jMessage, javax.swing.JButton btnCloseColor){
+    public void showMessage(boolean close, boolean open, String color, String message, javax.swing.JLabel erroMessage, javax.swing.JPanel jMessage, javax.swing.JButton btnCloseColor){
             
             if(color.equals("success")){
                  jMessage.setVisible(close);

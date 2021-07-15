@@ -35,6 +35,7 @@ public class RegistraNuovoProfilo extends javax.swing.JFrame {
          tableDatiUtenteJT.getTableHeader().setOpaque(false);
          tableDatiUtenteJT.getTableHeader().setBackground(new Color(32, 136, 203));
          tableDatiUtenteJT.getTableHeader().setForeground(new Color(255,255,255));
+         
         try {
             stampaDatiUtenteNellaTabella();
         } catch (ExceptionDao ex) {
@@ -209,11 +210,6 @@ public class RegistraNuovoProfilo extends javax.swing.JFrame {
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 inputIdCorrispondenteJTFFocusLost(evt);
-            }
-        });
-        inputIdCorrispondenteJTF.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inputIdCorrispondenteJTFActionPerformed(evt);
             }
         });
         jPanel1.add(inputIdCorrispondenteJTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 500, 30));
@@ -507,10 +503,6 @@ public class RegistraNuovoProfilo extends javax.swing.JFrame {
             
         }
     }//GEN-LAST:event_inputConfermaPasswordJTFFocusLost
-
-    private void inputIdCorrispondenteJTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputIdCorrispondenteJTFActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_inputIdCorrispondenteJTFActionPerformed
 
     public static void main(String args[]) {
   

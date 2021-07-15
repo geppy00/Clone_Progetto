@@ -3,6 +3,7 @@ package view.elimina;
 
 import controller.ControllerClub;
 import convalidazione.ControlloConvalidazione;
+import convalidazione.MessageError;
 import dao.ExceptionDao;
 import java.awt.Color;
 import java.awt.Font;
@@ -20,6 +21,7 @@ public class EliminaClub extends javax.swing.JFrame {
 
     /*CONTROLLORE PER GESTIRE GLI ERRORI*/
     private ControlloConvalidazione controlloConvalidazione = new ControlloConvalidazione();
+    private MessageError messageError = new MessageError();  
     
     /*DATI DEL CLUB*/
     private ArrayList<Club> datiClub = new ArrayList<Club>();
@@ -228,10 +230,12 @@ public class EliminaClub extends javax.swing.JFrame {
                 datiClub = controllerClub.cercaClub(nomeClubCercare);
                 if(datiClub.isEmpty()) {
                     Toolkit.getDefaultToolkit().beep();
-                    JOptionPane.showMessageDialog(this, "CLUB "+nomeClubCercare+" NON TROVATO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                    //JOptionPane.showMessageDialog(this, "CLUB "+nomeClubCercare+" NON TROVATO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                    messageError.showMessage(false, true, "warning", "Club "+nomeClubCercare+" Non Trovato", errorMessage, jPMessage, btnCloseMessage);
                 }
                 else {
-                    JOptionPane.showMessageDialog(this, "✓ CLUB "+nomeClubCercare+" TROVATO", "TROVATO", JOptionPane.INFORMATION_MESSAGE);
+                    //JOptionPane.showMessageDialog(this, "✓ CLUB "+nomeClubCercare+" TROVATO", "TROVATO", JOptionPane.INFORMATION_MESSAGE);
+                    messageError.showMessage(false, true, "success", "Club "+nomeClubCercare+" Trovato", errorMessage, jPMessage, btnCloseMessage);
                     datiClub.forEach((Club club) -> {
                         tblModel.addRow(new Object[]{
                             club.getIdClub(),
@@ -248,7 +252,8 @@ public class EliminaClub extends javax.swing.JFrame {
         }
         else {
             Toolkit.getDefaultToolkit().beep();
-            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nSCRIVERE NEL CAMPO IL CLUB DA CERCARE", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nSCRIVERE NEL CAMPO IL CLUB DA CERCARE", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            messageError.showMessage(false, true, "warning", "Scrivere Nel Campo Il Club Fiscale Da Cercare", errorMessage, jPMessage, btnCloseMessage);
         }
     }//GEN-LAST:event_btnCercaJBActionPerformed
 
@@ -258,12 +263,14 @@ public class EliminaClub extends javax.swing.JFrame {
         
         if(controlloConvalidazione.controlloCercaClub(nomeClubCercare) == false) {
             Toolkit.getDefaultToolkit().beep();
-            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nSCRIVERE NEL CAMPO IL CLUB DA ELIMINARE", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nSCRIVERE NEL CAMPO IL CLUB DA ELIMINARE", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            messageError.showMessage(false, true, "warning", "Scrivere Nel Campo Il Club Fiscale Da Cercare", errorMessage, jPMessage, btnCloseMessage);
         }
         else {
             if(datiClub.isEmpty()) {
                 Toolkit.getDefaultToolkit().beep();
-                JOptionPane.showMessageDialog(this, "CLUB "+nomeClubCercare+" NON ESISTE\nNON POSSIBILE ELIMINARLO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                //JOptionPane.showMessageDialog(this, "CLUB "+nomeClubCercare+" NON ESISTE\nNON POSSIBILE ELIMINARLO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                messageError.showMessage(false, true, "warning", "Club "+nomeClubCercare+" Non Esiste", errorMessage, jPMessage, btnCloseMessage);
             }
             else {
                 try {
@@ -271,7 +278,8 @@ public class EliminaClub extends javax.swing.JFrame {
                     controllerClub.eliminaClub(nomeClubCercare, this.getIdClub());
                     DefaultTableModel tblModel = (DefaultTableModel)datiClubTabellaJT.getModel();
                     tblModel.setRowCount(0);
-                    JOptionPane.showMessageDialog(this, "✓ ELIMINAZIONE EFFETTUATA CON SUCCESSO", "ELIMINAZIONE", JOptionPane.INFORMATION_MESSAGE);
+                    //JOptionPane.showMessageDialog(this, "✓ ELIMINAZIONE EFFETTUATA CON SUCCESSO", "ELIMINAZIONE", JOptionPane.INFORMATION_MESSAGE);
+                    messageError.showMessage(false, true, "success", "Eliminazione Effettuata Con Successo", errorMessage, jPMessage, btnCloseMessage);
                 } catch (ExceptionDao ex) {
                     Logger.getLogger(EliminaClub.class.getName()).log(Level.SEVERE, null, ex);
                 }

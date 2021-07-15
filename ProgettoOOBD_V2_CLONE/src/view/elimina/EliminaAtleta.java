@@ -3,6 +3,7 @@ package view.elimina;
 
 import controller.ControllerSportivo;
 import convalidazione.ControlloConvalidazione;
+import convalidazione.MessageError;
 import dao.ExceptionDao;
 import java.awt.Color;
 import java.awt.Font;
@@ -19,6 +20,7 @@ public class EliminaAtleta extends javax.swing.JFrame {
 
     /*CONTROLLORE PER GESTIRE GLI ERRORI*/
     private ControlloConvalidazione controlloConvalidazione = new ControlloConvalidazione();
+    private MessageError messageError = new MessageError();  
     
     /*DATI DEL PROCURATORE*/
     private ArrayList<Atleta> datiAtleta =  new ArrayList<Atleta>();
@@ -217,10 +219,12 @@ public class EliminaAtleta extends javax.swing.JFrame {
                 datiAtleta = controllerSportivo.cercaSportivo(codiceFiscaleAtletaPreso);
                 if(datiAtleta.isEmpty()) {
                     Toolkit.getDefaultToolkit().beep();
-                    JOptionPane.showMessageDialog(this, "ATLETA "+codiceFiscaleAtletaPreso+" NON TROVATO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                    //JOptionPane.showMessageDialog(this, "ATLETA "+codiceFiscaleAtletaPreso+" NON TROVATO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                    messageError.showMessage(false, true, "warning", "Atleta "+codiceFiscaleAtletaPreso+" Non Trovato", errorMessage, jPMessage, btnCloseMessage);
                 }
                 else{
-                    JOptionPane.showMessageDialog(this, "✓ ATLETA "+codiceFiscaleAtletaPreso+" TROVATO", "TROVATO", JOptionPane.INFORMATION_MESSAGE);
+                    //JOptionPane.showMessageDialog(this, "✓ ATLETA "+codiceFiscaleAtletaPreso+" TROVATO", "TROVATO", JOptionPane.INFORMATION_MESSAGE);
+                    messageError.showMessage(false, true, "success", "Atleta "+codiceFiscaleAtletaPreso+" Trovato", errorMessage, jPMessage, btnCloseMessage);
                     DefaultTableModel tblModel = (DefaultTableModel)tableAtletaJT.getModel();
                     tblModel.setRowCount(0);
                     datiAtleta.forEach((Atleta atleta)->{
@@ -247,7 +251,8 @@ public class EliminaAtleta extends javax.swing.JFrame {
         }
         else {
             Toolkit.getDefaultToolkit().beep();
-            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nSCRIVERE NEL CAMPO IL CODICE FISCALE DA CERCARE", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nSCRIVERE NEL CAMPO IL CODICE FISCALE DA CERCARE", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            messageError.showMessage(false, true, "warning", "Scrivere Nel Campo Il Codice Fiscale Da Cercare", errorMessage, jPMessage, btnCloseMessage);
         }
     }//GEN-LAST:event_btnCercaJBActionPerformed
 
@@ -257,19 +262,22 @@ public class EliminaAtleta extends javax.swing.JFrame {
         
         if(controlloConvalidazione.controlloCercaAtleta(codiceFiscaleAtletaPreso) == false) {
             Toolkit.getDefaultToolkit().beep();
-            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nSCRIVERE NEL CAMPO IL CODICE FISCALE DA ELIMINARE", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nSCRIVERE NEL CAMPO IL CODICE FISCALE DA ELIMINARE", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            messageError.showMessage(false, true, "warning", "Scrivere Nel Campo Il Codice Fiscale Da Eliminare", errorMessage, jPMessage, btnCloseMessage);
         }
         else{
             if(datiAtleta.isEmpty()) {
                 Toolkit.getDefaultToolkit().beep();
-                JOptionPane.showMessageDialog(this, "ATLETA "+codiceFiscaleAtletaPreso+" NON ESISTE\nNON POSSIBILE ELIMINARLO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                //JOptionPane.showMessageDialog(this, "ATLETA "+codiceFiscaleAtletaPreso+" NON ESISTE\nNON POSSIBILE ELIMINARLO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                messageError.showMessage(false, true, "warning", "Atleta "+codiceFiscaleAtletaPreso+" Non Esiste Non Possibile Eliminarlo", errorMessage, jPMessage, btnCloseMessage);
             }
             else {
                 try {
                     controllerSportivo.eliminaSportivo(codiceFiscaleAtletaPreso);
                     DefaultTableModel tblModel = (DefaultTableModel)tableAtletaJT.getModel();
                     tblModel.setRowCount(0);
-                    JOptionPane.showMessageDialog(this, "✓ ELIMINAZIONE EFFETTUATA CON SUCCESSO", "ELIMINAZIONE", JOptionPane.INFORMATION_MESSAGE);
+                    //JOptionPane.showMessageDialog(this, "✓ ELIMINAZIONE EFFETTUATA CON SUCCESSO", "ELIMINAZIONE", JOptionPane.INFORMATION_MESSAGE);
+                    messageError.showMessage(false, true, "success", "Eliminazione Effettuata Con Successo", errorMessage, jPMessage, btnCloseMessage);
                 } catch (ExceptionDao ex) {
                     Logger.getLogger(EliminaAtleta.class.getName()).log(Level.SEVERE, null, ex);
                 }

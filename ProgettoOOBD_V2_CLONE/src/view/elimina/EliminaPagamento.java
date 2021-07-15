@@ -3,6 +3,7 @@ package view.elimina;
 
 import controller.ControllerClub;
 import convalidazione.ControlloConvalidazione;
+import convalidazione.MessageError;
 import dao.ExceptionDao;
 import java.awt.Toolkit;
 import java.util.logging.Level;
@@ -21,6 +22,7 @@ public class EliminaPagamento extends javax.swing.JFrame {
     
     /*CONTROLLORE PER GESTIRE GLI ERRORI*/
     private ControlloConvalidazione controlloConvalidazione = new ControlloConvalidazione();
+    private MessageError messageError = new MessageError();  
      
     /*COSTRUTTORI*/
     public EliminaPagamento(String idClub) {
@@ -48,11 +50,11 @@ public class EliminaPagamento extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         destinatarioJL = new javax.swing.JLabel();
         dataPagamentoJL = new javax.swing.JLabel();
-        btnLogoutJB1 = new javax.swing.JButton();
         jMessagge = new javax.swing.JPanel();
         jLMessaggio = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        btnCloseMessagio = new javax.swing.JLabel();
+        btnCloseMessage = new javax.swing.JButton();
+        btnLogoutJB2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -136,19 +138,6 @@ public class EliminaPagamento extends javax.swing.JFrame {
         dataPagamentoJL.setText("Data Pagamento");
         jPanel1.add(dataPagamentoJL, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, -1, 30));
 
-        btnLogoutJB1.setBackground(new java.awt.Color(11, 58, 151));
-        btnLogoutJB1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_multiply_32px_1.png"))); // NOI18N
-        btnLogoutJB1.setBorder(null);
-        btnLogoutJB1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnLogoutJB1.setFocusPainted(false);
-        btnLogoutJB1.setFocusable(false);
-        btnLogoutJB1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLogoutJB1ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnLogoutJB1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 0, -1, 40));
-
         jMessagge.setBackground(new java.awt.Color(231, 76, 60));
 
         jLMessaggio.setFont(new java.awt.Font("Segoe UI Semibold", 0, 12)); // NOI18N
@@ -160,13 +149,15 @@ public class EliminaPagamento extends javax.swing.JFrame {
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_info_20px.png"))); // NOI18N
         jLabel3.setFocusable(false);
 
-        btnCloseMessagio.setBackground(new java.awt.Color(231, 76, 60));
-        btnCloseMessagio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_delete_20px.png"))); // NOI18N
-        btnCloseMessagio.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnCloseMessagio.setFocusable(false);
-        btnCloseMessagio.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnCloseMessagioMouseClicked(evt);
+        btnCloseMessage.setBackground(new java.awt.Color(231, 76, 60));
+        btnCloseMessage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_multiply_32px_1.png"))); // NOI18N
+        btnCloseMessage.setBorder(null);
+        btnCloseMessage.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCloseMessage.setFocusPainted(false);
+        btnCloseMessage.setFocusable(false);
+        btnCloseMessage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCloseMessageActionPerformed(evt);
             }
         });
 
@@ -179,17 +170,34 @@ public class EliminaPagamento extends javax.swing.JFrame {
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addComponent(jLMessaggio, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(btnCloseMessagio, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnCloseMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jMessaggeLayout.setVerticalGroup(
             jMessaggeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLMessaggio, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(btnCloseMessagio, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(jMessaggeLayout.createSequentialGroup()
+                .addGroup(jMessaggeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(btnCloseMessage, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jLMessaggio, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel1.add(jMessagge, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, 360, 30));
+
+        btnLogoutJB2.setBackground(new java.awt.Color(11, 58, 151));
+        btnLogoutJB2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_multiply_32px_1.png"))); // NOI18N
+        btnLogoutJB2.setBorder(null);
+        btnLogoutJB2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnLogoutJB2.setFocusPainted(false);
+        btnLogoutJB2.setFocusable(false);
+        btnLogoutJB2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutJB2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnLogoutJB2, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 0, -1, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -215,7 +223,8 @@ public class EliminaPagamento extends javax.swing.JFrame {
             dataPagamentoCercare = new java.sql.Date(inputDataCercareJDC.getDate().getTime());
         }catch(NullPointerException nex) {
             Toolkit.getDefaultToolkit().beep();
-            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nINSERISCI UNA DATA VALIDA", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nINSERISCI UNA DATA VALIDA", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            messageError.showMessage(false, true, "warning", "Inserisci Una Data Valida", jLMessaggio, jMessagge, btnCloseMessage);
         }
        
         if(controlloConvalidazione.controlloCercaPagamento(String.valueOf(dataPagamentoCercare), this.getIdAtletaCercare()) == true) {
@@ -223,10 +232,12 @@ public class EliminaPagamento extends javax.swing.JFrame {
                 importo = controllerClub.cercaPagamento(dataPagamentoCercare, Integer.parseInt(this.getIdClub()), this.getIdAtletaCercare());
                 if(importo == -1) {
                     Toolkit.getDefaultToolkit().beep();
-                    JOptionPane.showMessageDialog(this, "IMPORTO NON TROVATO\nNON POSSIBILE ELIMINARLO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                    //JOptionPane.showMessageDialog(this, "IMPORTO NON TROVATO\nNON POSSIBILE ELIMINARLO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                    messageError.showMessage(false, true, "warning", "Importo Non Trovato", jLMessaggio, jMessagge, btnCloseMessage);
                 }
                 else {
-                    JOptionPane.showMessageDialog(this, "✓ PAGAMENTO TROVATO CON SUCCESSO", "RICERCA", JOptionPane.INFORMATION_MESSAGE);
+                    //JOptionPane.showMessageDialog(this, "✓ PAGAMENTO TROVATO CON SUCCESSO", "RICERCA", JOptionPane.INFORMATION_MESSAGE);
+                    messageError.showMessage(false, true, "success", "Pagamento Trovato Con Successo", jLMessaggio, jMessagge, btnCloseMessage);
                     inputImportoJTF.setText(Double.toString(importo));
                 }
             }catch (ExceptionDao ex) {
@@ -235,7 +246,8 @@ public class EliminaPagamento extends javax.swing.JFrame {
         }
         else {
             Toolkit.getDefaultToolkit().beep();
-            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nUNO O PIU' CAMPI MANCANTI PER LA RICERCA", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nUNO O PIU' CAMPI MANCANTI PER LA RICERCA", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            messageError.showMessage(false, true, "warning", "Uno O Piu' Campi Mancanti Per La Ricerca", jLMessaggio, jMessagge, btnCloseMessage);
         }
     }//GEN-LAST:event_btnCercaJBActionPerformed
 
@@ -254,7 +266,8 @@ public class EliminaPagamento extends javax.swing.JFrame {
             importo = Double.parseDouble(inputImportoJTF.getText());
         }catch(NumberFormatException nfe) {
             Toolkit.getDefaultToolkit().beep();
-            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nNON POSSIBILE ELIMINARE", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nNON POSSIBILE ELIMINARE", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            messageError.showMessage(false, true, "warning", "Importo Non Valido Non Possibile Eliminarlo", jLMessaggio, jMessagge, btnCloseMessage);
         }
         
         
@@ -263,7 +276,8 @@ public class EliminaPagamento extends javax.swing.JFrame {
             dataPagamentoCercare = new java.sql.Date(inputDataCercareJDC.getDate().getTime());
         }catch(NullPointerException nex) {
             Toolkit.getDefaultToolkit().beep();
-            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nINSERISCI UNA DATA VALIDA", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nINSERISCI UNA DATA VALIDA", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            messageError.showMessage(false, true, "warning", "Inserisci Una Data Valida", jLMessaggio, jMessagge, btnCloseMessage);
         }
         
         if(controlloConvalidazione.controlloCercaPagamento(String.valueOf(dataPagamentoCercare), this.getIdAtletaCercare()) == true) {
@@ -271,11 +285,13 @@ public class EliminaPagamento extends javax.swing.JFrame {
                 importo = controllerClub.cercaPagamento(dataPagamentoCercare, Integer.parseInt(this.getIdClub()), idAtletaCercare);
                 if(importo == -1) {
                     Toolkit.getDefaultToolkit().beep();
-                    JOptionPane.showMessageDialog(this, "IMPORTO NON TROVATO\nNON POSSIBILE ELIMINARLO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                    //JOptionPane.showMessageDialog(this, "IMPORTO NON TROVATO\nNON POSSIBILE ELIMINARLO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                    messageError.showMessage(false, true, "warning", "Importo Non Trovato Non Possibile Eliminarlo", jLMessaggio, jMessagge, btnCloseMessage);
                 }
                 else{
                     controllerClub.eliminaPagamento(dataPagamentoCercare, Integer.parseInt(this.getIdClub()), this.getIdAtletaCercare(), importo);
-                    JOptionPane.showMessageDialog(this, "✓ ELIMINAZIONE DEL PAGAMENTO EFFETTUATA CON SUCCESSO", "ELIMINAZIONE", JOptionPane.INFORMATION_MESSAGE);
+                    //JOptionPane.showMessageDialog(this, "✓ ELIMINAZIONE DEL PAGAMENTO EFFETTUATA CON SUCCESSO", "ELIMINAZIONE", JOptionPane.INFORMATION_MESSAGE);
+                    messageError.showMessage(false, true, "success", "Eliminazione Del Pagamento Effettuata Con Successo", jLMessaggio, jMessagge, btnCloseMessage);
                 }
             } catch (ExceptionDao ex) {
                 Logger.getLogger(ModificaPagamento.class.getName()).log(Level.SEVERE, null, ex);
@@ -283,18 +299,19 @@ public class EliminaPagamento extends javax.swing.JFrame {
         }
         else {
             Toolkit.getDefaultToolkit().beep();
-            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nUNO O PIU' CAMPI MANCANTI PER LA RICERCA NON POSSIBILE EFFETTUARE L'ELIMINAZIONE", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nUNO O PIU' CAMPI MANCANTI PER LA RICERCA NON POSSIBILE EFFETTUARE L'ELIMINAZIONE", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            messageError.showMessage(false, true, "warning", "Uno O Piu' Campi Mancanti", jLMessaggio, jMessagge, btnCloseMessage);
         }
     }//GEN-LAST:event_btnEliminaJBActionPerformed
 
-    private void btnLogoutJB1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutJB1ActionPerformed
+    private void btnCloseMessageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseMessageActionPerformed
+        this.jMessagge.setVisible(false);
+    }//GEN-LAST:event_btnCloseMessageActionPerformed
+
+    private void btnLogoutJB2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutJB2ActionPerformed
         this.setVisible(false);
         System.exit(0);
-    }//GEN-LAST:event_btnLogoutJB1ActionPerformed
-
-    private void btnCloseMessagioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCloseMessagioMouseClicked
-        jMessagge.setVisible(false);
-    }//GEN-LAST:event_btnCloseMessagioMouseClicked
+    }//GEN-LAST:event_btnLogoutJB2ActionPerformed
 
 
     /*GET AND SET*/
@@ -326,9 +343,9 @@ public class EliminaPagamento extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAnnullaJB;
     private javax.swing.JButton btnCercaJB;
-    private javax.swing.JLabel btnCloseMessagio;
+    private javax.swing.JButton btnCloseMessage;
     private javax.swing.JButton btnEliminaJB;
-    private javax.swing.JButton btnLogoutJB1;
+    private javax.swing.JButton btnLogoutJB2;
     private javax.swing.JLabel dataPagamentoJL;
     private javax.swing.JLabel destinatarioJL;
     private com.toedter.calendar.JDateChooser inputDataCercareJDC;

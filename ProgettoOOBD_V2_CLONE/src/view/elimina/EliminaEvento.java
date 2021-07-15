@@ -3,6 +3,7 @@ package view.elimina;
 
 import controller.ControllerSponsor;
 import convalidazione.ControlloConvalidazione;
+import convalidazione.MessageError;
 import dao.DataAccessObject;
 import dao.ExceptionDao;
 import java.awt.Color;
@@ -28,6 +29,7 @@ public class EliminaEvento extends javax.swing.JFrame {
 
     /*CONTROLLORE PER GESTIRE GLI ERRORI*/
     private ControlloConvalidazione controlloConvalidazione = new ControlloConvalidazione();
+    private MessageError messageError = new MessageError();  
     
     /*DATI IMPORTANTI*/
     private String idSponsor;
@@ -325,10 +327,12 @@ public class EliminaEvento extends javax.swing.JFrame {
                 datiEvento = controllerSponsor.cercaNomeEvento(nomeEvento, Integer.parseInt(this.getIdSponsor()));
                 if(datiEvento.isEmpty()) {
                     Toolkit.getDefaultToolkit().beep();
-                    JOptionPane.showMessageDialog(this, "EVENTO CON NOME "+nomeEvento+" NON TROVATO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                    //JOptionPane.showMessageDialog(this, "EVENTO CON NOME "+nomeEvento+" NON TROVATO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                    messageError.showMessage(false, true, "warning", "Evento Con Nome "+nomeEvento+" Non Trovato", errorMessage, jPMessage, btnCloseMessage);
                 }
                 else {
-                    JOptionPane.showMessageDialog(this, "✓ EVENTO CON NOME "+nomeEvento+" TROVATO", "TROVATO", JOptionPane.INFORMATION_MESSAGE);
+                    //JOptionPane.showMessageDialog(this, "✓ EVENTO CON NOME "+nomeEvento+" TROVATO", "TROVATO", JOptionPane.INFORMATION_MESSAGE);
+                    messageError.showMessage(false, true, "success", "Evento Con Nome "+nomeEvento+" Trovato Con Successo", errorMessage, jPMessage, btnCloseMessage);
                     DefaultTableModel tblModel = (DefaultTableModel)tblDatiEventoJT.getModel();
                     tblModel.setRowCount(0);
                     datiEvento.forEach((Evento evento) -> {
@@ -351,7 +355,8 @@ public class EliminaEvento extends javax.swing.JFrame {
         }
         else {
             Toolkit.getDefaultToolkit().beep();
-            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nSCRIVERE NEL CAMPO IL NOME DELL'EVENTO DA CERCARE", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nSCRIVERE NEL CAMPO IL NOME DELL'EVENTO DA CERCARE", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            messageError.showMessage(false, true, "warning", "Scrivere Nel Campo Il Nome Dell'Evento Da Cercare", errorMessage, jPMessage, btnCloseMessage);
         }
     }//GEN-LAST:event_btnCercaNomeJBActionPerformed
 
@@ -372,7 +377,8 @@ public class EliminaEvento extends javax.swing.JFrame {
             dataEvento = new java.sql.Date(inputDataEventoJDC.getDate().getTime());
         }catch(NullPointerException npe) {
             Toolkit.getDefaultToolkit().beep();
-            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nSCRIVERE UNA DATA VALIDA DA CERCARE", "WARNING", JOptionPane.WARNING_MESSAGE);
+            //JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nSCRIVERE UNA DATA VALIDA DA CERCARE", "WARNING", JOptionPane.WARNING_MESSAGE);
+            messageError.showMessage(false, true, "warning", "Scrivere Una Data Valida Da Cercare", errorMessage, jPMessage, btnCloseMessage);
         }        
         
         
@@ -381,10 +387,12 @@ public class EliminaEvento extends javax.swing.JFrame {
                 datiEvento = controllerSponsor.cercaDataEvento(dataEvento, Integer.parseInt(this.getIdSponsor()));
                 if(datiEvento.isEmpty()) {
                     Toolkit.getDefaultToolkit().beep();
-                    JOptionPane.showMessageDialog(this, "EVENTO CON DATA "+dataEvento+" NON TROVATO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                    //JOptionPane.showMessageDialog(this, "EVENTO CON DATA "+dataEvento+" NON TROVATO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                    messageError.showMessage(false, true, "warning", "Evento Con Data "+dataEvento+" Non Trovato", errorMessage, jPMessage, btnCloseMessage);
                 }
                 else {
-                    JOptionPane.showMessageDialog(this, "✓ EVENTO CON DATA "+dataEvento+" TROVATO", "TROVATO", JOptionPane.INFORMATION_MESSAGE);
+                    //JOptionPane.showMessageDialog(this, "✓ EVENTO CON DATA "+dataEvento+" TROVATO", "TROVATO", JOptionPane.INFORMATION_MESSAGE);
+                    messageError.showMessage(false, true, "success", "Evento Con Data "+dataEvento+" Trovato", errorMessage, jPMessage, btnCloseMessage);
                     DefaultTableModel tblModel = (DefaultTableModel)tblDatiEventoJT.getModel();
                     tblModel.setRowCount(0);
                     datiEvento.forEach((Evento evento) -> {
@@ -404,12 +412,14 @@ public class EliminaEvento extends javax.swing.JFrame {
                 Logger.getLogger(EliminaEvento.class.getName()).log(Level.SEVERE, null, ex);
             } catch(NullPointerException nex){
                 Toolkit.getDefaultToolkit().beep();
-                JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nNON E' STATO POSSIBILE STAMPARE I DATI PERCHE' LA DATA INSERITA NON E' VALIDA", "WARNING", JOptionPane.WARNING_MESSAGE);
+                //JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nNON E' STATO POSSIBILE STAMPARE I DATI PERCHE' LA DATA INSERITA NON E' VALIDA", "WARNING", JOptionPane.WARNING_MESSAGE);
+                messageError.showMessage(false, true, "warning", "Non E' SStato Possibile Stampare I Dati", errorMessage, jPMessage, btnCloseMessage);
             }
         }
         else {
             Toolkit.getDefaultToolkit().beep();
-            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nSCRIVERE NEL CAMPO LA DATA DELL'EVENTO DA CERCARE", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            //OptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nSCRIVERE NEL CAMPO LA DATA DELL'EVENTO DA CERCARE", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            messageError.showMessage(false, true, "warning", "Scrivere Nel Campo La Data Dell'Evento Da Cercare", errorMessage, jPMessage, btnCloseMessage);
         }
     }//GEN-LAST:event_btnCercaDataJBActionPerformed
 
