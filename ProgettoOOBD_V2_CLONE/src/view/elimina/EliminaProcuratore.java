@@ -7,6 +7,7 @@ import convalidazione.MessageError;
 import dao.ExceptionDao;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Frame;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -56,6 +57,7 @@ public class EliminaProcuratore extends javax.swing.JFrame {
         errorMessage = new javax.swing.JLabel();
         btnCloseMessage = new javax.swing.JButton();
         btnLogoutJB1 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -82,7 +84,6 @@ public class EliminaProcuratore extends javax.swing.JFrame {
         btnAnnullaJB.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         btnAnnullaJB.setForeground(new java.awt.Color(255, 255, 255));
         btnAnnullaJB.setText("Annulla");
-        btnAnnullaJB.setActionCommand("Annulla");
         btnAnnullaJB.setBorder(null);
         btnAnnullaJB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAnnullaJB.addActionListener(new java.awt.event.ActionListener() {
@@ -115,7 +116,15 @@ public class EliminaProcuratore extends javax.swing.JFrame {
             new String [] {
                 "code procuratore", "nome", "cognome", "sesso", "nazione", "indirizzo", "data nascita", "telefono", "codfiscale", "iban procuratore"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jTBDati.setFocusable(false);
         jTBDati.setSelectionBackground(new java.awt.Color(232, 57, 95));
         jTBDati.setShowVerticalLines(false);
@@ -198,6 +207,15 @@ public class EliminaProcuratore extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnLogoutJB1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 0, -1, 40));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_subtract_32px_1.png"))); // NOI18N
+        jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1010, 5, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -321,6 +339,10 @@ public class EliminaProcuratore extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_btnLogoutJB1ActionPerformed
 
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        this.setState(Frame.ICONIFIED);
+    }//GEN-LAST:event_jLabel2MouseClicked
+
     
     public static void main(String args[]) {
     
@@ -340,6 +362,7 @@ public class EliminaProcuratore extends javax.swing.JFrame {
     private javax.swing.JLabel errorMessage;
     private javax.swing.JTextField inputMatricolaJTF;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPMessage;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

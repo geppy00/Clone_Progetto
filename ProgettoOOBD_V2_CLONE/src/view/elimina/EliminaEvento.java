@@ -8,6 +8,7 @@ import dao.DataAccessObject;
 import dao.ExceptionDao;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Frame;
 import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -79,6 +80,7 @@ public class EliminaEvento extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         errorMessage = new javax.swing.JLabel();
         btnCloseMessage = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -255,6 +257,15 @@ public class EliminaEvento extends javax.swing.JFrame {
 
         jPanel2.add(jPMessage, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 30, 610, 40));
 
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_subtract_32px_1.png"))); // NOI18N
+        jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 5, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -382,7 +393,7 @@ public class EliminaEvento extends javax.swing.JFrame {
         }        
         
         
-        if(controlloConvalidazione.controlloEliminaEventoData(String.valueOf(dataEvento)) == true) {
+        if(controlloConvalidazione.controlloEliminaEventoData(dataEvento) == true) {
             try {
                 datiEvento = controllerSponsor.cercaDataEvento(dataEvento, Integer.parseInt(this.getIdSponsor()));
                 if(datiEvento.isEmpty()) {
@@ -443,6 +454,10 @@ public class EliminaEvento extends javax.swing.JFrame {
         jPMessage.setVisible(false);
     }//GEN-LAST:event_btnCloseMessageActionPerformed
 
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        this.setState(Frame.ICONIFIED);
+    }//GEN-LAST:event_jLabel2MouseClicked
+
 
     /*GET AND SET*/
     public String getIdSponsor() {
@@ -483,6 +498,7 @@ public class EliminaEvento extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser inputDataEventoJDC;
     private javax.swing.JTextField inputNomeEventoJTF;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPMessage;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;

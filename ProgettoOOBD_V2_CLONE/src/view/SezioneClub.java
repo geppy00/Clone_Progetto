@@ -2,6 +2,7 @@
 package view;
 
 import java.awt.Color;
+import java.awt.Frame;
 import view.elimina.EliminaClub;
 import view.modificaDati.ModificaDatiClub;
 import view.registrare.RegistraClub;
@@ -29,6 +30,7 @@ public class SezioneClub extends javax.swing.JFrame {
         btnLogoutJB = new javax.swing.JButton();
         jLCurrentAccount = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -140,6 +142,15 @@ public class SezioneClub extends javax.swing.JFrame {
         jLabel1.setText("Sportivo System");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, -1, -1));
 
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_subtract_32px_1.png"))); // NOI18N
+        jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 15, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -217,6 +228,10 @@ public class SezioneClub extends javax.swing.JFrame {
        this.setVisible(false);
     }//GEN-LAST:event_btnLogoutJBActionPerformed
 
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        this.setState(Frame.ICONIFIED);
+    }//GEN-LAST:event_jLabel2MouseClicked
+
      
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -234,6 +249,7 @@ public class SezioneClub extends javax.swing.JFrame {
     private javax.swing.JButton btnRegistraClubJB;
     private javax.swing.JLabel jLCurrentAccount;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

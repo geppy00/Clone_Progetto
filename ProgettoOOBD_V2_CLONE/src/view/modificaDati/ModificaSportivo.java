@@ -3,8 +3,12 @@ package view.modificaDati;
 
 import controller.ControllerSportivo;
 import convalidazione.ControlloConvalidazione;
+import convalidazione.MessageError;
+import convalidazione.PermessoPerNonScrivere;
+import convalidazione.PermessoPerScrivere;
 import dao.ExceptionDao;
 import java.awt.Color;
+import java.awt.Frame;
 import java.awt.Toolkit;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -20,6 +24,7 @@ public class ModificaSportivo extends javax.swing.JFrame {
     /*CONTROLLORE PER GESTIRE GLI ERRORI*/
     private ControlloConvalidazione controlloConvalidazione = new ControlloConvalidazione();
     private static final String FORMAT = "yyyy/MM/dd";
+    private MessageError messageError = new MessageError();
     
     /*DATI DEL ATLETA*/
     private ArrayList<Atleta> datiAtleta =  new ArrayList<Atleta>();
@@ -71,6 +76,7 @@ public class ModificaSportivo extends javax.swing.JFrame {
         btnCloseMessage = new javax.swing.JButton();
         inputIdClubJTF1 = new javax.swing.JTextField();
         jLabel22 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -89,7 +95,7 @@ public class ModificaSportivo extends javax.swing.JFrame {
                 btnLogoutJB1ActionPerformed(evt);
             }
         });
-        jPanel1.add(btnLogoutJB1, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 10, 40, 40));
+        jPanel1.add(btnLogoutJB1, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 5, 40, 40));
 
         inputCodiceFiscaleJTF.setBackground(new java.awt.Color(9, 46, 119));
         inputCodiceFiscaleJTF.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
@@ -159,6 +165,14 @@ public class ModificaSportivo extends javax.swing.JFrame {
         inputTelefonoJTF.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         inputTelefonoJTF.setForeground(new java.awt.Color(231, 231, 231));
         inputTelefonoJTF.setBorder(null);
+        inputTelefonoJTF.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                inputTelefonoJTFFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                inputTelefonoJTFFocusLost(evt);
+            }
+        });
         jPanel1.add(inputTelefonoJTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 560, 630, 30));
 
         inputProcuratoreAssociatoJTF.setBackground(new java.awt.Color(9, 46, 119));
@@ -305,7 +319,7 @@ public class ModificaSportivo extends javax.swing.JFrame {
             jPMessageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPMessageLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addComponent(jLabel1)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(errorMessage, javax.swing.GroupLayout.DEFAULT_SIZE, 518, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
@@ -329,12 +343,29 @@ public class ModificaSportivo extends javax.swing.JFrame {
         inputIdClubJTF1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         inputIdClubJTF1.setForeground(new java.awt.Color(231, 231, 231));
         inputIdClubJTF1.setBorder(null);
+        inputIdClubJTF1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                inputIdClubJTF1FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                inputIdClubJTF1FocusLost(evt);
+            }
+        });
         jPanel1.add(inputIdClubJTF1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 500, 310, 30));
 
         jLabel22.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         jLabel22.setForeground(new java.awt.Color(255, 255, 255));
         jLabel22.setText("ID Club");
         jPanel1.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 470, 110, 30));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_subtract_32px_1.png"))); // NOI18N
+        jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 10, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -378,10 +409,12 @@ public class ModificaSportivo extends javax.swing.JFrame {
                 datiAtleta = controllerSportivo.cercaSportivo(CodiceFiscalePreso);
                 if(datiAtleta.isEmpty()) {
                     Toolkit.getDefaultToolkit().beep();
-                    JOptionPane.showMessageDialog(this, "ATLETA "+CodiceFiscalePreso+" NON TROVATO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                    //JOptionPane.showMessageDialog(this, "ATLETA "+CodiceFiscalePreso+" NON TROVATO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                    messageError.showMessage(false, true, "warning", "Atleta Con Codice Fiscale "+CodiceFiscalePreso+" Non Trovato", errorMessage, jPMessage, btnCloseMessage);
                 }
                 else {
-                    JOptionPane.showMessageDialog(this, "✓ ATLETA "+CodiceFiscalePreso+" TROVATO CON SUCCESSO", "RICERCA", JOptionPane.INFORMATION_MESSAGE);
+                    //JOptionPane.showMessageDialog(this, "✓ ATLETA "+CodiceFiscalePreso+" TROVATO CON SUCCESSO", "RICERCA", JOptionPane.INFORMATION_MESSAGE);
+                    messageError.showMessage(false, true, "success", "Atleta Con Codice Fiscale "+CodiceFiscalePreso+" Trovato Con Successo", errorMessage, jPMessage, btnCloseMessage);
                     datiAtleta.forEach((Atleta atleta)->{
                         inputCodiceFiscaleModificatoJTF.setText(atleta.getCodiceFiscale());
                         inputCognomeJTF.setText(atleta.getCognmome());
@@ -404,7 +437,8 @@ public class ModificaSportivo extends javax.swing.JFrame {
         }
         else {
             Toolkit.getDefaultToolkit().beep();
-            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nSCRIVERE NEL CAMPO IL CODICE FISCALE DA CERCARE", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nSCRIVERE NEL CAMPO IL CODICE FISCALE DA CERCARE", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            messageError.showMessage(false, true, "warning", "Scrivere Nel Campo Il Codice Fiscale Da Cercare", errorMessage, jPMessage, btnCloseMessage);
         }
     }//GEN-LAST:event_btnCercaJBActionPerformed
 
@@ -421,7 +455,8 @@ public class ModificaSportivo extends javax.swing.JFrame {
         if(controlloConvalidazione.controlloCercaAtleta(codiceFiscalePreso) == true) {
             if(datiAtleta.isEmpty()) {
                 Toolkit.getDefaultToolkit().beep();
-                JOptionPane.showMessageDialog(this, "ATLETA "+codiceFiscalePreso+" NON ESISTE\nNON POSSIBILE MODIFICARLO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                //JOptionPane.showMessageDialog(this, "ATLETA "+codiceFiscalePreso+" NON ESISTE\nNON POSSIBILE MODIFICARLO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                messageError.showMessage(false, true, "warning", "Atleta Con Codice Fiscale "+codiceFiscalePreso+" Non Esiste Non Possibile Modificarlo", errorMessage, jPMessage, btnCloseMessage);
             }
             else {
                 String nome = inputNomeJTF.getText();
@@ -434,7 +469,8 @@ public class ModificaSportivo extends javax.swing.JFrame {
                     dataNascitaSql = new java.sql.Date(inputDataNascitaJDC.getDate().getTime());
                 } catch(NullPointerException nex) {
                     Toolkit.getDefaultToolkit().beep();
-                    JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nINSERISCI UNA DATA VALIDA", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                    //JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nINSERISCI UNA DATA VALIDA", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                    messageError.showMessage(false, true, "warning", "Inserisci Una Data Valida", errorMessage, jPMessage, btnCloseMessage);
                 }
                 
                 String telefono = inputTelefonoJTF.getText();
@@ -444,32 +480,59 @@ public class ModificaSportivo extends javax.swing.JFrame {
                 float peso = Float.parseFloat(pesoStr);
                 String idProcuratore = inputProcuratoreAssociatoJTF.getText();
                 String iban = inputIbanJTF.getText();
-                int idClub = Integer.parseInt(inputTelefonoJTF.getText());
+                
+                int idClub;
+                if(inputIdClubJTF1.getText().equals(""))
+                    idClub = 0;
+                else
+                    idClub = Integer.parseInt(inputIdClubJTF1.getText());
 
-                String strDate = String.valueOf(dataNascitaSql);
-                if(controlloConvalidazione.controlloModificaAtleta(nome, cognome, nazionalita, indirizzo, strDate, codiceFiscale, sesso, telefono, ruolo, pesoStr, idProcuratore, iban) == true) {
+                if(controlloConvalidazione.controlloModificaAtleta(nome, cognome, nazionalita, indirizzo, dataNascitaSql, codiceFiscale, sesso, telefono, ruolo, pesoStr, idProcuratore, iban) == true) {
                     try {
                         controllerSportivo.aggiornaSportivo(codiceFiscalePreso, nome, cognome, sesso, nazionalita, indirizzo, dataNascitaSql, telefono, codiceFiscale, ruolo, peso, idProcuratore, iban, idClub);
-                        JOptionPane.showMessageDialog(this, "✓ MODIFICA DELL'ATLETA "+codiceFiscalePreso+" EFFETTUATA CON SUCCESSO", "MODIFICA", JOptionPane.INFORMATION_MESSAGE);
+                        //JOptionPane.showMessageDialog(this, "✓ MODIFICA DELL'ATLETA "+codiceFiscalePreso+" EFFETTUATA CON SUCCESSO", "MODIFICA", JOptionPane.INFORMATION_MESSAGE);
+                        messageError.showMessage(false, true, "success", "Modifica Dell'Atleta Con Codice Fiscale "+codiceFiscalePreso+" Effettuata Con Successo", errorMessage, jPMessage, btnCloseMessage);
                     } catch (ExceptionDao ex) {
                         Logger.getLogger(ModificaSportivo.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
                 else {
                     Toolkit.getDefaultToolkit().beep();
-                    JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nUNO O PIU' CAMPI MANCANTI", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                    //JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nUNO O PIU' CAMPI MANCANTI", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                    messageError.showMessage(false, true, "warning", "Uno O Piu' Campi Mancanti", errorMessage, jPMessage, btnCloseMessage);
                 }
             }
         }
         else {
             Toolkit.getDefaultToolkit().beep();
-            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nINSERIRE IL CODICE FISCALE PER TROVARE IL PROCURATORE DA MODIFICARE", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nINSERIRE IL CODICE FISCALE PER TROVARE IL PROCURATORE DA MODIFICARE", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            messageError.showMessage(false, true, "warning", "Inserire Il Codice Fiscale Per Trovare L'Atleta Da Modificare", errorMessage, jPMessage, btnCloseMessage);
         }
     }//GEN-LAST:event_btnAggiornaJBActionPerformed
 
     private void btnCloseMessageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseMessageActionPerformed
         jPMessage.setVisible(false);
     }//GEN-LAST:event_btnCloseMessageActionPerformed
+
+    private void inputIdClubJTF1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputIdClubJTF1FocusGained
+        inputIdClubJTF1.setDocument(new PermessoPerScrivere());
+    }//GEN-LAST:event_inputIdClubJTF1FocusGained
+
+    private void inputIdClubJTF1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputIdClubJTF1FocusLost
+        inputIdClubJTF1.setDocument(new PermessoPerNonScrivere());
+    }//GEN-LAST:event_inputIdClubJTF1FocusLost
+
+    private void inputTelefonoJTFFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputTelefonoJTFFocusGained
+        inputTelefonoJTF.setDocument(new PermessoPerScrivere());
+    }//GEN-LAST:event_inputTelefonoJTFFocusGained
+
+    private void inputTelefonoJTFFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputTelefonoJTFFocusLost
+        inputTelefonoJTF.setDocument(new PermessoPerNonScrivere());
+    }//GEN-LAST:event_inputTelefonoJTFFocusLost
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        this.setState(Frame.ICONIFIED);
+    }//GEN-LAST:event_jLabel2MouseClicked
 
 
     public static void main(String args[]) {
@@ -512,6 +575,7 @@ public class ModificaSportivo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;

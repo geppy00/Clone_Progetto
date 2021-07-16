@@ -4,6 +4,7 @@ package view;
 import controller.ControllerLogin;
 import dao.ExceptionDao;
 import java.awt.Color;
+import java.awt.Frame;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -37,6 +38,7 @@ public class LoginView extends javax.swing.JFrame {
         jLMessaggio = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         btnCloseMessagio = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -175,6 +177,15 @@ public class LoginView extends javax.swing.JFrame {
 
         jPanel1.add(jMessagge, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 330, 310, 30));
 
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_subtract_32px_1.png"))); // NOI18N
+        jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 15, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -257,6 +268,7 @@ public class LoginView extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.dispose();
+        System.exit(0);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void sceltaAccessoJCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sceltaAccessoJCBActionPerformed
@@ -304,6 +316,10 @@ public class LoginView extends javax.swing.JFrame {
         jMessagge.setVisible(false);
     }//GEN-LAST:event_btnCloseMessagioMouseClicked
 
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        this.setState(Frame.ICONIFIED);
+    }//GEN-LAST:event_jLabel2MouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAccediJB;
@@ -313,6 +329,7 @@ public class LoginView extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLMessaggio;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jMessagge;
     private javax.swing.JPanel jPanel1;

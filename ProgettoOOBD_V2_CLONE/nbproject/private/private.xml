@@ -5,7 +5,7 @@
             <url>src/view/AtletaView.java</url>
             <bookmark id="1">
                 <name/>
-                <line>20</line>
+                <line>21</line>
                 <key/>
             </bookmark>
         </file>
@@ -27,12 +27,12 @@
             <file>file:/C:/Users/39347/Documents/NetBeansProjects/BACKUP%20PROGETTO/src/view/elimina/EliminaContrattoProcuratore.java</file>
         </group>
         <group>
-            <file>file:/C:/Users/peppe/Desktop/ALL%20MY%20SHIT/progetto%20di%20jeft/BACKUP%20PROGETTO%20-%20Copia%20(4)/src/view/elimina/EliminaAtleta.java</file>
-            <file>file:/C:/Users/peppe/Desktop/ALL%20MY%20SHIT/progetto%20di%20jeft/BACKUP%20PROGETTO%20-%20Copia%20(4)/src/convalidazione/PermessoPerNonScrivere.java</file>
-            <file>file:/C:/Users/peppe/Desktop/ALL%20MY%20SHIT/progetto%20di%20jeft/BACKUP%20PROGETTO%20-%20Copia%20(4)/src/view/registrare/RegistraEventoSponsor.java</file>
-            <file>file:/C:/Users/peppe/Desktop/ALL%20MY%20SHIT/progetto%20di%20jeft/BACKUP%20PROGETTO%20-%20Copia%20(4)/src/view/elimina/EliminaSponsor.java</file>
-            <file>file:/C:/Users/peppe/Desktop/ALL%20MY%20SHIT/progetto%20di%20jeft/BACKUP%20PROGETTO%20-%20Copia%20(4)/src/convalidazione/PermessoPerScrivere.java</file>
-            <file>file:/C:/Users/peppe/Desktop/ALL%20MY%20SHIT/progetto%20di%20jeft/BACKUP%20PROGETTO%20-%20Copia%20(4)/src/view/elimina/EliminaProcuratore.java</file>
+            <file>file:/C:/Users/peppe/Desktop/ALL%20MY%20SHIT/progetto%20di%20jeft/BACKUP%20PROGETTO%20-%20Copia%20(4)/src/view/GestioneEventiAtleta.java</file>
+            <file>file:/C:/Users/peppe/Desktop/ALL%20MY%20SHIT/progetto%20di%20jeft/BACKUP%20PROGETTO%20-%20Copia%20(4)/src/convalidazione/ControlloConvalidazione.java</file>
+            <file>file:/C:/Users/peppe/Desktop/ALL%20MY%20SHIT/progetto%20di%20jeft/BACKUP%20PROGETTO%20-%20Copia%20(4)/src/view/SezioneGettoniEventoAtleta.java</file>
+            <file>file:/C:/Users/peppe/Desktop/ALL%20MY%20SHIT/progetto%20di%20jeft/BACKUP%20PROGETTO%20-%20Copia%20(4)/src/view/SezioneIntroitiAtleta.java</file>
+            <file>file:/C:/Users/peppe/Desktop/ALL%20MY%20SHIT/progetto%20di%20jeft/BACKUP%20PROGETTO%20-%20Copia%20(4)/src/view/SezionePagamentoView.java</file>
+            <file>file:/C:/Users/peppe/Desktop/ALL%20MY%20SHIT/progetto%20di%20jeft/BACKUP%20PROGETTO%20-%20Copia%20(4)/src/view/AtletaView.java</file>
         </group>
     </open-files>
 </project-private>

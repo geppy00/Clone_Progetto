@@ -4,14 +4,18 @@ package view;
 import controller.ControllerAdmin;
 import dao.ExceptionDao;
 import java.awt.Color;
+import java.awt.Frame;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import view.registrare.RegistraNuovoProfilo;
 
 public class AdminView extends javax.swing.JFrame {
 
+    ImageIcon icon;
+    
     /*CONTROLLER PER ADMIN*/
     ControllerAdmin controllerAdmin = new ControllerAdmin();
     
@@ -51,6 +55,7 @@ public class AdminView extends javax.swing.JFrame {
         btnLogoutJB = new javax.swing.JButton();
         jLCurrentAccount = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -225,7 +230,7 @@ public class AdminView extends javax.swing.JFrame {
                 jLNewAccountMouseExited(evt);
             }
         });
-        jPanel1.add(jLNewAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 448, 80, -1));
+        jPanel1.add(jLNewAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 448, 130, -1));
 
         btnLogoutJB.setBackground(new java.awt.Color(11, 58, 151));
         btnLogoutJB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_shutdown_32px_1.png"))); // NOI18N
@@ -250,7 +255,17 @@ public class AdminView extends javax.swing.JFrame {
         jLabel1.setText("Sportivo System");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, -1, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 760, 520));
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_subtract_32px_1.png"))); // NOI18N
+        jLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel3.setFocusable(false);
+        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel3MouseClicked(evt);
+            }
+        });
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 15, -1, -1));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 760, 530));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -351,6 +366,10 @@ public class AdminView extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnLogoutJBActionPerformed
 
+    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+        this.setState(Frame.ICONIFIED);
+    }//GEN-LAST:event_jLabel3MouseClicked
+
     /*GET AND SET*/
     public String getOpzUser() {
         return opzUser;
@@ -382,6 +401,7 @@ public class AdminView extends javax.swing.JFrame {
     private javax.swing.JLabel jLNewAccount;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables

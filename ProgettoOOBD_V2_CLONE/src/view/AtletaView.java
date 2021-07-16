@@ -4,6 +4,7 @@ package view;
 import controller.ControllerSportivo;
 import dao.ExceptionDao;
 import java.awt.Color;
+import java.awt.Frame;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
@@ -51,6 +52,7 @@ public class AtletaView extends javax.swing.JFrame {
         btnLogoutJB = new javax.swing.JButton();
         jLCurrentAccount = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -177,6 +179,15 @@ public class AtletaView extends javax.swing.JFrame {
         jLabel1.setText("Sportivo System");
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, -1, -1));
 
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_subtract_32px_1.png"))); // NOI18N
+        jLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel3MouseClicked(evt);
+            }
+        });
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 15, -1, -1));
+
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 770, 500));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -207,8 +218,8 @@ public class AtletaView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCloseActionPerformed
 
     private void btnGestioneEventiJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGestioneEventiJBActionPerformed
-        SezioneAtletaView sezioneAtletaView = new SezioneAtletaView();
-        sezioneAtletaView.setVisible(true);
+        GestioneEventiAtleta gestioneEventiAtleta = new GestioneEventiAtleta(this.getIdAtleta());
+        gestioneEventiAtleta.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnGestioneEventiJBActionPerformed
 
@@ -223,8 +234,8 @@ public class AtletaView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGestioneEventiJBMouseEntered
 
     private void btnEntroitiJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntroitiJBActionPerformed
-        SezioneProcuratoreView procuratoreView = new SezioneProcuratoreView();
-        procuratoreView.setVisible(true);
+        SezioneIntroitiAtleta sezioneIntroitiAtleta = new SezioneIntroitiAtleta(this.getIdAtleta());
+        sezioneIntroitiAtleta.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnEntroitiJBActionPerformed
 
@@ -237,6 +248,10 @@ public class AtletaView extends javax.swing.JFrame {
         btnEntroitiJB.setBackground(new Color(34,87,191));
         btnEntroitiJB.setForeground(new Color(231,231,231));
     }//GEN-LAST:event_btnEntroitiJBMouseEntered
+
+    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+        this.setState(Frame.ICONIFIED);
+    }//GEN-LAST:event_jLabel3MouseClicked
 
     
     /*GET AND SET*/
@@ -265,6 +280,7 @@ public class AtletaView extends javax.swing.JFrame {
     private javax.swing.JLabel jLDataAttuale;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

@@ -3,11 +3,18 @@ package view.modificaDati;
 
 import controller.ControllerProcuratore;
 import convalidazione.ControlloConvalidazione;
+import convalidazione.MessageError;
+import convalidazione.PermessoPerNonScrivere;
+import convalidazione.PermessoPerScrivere;
 import dao.ExceptionDao;
+import java.awt.Color;
+import java.awt.Frame;
 import java.awt.Toolkit;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -19,26 +26,46 @@ public class ModificaContrattiProcuratore extends javax.swing.JFrame {
 
     /*CONTROLLORE PER GESTIRE GLI ERRORI*/
     private ControlloConvalidazione controlloConvalidazione = new ControlloConvalidazione();
+    private MessageError messageError = new MessageError();  
     
     /*DATI IMPORTANTI*/
     private String idProcuratore;
     private int idContratto;
+    private String flag;
     private ArrayList<Contratto> datiContratto = new ArrayList<Contratto>();
     
     /*COSTRUTTORI*/
     public ModificaContrattiProcuratore(String idProcuratore, int idContratto, String flag) {
+        this.flag = flag;
         initComponents();
         this.setLocationRelativeTo(null);
         this.idProcuratore = idProcuratore;
         this.idContratto = idContratto;
         jPMessage.setVisible(false);
-        if(flag.equals("CLUB")) 
+        if(this.getFlag().equals("CLUB")) { 
             inputIdSponsorJTF.setEditable(false);
-        else if(flag.equals("SPONSOR")) 
+            inputIdSponsorJTF.setVisible(false);
+            jLabel4.setVisible(false);
+            //this.inputIdClubJTF.setLocation(100, 110);
+            //this.inputIdClubJTF.setSize(510, 30);
+            this.inputIdClubJTF.setBounds(100, 110, 510, 30);
+        }
+        else if(this.getFlag().equals("SPONSOR")) {
             inputIdClubJTF.setEditable(false);
+            inputIdClubJTF.setVisible(false);
+            jLabel2.setVisible(false);
+            //this.inputIdSponsorJTF.setSize(510, 30);
+            this.inputIdSponsorJTF.setBounds(100, 110, 510, 30);
+        }
         else {
             Toolkit.getDefaultToolkit().beep();
-            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nERRORE FATALE NON E' STATO POSSIBILE RICAVARE I DATI RIPROVARE", "ERRORE FATALE", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nERRORE FATALE NON E' STATO POSSIBILE RICAVARE I DATI RIPROVARE", "ERRORE FATALE", JOptionPane.ERROR_MESSAGE);
+            messageError.showMessage(false, true, "warning", "Errore Fatale Non E' Stato Possibile Leggere I Dati Riprovare", errorMessage, jPMessage, btnCloseMessage);
+            try {
+                java.util.concurrent.TimeUnit.SECONDS.sleep(5);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(ModificaContrattiProcuratore.class.getName()).log(Level.SEVERE, null, ex);
+            }
             System.exit(0);
         }
         
@@ -76,22 +103,10 @@ public class ModificaContrattiProcuratore extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         btnModificaJB = new javax.swing.JButton();
         btnAnnullaJB = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
 
         DataInizioJDC.setMaxSelectableDate(new java.util.Date(253370764884000L));
         DataInizioJDC.setMinSelectableDate(new java.util.Date(-62135769516000L));
-        DataInizioJDC.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                DataInizioJDCMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                DataInizioJDCMouseEntered(evt);
-            }
-        });
-        DataInizioJDC.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                DataInizioJDCPropertyChange(evt);
-            }
-        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -169,6 +184,14 @@ public class ModificaContrattiProcuratore extends javax.swing.JFrame {
         inputIdSponsorJTF.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         inputIdSponsorJTF.setForeground(new java.awt.Color(221, 231, 231));
         inputIdSponsorJTF.setBorder(null);
+        inputIdSponsorJTF.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                inputIdSponsorJTFFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                inputIdSponsorJTFFocusLost(evt);
+            }
+        });
         jPanel1.add(inputIdSponsorJTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 110, 250, 30));
 
         inputIdContrattoJTF.setEditable(false);
@@ -176,12 +199,28 @@ public class ModificaContrattiProcuratore extends javax.swing.JFrame {
         inputIdContrattoJTF.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         inputIdContrattoJTF.setForeground(new java.awt.Color(221, 231, 231));
         inputIdContrattoJTF.setBorder(null);
+        inputIdContrattoJTF.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                inputIdContrattoJTFFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                inputIdContrattoJTFFocusLost(evt);
+            }
+        });
         jPanel1.add(inputIdContrattoJTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 290, 250, 30));
 
         inputValoreContrattualeJTF.setBackground(new java.awt.Color(9, 46, 119));
         inputValoreContrattualeJTF.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         inputValoreContrattualeJTF.setForeground(new java.awt.Color(221, 231, 231));
         inputValoreContrattualeJTF.setBorder(null);
+        inputValoreContrattualeJTF.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                inputValoreContrattualeJTFFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                inputValoreContrattualeJTFFocusLost(evt);
+            }
+        });
         jPanel1.add(inputValoreContrattualeJTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 230, 510, 30));
 
         inputIdAtletaJTF.setEditable(false);
@@ -291,6 +330,15 @@ public class ModificaContrattiProcuratore extends javax.swing.JFrame {
         });
         jPanel1.add(btnAnnullaJB, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 350, 80, 30));
 
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_subtract_32px_1.png"))); // NOI18N
+        jLabel9.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel9MouseClicked(evt);
+            }
+        });
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 5, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -316,18 +364,6 @@ public class ModificaContrattiProcuratore extends javax.swing.JFrame {
         jPMessage.setVisible(false);
     }//GEN-LAST:event_btnCloseMessageActionPerformed
 
-    private void DataInizioJDCMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DataInizioJDCMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_DataInizioJDCMouseClicked
-
-    private void DataInizioJDCMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DataInizioJDCMouseEntered
-
-    }//GEN-LAST:event_DataInizioJDCMouseEntered
-
-    private void DataInizioJDCPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_DataInizioJDCPropertyChange
-        
-    }//GEN-LAST:event_DataInizioJDCPropertyChange
-
     private void inputDataFineJDCMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inputDataFineJDCMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_inputDataFineJDCMouseClicked
@@ -349,7 +385,38 @@ public class ModificaContrattiProcuratore extends javax.swing.JFrame {
     }//GEN-LAST:event_inputDataInizioJDCMouseEntered
 
     private void inputDataInizioJDCPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_inputDataInizioJDCPropertyChange
-        // TODO add your handling code here:
+        Date dataInizio = new Date();
+        if(this.getFlag().equals("CLUB")) {
+            if(this.inputDataInizioJDC.getDate() == null) {
+                // Il form è stato appena creato e nessuna data è stata inserita
+                dataInizio = Calendar.getInstance().getTime();
+                inputDataInizioJDC.setDate(dataInizio);
+            }
+            dataInizio = inputDataInizioJDC.getDate();
+            int nextYear = (inputDataInizioJDC.getDate().getYear()) + 1;
+            inputDataInizioJDC.getDate().setYear(nextYear);
+            dataInizio.setYear(nextYear);
+            inputDataFineJDC.setMinSelectableDate(dataInizio);
+        }
+        else if(this.getFlag().equals("SPONSOR")) {
+            if(this.inputDataInizioJDC.getDate() == null) {
+                // Il form è stato appena creato e nessuna data è stata inserita
+                dataInizio = Calendar.getInstance().getTime();
+                inputDataInizioJDC.setDate(dataInizio);
+            }
+            inputDataFineJDC.setMinSelectableDate(dataInizio);
+        }
+        else {
+            Toolkit.getDefaultToolkit().beep();
+            //JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nERRORE FATALE NON E' STATO POSSIBILE RICAVARE I DATI RIPROVARE", "ERRORE FATALE", JOptionPane.ERROR_MESSAGE);
+            messageError.showMessage(false, true, "warning", "Errore Fatale Non E' Stato Possibile Leggere I Dati Riprovare", errorMessage, jPMessage, btnCloseMessage);
+            try {
+                java.util.concurrent.TimeUnit.SECONDS.sleep(5);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(ModificaContrattiProcuratore.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            System.exit(0);
+        }
     }//GEN-LAST:event_inputDataInizioJDCPropertyChange
 
     private void btnModificaJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificaJBActionPerformed
@@ -374,7 +441,8 @@ public class ModificaContrattiProcuratore extends javax.swing.JFrame {
         if(controlloConvalidazione.controllaId(String.valueOf(this.getIdContratto())) == true) {
             if(datiContratto.isEmpty()) {
                 Toolkit.getDefaultToolkit().beep();
-                JOptionPane.showMessageDialog(this, "CONTRATTO NUMERO "+this.getIdContratto()+" NON ESISTE\nNON POSSIBILE MODIFICARLO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                //JOptionPane.showMessageDialog(this, "CONTRATTO NUMERO "+this.getIdContratto()+" NON ESISTE\nNON POSSIBILE MODIFICARLO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                messageError.showMessage(false, true, "warning", "Contratto Numero "+this.getIdContratto()+" Non Esiste Non Possibile Modificarlo", errorMessage, jPMessage, btnCloseMessage);
             }
             else{
                 try {
@@ -384,24 +452,28 @@ public class ModificaContrattiProcuratore extends javax.swing.JFrame {
                     numeroContratto = Integer.parseInt(inputIdContrattoJTF.getText());
                 }catch(NullPointerException npe) {
                     Toolkit.getDefaultToolkit().beep();
-                    JOptionPane.showMessageDialog(this, "INSERIRE UNA DATA VALIDA", "WARNING", JOptionPane.WARNING_MESSAGE);
+                    //JOptionPane.showMessageDialog(this, "INSERIRE UNA DATA VALIDA", "WARNING", JOptionPane.WARNING_MESSAGE);
+                    messageError.showMessage(false, true, "warning", "Inserire Una Data Valida", errorMessage, jPMessage, btnCloseMessage);
                 }catch(NumberFormatException nfe) {
                     Toolkit.getDefaultToolkit().beep();
-                    JOptionPane.showMessageDialog(this, "INSERIRE UN NUMERO VALIDO", "WARNING", JOptionPane.WARNING_MESSAGE);
+                    //JOptionPane.showMessageDialog(this, "Inserire Un Numero Valido", "WARNING", JOptionPane.WARNING_MESSAGE);
+                    messageError.showMessage(false, true, "warning", "Inserire Un Numero Valido", errorMessage, jPMessage, btnCloseMessage);
                 }
 
-                if(controlloConvalidazione.controllaModificaContratto(String.valueOf(idClub), String.valueOf(idSponsor), String.valueOf(dataInizio), String.valueOf(dataFine), String.valueOf(valoreContrattuale)) == true) {
+                if(controlloConvalidazione.controllaModificaContratto(String.valueOf(idClub), String.valueOf(idSponsor), dataInizio, dataFine, String.valueOf(valoreContrattuale)) == true) {
                     try {
                         boolean check = controllerProcuratore.modificaContratto(numeroContratto, idAtleta, idSponsor, idClub, dataInizio, dataFine, valoreContrattuale);
                         if(check == true) {
-                            JOptionPane.showMessageDialog(this, "✓ MODIFICA DEL CONTRATTO CON ID "+this.getIdContratto()+" EFFETTUATA CON SUCCESSO", "MODIFICA", JOptionPane.INFORMATION_MESSAGE);
+                            //JOptionPane.showMessageDialog(this, "✓ MODIFICA DEL CONTRATTO CON ID "+this.getIdContratto()+" EFFETTUATA CON SUCCESSO", "MODIFICA", JOptionPane.INFORMATION_MESSAGE);
+                            messageError.showMessage(false, true, "success", "Modifica Del Contratto Con Id "+this.getIdContratto()+" Effettuata Con Successo", errorMessage, jPMessage, btnCloseMessage);
                             SezioneGestioneContrattiView sezioneGestioneContrattiView = new SezioneGestioneContrattiView(this.getIdProcuratore());
                             sezioneGestioneContrattiView.setVisible(true);
                             this.setVisible(false);
                         }
                         else {
                             Toolkit.getDefaultToolkit().beep();
-                            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nUNO O PIU' CAMPI MANCANTI", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                            //JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nUNO O PIU' CAMPI MANCANTI", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                            messageError.showMessage(false, true, "warning", "Uno O Piu' Campi Mancanti", errorMessage, jPMessage, btnCloseMessage);
                         }
                     } catch (ExceptionDao ex) {
                         Logger.getLogger(ModificaContrattiProcuratore.class.getName()).log(Level.SEVERE, null, ex);
@@ -409,13 +481,15 @@ public class ModificaContrattiProcuratore extends javax.swing.JFrame {
                 }
                 else {
                     Toolkit.getDefaultToolkit().beep();
-                    JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nUNO O PIU' CAMPI MANCANTI", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                    //JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nUNO O PIU' CAMPI MANCANTI", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                    messageError.showMessage(false, true, "warning", "Uno O Piu' Campi Mancanti", errorMessage, jPMessage, btnCloseMessage);
                 }
             }
         }
         else {
             Toolkit.getDefaultToolkit().beep();
-            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nERRORE FATALE NON E' STATO POSSIBILE RICAVARE I DATI RIPROVARE", "ERRORE FATALE", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nERRORE FATALE NON E' STATO POSSIBILE RICAVARE I DATI RIPROVARE", "ERRORE FATALE", JOptionPane.ERROR_MESSAGE);
+            messageError.showMessage(false, true, "warning", "Errore Fatale Non E' Stato Possibile Leggere I Dati Riprovare", errorMessage, jPMessage, btnCloseMessage);
             SezioneGestioneContrattiView sezioneGestioneContrattiView = new SezioneGestioneContrattiView(this.getIdProcuratore());
             sezioneGestioneContrattiView.setVisible(true);
             this.setVisible(false);
@@ -428,6 +502,34 @@ public class ModificaContrattiProcuratore extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnAnnullaJBActionPerformed
 
+    private void inputIdSponsorJTFFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputIdSponsorJTFFocusGained
+        inputIdSponsorJTF.setDocument(new PermessoPerScrivere());
+    }//GEN-LAST:event_inputIdSponsorJTFFocusGained
+
+    private void inputIdSponsorJTFFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputIdSponsorJTFFocusLost
+        inputIdSponsorJTF.setDocument(new PermessoPerNonScrivere());
+    }//GEN-LAST:event_inputIdSponsorJTFFocusLost
+
+    private void inputValoreContrattualeJTFFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputValoreContrattualeJTFFocusGained
+        inputValoreContrattualeJTF.setDocument(new PermessoPerScrivere());
+    }//GEN-LAST:event_inputValoreContrattualeJTFFocusGained
+
+    private void inputValoreContrattualeJTFFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputValoreContrattualeJTFFocusLost
+        inputValoreContrattualeJTF.setDocument(new PermessoPerNonScrivere());
+    }//GEN-LAST:event_inputValoreContrattualeJTFFocusLost
+
+    private void inputIdContrattoJTFFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputIdContrattoJTFFocusGained
+        inputIdContrattoJTF.setDocument(new PermessoPerScrivere());
+    }//GEN-LAST:event_inputIdContrattoJTFFocusGained
+
+    private void inputIdContrattoJTFFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputIdContrattoJTFFocusLost
+        inputIdContrattoJTF.setDocument(new PermessoPerNonScrivere());
+    }//GEN-LAST:event_inputIdContrattoJTFFocusLost
+
+    private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked
+        this.setState(Frame.ICONIFIED);
+    }//GEN-LAST:event_jLabel9MouseClicked
+
     /*METODI*/
     private void stampaDatiContratto(int idContratto) {
         ControllerProcuratore controllerProcuratore = new ControllerProcuratore();
@@ -437,7 +539,8 @@ public class ModificaContrattiProcuratore extends javax.swing.JFrame {
                 datiContratto = controllerProcuratore.prendiDatiContratto(idContratto);
                 if(datiContratto.isEmpty()) {
                     Toolkit.getDefaultToolkit().beep();
-                    JOptionPane.showMessageDialog(this, "CONTRATTO CON "+this.getIdContratto()+" NON ESISTE\nNON POSSIBILE MODIFICARLO\n\t\t\tRIPROVARE", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                    //JOptionPane.showMessageDialog(this, "CONTRATTO CON "+this.getIdContratto()+" NON ESISTE\nNON POSSIBILE MODIFICARLO\n\t\t\tRIPROVARE", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                    messageError.showMessage(false, true, "warning", "Contratto Con Id "+this.getIdContratto()+" Non Esiste Non Possibile Modificarlo Riprovare", errorMessage, jPMessage, btnCloseMessage);
                     SezioneGestioneContrattiView sezioneGestioneContrattiView = new SezioneGestioneContrattiView(this.getIdProcuratore());
                     sezioneGestioneContrattiView.setVisible(true);
                     this.setVisible(false);
@@ -467,7 +570,8 @@ public class ModificaContrattiProcuratore extends javax.swing.JFrame {
         }
         else {
             Toolkit.getDefaultToolkit().beep();
-            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nERRORE FATALE NON E' STATO POSSIBILE RICAVARE I DATI RIPROVARE", "ERRORE FATALE", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nERRORE FATALE NON E' STATO POSSIBILE RICAVARE I DATI RIPROVARE", "ERRORE FATALE", JOptionPane.ERROR_MESSAGE);
+            messageError.showMessage(false, true, "warning", "Errore Fatale Non E' Stato Possibile Leggere I Dati Riprovare", errorMessage, jPMessage, btnCloseMessage);
             SezioneGestioneContrattiView sezioneGestioneContrattiView = new SezioneGestioneContrattiView(this.getIdProcuratore());
             sezioneGestioneContrattiView.setVisible(true);
             this.setVisible(false);
@@ -491,6 +595,15 @@ public class ModificaContrattiProcuratore extends javax.swing.JFrame {
     public void setIdContratto(int idContratto) {
         this.idContratto = idContratto;
     }
+      
+    public String getFlag() {
+        return flag;
+    }
+
+    public void setFlag(String flag) {
+        this.flag = flag;
+    }
+
 
     /*MAIN*/
     public static void main(String args[]) {
@@ -523,6 +636,7 @@ public class ModificaContrattiProcuratore extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPMessage;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables

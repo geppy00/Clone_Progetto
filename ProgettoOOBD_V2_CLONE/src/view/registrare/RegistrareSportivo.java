@@ -3,10 +3,14 @@ package view.registrare;
 
 import controller.ControllerSportivo;
 import convalidazione.ControlloConvalidazione;
+import convalidazione.MessageError;
+import convalidazione.PermessoPerNonScrivere;
+import convalidazione.PermessoPerScrivere;
 import dao.DataAccessObject;
 import dao.ExceptionDao;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Frame;
 import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -25,6 +29,7 @@ public class RegistrareSportivo extends javax.swing.JFrame {
 
     /*CONTROLLORE PER GESTIRE GLI ERRORI*/
     private ControlloConvalidazione controlloConvalidazione = new ControlloConvalidazione();
+    private MessageError messageError = new MessageError();
     
     /*COSTRUTTORE*/
     public RegistrareSportivo() {
@@ -107,6 +112,7 @@ public class RegistrareSportivo extends javax.swing.JFrame {
         errorMessage = new javax.swing.JLabel();
         btnCloseMessage = new javax.swing.JButton();
         btnLogoutJB1 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -402,6 +408,15 @@ public class RegistrareSportivo extends javax.swing.JFrame {
         });
         jPanel1.add(btnLogoutJB1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 0, -1, 40));
 
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_subtract_32px_1.png"))); // NOI18N
+        jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 5, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -437,7 +452,8 @@ public class RegistrareSportivo extends javax.swing.JFrame {
             dataNascitaPresoSql = new java.sql.Date(DataNascitaJDC.getDate().getTime());
         } catch(NullPointerException nex) {
             Toolkit.getDefaultToolkit().beep();
-            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nINSERIRE UNA DATA VALIDA", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nINSERIRE UNA DATA VALIDA", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            messageError.showMessage(false, true, "warning","Inserire Una Data Valida" , errorMessage, jPMessage, btnCloseMessage);
         }
 
         String telefonoPreso = inputTelefonoJTF.getText();
@@ -449,7 +465,8 @@ public class RegistrareSportivo extends javax.swing.JFrame {
             pesoPreso = Float.parseFloat(pesoStr);
         } catch(NumberFormatException nex) {
             Toolkit.getDefaultToolkit().beep();
-            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nINSERIRE UN NUMERO VALIDO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nINSERIRE UN NUMERO VALIDO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            messageError.showMessage(false, true, "warning","Inserire Un Numero Valido" , errorMessage, jPMessage, btnCloseMessage);
         }
         
         String ibanPreso = inputIbanAtletaJTF.getText();
@@ -457,23 +474,24 @@ public class RegistrareSportivo extends javax.swing.JFrame {
         String indirizzoPreso = inputIndirizzoJTF.getText();
 
         int idClub;
-        if(inputIdClubJTF.getText().equals(""))
+        if(inputIdClubJTF.getText().equals("") || inputIdClubJTF.getText().equals("ID Club"))
             idClub = 0;
         else
             idClub = Integer.parseInt(inputIdClubJTF.getText());
 
-        String strDate = String.valueOf(dataNascitaPresoSql);
-        if(controlloConvalidazione.controlloRegistraAtleta(nomePreso, cognomePreso, nazionePreso, indirizzoPreso, strDate, codiceFiscalePreso) == true) {
+        if(controlloConvalidazione.controlloRegistraAtleta(nomePreso, cognomePreso, nazionePreso, indirizzoPreso, dataNascitaPresoSql, codiceFiscalePreso) == true) {
             try {
                 controllerSportivo.registraSportivo(nomePreso, cognomePreso, sessoPreso, nazionePreso, indirizzoPreso, dataNascitaPresoSql, telefonoPreso, codiceFiscalePreso, ruoloAtletaPreso, pesoPreso, idProcuratore, ibanPreso, idClub);
-                JOptionPane.showMessageDialog(this, "✓ REGISTRAZIONE EFFETTUATA CON SUCCESSO", "REGISTRAZIONE", JOptionPane.INFORMATION_MESSAGE);
-                    } catch (ExceptionDao ex) {
+                //JOptionPane.showMessageDialog(this, "✓ REGISTRAZIONE EFFETTUATA CON SUCCESSO", "REGISTRAZIONE", JOptionPane.INFORMATION_MESSAGE);
+                messageError.showMessage(false, true, "success", "Registrazione Effettuata Con Successo", errorMessage , jPMessage, btnCloseMessage);
+            } catch (ExceptionDao ex) {
                 Logger.getLogger(RegistrareSportivo.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         else {
             Toolkit.getDefaultToolkit().beep();
-            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nUNO O PIU' CAMPI MANCANTI", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nUNO O PIU' CAMPI MANCANTI", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            messageError.showMessage(false, true, "warning","Uno O Piu' Campi Mancanti" , errorMessage, jPMessage, btnCloseMessage);
         }
     }//GEN-LAST:event_btnRegistraJBActionPerformed
 
@@ -560,11 +578,13 @@ public class RegistrareSportivo extends javax.swing.JFrame {
          if(inputPesoJTF.getText().equals("Peso")){
             inputPesoJTF.setText("");
             inputPesoJTF.setForeground(new Color(255,255,255));
+            inputPesoJTF.setDocument(new PermessoPerScrivere());
         }
     }//GEN-LAST:event_inputPesoJTFFocusGained
 
     private void inputPesoJTFFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputPesoJTFFocusLost
        if(inputPesoJTF.getText().equals("")){
+            inputPesoJTF.setDocument(new PermessoPerNonScrivere());
             inputPesoJTF.setText("Peso");
             inputPesoJTF.setForeground(new Color(231,231,231));
         }
@@ -630,15 +650,21 @@ public class RegistrareSportivo extends javax.swing.JFrame {
         if(inputIdClubJTF.getText().equals("ID Club")){
             inputIdClubJTF.setText("");
             inputIdClubJTF.setForeground(new Color(255,255,255));
+            inputIdClubJTF.setDocument(new PermessoPerScrivere());
         }
     }//GEN-LAST:event_inputIdClubJTFFocusGained
 
     private void inputIdClubJTFFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputIdClubJTFFocusLost
       if(inputIdClubJTF.getText().equals("")){
+            inputIdClubJTF.setDocument(new PermessoPerNonScrivere());
             inputIdClubJTF.setText("ID Club");
             inputIdClubJTF.setForeground(new Color(231,231,231));
         }
     }//GEN-LAST:event_inputIdClubJTFFocusLost
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        this.setState(Frame.ICONIFIED);
+    }//GEN-LAST:event_jLabel2MouseClicked
 
    
     /*MAIN*/
@@ -671,6 +697,7 @@ public class RegistrareSportivo extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> inputSessoJTF;
     private javax.swing.JTextField inputTelefonoJTF;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPMessage;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

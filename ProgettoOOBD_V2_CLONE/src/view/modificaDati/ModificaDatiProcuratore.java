@@ -3,8 +3,12 @@ package view.modificaDati;
 
 import controller.ControllerProcuratore;
 import convalidazione.ControlloConvalidazione;
+import convalidazione.MessageError;
+import convalidazione.PermessoPerNonScrivere;
+import convalidazione.PermessoPerScrivere;
 import dao.ExceptionDao;
 import java.awt.Color;
+import java.awt.Frame;
 import java.awt.Toolkit;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -22,6 +26,7 @@ public class ModificaDatiProcuratore extends javax.swing.JFrame {
     /*CONTROLLORE PER GESTIRE GLI ERRORI*/
     private ControlloConvalidazione controlloConvalidazione = new ControlloConvalidazione();
     private static final String FORMAT = "yyyy/MM/dd";
+    private MessageError messageError = new MessageError();  
     
     /*DATI DEL PROCURATORE*/
     private ArrayList<Procuratore> datiProcuratore =  new ArrayList<Procuratore>();
@@ -68,6 +73,7 @@ public class ModificaDatiProcuratore extends javax.swing.JFrame {
         inputCodiceFiscaleJTF = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         jButton2.setText("jButton2");
 
@@ -286,6 +292,14 @@ public class ModificaDatiProcuratore extends javax.swing.JFrame {
         inputTelefonoJTF.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         inputTelefonoJTF.setForeground(new java.awt.Color(221, 231, 231));
         inputTelefonoJTF.setBorder(null);
+        inputTelefonoJTF.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                inputTelefonoJTFFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                inputTelefonoJTFFocusLost(evt);
+            }
+        });
         jPanel1.add(inputTelefonoJTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 390, 250, 30));
 
         inputCodiceFiscaleJTF.setBackground(new java.awt.Color(9, 46, 119));
@@ -303,6 +317,15 @@ public class ModificaDatiProcuratore extends javax.swing.JFrame {
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
         jLabel15.setText("Codice Fiscale");
         jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 420, 100, 30));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_subtract_32px_1.png"))); // NOI18N
+        jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 15, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -350,10 +373,12 @@ public class ModificaDatiProcuratore extends javax.swing.JFrame {
                 datiProcuratore = controllerProcuratore.cercaProcuratore(matricolaCopiata);
                 if(datiProcuratore.isEmpty()) {
                     Toolkit.getDefaultToolkit().beep();
-                    JOptionPane.showMessageDialog(this, "PROCURATORE "+matricolaCopiata+" NON TROVATO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                    //JOptionPane.showMessageDialog(this, "PROCURATORE "+matricolaCopiata+" NON TROVATO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                    messageError.showMessage(false, true, "warning", "Procuratore Matricola "+matricolaCopiata+" Non Trovato", errorMessage, jPMessage, btnCloseMessage);
                 }
                 else{
-                    JOptionPane.showMessageDialog(this, "✓ PROCURATORE "+matricolaCopiata+" TROVATO CON SUCCESSO", "RICERCA", JOptionPane.INFORMATION_MESSAGE);
+                    //JOptionPane.showMessageDialog(this, "✓ PROCURATORE "+matricolaCopiata+" TROVATO CON SUCCESSO", "RICERCA", JOptionPane.INFORMATION_MESSAGE);
+                    messageError.showMessage(false, true, "success", "Procuratore Matricola "+matricolaCopiata+" Trovato Con Successo", errorMessage, jPMessage, btnCloseMessage);
                     datiProcuratore.forEach((Procuratore procuratore)->{
                         inputMatricolaJTF.setText(procuratore.getCode_procuratore());
                         inputNomeJTF.setText(procuratore.getNome());
@@ -373,7 +398,8 @@ public class ModificaDatiProcuratore extends javax.swing.JFrame {
         }
         else {
             Toolkit.getDefaultToolkit().beep();
-            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nSCRIVERE NEL CAMPO LA MATRICOLA DA CERCARE", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nSCRIVERE NEL CAMPO LA MATRICOLA DA CERCARE", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            messageError.showMessage(false, true, "warning", "Scrivere Nel Campo La Matricola Da Cercare", errorMessage, jPMessage, btnCloseMessage);
         }
     }//GEN-LAST:event_btnCercaJTFActionPerformed
 
@@ -391,7 +417,8 @@ public class ModificaDatiProcuratore extends javax.swing.JFrame {
         if(controlloConvalidazione.controlloCercaProcuratore(matricolaDaModificare) == true) {
             if(datiProcuratore.isEmpty()) {
                 Toolkit.getDefaultToolkit().beep();
-                JOptionPane.showMessageDialog(this, "PROCURATORE "+matricolaDaModificare+" NON ESISTE\nNON POSSIBILE MODIFICARLO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                //JOptionPane.showMessageDialog(this, "PROCURATORE "+matricolaDaModificare+" NON ESISTE\nNON POSSIBILE MODIFICARLO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                messageError.showMessage(false, true, "warning", "Procuratore "+matricolaDaModificare+" Non Esiste Non Possibile Modificarlo", errorMessage, jPMessage, btnCloseMessage);
             }
             else {
                 String matricolaNuova = inputMatricolaJTF.getText();
@@ -408,28 +435,44 @@ public class ModificaDatiProcuratore extends javax.swing.JFrame {
                     dataNascitaPresoSql = new java.sql.Date(cambiaDataNascitaJDC.getDate().getTime());
                 } catch(NullPointerException nex) {
                     Toolkit.getDefaultToolkit().beep();
-                    JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nINSERISCI UNA DATA VALIDA", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                    //JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nINSERISCI UNA DATA VALIDA", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                    messageError.showMessage(false, true, "warning", "Inserisci Una Data Valida", errorMessage, jPMessage, btnCloseMessage);
                 }
 
-                if(controlloConvalidazione.controlloModificaProcuratore(matricolaNuova, nomeNuovo, cognomeNuovo, sessoNuovo, nazioneNuova, indirizzoNuovo, telefonoNuovo, codiceFiscaleNuovo, ibanNuovo, String.valueOf(dataNascitaPresoSql)) == true) {
+                if(controlloConvalidazione.controlloModificaProcuratore(matricolaNuova, nomeNuovo, cognomeNuovo, sessoNuovo, nazioneNuova, indirizzoNuovo, telefonoNuovo, codiceFiscaleNuovo, ibanNuovo, dataNascitaPresoSql) == true) {
                     try {
                         controllerProcuratore.aggiornaProcuratore(matricolaNuova, nomeNuovo, cognomeNuovo, sessoNuovo, nazioneNuova, indirizzoNuovo, (java.sql.Date) dataNascitaPresoSql, telefonoNuovo, codiceFiscaleNuovo, ibanNuovo, matricolaDaModificare);
-                        JOptionPane.showMessageDialog(this, "✓ MODIFICA DEL PROCURATORE "+matricolaDaModificare+" EFFETTUATA CON SUCCESSO", "MODIFICA", JOptionPane.INFORMATION_MESSAGE);
+                        //JOptionPane.showMessageDialog(this, "✓ MODIFICA DEL PROCURATORE "+matricolaDaModificare+" EFFETTUATA CON SUCCESSO", "MODIFICA", JOptionPane.INFORMATION_MESSAGE);
+                        messageError.showMessage(false, true, "success", "Modifica Del Procuratore Matricola "+matricolaDaModificare+" Effettuata Con Successo", errorMessage, jPMessage, btnCloseMessage);
                     } catch (ExceptionDao ex) {
                         Logger.getLogger(ModificaDatiProcuratore.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
                 else {
                     Toolkit.getDefaultToolkit().beep();
-                    JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nUNO O PIU' CAMPI MANCANTI", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                    //JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nUNO O PIU' CAMPI MANCANTI", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                    messageError.showMessage(false, true, "warning", "Uno O Piu' Campi Mancanti", errorMessage, jPMessage, btnCloseMessage);
                 }
             }
         }
         else {
             Toolkit.getDefaultToolkit().beep();
-            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nINSERIRE LA MATRICOLA PER TROVARE IL PROCURATORE DA MODIFICARE", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nINSERIRE LA MATRICOLA PER TROVARE IL PROCURATORE DA MODIFICARE", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            messageError.showMessage(false, true, "warning", "Inserire La Matricola Per Trovare Il Procuratore Da Modificare", errorMessage, jPMessage, btnCloseMessage);
         }
     }//GEN-LAST:event_btnModificaJBActionPerformed
+
+    private void inputTelefonoJTFFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputTelefonoJTFFocusGained
+        inputTelefonoJTF.setDocument(new PermessoPerScrivere());
+    }//GEN-LAST:event_inputTelefonoJTFFocusGained
+
+    private void inputTelefonoJTFFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputTelefonoJTFFocusLost
+        inputTelefonoJTF.setDocument(new PermessoPerNonScrivere());
+    }//GEN-LAST:event_inputTelefonoJTFFocusLost
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        this.setState(Frame.ICONIFIED);
+    }//GEN-LAST:event_jLabel2MouseClicked
 
     public String convertiDate(java.util.Date dataDiNascita){
         DateFormat df = new SimpleDateFormat(FORMAT);
@@ -472,6 +515,7 @@ public class ModificaDatiProcuratore extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;

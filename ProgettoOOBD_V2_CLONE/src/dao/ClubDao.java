@@ -109,7 +109,6 @@ public class ClubDao {
             pStmt = connection.prepareStatement(sql);
             pStmt.setString(1, club.getNomeClub());
             pStmt.executeUpdate();
-            JOptionPane.showMessageDialog(null, "CLUB eliminato con successo");
         }catch(SQLException e) {
             throw new ExceptionDao("ERRORE ELIMINAZIONE CLUB FALLITA "+e);
         }
@@ -131,7 +130,6 @@ public class ClubDao {
             stmt = connection.createStatement();
             stmt.executeUpdate(sql);
             connection.commit();
-            JOptionPane.showMessageDialog(null, "CLUB aggirnato con successo");
         }catch(SQLException e) {
             throw new ExceptionDao("ERRORE AGGIORNAMENTO CLUB FALLITA "+e);
         }

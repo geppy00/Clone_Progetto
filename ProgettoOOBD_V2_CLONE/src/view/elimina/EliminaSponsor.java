@@ -6,6 +6,7 @@ import convalidazione.ControlloConvalidazione;
 import convalidazione.MessageError;
 import dao.ExceptionDao;
 import java.awt.Color;
+import java.awt.Frame;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -28,6 +29,8 @@ public class EliminaSponsor extends javax.swing.JFrame {
     public EliminaSponsor() {
         initComponents();
         this.setLocationRelativeTo(null);
+        
+        this.jMessagge.setVisible(false);
     }
 
    
@@ -47,6 +50,7 @@ public class EliminaSponsor extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         btnCloseMessage = new javax.swing.JButton();
         btnLogoutJB2 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -193,6 +197,15 @@ public class EliminaSponsor extends javax.swing.JFrame {
         });
         jPanel1.add(btnLogoutJB2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 0, -1, 40));
 
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_subtract_32px_1.png"))); // NOI18N
+        jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 5, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -303,6 +316,10 @@ public class EliminaSponsor extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_btnLogoutJB2ActionPerformed
 
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        this.setState(Frame.ICONIFIED);
+    }//GEN-LAST:event_jLabel1MouseClicked
+
     /*GET AND SET*/
     public int getIdSponsor() {
         return idSponsor;
@@ -330,6 +347,7 @@ public class EliminaSponsor extends javax.swing.JFrame {
     private javax.swing.JButton btnLogoutJB2;
     private javax.swing.JTextField inputNomeSponsorJTF;
     private javax.swing.JLabel jLMessaggio;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jMessagge;
     private javax.swing.JPanel jPanel1;

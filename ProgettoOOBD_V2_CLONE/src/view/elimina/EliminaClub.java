@@ -7,6 +7,7 @@ import convalidazione.MessageError;
 import dao.ExceptionDao;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Frame;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -55,6 +56,7 @@ public class EliminaClub extends javax.swing.JFrame {
         errorMessage = new javax.swing.JLabel();
         btnCloseMessage = new javax.swing.JButton();
         btnTornaIndietroJB1 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -203,6 +205,15 @@ public class EliminaClub extends javax.swing.JFrame {
         });
         jPanel1.add(btnTornaIndietroJB1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, 60, 30));
 
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_subtract_32px_1.png"))); // NOI18N
+        jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 5, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -253,7 +264,7 @@ public class EliminaClub extends javax.swing.JFrame {
         else {
             Toolkit.getDefaultToolkit().beep();
             //JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nSCRIVERE NEL CAMPO IL CLUB DA CERCARE", "ERRORE", JOptionPane.ERROR_MESSAGE);
-            messageError.showMessage(false, true, "warning", "Scrivere Nel Campo Il Club Fiscale Da Cercare", errorMessage, jPMessage, btnCloseMessage);
+            messageError.showMessage(false, true, "warning", "Scrivere Nel Campo Il Club Da Cercare", errorMessage, jPMessage, btnCloseMessage);
         }
     }//GEN-LAST:event_btnCercaJBActionPerformed
 
@@ -264,7 +275,7 @@ public class EliminaClub extends javax.swing.JFrame {
         if(controlloConvalidazione.controlloCercaClub(nomeClubCercare) == false) {
             Toolkit.getDefaultToolkit().beep();
             //JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nSCRIVERE NEL CAMPO IL CLUB DA ELIMINARE", "ERRORE", JOptionPane.ERROR_MESSAGE);
-            messageError.showMessage(false, true, "warning", "Scrivere Nel Campo Il Club Fiscale Da Cercare", errorMessage, jPMessage, btnCloseMessage);
+            messageError.showMessage(false, true, "warning", "Scrivere Nel Campo Il Club Da Eliminare", errorMessage, jPMessage, btnCloseMessage);
         }
         else {
             if(datiClub.isEmpty()) {
@@ -320,6 +331,10 @@ public class EliminaClub extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnTornaIndietroJB1ActionPerformed
 
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        this.setState(Frame.ICONIFIED);
+    }//GEN-LAST:event_jLabel2MouseClicked
+
     /*GET AND SET*/
     public int getIdClub() {
         return idClub;
@@ -350,6 +365,7 @@ public class EliminaClub extends javax.swing.JFrame {
     private javax.swing.JLabel errorMessage;
     private javax.swing.JTextField inputNomeJTF;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPMessage;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

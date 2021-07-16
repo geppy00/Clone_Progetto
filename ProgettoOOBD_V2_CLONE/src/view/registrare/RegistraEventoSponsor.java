@@ -8,6 +8,7 @@ import convalidazione.PermessoPerNonScrivere;
 import convalidazione.PermessoPerScrivere;
 import dao.ExceptionDao;
 import java.awt.Color;
+import java.awt.Frame;
 import java.awt.Toolkit;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
@@ -76,6 +77,7 @@ public class RegistraEventoSponsor extends javax.swing.JFrame {
         btnCloseMessage = new javax.swing.JButton();
         btnLogoutJB1 = new javax.swing.JButton();
         btnAnnulla = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -254,6 +256,15 @@ public class RegistraEventoSponsor extends javax.swing.JFrame {
         });
         jPanel1.add(btnAnnulla, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 440, 80, 30));
 
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_subtract_32px_1.png"))); // NOI18N
+        jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 15, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -305,7 +316,7 @@ public class RegistraEventoSponsor extends javax.swing.JFrame {
         if(controlloConvalidazione.controlloDescrizioneEvento(descrizione) == true) {
             try {
                 this.jPMessage.setVisible(false);
-                if(controlloConvalidazione.controlloRegistraEvento(String.valueOf(dataInizio), String.valueOf(dataFine), luogo, titolo, String.valueOf(gettoneValue)) == true) {
+                if(controlloConvalidazione.controlloRegistraEvento(dataInizio, dataFine, luogo, titolo, String.valueOf(gettoneValue)) == true) {
                     controllerSponsor.registraEvento(gettoneValue, titolo, luogo, dataInizio, oraInizioTime, dataFine, oraFineTime, Integer.parseInt(this.getIdSponsor()), descrizione);
                     messageError.showMessage(false, true, "success", "Registrazione Effettuata Con Successo", errorMessage, jPMessage, btnCloseMessage);
                     inputTitoloJTF.setText("");
@@ -396,7 +407,7 @@ public class RegistraEventoSponsor extends javax.swing.JFrame {
     }//GEN-LAST:event_inputGettoneEventoJTFFocusGained
 
     private void inputGettoneEventoJTFFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputGettoneEventoJTFFocusLost
-      if(inputGettoneEventoJTF.getText().equals("")){
+      if(inputGettoneEventoJTF.getText().equals("")) {
             inputGettoneEventoJTF.setDocument(new PermessoPerNonScrivere());
             inputGettoneEventoJTF.setText("Gettone");
             inputGettoneEventoJTF.setForeground(new Color(255,255,255));
@@ -407,7 +418,6 @@ public class RegistraEventoSponsor extends javax.swing.JFrame {
         if(inputDescrizioneJTA.getText().equals("Descrizione")) {
             inputDescrizioneJTA.setText("");
             inputDescrizioneJTA.setForeground(new Color(255,255,255));
-            
         }
     }//GEN-LAST:event_inputDescrizioneJTAFocusGained
 
@@ -421,6 +431,10 @@ public class RegistraEventoSponsor extends javax.swing.JFrame {
     private void inputGettoneEventoJTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputGettoneEventoJTFActionPerformed
         
     }//GEN-LAST:event_inputGettoneEventoJTFActionPerformed
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        this.setState(Frame.ICONIFIED);
+    }//GEN-LAST:event_jLabel2MouseClicked
 
     
     /*GET AND SET*/
@@ -452,6 +466,7 @@ public class RegistraEventoSponsor extends javax.swing.JFrame {
     private javax.swing.JTextField inputLuogoEventoJTF;
     private javax.swing.JTextField inputTitoloJTF;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPMessage;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

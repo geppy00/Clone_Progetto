@@ -5,6 +5,7 @@ import dao.DataAccessObject;
 import dao.ExceptionDao;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Frame;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -89,6 +90,7 @@ public class SezioneGettoniEventoAtleta extends javax.swing.JFrame {
         btnTornaIndietroJB = new javax.swing.JButton();
         btnClose = new javax.swing.JButton();
         jLDataAttuale = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -152,6 +154,15 @@ public class SezioneGettoniEventoAtleta extends javax.swing.JFrame {
         jLDataAttuale.setText("13/01/2023");
         jPanel1.add(jLDataAttuale, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 120, -1, -1));
 
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_subtract_32px_1.png"))); // NOI18N
+        jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 15, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -177,6 +188,10 @@ public class SezioneGettoniEventoAtleta extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_btnCloseActionPerformed
 
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        this.setState(Frame.ICONIFIED);
+    }//GEN-LAST:event_jLabel1MouseClicked
+
      /*GET AND SET*/
     public String getIdAtleta() {
         return idAtleta;
@@ -199,6 +214,7 @@ public class SezioneGettoniEventoAtleta extends javax.swing.JFrame {
     private javax.swing.JButton btnClose;
     private javax.swing.JButton btnTornaIndietroJB;
     private javax.swing.JLabel jLDataAttuale;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblGettoniEventoJT;

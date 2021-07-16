@@ -3,10 +3,14 @@ package view.registrare;
 
 import controller.ControllerClub;
 import convalidazione.ControlloConvalidazione;
+import convalidazione.MessageError;
+import convalidazione.PermessoPerNonScrivere;
+import convalidazione.PermessoPerScrivere;
 import dao.DataAccessObject;
 import dao.ExceptionDao;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Frame;
 import java.awt.Toolkit;
 import java.sql.Connection;
 import view.SezionePagamentoView;
@@ -27,6 +31,7 @@ public class RegistraPagamento extends javax.swing.JFrame {
 
     /*CONTROLLORE PER GESTIRE GLI ERRORI*/
     private ControlloConvalidazione controlloConvalidazione = new ControlloConvalidazione();
+    private MessageError messageError = new MessageError();
     
     /*DATI IMPORTANTI*/
     private String idClubStr;
@@ -105,6 +110,7 @@ public class RegistraPagamento extends javax.swing.JFrame {
         errorMessage = new javax.swing.JLabel();
         btnCloseMessage = new javax.swing.JButton();
         btnLogoutJB = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -254,6 +260,15 @@ public class RegistraPagamento extends javax.swing.JFrame {
         });
         jPanel1.add(btnLogoutJB, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 0, -1, 40));
 
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_subtract_32px_1.png"))); // NOI18N
+        jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 5, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -280,7 +295,8 @@ public class RegistraPagamento extends javax.swing.JFrame {
             importo = Float.parseFloat(importoStr);
         }catch(NumberFormatException nex) {
             Toolkit.getDefaultToolkit().beep();
-            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nINSERIRE UN NUMERO VALIDO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nINSERIRE UN NUMERO VALIDO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            messageError.showMessage(false, true, "warning","Inserire Un Numero Valido" , errorMessage, jPMessage, btnCloseMessage);
         }
         
         String idDestinatario = inputIdDestinatarioJTF.getText();
@@ -289,14 +305,16 @@ public class RegistraPagamento extends javax.swing.JFrame {
         if(controlloConvalidazione.controlloRegistraPagamento(importoStr, idDestinatario) == true) {
             try {
                 controllerClub.effettuaPagamento(importo, idDestinatario, this.getIdClub(), (java.sql.Date) javaDate);
-                JOptionPane.showMessageDialog(this, "PAGAMENTO EFFETTUATO CON SUCCESSO\nRiepilogo\nImporto: "+importo+"\nDestinatario: "+idDestinatario+"\nData Pagamento: "+javaDate+"\nID Mittente: "+this.getIdClub(), "REGISTRAZIONE PAGAMENTO", JOptionPane.INFORMATION_MESSAGE);
+                //JOptionPane.showMessageDialog(this, "PAGAMENTO EFFETTUATO CON SUCCESSO\nRiepilogo\nImporto: "+importo+"\nDestinatario: "+idDestinatario+"\nData Pagamento: "+javaDate+"\nID Mittente: "+this.getIdClub(), "REGISTRAZIONE PAGAMENTO", JOptionPane.INFORMATION_MESSAGE);
+                messageError.showMessage(false, true, "success", "Pagamento Effettuato Con Successo", errorMessage , jPMessage, btnCloseMessage);
             } catch (ExceptionDao ex) {
                 Logger.getLogger(RegistraPagamento.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         else {
             Toolkit.getDefaultToolkit().beep();
-            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nUNO O PIU' CAMPI MANCANTI", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nUNO O PIU' CAMPI MANCANTI", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            messageError.showMessage(false, true, "warning","Uno O Piu' Campi Mancanti" , errorMessage, jPMessage, btnCloseMessage);
         }
     }//GEN-LAST:event_btnPagaJBActionPerformed
 
@@ -319,15 +337,15 @@ public class RegistraPagamento extends javax.swing.JFrame {
          if(inputImportoJTF.getText().equals("L'Importo")){
             inputImportoJTF.setText("");
             inputImportoJTF.setForeground(new Color(255,255,255));
-            
+            inputImportoJTF.setDocument(new PermessoPerScrivere());    
         }
     }//GEN-LAST:event_inputImportoJTFFocusGained
 
     private void inputImportoJTFFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputImportoJTFFocusLost
         if(inputImportoJTF.getText().equals("")){
+            inputImportoJTF.setDocument(new PermessoPerNonScrivere());
             inputImportoJTF.setText("L'Importo");
-            inputImportoJTF.setForeground(new Color(255,255,255));
-            
+            inputImportoJTF.setForeground(new Color(255,255,255)); 
         }
     }//GEN-LAST:event_inputImportoJTFFocusLost
 
@@ -346,6 +364,10 @@ public class RegistraPagamento extends javax.swing.JFrame {
             
         }
     }//GEN-LAST:event_inputIdDestinatarioJTFFocusLost
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        this.setState(Frame.ICONIFIED);
+    }//GEN-LAST:event_jLabel2MouseClicked
 
     
     /*GET AND SET*/
@@ -386,6 +408,7 @@ public class RegistraPagamento extends javax.swing.JFrame {
     private javax.swing.JTextField inputIdDestinatarioJTF;
     private javax.swing.JTextField inputImportoJTF;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPMessage;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

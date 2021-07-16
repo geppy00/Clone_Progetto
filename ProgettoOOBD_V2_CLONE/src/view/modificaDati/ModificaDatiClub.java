@@ -3,8 +3,12 @@ package view.modificaDati;
 
 import controller.ControllerClub;
 import convalidazione.ControlloConvalidazione;
+import convalidazione.MessageError;
+import convalidazione.PermessoPerNonScrivere;
+import convalidazione.PermessoPerScrivere;
 import dao.ExceptionDao;
 import java.awt.Color;
+import java.awt.Frame;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -18,6 +22,7 @@ public class ModificaDatiClub extends javax.swing.JFrame {
 
     /*CONTROLLORE PER GESTIRE GLI ERRORI*/
     private ControlloConvalidazione controlloConvalidazione = new ControlloConvalidazione();
+    private MessageError messageError = new MessageError();  
     
     /*DATI DEL PROCURATORE*/
     private ArrayList<Club> datiClub = new ArrayList<Club>();
@@ -50,6 +55,7 @@ public class ModificaDatiClub extends javax.swing.JFrame {
         btnTornaIndietroJB = new javax.swing.JButton();
         btnModificaJB = new javax.swing.JButton();
         inputNomeJTF1 = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -121,6 +127,14 @@ public class ModificaDatiClub extends javax.swing.JFrame {
         inputTelefonoJTF.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         inputTelefonoJTF.setForeground(new java.awt.Color(221, 231, 231));
         inputTelefonoJTF.setBorder(null);
+        inputTelefonoJTF.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                inputTelefonoJTFFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                inputTelefonoJTFFocusLost(evt);
+            }
+        });
         jPanel1.add(inputTelefonoJTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 290, 250, 30));
 
         inputNomeCercareJTF.setBackground(new java.awt.Color(9, 46, 119));
@@ -212,6 +226,15 @@ public class ModificaDatiClub extends javax.swing.JFrame {
         inputNomeJTF1.setBorder(null);
         jPanel1.add(inputNomeJTF1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 230, 510, 30));
 
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_subtract_32px_1.png"))); // NOI18N
+        jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 5, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -244,12 +267,14 @@ public class ModificaDatiClub extends javax.swing.JFrame {
                 datiClub = controllerClub.cercaClub(nomeClubCercare);
                 if(datiClub.isEmpty()) {
                     Toolkit.getDefaultToolkit().beep();
-                    JOptionPane.showMessageDialog(this, "CLUB "+nomeClubCercare+" NON TROVATO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                    //JOptionPane.showMessageDialog(this, "CLUB "+nomeClubCercare+" NON TROVATO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                    messageError.showMessage(false, true, "warning", "Club "+nomeClubCercare+" Non Trovato", errorMessage, jPMessage, btnCloseMessage);
                 }
                 else {
-                    JOptionPane.showMessageDialog(this, "✓ CLUB "+nomeClubCercare+" TROVATO CON SUCCESSO", "RICERCA", JOptionPane.INFORMATION_MESSAGE);
+                    //JOptionPane.showMessageDialog(this, "✓ CLUB "+nomeClubCercare+" TROVATO CON SUCCESSO", "RICERCA", JOptionPane.INFORMATION_MESSAGE);
+                    messageError.showMessage(false, true, "success", "Club "+nomeClubCercare+" Trovato Con Successo", errorMessage, jPMessage, btnCloseMessage);
                     datiClub.forEach((Club club) -> {
-                        inputNomeCercareJTF.setText(club.getNomeClub());
+                        inputNomeJTF1.setText(club.getNomeClub());
                         inputIndirizzoJTF.setText(club.getIndirizzo());
                         inputTelefonoJTF.setText(club.getTelefono());
                     });
@@ -260,7 +285,8 @@ public class ModificaDatiClub extends javax.swing.JFrame {
         }
         else {
             Toolkit.getDefaultToolkit().beep();
-            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nSCRIVERE NEL CAMPO IL CLUB DA CERCARE", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nSCRIVERE NEL CAMPO IL CLUB DA CERCARE", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            messageError.showMessage(false, true, "warning", "Scrivere Nel Campo Il Club Da Cercare", errorMessage, jPMessage, btnCloseMessage);
         }
     }//GEN-LAST:event_btnCercaJBActionPerformed
 
@@ -277,7 +303,8 @@ public class ModificaDatiClub extends javax.swing.JFrame {
         if(controlloConvalidazione.controlloCercaClub(nomeClubCercare) == true) {
             if(datiClub.isEmpty()) {
                 Toolkit.getDefaultToolkit().beep();
-                JOptionPane.showMessageDialog(this, "CLUB "+nomeClubCercare+" NON ESISTE\nNON POSSIBILE MODIFICARLO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                //JOptionPane.showMessageDialog(this, "CLUB "+nomeClubCercare+" NON ESISTE\nNON POSSIBILE MODIFICARLO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                messageError.showMessage(false, true, "warning", "Club "+nomeClubCercare+" Non Esiste Non Possibile Modificarlo", errorMessage, jPMessage, btnCloseMessage);
             }
             else {
                 String nome = inputNomeCercareJTF.getText();
@@ -286,20 +313,23 @@ public class ModificaDatiClub extends javax.swing.JFrame {
                 if(controlloConvalidazione.controlloModificaClub(nome, indirizzo, telefono) == true) {
                     try {
                         controllerClub.aggiornaClub(nomeClubCercare, nome, indirizzo, telefono);
-                        JOptionPane.showMessageDialog(this, "✓ MODIFICA DEL CLUB "+nomeClubCercare+" EFFETTUATA CON SUCCESSO", "MODIFICA", JOptionPane.INFORMATION_MESSAGE);
+                        //JOptionPane.showMessageDialog(this, "✓ MODIFICA DEL CLUB "+nomeClubCercare+" EFFETTUATA CON SUCCESSO", "MODIFICA", JOptionPane.INFORMATION_MESSAGE);
+                        messageError.showMessage(false, true, "success", "Modifica Del Club "+nomeClubCercare+" Effettuata Con Successo", errorMessage, jPMessage, btnCloseMessage);
                     } catch (ExceptionDao ex) {
                         Logger.getLogger(ModificaDatiClub.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
                 else {
                     Toolkit.getDefaultToolkit().beep();
-                    JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nUNO O PIU' CAMPI MANCANTI", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                    //JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nUNO O PIU' CAMPI MANCANTI", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                    messageError.showMessage(false, true, "warning", "Uno O Piu' Campi Mancanti", errorMessage, jPMessage, btnCloseMessage);
                 }
             }
         }
         else {
             Toolkit.getDefaultToolkit().beep();
-            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nINSERIRE IL NOME PER TROVARE IL CLUB DA MODIFICARE", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nINSERIRE IL NOME PER TROVARE IL CLUB DA MODIFICARE", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            messageError.showMessage(false, true, "warning", "Inserire Il Nome Per Trovare Il Club Da Modificare", errorMessage, jPMessage, btnCloseMessage);
         }
     }//GEN-LAST:event_btnModificaJBActionPerformed
 
@@ -316,6 +346,18 @@ public class ModificaDatiClub extends javax.swing.JFrame {
             inputNomeCercareJTF.setForeground(new Color(231,231,231));
        }
     }//GEN-LAST:event_inputNomeCercareJTFFocusLost
+
+    private void inputTelefonoJTFFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputTelefonoJTFFocusGained
+        inputTelefonoJTF.setDocument(new PermessoPerScrivere());
+    }//GEN-LAST:event_inputTelefonoJTFFocusGained
+
+    private void inputTelefonoJTFFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputTelefonoJTFFocusLost
+        inputTelefonoJTF.setDocument(new PermessoPerNonScrivere());
+    }//GEN-LAST:event_inputTelefonoJTFFocusLost
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        this.setState(Frame.ICONIFIED);
+    }//GEN-LAST:event_jLabel2MouseClicked
 
 
     public static void main(String args[]) {
@@ -338,6 +380,7 @@ public class ModificaDatiClub extends javax.swing.JFrame {
     private javax.swing.JTextField inputNomeJTF1;
     private javax.swing.JTextField inputTelefonoJTF;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;

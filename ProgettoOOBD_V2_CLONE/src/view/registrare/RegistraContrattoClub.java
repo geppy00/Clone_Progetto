@@ -8,6 +8,7 @@ import convalidazione.PermessoPerNonScrivere;
 import convalidazione.PermessoPerScrivere;
 import dao.ExceptionDao;
 import java.awt.Color;
+import java.awt.Frame;
 import java.awt.Toolkit;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -25,6 +26,7 @@ public class RegistraContrattoClub extends javax.swing.JFrame {
 
     /*CONTROLLORE PER GESTIRE GLI ERRORI*/
     private ControlloConvalidazione controlloConvalidazione = new ControlloConvalidazione();
+    private MessageError messageError = new MessageError();
     
     /*DATI IMPORTANTI*/
     private String idProcuratore;
@@ -68,6 +70,7 @@ public class RegistraContrattoClub extends javax.swing.JFrame {
         errorMessage = new javax.swing.JLabel();
         btnCloseMessage = new javax.swing.JButton();
         btnLogoutJB1 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         jButton1.setText("jButton1");
 
@@ -294,6 +297,15 @@ public class RegistraContrattoClub extends javax.swing.JFrame {
         });
         jPanel1.add(btnLogoutJB1, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 10, -1, 40));
 
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_subtract_32px_1.png"))); // NOI18N
+        jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 15, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -317,7 +329,6 @@ public class RegistraContrattoClub extends javax.swing.JFrame {
 
     private void btnStipulaContrattoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStipulaContrattoActionPerformed
         ControllerProcuratore controllerProcuratore = new ControllerProcuratore();
-        MessageError messageError = new MessageError();
         String idAtleta = inputCfAtletaJTF.getText();
         int idClub = 0;
         java.sql.Date dataInizio = null;
@@ -331,24 +342,22 @@ public class RegistraContrattoClub extends javax.swing.JFrame {
             valContratto = Float.parseFloat(inputValContrattoJTF.getText());
         }catch(NullPointerException npe) {
             Toolkit.getDefaultToolkit().beep();
-             messageError.showMessage(false, true, "warning","Data non Valida, inserisca una Data Valida" ,errorMessage , jPMessage, btnCercaJB);
+            messageError.showMessage(false, true, "warning","Data non Valida, inserisca una Data Valida" ,errorMessage , jPMessage, btnCloseMessage);
         }catch(NumberFormatException nfe) {
             Toolkit.getDefaultToolkit().beep();
-             messageError.showMessage(false, true, "warning","Inserisce Un Numero Valido" ,errorMessage , jPMessage, btnCercaJB);
+            messageError.showMessage(false, true, "warning","Inserisce Un Numero Valido" ,errorMessage , jPMessage, btnCloseMessage);
         }
         
-        if(controlloConvalidazione.controllaStipulaContratto(idAtleta, String.valueOf(idClub), String.valueOf(dataInizio), String.valueOf(dataFine), String.valueOf(valContratto)) == true) {
+        if(controlloConvalidazione.controllaStipulaContratto(idAtleta, String.valueOf(idClub), dataInizio, dataFine, String.valueOf(valContratto)) == true) {
             if(datiAtleta.isEmpty()) {
                 Toolkit.getDefaultToolkit().beep();
-                 messageError.showMessage(false, true, "warning","L'Atleta Con Codice Fiscale"+idAtleta+" Non Esiste" ,errorMessage , jPMessage, btnCercaJB);
+                messageError.showMessage(false, true, "warning","L'Atleta Con Codice Fiscale "+idAtleta+" Non Esiste" ,errorMessage , jPMessage, btnCloseMessage);
                 
             }
             else {
                 try {
                     controllerProcuratore.registraContratto(idAtleta, idClub, dataInizio, dataFine, valContratto, "CLUB");
-                     messageError.showMessage(false, true, "success","L'Atleta "+idAtleta+"Contratto Stabiltto con Sucesso" ,errorMessage , jPMessage, btnCercaJB);
-                    
-                   
+                    messageError.showMessage(false, true, "success","L'Atleta "+idAtleta+" Contratto Stabiltto con Sucesso" ,errorMessage , jPMessage, btnCloseMessage);
                 } catch (ExceptionDao ex) {
                     Logger.getLogger(RegistraContrattoClub.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -356,15 +365,13 @@ public class RegistraContrattoClub extends javax.swing.JFrame {
         }
         else {
             Toolkit.getDefaultToolkit().beep();
-            messageError.showMessage(false, true, "warning","L'Atleta "+idAtleta+"Mancano Campi Obbligatori da Compilare" ,errorMessage , jPMessage, btnCercaJB);
+            messageError.showMessage(false, true, "warning","L'Atleta "+idAtleta+"Mancano Campi Obbligatori da Compilare" ,errorMessage , jPMessage, btnCloseMessage);
                
         }
     }//GEN-LAST:event_btnStipulaContrattoActionPerformed
 
     private void btnCercaJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCercaJBActionPerformed
         ControllerProcuratore controllerProcuratore = new ControllerProcuratore();
-         MessageError messageError = new MessageError();
-         
         String idAtleta = inputCfAtletaJTF.getText();
         
         if(controlloConvalidazione.controlloAtleta(idAtleta) == true) {
@@ -372,13 +379,11 @@ public class RegistraContrattoClub extends javax.swing.JFrame {
                 datiAtleta = controllerProcuratore.cercaSportivo(idAtleta);
                 if(datiAtleta.isEmpty()) {
                     Toolkit.getDefaultToolkit().beep();
-                   
-                    messageError.showMessage(false, true, "warning","L'Atleta "+idAtleta+" Non è Stato Trovato" ,errorMessage , jPMessage, btnCercaJB);
-                    
+                    messageError.showMessage(false, true, "warning","L'Atleta "+idAtleta+" Non è Stato Trovato" ,errorMessage , jPMessage, btnCloseMessage);  
                 }
                 else {
-                 
-                    messageError.closeFiestraMessage(jPMessage);
+                    //messageError.closeFiestraMessage(jPMessage);
+                    messageError.showMessage(false, true, "success", "Registrazione Effettuata Con Successo", errorMessage, jPMessage, btnCloseMessage);
                     datiAtleta.forEach((Atleta atleta)->{
                         nomeJTF.setText(atleta.getNome());
                         cognomeJTF.setText(atleta.getCognmome());
@@ -399,7 +404,6 @@ public class RegistraContrattoClub extends javax.swing.JFrame {
 
     private void inputIdClubJTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputIdClubJTFActionPerformed
         ControllerProcuratore controllerProcuratore = new ControllerProcuratore();
-        MessageError messageError = new MessageError();
         int idClub = Integer.parseInt(inputIdClubJTF.getText());
         
         if(controlloConvalidazione.controllaId(String.valueOf(idClub)) == true) {
@@ -410,7 +414,7 @@ public class RegistraContrattoClub extends javax.swing.JFrame {
                 else {
                     Toolkit.getDefaultToolkit().beep();
                     inputNomeClubJTF.setText("");
-                     messageError.showMessage(false, true, "warning","Club con ID"+idClub+" Non è stato Trovato" ,errorMessage , jPMessage, btnCercaJB);
+                     messageError.showMessage(false, true, "warning","Club con ID"+idClub+" Non è stato Trovato" ,errorMessage , jPMessage, btnCloseMessage);
                 }
             } catch (ExceptionDao ex) {
                 Logger.getLogger(RegistraContrattoClub.class.getName()).log(Level.SEVERE, null, ex);
@@ -418,7 +422,7 @@ public class RegistraContrattoClub extends javax.swing.JFrame {
         }
         else {
             Toolkit.getDefaultToolkit().beep();
-             messageError.showMessage(false, true, "warning","Scrive L'ID Del Club" ,errorMessage , jPMessage, btnCercaJB);
+             messageError.showMessage(false, true, "warning","Scrive L'ID Del Club" ,errorMessage , jPMessage, btnCloseMessage);
             
         }
     }//GEN-LAST:event_inputIdClubJTFActionPerformed
@@ -472,34 +476,40 @@ public class RegistraContrattoClub extends javax.swing.JFrame {
       if(inputIdClubJTF.getText().equals("ID Club")){
             inputIdClubJTF.setText("");
             inputIdClubJTF.setForeground(new Color(255,255,255));
-            
+            inputIdClubJTF.setDocument(new PermessoPerScrivere()); 
         }
     }//GEN-LAST:event_inputIdClubJTFFocusGained
 
     private void inputIdClubJTFFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputIdClubJTFFocusLost
         if(inputIdClubJTF.getText().equals("")){
+            inputIdClubJTF.setDocument(new PermessoPerNonScrivere());
             inputIdClubJTF.setText("ID Club");
             inputIdClubJTF.setForeground(new Color(231,231,231));
-            
         }
     }//GEN-LAST:event_inputIdClubJTFFocusLost
 
     private void inputValContrattoJTFFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputValContrattoJTFFocusGained
        if(inputValContrattoJTF.getText().equals("Valore Contrattuale")){
-            inputValContrattoJTF.setText("");
-            inputValContrattoJTF.setForeground(new Color(255,255,255));
-            inputValContrattoJTF.setDocument(new PermessoPerScrivere());
+           inputIdClubJTF.setDocument(new PermessoPerNonScrivere());
+           inputValContrattoJTF.setText("");
+           inputValContrattoJTF.setForeground(new Color(255,255,255));
+           inputValContrattoJTF.setDocument(new PermessoPerScrivere());
         }
     }//GEN-LAST:event_inputValContrattoJTFFocusGained
 
     private void inputValContrattoJTFFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputValContrattoJTFFocusLost
-       inputValContrattoJTF.setDocument(new PermessoPerNonScrivere());
+      
         if(inputValContrattoJTF.getText().equals("")){
+            inputValContrattoJTF.setDocument(new PermessoPerNonScrivere());
             inputValContrattoJTF.setText("Valore Contrattuale");
             inputValContrattoJTF.setForeground(new Color(255,255,255));
         }
        
     }//GEN-LAST:event_inputValContrattoJTFFocusLost
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        this.setState(Frame.ICONIFIED);
+    }//GEN-LAST:event_jLabel2MouseClicked
 
     public void DataInizioJDCMouseClicked(java.awt.event.MouseEvent evt) {
        
@@ -541,6 +551,7 @@ public class RegistraContrattoClub extends javax.swing.JFrame {
     private javax.swing.JTextField inputValContrattoJTF;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPMessage;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField nomeJTF;

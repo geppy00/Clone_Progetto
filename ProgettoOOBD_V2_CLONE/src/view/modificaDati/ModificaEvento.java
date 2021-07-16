@@ -3,7 +3,11 @@ package view.modificaDati;
 
 import controller.ControllerSponsor;
 import convalidazione.ControlloConvalidazione;
+import convalidazione.MessageError;
+import convalidazione.PermessoPerNonScrivere;
+import convalidazione.PermessoPerScrivere;
 import dao.ExceptionDao;
+import java.awt.Frame;
 import java.awt.Toolkit;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -24,6 +28,7 @@ public class ModificaEvento extends javax.swing.JFrame {
     
     /*CONTROLLORE PER GESTIRE GLI ERRORI*/
     private ControlloConvalidazione controlloConvalidazione = new ControlloConvalidazione();
+    private MessageError messageError = new MessageError();
     
     /*DATI IMPORTANTI*/
     private ArrayList<Evento> datiEvento = new ArrayList<Evento>();
@@ -55,7 +60,8 @@ public class ModificaEvento extends javax.swing.JFrame {
                 datiEvento = controllerSponsor.prendiDatiEvento(this.getIdEvento());
                 if(datiEvento.isEmpty()) {
                     Toolkit.getDefaultToolkit().beep();
-                    JOptionPane.showMessageDialog(this, "EVENTO CON ID UGUALE AD "+this.getIdEvento()+" NON TROVATO\nNON POSSIBILE MODIFICARLO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                    //JOptionPane.showMessageDialog(this, "EVENTO CON ID UGUALE AD "+this.getIdEvento()+" NON TROVATO\nNON POSSIBILE MODIFICARLO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                    messageError.showMessage(false, true, "warning", "Evento Con Id "+this.getIdEvento()+" Non Trovato Non Possibile Modificarlo", errorMessage, jPMessage, btnCloseMessage);
                     ElencoEventiView elencoEventiView = new ElencoEventiView(this.getIdSponsor());
                     elencoEventiView.setVisible(true);
                     this.setVisible(false);
@@ -76,12 +82,14 @@ public class ModificaEvento extends javax.swing.JFrame {
             } catch (ExceptionDao ex) {
                 Toolkit.getDefaultToolkit().beep();
                 //Logger.getLogger(ModificaEvento.class.getName()).log(Level.SEVERE, null, ex);
-                JOptionPane.showMessageDialog(this, "CI E' STATO UN PROBLEMA NEL RICAVARE I DATI\nCI SCUSIAMO PER L'INCONVENINETE", "WARNING", JOptionPane.WARNING_MESSAGE);
+                //JOptionPane.showMessageDialog(this, "CI E' STATO UN PROBLEMA NEL RICAVARE I DATI\nCI SCUSIAMO PER L'INCONVENINETE", "WARNING", JOptionPane.WARNING_MESSAGE);
+                messageError.showMessage(false, true, "warning", "Problema Nel Ricavare I Dati Ci Scusiamo Per L'inconveniente", errorMessage, jPMessage, btnCloseMessage);
             }
         }
         else {
             Toolkit.getDefaultToolkit().beep();
-            JOptionPane.showMessageDialog(this, "CI E' STATO UN PROBLEMA NEL RICAVARE I DATI\nRIPROVA A SELEZIONE QUESTO EVENTO", "WARNING", JOptionPane.WARNING_MESSAGE);
+            //JOptionPane.showMessageDialog(this, "CI E' STATO UN PROBLEMA NEL RICAVARE I DATI\nRIPROVA A SELEZIONE QUESTO EVENTO", "WARNING", JOptionPane.WARNING_MESSAGE);
+            messageError.showMessage(false, true, "warning", "Problema Nel Ricavare I Dati Riprova A Selezionare Questo Evento", errorMessage, jPMessage, btnCloseMessage);
             ElencoEventiView elencoEventiView = new ElencoEventiView(this.getIdSponsor());
             elencoEventiView.setVisible(true);
             this.setVisible(false);
@@ -97,7 +105,8 @@ public class ModificaEvento extends javax.swing.JFrame {
         } catch (ParseException ex) {
             Toolkit.getDefaultToolkit().beep();
             //Logger.getLogger(RegistraEventoSponsor.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nINSERIRE UN ORARIO VALIDO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nINSERIRE UN ORARIO VALIDO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            messageError.showMessage(false, true, "warning", "Inserire Un Orario Valido", errorMessage, jPMessage, btnCloseMessage);
         }
         
         return null;
@@ -134,6 +143,7 @@ public class ModificaEvento extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -179,6 +189,14 @@ public class ModificaEvento extends javax.swing.JFrame {
         inputGettoneEventoJTF.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         inputGettoneEventoJTF.setForeground(new java.awt.Color(231, 231, 231));
         inputGettoneEventoJTF.setBorder(null);
+        inputGettoneEventoJTF.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                inputGettoneEventoJTFFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                inputGettoneEventoJTFFocusLost(evt);
+            }
+        });
         inputGettoneEventoJTF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 inputGettoneEventoJTFActionPerformed(evt);
@@ -345,6 +363,15 @@ public class ModificaEvento extends javax.swing.JFrame {
         jLabel17.setText("Ora Inzio");
         jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 290, 80, 30));
 
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_subtract_32px_1.png"))); // NOI18N
+        jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 15, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -391,7 +418,8 @@ public class ModificaEvento extends javax.swing.JFrame {
             dataFine = new java.sql.Date(inputDataFineJDC.getDate().getTime());
             }catch(NullPointerException nex) {
                 Toolkit.getDefaultToolkit().beep();
-                JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nINSERIRE UNA DATA VALIDA", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                //JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nINSERIRE UNA DATA VALIDA", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                messageError.showMessage(false, true, "warning", "Inserire Una Data Valida", errorMessage, jPMessage, btnCloseMessage);
             }
             
             String oraInizio = inputOraInizioJTF.getText();
@@ -403,16 +431,18 @@ public class ModificaEvento extends javax.swing.JFrame {
                 gettoneValue = Double.parseDouble(inputGettoneEventoJTF.getText());
             }catch(NumberFormatException nfe) {
                 Toolkit.getDefaultToolkit().beep();
-                JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nINSERIRE UN NUMERO VALIDO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                //JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nINSERIRE UN NUMERO VALIDO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                messageError.showMessage(false, true, "warning", "Inserire Un Numero Valido", errorMessage, jPMessage, btnCloseMessage);
             }
             
             String descrizione = inputDescrizioneJTA.getText();
             
             if(controlloConvalidazione.controlloDescrizioneEvento(descrizione) == true) {
-                if(controlloConvalidazione.controlloModificaEvento(String.valueOf(dataInizio), String.valueOf(dataFine), titolo, titolo, String.valueOf(gettoneValue), String.valueOf(oraInizioTime), String.valueOf(oraFineTime)) == true) {
+                if(controlloConvalidazione.controlloModificaEvento(dataInizio, dataFine, titolo, titolo, String.valueOf(gettoneValue), String.valueOf(oraInizioTime), String.valueOf(oraFineTime)) == true) {
                     if(datiEvento.isEmpty()) {
                         Toolkit.getDefaultToolkit().beep();
-                        JOptionPane.showMessageDialog(this, "EVENTO CON ID "+this.getIdEvento()+" NON ESISTE\nNON POSSIBILE MODIFICARLO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                        //JOptionPane.showMessageDialog(this, "EVENTO CON ID "+this.getIdEvento()+" NON ESISTE\nNON POSSIBILE MODIFICARLO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                        messageError.showMessage(false, true, "warning", "Evento Con Id "+this.getIdEvento()+" Non Esiste Non Possibile Modificarlo", errorMessage, jPMessage, btnCloseMessage);
                         ElencoEventiView elencoEventiView = new ElencoEventiView(this.getIdSponsor());
                         elencoEventiView.setVisible(true);
                         this.setVisible(false);
@@ -420,7 +450,13 @@ public class ModificaEvento extends javax.swing.JFrame {
                     else {
                         try {
                             controllerSponsor.aggiornaEvento(gettoneValue, this.getIdEvento(), titolo, indirizzo, dataInizio, oraInizioTime, dataFine, oraFineTime, Integer.parseInt(this.getIdSponsor()), descrizione);
-                            JOptionPane.showMessageDialog(this, "✓ MODIFICA DELL' EVENTO CON ID"+this.getIdEvento()+" EFFETTUATA CON SUCCESSO", "MODIFICA", JOptionPane.INFORMATION_MESSAGE);
+                            //JOptionPane.showMessageDialog(this, "✓ MODIFICA DELL' EVENTO CON ID"+this.getIdEvento()+" EFFETTUATA CON SUCCESSO", "MODIFICA", JOptionPane.INFORMATION_MESSAGE);
+                            messageError.showMessage(false, true, "success", "Modifica Del Evento Con Id "+this.getIdEvento()+" Effettuata Con Successo", errorMessage, jPMessage, btnCloseMessage);
+                            try {
+                                java.util.concurrent.TimeUnit.SECONDS.sleep(3);
+                            } catch (InterruptedException ex) {
+                                Logger.getLogger(ModificaEvento.class.getName()).log(Level.SEVERE, null, ex);
+                            }
                             ElencoEventiView elencoEventiView = new ElencoEventiView(this.getIdSponsor());
                             elencoEventiView.setVisible(true);
                             this.setVisible(false);
@@ -432,12 +468,19 @@ public class ModificaEvento extends javax.swing.JFrame {
             }
             else {
                 Toolkit.getDefaultToolkit().beep();
-                JOptionPane.showMessageDialog(this, "DESCRIZIONE MASSIMO 280 CARATTERI", "WARNING", JOptionPane.WARNING_MESSAGE);
+                //JOptionPane.showMessageDialog(this, "DESCRIZIONE MASSIMO 280 CARATTERI", "WARNING", JOptionPane.WARNING_MESSAGE);
+                messageError.showMessage(false, true, "warning", "Descrizione Massimo 280 Caratteri", errorMessage, jPMessage, btnCloseMessage);
             }
         }
         else {
             Toolkit.getDefaultToolkit().beep();
-            JOptionPane.showMessageDialog(this, "CI E' STATO UN PROBLEMA NEL RICAVARE I DATI\nRIPROVA A SELEZIONE QUESTO EVENTO", "WARNING", JOptionPane.WARNING_MESSAGE);
+            //JOptionPane.showMessageDialog(this, "CI E' STATO UN PROBLEMA NEL RICAVARE I DATI\nRIPROVA A SELEZIONE QUESTO EVENTO", "WARNING", JOptionPane.WARNING_MESSAGE);
+            messageError.showMessage(false, true, "warning", "Problema Nel Ricavare I Dati Riprova A Selezionare Questo Evento", errorMessage, jPMessage, btnCloseMessage);
+            try {
+                java.util.concurrent.TimeUnit.SECONDS.sleep(3);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(ModificaEvento.class.getName()).log(Level.SEVERE, null, ex);
+            }
             ElencoEventiView elencoEventiView = new ElencoEventiView(this.getIdSponsor());
             elencoEventiView.setVisible(true);
             this.setVisible(false);
@@ -462,6 +505,18 @@ public class ModificaEvento extends javax.swing.JFrame {
     private void inpuIndirizzoJTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inpuIndirizzoJTFActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_inpuIndirizzoJTFActionPerformed
+
+    private void inputGettoneEventoJTFFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputGettoneEventoJTFFocusGained
+        inputGettoneEventoJTF.setDocument(new PermessoPerScrivere());
+    }//GEN-LAST:event_inputGettoneEventoJTFFocusGained
+
+    private void inputGettoneEventoJTFFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputGettoneEventoJTFFocusLost
+        inputGettoneEventoJTF.setDocument(new PermessoPerNonScrivere());
+    }//GEN-LAST:event_inputGettoneEventoJTFFocusLost
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        this.setState(Frame.ICONIFIED);
+    }//GEN-LAST:event_jLabel2MouseClicked
 
     /*GET AND SET*/
     public String getIdSponsor() {
@@ -513,6 +568,7 @@ public class ModificaEvento extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPMessage;
     private javax.swing.JPanel jPanel1;

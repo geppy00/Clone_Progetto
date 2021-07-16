@@ -8,6 +8,7 @@ import dao.DataAccessObject;
 import dao.ExceptionDao;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Frame;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -111,6 +112,7 @@ public class ContrattiClubProcuratoreView extends javax.swing.JFrame {
         btnTornaIndietroJB = new javax.swing.JButton();
         btnLogoutJB = new javax.swing.JButton();
         jLDataAttuale1 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         jLDataAttuale.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLDataAttuale.setForeground(new java.awt.Color(255, 255, 255));
@@ -184,6 +186,15 @@ public class ContrattiClubProcuratoreView extends javax.swing.JFrame {
         jLDataAttuale1.setText("13/01/2023");
         jPanel1.add(jLDataAttuale1, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 120, -1, -1));
 
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_subtract_32px_1.png"))); // NOI18N
+        jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 15, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -222,6 +233,10 @@ public class ContrattiClubProcuratoreView extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_btnLogoutJBActionPerformed
 
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        this.setState(Frame.ICONIFIED);
+    }//GEN-LAST:event_jLabel1MouseClicked
+
      /*GET AND SET*/
     public String getIdProcuratore() {
         return idProcuratore;
@@ -245,6 +260,7 @@ public class ContrattiClubProcuratoreView extends javax.swing.JFrame {
     private javax.swing.JButton btnTornaIndietroJB;
     private javax.swing.JLabel jLDataAttuale;
     private javax.swing.JLabel jLDataAttuale1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblDatiContrattiClubJT;

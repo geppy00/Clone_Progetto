@@ -3,8 +3,12 @@ package view.registrare;
 
 import controller.ControllerProcuratore;
 import convalidazione.ControlloConvalidazione;
+import convalidazione.MessageError;
+import convalidazione.PermessoPerNonScrivere;
+import convalidazione.PermessoPerScrivere;
 import dao.ExceptionDao;
 import java.awt.Color;
+import java.awt.Frame;
 import java.awt.Toolkit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,6 +19,7 @@ public class RegistraProcuratore extends javax.swing.JFrame {
 
     /*CONTROLLORE PER GESTIRE GLI ERRORI*/
     private ControlloConvalidazione controlloConvalidazione = new ControlloConvalidazione();
+    private MessageError messageError = new MessageError();
    
     public RegistraProcuratore() {
         initComponents();
@@ -47,6 +52,7 @@ public class RegistraProcuratore extends javax.swing.JFrame {
         btnLogoutJB1 = new javax.swing.JButton();
         inputNomeJTF = new javax.swing.JTextField();
         sessoJCB = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -300,6 +306,15 @@ public class RegistraProcuratore extends javax.swing.JFrame {
         sessoJCB.setFocusable(false);
         jPanel2.add(sessoJCB, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 310, 310, 30));
 
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_subtract_32px_1.png"))); // NOI18N
+        jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 15, -1, -1));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -328,7 +343,7 @@ public class RegistraProcuratore extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void InputIbanJTFFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_InputIbanJTFFocusGained
-        if(InputIbanJTF.getText().equals("ID Club")){
+        if(InputIbanJTF.getText().equals("IBAN")){
             InputIbanJTF.setText("");
             InputIbanJTF.setForeground(new Color(255,255,255));
 
@@ -337,7 +352,7 @@ public class RegistraProcuratore extends javax.swing.JFrame {
 
     private void InputIbanJTFFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_InputIbanJTFFocusLost
         if(InputIbanJTF.getText().equals("")){
-            InputIbanJTF.setText("ID Club");
+            InputIbanJTF.setText("IBAN");
             InputIbanJTF.setForeground(new Color(231,231,231));
 
         }
@@ -398,25 +413,28 @@ public class RegistraProcuratore extends javax.swing.JFrame {
             dataNascitaPresoSql = new java.sql.Date(dataNascitaJDC.getDate().getTime());
         }catch(NullPointerException nex) {
                 Toolkit.getDefaultToolkit().beep();
-                JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nINSERIRE UNA DATA VALIDA", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                //JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nINSERIRE UNA DATA VALIDA", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                messageError.showMessage(false, true, "warning","Inserire Una Data Valida" , errorMessage, jPMessage, btnCloseMessage);
             }
 
         String telefonoPreso = InputTelefonoJTF.getText();
         String codiceFiscalePreso = InputCodiceFiscaleJTF.getText();
         String ibanPreso = InputIbanJTF.getText();       
         String strDate = String.valueOf(dataNascitaPresoSql);
-
-        if(controlloConvalidazione.controlloRegistraProcuratore(matricolaPresa, nomePreso, cognomePreso, nazionePresa, indirizzoPreso, strDate, codiceFiscalePreso) == true) {
+        System.out.println("DATA="+strDate);
+        if(controlloConvalidazione.controlloRegistraProcuratore(matricolaPresa, nomePreso, cognomePreso, nazionePresa, indirizzoPreso, dataNascitaPresoSql, codiceFiscalePreso) == true) {
             try {
                 controllerProcuratore.registraProcuratore(matricolaPresa, nomePreso, cognomePreso, sessoPreso, nazionePresa, indirizzoPreso, (java.sql.Date) dataNascitaPresoSql, telefonoPreso, codiceFiscalePreso, ibanPreso);
-                JOptionPane.showMessageDialog(this, "✓ REGISTRAZIONE EFFETTUATA CON SUCCESSO", "REGISTRAZIONE", JOptionPane.INFORMATION_MESSAGE);
+                //JOptionPane.showMessageDialog(this, "✓ REGISTRAZIONE EFFETTUATA CON SUCCESSO", "REGISTRAZIONE", JOptionPane.INFORMATION_MESSAGE);
+                messageError.showMessage(false, true, "success", "Registrazione Effettuata Con Successo", errorMessage , jPMessage, btnCloseMessage);
             } catch (ExceptionDao ex) {
                 Logger.getLogger(RegistraProcuratore.class.getName()).log(Level.SEVERE, null, ex);
             } 
         }
         else {
             Toolkit.getDefaultToolkit().beep();
-            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nUNO O PIU' CAMPI MANCANTI", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nUNO O PIU' CAMPI MANCANTI", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            messageError.showMessage(false, true, "warning","Uno O Piu' Campi Mancanti" , errorMessage, jPMessage, btnCloseMessage);
         }
     }//GEN-LAST:event_btnRegistraJBActionPerformed
 
@@ -478,15 +496,16 @@ public class RegistraProcuratore extends javax.swing.JFrame {
     }//GEN-LAST:event_inputIndirizzoJTFFocusLost
 
     private void InputTelefonoJTFFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_InputTelefonoJTFFocusGained
-        if(InputTelefonoJTF.getText().equals("Telefono")){
+        if(InputTelefonoJTF.getText().equals("Telefono")) {
             InputTelefonoJTF.setText("");
             InputTelefonoJTF.setForeground(new Color(255,255,255));
-            
+            InputTelefonoJTF.setDocument(new PermessoPerScrivere());
         }
     }//GEN-LAST:event_InputTelefonoJTFFocusGained
 
     private void InputTelefonoJTFFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_InputTelefonoJTFFocusLost
-        if(InputTelefonoJTF.getText().equals("")){
+        if(InputTelefonoJTF.getText().equals("")) {
+            InputTelefonoJTF.setDocument(new PermessoPerNonScrivere());
             InputTelefonoJTF.setText("Telefono");
             InputTelefonoJTF.setForeground(new Color(255,255,255));
             
@@ -529,6 +548,10 @@ public class RegistraProcuratore extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_inputNomeJTFActionPerformed
 
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        this.setState(Frame.ICONIFIED);
+    }//GEN-LAST:event_jLabel2MouseClicked
+
    
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -554,6 +577,7 @@ public class RegistraProcuratore extends javax.swing.JFrame {
     private javax.swing.JTextField inputNazioneJTF;
     private javax.swing.JTextField inputNomeJTF;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPMessage;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

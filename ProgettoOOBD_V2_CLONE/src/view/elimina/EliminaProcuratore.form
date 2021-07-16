@@ -148,16 +148,16 @@
                 </Property>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="10" rowCount="0">
-                    <Column editable="true" title="code procuratore" type="java.lang.Object"/>
-                    <Column editable="true" title="nome" type="java.lang.Object"/>
-                    <Column editable="true" title="cognome" type="java.lang.Object"/>
-                    <Column editable="true" title="sesso" type="java.lang.Object"/>
-                    <Column editable="true" title="nazione" type="java.lang.Object"/>
-                    <Column editable="true" title="indirizzo" type="java.lang.Object"/>
-                    <Column editable="true" title="data nascita" type="java.lang.Object"/>
-                    <Column editable="true" title="telefono" type="java.lang.Object"/>
-                    <Column editable="true" title="codfiscale" type="java.lang.Object"/>
-                    <Column editable="true" title="iban procuratore" type="java.lang.Object"/>
+                    <Column editable="false" title="code procuratore" type="java.lang.Object"/>
+                    <Column editable="false" title="nome" type="java.lang.Object"/>
+                    <Column editable="false" title="cognome" type="java.lang.Object"/>
+                    <Column editable="false" title="sesso" type="java.lang.Object"/>
+                    <Column editable="false" title="nazione" type="java.lang.Object"/>
+                    <Column editable="false" title="indirizzo" type="java.lang.Object"/>
+                    <Column editable="false" title="data nascita" type="java.lang.Object"/>
+                    <Column editable="false" title="telefono" type="java.lang.Object"/>
+                    <Column editable="false" title="codfiscale" type="java.lang.Object"/>
+                    <Column editable="false" title="iban procuratore" type="java.lang.Object"/>
                   </Table>
                 </Property>
                 <Property name="focusable" type="boolean" value="false"/>
@@ -308,6 +308,24 @@
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="1050" y="0" width="-1" height="40"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel2">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/IMG/icons8_subtract_32px_1.png"/>
+            </Property>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Hand Cursor"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel2MouseClicked"/>
+          </Events>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="1010" y="5" width="-1" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>

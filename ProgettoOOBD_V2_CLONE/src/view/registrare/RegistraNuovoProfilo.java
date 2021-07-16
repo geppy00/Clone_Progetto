@@ -3,10 +3,14 @@ package view.registrare;
 
 import controller.ControllerLogin;
 import convalidazione.ControlloConvalidazione;
+import convalidazione.MessageError;
+import convalidazione.PermessoPerNonScrivere;
+import convalidazione.PermessoPerScrivere;
 import dao.DataAccessObject;
 import dao.ExceptionDao;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Frame;
 import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -23,7 +27,8 @@ import view.AdminView;
 public class RegistraNuovoProfilo extends javax.swing.JFrame {
 
     /*CONTROLLORE PER GESTIRE GLI ERRORI*/
-    ControlloConvalidazione controlloConvalidazione = new ControlloConvalidazione();
+    private ControlloConvalidazione controlloConvalidazione = new ControlloConvalidazione();
+    private MessageError messageError = new MessageError();
 
     /*COSTRUTTORE*/
     public RegistraNuovoProfilo() {
@@ -41,7 +46,16 @@ public class RegistraNuovoProfilo extends javax.swing.JFrame {
         } catch (ExceptionDao ex) {
             Toolkit.getDefaultToolkit().beep();
             //Logger.getLogger(RegistraNuovoProfilo.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(this, "NON E' STATO POSSIBILE STAMPARE I DATI NELLA TABELLA\n\t\tRIPROVA", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(this, "NON E' STATO POSSIBILE STAMPARE I DATI NELLA TABELLA\n\t\tRIPROVA", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            messageError.showMessage(false, true, "warning","Non E' Stato Possibile Stampare I dati Nella Tabella Riprovare" , errorMessage, jPMessage, btnCloseMessage);
+            try {
+                java.util.concurrent.TimeUnit.SECONDS.sleep(3);
+            } catch (InterruptedException ex1) {
+                Logger.getLogger(RegistraNuovoProfilo.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+            AdminView adminView = new AdminView();
+            adminView.setVisible(true);
+            this.setVisible(false);
         }
     }
     
@@ -164,6 +178,7 @@ public class RegistraNuovoProfilo extends javax.swing.JFrame {
         btnCloseMessage = new javax.swing.JButton();
         inputConfermaPasswordJTF = new javax.swing.JPasswordField();
         inputPasswordJTF = new javax.swing.JPasswordField();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -174,7 +189,7 @@ public class RegistraNuovoProfilo extends javax.swing.JFrame {
         opzUserJCB.setBackground(new java.awt.Color(9, 46, 119));
         opzUserJCB.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         opzUserJCB.setForeground(new java.awt.Color(255, 255, 255));
-        opzUserJCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Procuratore", "Atleta", "Sponsor", "Club", " " }));
+        opzUserJCB.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Procuratore", "Atleta", "Sponsor", "Club" }));
         opzUserJCB.setBorder(null);
         opzUserJCB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -203,7 +218,6 @@ public class RegistraNuovoProfilo extends javax.swing.JFrame {
         inputIdCorrispondenteJTF.setForeground(new java.awt.Color(231, 231, 231));
         inputIdCorrispondenteJTF.setText("ID Corrispondente");
         inputIdCorrispondenteJTF.setBorder(null);
-        inputIdCorrispondenteJTF.setFocusable(false);
         inputIdCorrispondenteJTF.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 inputIdCorrispondenteJTFFocusGained(evt);
@@ -219,7 +233,7 @@ public class RegistraNuovoProfilo extends javax.swing.JFrame {
         btnRegistraJB.setForeground(new java.awt.Color(255, 255, 255));
         btnRegistraJB.setText("Registra");
         btnRegistraJB.setBorder(null);
-        btnRegistraJB.setCursor(new java.awt.Cursor(java.awt.Cursor.MOVE_CURSOR));
+        btnRegistraJB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnRegistraJB.setFocusPainted(false);
         btnRegistraJB.setFocusable(false);
         btnRegistraJB.addActionListener(new java.awt.event.ActionListener() {
@@ -360,6 +374,15 @@ public class RegistraNuovoProfilo extends javax.swing.JFrame {
         });
         jPanel1.add(inputPasswordJTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 250, 30));
 
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_subtract_32px_1.png"))); // NOI18N
+        jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 15, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -388,16 +411,19 @@ public class RegistraNuovoProfilo extends javax.swing.JFrame {
         if(controlloConvalidazione.controlloRegistraNuovoProfilo(username, password, confermaPassword, idCorrispodente) == true) {
             if(!(password.equals(confermaPassword))) {
                Toolkit.getDefaultToolkit().beep();
-               JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nPASSWORD NON COINCIDONO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+               //JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nPASSWORD NON COINCIDONO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+               messageError.showMessage(false, true, "warning","Password Non Coincidono" , errorMessage, jPMessage, btnCloseMessage);
             } 
             else {
                 try {
                     boolean check = controllerLogin.registraUtenteLogin(opzUser, username, password, idCorrispodente);
                     if(check == true)
-                        JOptionPane.showMessageDialog(this, "✓ REGISTRAZIONE DELL'UTENTE EFFETTUATA CON SUCCESSO", "REGISTRAZIONE", JOptionPane.INFORMATION_MESSAGE);
+                        //JOptionPane.showMessageDialog(this, "✓ REGISTRAZIONE DELL'UTENTE EFFETTUATA CON SUCCESSO", "REGISTRAZIONE", JOptionPane.INFORMATION_MESSAGE);
+                        messageError.showMessage(false, true, "success", "Registrazione Effettuata Con Successo", errorMessage , jPMessage, btnCloseMessage);
                     else {
                         Toolkit.getDefaultToolkit().beep();
-                        JOptionPane.showMessageDialog(this, "!! REGISTRAZIONE FALLITA !!", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                        //JOptionPane.showMessageDialog(this, "!! REGISTRAZIONE FALLITA !!", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                        messageError.showMessage(false, true, "warning","Registrazione Fallita Riprova" , errorMessage, jPMessage, btnCloseMessage);
                     }
                 }catch (ExceptionDao ex) {
                         Logger.getLogger(RegistraNuovoProfilo.class.getName()).log(Level.SEVERE, null, ex);
@@ -406,7 +432,8 @@ public class RegistraNuovoProfilo extends javax.swing.JFrame {
         }
         else {
             Toolkit.getDefaultToolkit().beep();
-            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nUNO O PIU' CAMPI MANCANTI", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nUNO O PIU' CAMPI MANCANTI", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            messageError.showMessage(false, true, "warning","Uno O Piu' Campi Mancanti" , errorMessage, jPMessage, btnCloseMessage);
         }
     }//GEN-LAST:event_btnRegistraJBActionPerformed
 
@@ -457,18 +484,25 @@ public class RegistraNuovoProfilo extends javax.swing.JFrame {
     }//GEN-LAST:event_inputUsernameJTFFocusLost
 
     private void inputIdCorrispondenteJTFFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputIdCorrispondenteJTFFocusGained
-       if(inputIdCorrispondenteJTF.getText().equals("ID Corrispondente")){
+       if(inputIdCorrispondenteJTF.getText().equals("ID Corrispondente")) {
             inputIdCorrispondenteJTF.setText("");
             inputIdCorrispondenteJTF.setForeground(new Color(255,255,255));
+            String opzUser = opzUserJCB.getSelectedItem().toString();
             
+            if(opzUser.equals("Sponsor") || opzUser.equals("Club"))
+                inputIdCorrispondenteJTF.setDocument(new PermessoPerScrivere());
         }
     }//GEN-LAST:event_inputIdCorrispondenteJTFFocusGained
 
     private void inputIdCorrispondenteJTFFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputIdCorrispondenteJTFFocusLost
-      if(inputIdCorrispondenteJTF.getText().equals("")){
-            inputIdCorrispondenteJTF.setText("ID Corrispondente");
-            inputIdCorrispondenteJTF.setForeground(new Color(255,255,255));
+      String opzUser = opzUserJCB.getSelectedItem().toString();
+      
+      if(inputIdCorrispondenteJTF.getText().equals("")) {
+            if(opzUser.equals("Sponsor") || opzUser.equals("Club"))
+                inputIdCorrispondenteJTF.setDocument(new PermessoPerNonScrivere());
             
+            inputIdCorrispondenteJTF.setText("ID Corrispondente");
+            inputIdCorrispondenteJTF.setForeground(new Color(255,255,255)); 
         }
     }//GEN-LAST:event_inputIdCorrispondenteJTFFocusLost
 
@@ -504,6 +538,10 @@ public class RegistraNuovoProfilo extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_inputConfermaPasswordJTFFocusLost
 
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        this.setState(Frame.ICONIFIED);
+    }//GEN-LAST:event_jLabel2MouseClicked
+
     public static void main(String args[]) {
   
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -525,6 +563,7 @@ public class RegistraNuovoProfilo extends javax.swing.JFrame {
     private javax.swing.JPasswordField inputPasswordJTF;
     private javax.swing.JTextField inputUsernameJTF;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPMessage;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

@@ -5,6 +5,7 @@ import controller.ControllerClub;
 import convalidazione.ControlloConvalidazione;
 import convalidazione.MessageError;
 import dao.ExceptionDao;
+import java.awt.Frame;
 import java.awt.Toolkit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -55,6 +56,7 @@ public class EliminaPagamento extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         btnCloseMessage = new javax.swing.JButton();
         btnLogoutJB2 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -199,6 +201,15 @@ public class EliminaPagamento extends javax.swing.JFrame {
         });
         jPanel1.add(btnLogoutJB2, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 0, -1, 40));
 
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_subtract_32px_1.png"))); // NOI18N
+        jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 5, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -227,7 +238,7 @@ public class EliminaPagamento extends javax.swing.JFrame {
             messageError.showMessage(false, true, "warning", "Inserisci Una Data Valida", jLMessaggio, jMessagge, btnCloseMessage);
         }
        
-        if(controlloConvalidazione.controlloCercaPagamento(String.valueOf(dataPagamentoCercare), this.getIdAtletaCercare()) == true) {
+        if(controlloConvalidazione.controlloCercaPagamento(dataPagamentoCercare, this.getIdAtletaCercare()) == true) {
             try {
                 importo = controllerClub.cercaPagamento(dataPagamentoCercare, Integer.parseInt(this.getIdClub()), this.getIdAtletaCercare());
                 if(importo == -1) {
@@ -280,7 +291,7 @@ public class EliminaPagamento extends javax.swing.JFrame {
             messageError.showMessage(false, true, "warning", "Inserisci Una Data Valida", jLMessaggio, jMessagge, btnCloseMessage);
         }
         
-        if(controlloConvalidazione.controlloCercaPagamento(String.valueOf(dataPagamentoCercare), this.getIdAtletaCercare()) == true) {
+        if(controlloConvalidazione.controlloCercaPagamento(dataPagamentoCercare, this.getIdAtletaCercare()) == true) {
             try {
                 importo = controllerClub.cercaPagamento(dataPagamentoCercare, Integer.parseInt(this.getIdClub()), idAtletaCercare);
                 if(importo == -1) {
@@ -312,6 +323,10 @@ public class EliminaPagamento extends javax.swing.JFrame {
         this.setVisible(false);
         System.exit(0);
     }//GEN-LAST:event_btnLogoutJB2ActionPerformed
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        this.setState(Frame.ICONIFIED);
+    }//GEN-LAST:event_jLabel2MouseClicked
 
 
     /*GET AND SET*/
@@ -353,6 +368,7 @@ public class EliminaPagamento extends javax.swing.JFrame {
     private javax.swing.JTextField inputImportoJTF;
     private javax.swing.JLabel jLMessaggio;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jMessagge;
     private javax.swing.JPanel jPanel1;
