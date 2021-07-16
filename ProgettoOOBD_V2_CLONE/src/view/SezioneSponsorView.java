@@ -25,7 +25,6 @@ public class SezioneSponsorView extends javax.swing.JFrame {
         btnAggiornaSponsorJB = new javax.swing.JButton();
         btnClose = new javax.swing.JButton();
         btnLogoutJB = new javax.swing.JButton();
-        jLCurrentAccount = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
@@ -129,14 +128,9 @@ public class SezioneSponsorView extends javax.swing.JFrame {
         });
         jPanel1.add(btnLogoutJB, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 440, -1, 40));
 
-        jLCurrentAccount.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLCurrentAccount.setForeground(new java.awt.Color(255, 255, 255));
-        jLCurrentAccount.setText("Current Account:");
-        jPanel1.add(jLCurrentAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 80, 160, 20));
-
         jLabel1.setFont(new java.awt.Font("Segoe UI Black", 0, 20)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Sportivo System");
+        jLabel1.setText("Admin System");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, -1, -1));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_subtract_32px_1.png"))); // NOI18N
@@ -246,7 +240,6 @@ public class SezioneSponsorView extends javax.swing.JFrame {
     private javax.swing.JButton btnEliminaSponsorJB;
     private javax.swing.JButton btnLogoutJB;
     private javax.swing.JButton btsRegistraSponsorJB;
-    private javax.swing.JLabel jLCurrentAccount;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

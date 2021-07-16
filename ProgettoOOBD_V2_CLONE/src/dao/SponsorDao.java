@@ -220,7 +220,6 @@ public class SponsorDao {
             stmt = connection.createStatement();
             stmt.executeUpdate(sql);
             connection.commit();
-            JOptionPane.showMessageDialog(null, "Evento aggirnato con successo");
         }catch(SQLException e) {
             throw new ExceptionDao("Evento AGGIORNAMENTO SPONSOR FALLITA "+e);
         }

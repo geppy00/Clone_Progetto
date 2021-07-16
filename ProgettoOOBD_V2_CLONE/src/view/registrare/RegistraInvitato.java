@@ -184,21 +184,21 @@ public class RegistraInvitato extends javax.swing.JFrame {
                 messageError.showMessage(false, true, "success", "L'Atleta "+this.getIdAtleta()+" E' Invitato Per L'Evento Numero "+this.getIdEvento() ,jLMessaggio , jMessagge, btnCloseMessage);
                 this.btnYesJB.setEnabled(false);
                 this.btnNoJB.setEnabled(false);
-                try {
+                /*try {
                     java.util.concurrent.TimeUnit.SECONDS.sleep(3);
                 } catch (InterruptedException ex) {
                     Logger.getLogger(RegistraInvitato.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                this.setVisible(false);
+                this.setVisible(false);*/
             }
             else {
                 messageError.showMessage(false, true, "warning","Errore Anamolo Non E' Stato Possibile Registrare L'invitato Riprovare" , jLMessaggio, jMessagge, btnCloseMessage);
-                try {
+                /*try {
                     java.util.concurrent.TimeUnit.SECONDS.sleep(3);
                 } catch (InterruptedException ex) {
                     Logger.getLogger(RegistraInvitato.class.getName()).log(Level.SEVERE, null, ex);
                     this.setVisible(false);
-                }
+                }*/
             }
         } catch (ExceptionDao ex) {
             Logger.getLogger(RegistraInvitato.class.getName()).log(Level.SEVERE, null, ex);
@@ -214,21 +214,21 @@ public class RegistraInvitato extends javax.swing.JFrame {
                 messageError.showMessage(false, true, "success", "L'Atleta "+this.getIdAtleta()+" Non E' Invitato Per L'Evento Numero "+this.getIdEvento() ,jLMessaggio , jMessagge, btnCloseMessage);
                 this.btnYesJB.setEnabled(false);
                 this.btnNoJB.setEnabled(false);
-                try {
+                /*try {
                     java.util.concurrent.TimeUnit.SECONDS.sleep(3);
                 } catch (InterruptedException ex) {
                     Logger.getLogger(RegistraInvitato.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                this.setVisible(false);
+                this.setVisible(false);*/
             }
             else{
                 messageError.showMessage(false, true, "warning","Errore Anamolo Non E' Stato Possibile Registrare L'invitato Riprovare" , jLMessaggio, jMessagge, btnCloseMessage);
-                try {
+                /*try {
                     java.util.concurrent.TimeUnit.SECONDS.sleep(3);
                 } catch (InterruptedException ex) {
                     Logger.getLogger(RegistraInvitato.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                this.setVisible(false);
+                this.setVisible(false);*/
             }
         } catch (ExceptionDao ex) {
             Logger.getLogger(RegistraInvitato.class.getName()).log(Level.SEVERE, null, ex);
@@ -241,7 +241,6 @@ public class RegistraInvitato extends javax.swing.JFrame {
 
     private void btnLogoutJB2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutJB2ActionPerformed
         this.setVisible(false);
-        System.exit(0);
     }//GEN-LAST:event_btnLogoutJB2ActionPerformed
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked

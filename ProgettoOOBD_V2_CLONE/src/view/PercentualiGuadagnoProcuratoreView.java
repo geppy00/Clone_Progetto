@@ -245,7 +245,6 @@ public class PercentualiGuadagnoProcuratoreView extends javax.swing.JFrame {
 
         atletaMigliorGuadagnoJTF.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
         atletaMigliorGuadagnoJTF.setForeground(new java.awt.Color(46, 204, 113));
-        atletaMigliorGuadagnoJTF.setText("Jeft Matamba");
         jPanel1.add(atletaMigliorGuadagnoJTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(622, 578, -1, -1));
 
         totaleGettoniJTF.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N

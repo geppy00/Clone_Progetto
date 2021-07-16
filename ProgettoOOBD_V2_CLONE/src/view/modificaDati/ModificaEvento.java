@@ -70,7 +70,7 @@ public class ModificaEvento extends javax.swing.JFrame {
                     datiEvento.forEach((Evento evento) -> {
                         idEventoJTF.setText(String.valueOf(this.getIdEvento()));
                         inputGettoneEventoJTF.setText(String.valueOf(evento.getGettoneValue()));
-                        inputOraFineJTF.setText(evento.getTitolo());
+                        inputTitoloJTF.setText(evento.getTitolo());
                         inpuIndirizzoJTF.setText(evento.getLuogoEvento());
                         inputDataInizioJDC.setDate(evento.getDataInizio());
                         inputOraInizioJTF.setText(String.valueOf(evento.getOraInizio()));
@@ -220,13 +220,14 @@ public class ModificaEvento extends javax.swing.JFrame {
         jPanel1.add(btnCreaEventoJB, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 530, 80, 30));
 
         jPMessage.setBackground(new java.awt.Color(46, 204, 113));
+        jPMessage.setFocusable(false);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_info_26px.png"))); // NOI18N
 
         errorMessage.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         errorMessage.setForeground(new java.awt.Color(255, 255, 255));
         errorMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        errorMessage.setText("Evento Creato Con Successo");
+        errorMessage.setText("Modifica Effettuata Con Successo");
 
         btnCloseMessage.setBackground(new java.awt.Color(46, 204, 113));
         btnCloseMessage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_multiply_32px_1.png"))); // NOI18N
@@ -414,8 +415,8 @@ public class ModificaEvento extends javax.swing.JFrame {
             double gettoneValue = 0;
             
             try {
-            dataInizio = new java.sql.Date(inputDataInizioJDC.getDate().getTime());
-            dataFine = new java.sql.Date(inputDataFineJDC.getDate().getTime());
+                dataInizio = new java.sql.Date(inputDataInizioJDC.getDate().getTime());
+                dataFine = new java.sql.Date(inputDataFineJDC.getDate().getTime());
             }catch(NullPointerException nex) {
                 Toolkit.getDefaultToolkit().beep();
                 //JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nINSERIRE UNA DATA VALIDA", "ERRORE", JOptionPane.ERROR_MESSAGE);
@@ -452,14 +453,14 @@ public class ModificaEvento extends javax.swing.JFrame {
                             controllerSponsor.aggiornaEvento(gettoneValue, this.getIdEvento(), titolo, indirizzo, dataInizio, oraInizioTime, dataFine, oraFineTime, Integer.parseInt(this.getIdSponsor()), descrizione);
                             //JOptionPane.showMessageDialog(this, "✓ MODIFICA DELL' EVENTO CON ID"+this.getIdEvento()+" EFFETTUATA CON SUCCESSO", "MODIFICA", JOptionPane.INFORMATION_MESSAGE);
                             messageError.showMessage(false, true, "success", "Modifica Del Evento Con Id "+this.getIdEvento()+" Effettuata Con Successo", errorMessage, jPMessage, btnCloseMessage);
-                            try {
+                            ElencoEventiView elencoEventiView = new ElencoEventiView(this.getIdSponsor());
+                            elencoEventiView.setVisible(true);
+                            /*try {    
                                 java.util.concurrent.TimeUnit.SECONDS.sleep(3);
                             } catch (InterruptedException ex) {
                                 Logger.getLogger(ModificaEvento.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                            ElencoEventiView elencoEventiView = new ElencoEventiView(this.getIdSponsor());
-                            elencoEventiView.setVisible(true);
-                            this.setVisible(false);
+                            }*/
+                            //this.setVisible(false);
                         } catch (ExceptionDao ex) {
                             Logger.getLogger(ModificaEvento.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -476,11 +477,11 @@ public class ModificaEvento extends javax.swing.JFrame {
             Toolkit.getDefaultToolkit().beep();
             //JOptionPane.showMessageDialog(this, "CI E' STATO UN PROBLEMA NEL RICAVARE I DATI\nRIPROVA A SELEZIONE QUESTO EVENTO", "WARNING", JOptionPane.WARNING_MESSAGE);
             messageError.showMessage(false, true, "warning", "Problema Nel Ricavare I Dati Riprova A Selezionare Questo Evento", errorMessage, jPMessage, btnCloseMessage);
-            try {
+            /*try {
                 java.util.concurrent.TimeUnit.SECONDS.sleep(3);
             } catch (InterruptedException ex) {
                 Logger.getLogger(ModificaEvento.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            }*/
             ElencoEventiView elencoEventiView = new ElencoEventiView(this.getIdSponsor());
             elencoEventiView.setVisible(true);
             this.setVisible(false);
@@ -497,8 +498,8 @@ public class ModificaEvento extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLogoutJB1ActionPerformed
 
     private void btnAnnullaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnnullaActionPerformed
-        ElencoEventiView elencoEventiView = new ElencoEventiView(this.getIdSponsor());
-        elencoEventiView.setVisible(true);
+        /*ElencoEventiView elencoEventiView = new ElencoEventiView(this.getIdSponsor());
+        elencoEventiView.setVisible(true);*/
         this.setVisible(false);
     }//GEN-LAST:event_btnAnnullaActionPerformed
 

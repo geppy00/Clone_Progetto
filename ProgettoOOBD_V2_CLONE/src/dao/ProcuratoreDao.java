@@ -501,7 +501,6 @@ public class ProcuratoreDao {
             pStmt = connection.prepareStatement(sql);
             pStmt.setInt(1, contratto.getNumeroContratto());
             pStmt.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Contratto numero "+contratto.getNumeroContratto()+" eliminato con successo");
         }catch(SQLException e){
             throw new ExceptionDao("ERRORE ELIMINAZIONE CONTRATTO FALLITA "+e);
         }

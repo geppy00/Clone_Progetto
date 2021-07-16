@@ -3,6 +3,7 @@ package view;
 
 import controller.ControllerClub;
 import convalidazione.ControlloConvalidazione;
+import convalidazione.MessageError;
 import convalidazione.PermessoPerNonScrivere;
 import dao.DataAccessObject;
 import dao.ExceptionDao;
@@ -33,6 +34,8 @@ public class SezioneVisualizzaPagamenti extends javax.swing.JFrame {
     
     /*CONTROLLORE PER GESTIRE GLI ERRORI*/
     private ControlloConvalidazione controlloConvalidazione = new ControlloConvalidazione();
+     private MessageError messageError = new MessageError();
+     
     public SezioneVisualizzaPagamenti(String idClub) {
         initComponents();
         this.idClub = idClub;
@@ -48,6 +51,7 @@ public class SezioneVisualizzaPagamenti extends javax.swing.JFrame {
             Logger.getLogger(SezioneVisualizzaPagamenti.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.setLocationRelativeTo(null);
+        this.jPanel2.setVisible(false);
     }
     public SezioneVisualizzaPagamenti(){}
    
@@ -56,13 +60,17 @@ public class SezioneVisualizzaPagamenti extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        btnClose = new javax.swing.JButton();
         inputIdAtletaJTF = new javax.swing.JTextField();
         btnCercaAtletaJB = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         visualizzaDatiPagamentiJB = new javax.swing.JTable();
         btnAnnullaJB2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        btnCloseMessage = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        btnClose1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -70,25 +78,11 @@ public class SezioneVisualizzaPagamenti extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(11, 58, 151));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnClose.setBackground(new java.awt.Color(11, 58, 151));
-        btnClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_multiply_32px_1.png"))); // NOI18N
-        btnClose.setBorder(null);
-        btnClose.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnClose.setFocusPainted(false);
-        btnClose.setFocusable(false);
-        btnClose.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCloseActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 0, -1, 40));
-
         inputIdAtletaJTF.setBackground(new java.awt.Color(9, 46, 119));
         inputIdAtletaJTF.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         inputIdAtletaJTF.setForeground(new java.awt.Color(231, 231, 231));
         inputIdAtletaJTF.setText("ID Atleta");
         inputIdAtletaJTF.setBorder(null);
-        inputIdAtletaJTF.setFocusable(false);
         inputIdAtletaJTF.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 inputIdAtletaJTFFocusGained(evt);
@@ -158,7 +152,64 @@ public class SezioneVisualizzaPagamenti extends javax.swing.JFrame {
                 jLabel1MouseClicked(evt);
             }
         });
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 5, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 5, -1, -1));
+
+        jPanel2.setBackground(new java.awt.Color(46, 204, 113));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_info_20px.png"))); // NOI18N
+
+        btnCloseMessage.setBackground(new java.awt.Color(46, 204, 113));
+        btnCloseMessage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_multiply_32px_1.png"))); // NOI18N
+        btnCloseMessage.setBorder(null);
+        btnCloseMessage.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCloseMessage.setFocusPainted(false);
+        btnCloseMessage.setFocusable(false);
+        btnCloseMessage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCloseMessageActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("jLabel3");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 562, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(btnCloseMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(btnCloseMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, 670, 30));
+
+        btnClose1.setBackground(new java.awt.Color(11, 58, 151));
+        btnClose1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_multiply_32px_1.png"))); // NOI18N
+        btnClose1.setBorder(null);
+        btnClose1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnClose1.setFocusPainted(false);
+        btnClose1.setFocusable(false);
+        btnClose1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClose1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnClose1, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 0, -1, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -174,10 +225,9 @@ public class SezioneVisualizzaPagamenti extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
-        this.setVisible(false);
-        System.exit(0);
-    }//GEN-LAST:event_btnCloseActionPerformed
+    private void btnCloseMessageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseMessageActionPerformed
+        this.jPanel2.setVisible(false);
+    }//GEN-LAST:event_btnCloseMessageActionPerformed
 
     private void inputIdAtletaJTFFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputIdAtletaJTFFocusGained
        if(inputIdAtletaJTF.getText().equals("ID Atleta")){
@@ -197,7 +247,9 @@ public class SezioneVisualizzaPagamenti extends javax.swing.JFrame {
     }//GEN-LAST:event_inputIdAtletaJTFFocusLost
 
     private void btnAnnullaJB2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnnullaJB2ActionPerformed
-        // TODO add your handling code here:
+        SezionePagamentoView sezionePagamentoView = new SezionePagamentoView(this.getIdClub());
+        sezionePagamentoView.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnAnnullaJB2ActionPerformed
 
     private void btnCercaAtletaJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCercaAtletaJBActionPerformed
@@ -209,9 +261,11 @@ public class SezioneVisualizzaPagamenti extends javax.swing.JFrame {
                 datiStipendio = controllerClub.cercaPagamentiAtleta(idAtleta, Integer.parseInt(this.getIdClub()));
                 if(datiStipendio.isEmpty()) {
                     Toolkit.getDefaultToolkit().beep();
-                    JOptionPane.showMessageDialog(this, "ATLETA "+idAtleta+" NON TROVATO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                    //JOptionPane.showMessageDialog(this, "ATLETA "+idAtleta+" NON TROVATO", "ERRORE", JOptionPane.ERROR_MESSAGE);
+                    messageError.showMessage(false, true, "warning","Atleta "+idAtleta+" Non Trovato" , jLabel3, jPanel2, btnCloseMessage);
                 }
                 else {
+                    messageError.showMessage(false, true, "success", "Atleta "+idAtleta+" Trovato", jLabel3 , jPanel2, btnCloseMessage);
                     DefaultTableModel tblModel = (DefaultTableModel)visualizzaDatiPagamentiJB.getModel();
                     tblModel.setRowCount(0);
                     datiStipendio.forEach((Stipendio stipendio) -> {
@@ -232,13 +286,19 @@ public class SezioneVisualizzaPagamenti extends javax.swing.JFrame {
         }
         else {
             Toolkit.getDefaultToolkit().beep();
-            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nCAMPO DI RICERCA MANCANTE", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nCAMPO DI RICERCA MANCANTE", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            messageError.showMessage(false, true, "warning","Campo Di Ricerca Mancante" , jLabel3, jPanel2, btnCloseMessage);
         }
     }//GEN-LAST:event_btnCercaAtletaJBActionPerformed
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
         this.setState(Frame.ICONIFIED);
     }//GEN-LAST:event_jLabel1MouseClicked
+
+    private void btnClose1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClose1ActionPerformed
+        this.setVisible(false);
+        System.exit(0);
+    }//GEN-LAST:event_btnClose1ActionPerformed
 
     
     /*GET AND SET*/
@@ -337,10 +397,14 @@ public class SezioneVisualizzaPagamenti extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAnnullaJB2;
     private javax.swing.JButton btnCercaAtletaJB;
-    private javax.swing.JButton btnClose;
+    private javax.swing.JButton btnClose1;
+    private javax.swing.JButton btnCloseMessage;
     private javax.swing.JTextField inputIdAtletaJTF;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable visualizzaDatiPagamentiJB;
     // End of variables declaration//GEN-END:variables

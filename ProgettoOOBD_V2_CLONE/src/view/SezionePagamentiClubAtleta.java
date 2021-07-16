@@ -91,7 +91,6 @@ public class SezionePagamentiClubAtleta extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblPagamentiClubJT = new javax.swing.JTable();
         jLDataAttuale = new javax.swing.JLabel();
-        jLCurrentAccount = new javax.swing.JLabel();
         btnTornaIndietroJB1 = new javax.swing.JButton();
         btnClose = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -131,11 +130,6 @@ public class SezionePagamentiClubAtleta extends javax.swing.JFrame {
         jLDataAttuale.setForeground(new java.awt.Color(255, 255, 255));
         jLDataAttuale.setText("13/01/2023");
         jPanel1.add(jLDataAttuale, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, -1, -1));
-
-        jLCurrentAccount.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLCurrentAccount.setForeground(new java.awt.Color(255, 255, 255));
-        jLCurrentAccount.setText("Current Account:");
-        jPanel1.add(jLCurrentAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 100, 150, 20));
 
         btnTornaIndietroJB1.setBackground(new java.awt.Color(11, 58, 151));
         btnTornaIndietroJB1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_left_32px_2.png"))); // NOI18N
@@ -220,7 +214,6 @@ public class SezionePagamentiClubAtleta extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClose;
     private javax.swing.JButton btnTornaIndietroJB1;
-    private javax.swing.JLabel jLCurrentAccount;
     private javax.swing.JLabel jLDataAttuale;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;

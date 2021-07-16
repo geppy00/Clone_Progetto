@@ -42,20 +42,22 @@ public class ModificaContrattiProcuratore extends javax.swing.JFrame {
         this.idProcuratore = idProcuratore;
         this.idContratto = idContratto;
         jPMessage.setVisible(false);
-        if(this.getFlag().equals("CLUB")) { 
+        if(this.getFlag().equals("CLUB")) {
+            inputIdClubJTF.setText(String.valueOf(this.getIdContratto()));
             inputIdSponsorJTF.setEditable(false);
             inputIdSponsorJTF.setVisible(false);
             jLabel4.setVisible(false);
             //this.inputIdClubJTF.setLocation(100, 110);
             //this.inputIdClubJTF.setSize(510, 30);
-            this.inputIdClubJTF.setBounds(100, 110, 510, 30);
+            //this.inputIdClubJTF.setBounds(100, 110, 510, 30);
         }
         else if(this.getFlag().equals("SPONSOR")) {
+            inputIdSponsorJTF.setText(String.valueOf(this.getIdContratto()));
             inputIdClubJTF.setEditable(false);
             inputIdClubJTF.setVisible(false);
             jLabel2.setVisible(false);
             //this.inputIdSponsorJTF.setSize(510, 30);
-            this.inputIdSponsorJTF.setBounds(100, 110, 510, 30);
+            //this.inputIdSponsorJTF.setBounds(100, 110, 510, 30);
         }
         else {
             Toolkit.getDefaultToolkit().beep();
@@ -519,11 +521,11 @@ public class ModificaContrattiProcuratore extends javax.swing.JFrame {
     }//GEN-LAST:event_inputValoreContrattualeJTFFocusLost
 
     private void inputIdContrattoJTFFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputIdContrattoJTFFocusGained
-        inputIdContrattoJTF.setDocument(new PermessoPerScrivere());
+        //inputIdContrattoJTF.setDocument(new PermessoPerScrivere());
     }//GEN-LAST:event_inputIdContrattoJTFFocusGained
 
     private void inputIdContrattoJTFFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputIdContrattoJTFFocusLost
-        inputIdContrattoJTF.setDocument(new PermessoPerNonScrivere());
+        //inputIdContrattoJTF.setDocument(new PermessoPerNonScrivere());
     }//GEN-LAST:event_inputIdContrattoJTFFocusLost
 
     private void jLabel9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel9MouseClicked

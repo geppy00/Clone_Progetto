@@ -43,7 +43,6 @@ public class EliminaContrattoProcuratore extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        adviceJL = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         btnNoJB = new javax.swing.JButton();
         btnYesJB = new javax.swing.JButton();
@@ -53,6 +52,7 @@ public class EliminaContrattoProcuratore extends javax.swing.JFrame {
         btnCloseMessage = new javax.swing.JButton();
         btnLogoutJB2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        adviceJL = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -160,25 +160,20 @@ public class EliminaContrattoProcuratore extends javax.swing.JFrame {
         });
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 5, -1, -1));
 
+        adviceJL.setForeground(new java.awt.Color(255, 255, 255));
+        adviceJL.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        adviceJL.setText("jLabel2");
+        jPanel1.add(adviceJL, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(161, 161, 161)
-                .addComponent(adviceJL)
-                .addContainerGap(380, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 541, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 541, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(adviceJL)
-                .addContainerGap(204, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE)
         );
 
         pack();
