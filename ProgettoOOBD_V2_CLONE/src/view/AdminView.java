@@ -10,6 +10,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import model.Admin;
 import view.registrare.RegistraNuovoProfilo;
 
 public class AdminView extends javax.swing.JFrame {
@@ -21,6 +22,7 @@ public class AdminView extends javax.swing.JFrame {
     
     /*INFORMAZIONI IMPORTANTI*/
     private String opzUser = "Admin";
+    private Admin admin = new Admin();
     
     /*COSTRUTTORI*/
     public AdminView() {
@@ -31,7 +33,7 @@ public class AdminView extends javax.swing.JFrame {
         jLDataAttuale.setText(dtf.format(LocalDateTime.now()));
         
         try {
-            jLCurrentAccount.setText("Current Account: "+controllerAdmin.prendiNomeUtente(this.getOpzUser()));
+            jLCurrentAccount.setText("Current Account: "+admin.prendiNomeUtente(null, this.getOpzUser()));
         } catch (ExceptionDao ex) {
             Logger.getLogger(AdminView.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -4,7 +4,7 @@ import dao.ExceptionDao;
 import dao.SportivoDao;
 import java.util.ArrayList;
 
-public class Atleta {
+public class Atleta extends Login {
 
     private String username;
     private String nome;
@@ -185,8 +185,5 @@ public class Atleta {
     public void registraInvitato(Invitati invitati) throws ExceptionDao {
         new SportivoDao().registraInvitato(invitati);
     }
-    
-    public String prendiNomeUtente(Atleta atleta) throws ExceptionDao {
-        return new SportivoDao().prendiNomeUtente(atleta);
-    }
+   
 }

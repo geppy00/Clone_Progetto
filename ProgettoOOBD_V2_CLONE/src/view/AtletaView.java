@@ -9,11 +9,14 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Atleta;
 
 public class AtletaView extends javax.swing.JFrame {
-
+   
     /*INFORMAZIONI IMPORTANTI*/
     private String idAtleta;
+    private Atleta atleta = new Atleta();
+    private String opzUser = "Atleta";
     
     /*CONTROLLER PER SPORTIVO*/
     ControllerSportivo controllerSportivo = new ControllerSportivo();
@@ -27,7 +30,7 @@ public class AtletaView extends javax.swing.JFrame {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         jLDataAttuale.setText(dtf.format(LocalDateTime.now()));
         try {
-            jLCurrentAccount.setText("Current Account: "+controllerSportivo.prendiNomeUtente(this.getIdAtleta()));
+            jLCurrentAccount.setText("Current Account: "+atleta.prendiNomeUtente(this.getIdAtleta(), this.getOpzUser()));
         } catch (ExceptionDao ex) {
             Logger.getLogger(AtletaView.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -262,7 +265,17 @@ public class AtletaView extends javax.swing.JFrame {
     public void setIdAtleta(String idAtleta) {
         this.idAtleta = idAtleta;
     }
+    
+    public String getOpzUser() {
+        return opzUser;
+    }
 
+    public void setOpzUser(String opzUser) {
+        this.opzUser = opzUser;
+    }
+
+
+    /*MAIN*/
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

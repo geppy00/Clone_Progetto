@@ -43,6 +43,11 @@ public class Login {
         this.opzioneLogin = scelta;
     }
     
+    public Login(String idGenerico, String opzioneLogin) {
+       this.idGenerico = idGenerico;
+       this.opzioneLogin = opzioneLogin;
+    }
+    
     public Login() {
         
     }
@@ -129,7 +134,10 @@ public class Login {
     /*METODI*/
     public String verificaLogin(Login login) throws ExceptionDao {
        return new LoginDao().verificaLogin(username, password, opzioneLogin);
-      
+    }
+    
+    public String prendiNomeUtente(String id, String opzUser) throws ExceptionDao {
+        return new LoginDao().prendiNomeUtente(id, opzUser);
     }
 
 }

@@ -120,8 +120,4 @@ public class Admin extends Login {
     public void registraUtenteLogin(Login login) throws ExceptionDao {
         new LoginDao().registraUtente(login);
     }
-    
-    public String prendiNomeUtente(Admin admin) throws ExceptionDao {
-        return new AdminDao().prendiNomeUtente(admin);
-    }
 }

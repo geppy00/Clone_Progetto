@@ -7,7 +7,7 @@ import dao.StipendioDao;
 import java.util.ArrayList;
 
 
-public class Club {
+public class Club extends Login {
 
    private int idClub; 
    private String nomeClub; 
@@ -130,7 +130,4 @@ public class Club {
         new StipendioDao().eliminaPagamento(stipendio);
     }
     
-    public String prendiNomeUtente(Club club) throws ExceptionDao {
-        return new ClubDao().prendiNomeUtente(club);
-    }
 }

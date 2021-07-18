@@ -9,11 +9,14 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Sponsor;
 
 public class SponsorView extends javax.swing.JFrame {
 
     /*INFORMAZIONI IMPORTANTI*/
     private String idSponsor;
+    private String opzUser = "Sponsor";
+    private Sponsor sponsor = new Sponsor();
     
     /*CONTROLLER PER SPONSOR*/
     ControllerSponsor ControllerSponsor = new ControllerSponsor();
@@ -26,7 +29,7 @@ public class SponsorView extends javax.swing.JFrame {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         jLDataAttuale.setText(dtf.format(LocalDateTime.now()));
         try {
-              jLCurrentAccount.setText("Current Account: "+ControllerSponsor.prendiNomeUtente(Integer.parseInt(this.getIdSponsor())));
+              jLCurrentAccount.setText("Current Account: "+sponsor.prendiNomeUtente(this.getIdSponsor(), this.getOpzUser()));
         } catch (ExceptionDao ex) {
             Logger.getLogger(SponsorView.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -264,6 +267,14 @@ public class SponsorView extends javax.swing.JFrame {
 
     public void setIdSponsor(String idSponsor) {
         this.idSponsor = idSponsor;
+    }
+    
+    public String getOpzUser() {
+        return opzUser;
+    }
+
+    public void setOpzUser(String opzUser) {
+        this.opzUser = opzUser;
     }
 
     /*MAIN*/

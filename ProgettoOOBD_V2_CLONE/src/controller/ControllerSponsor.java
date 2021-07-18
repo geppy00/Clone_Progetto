@@ -103,13 +103,4 @@ public class ControllerSponsor {
             sponsor.eliminaEvento(evento);
         }
     }
-    
-    public String prendiNomeUtente(int idSponsor) throws ExceptionDao {
-        if(idSponsor > 0) {
-            Sponsor sponsor = new Sponsor(idSponsor);
-            return sponsor.prendiNomeUtente(sponsor);
-        }
-        else
-            return null;
-    }
 }

@@ -498,8 +498,8 @@ public class ModificaEvento extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLogoutJB1ActionPerformed
 
     private void btnAnnullaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnnullaActionPerformed
-        /*ElencoEventiView elencoEventiView = new ElencoEventiView(this.getIdSponsor());
-        elencoEventiView.setVisible(true);*/
+        ElencoEventiView elencoEventiView = new ElencoEventiView(this.getIdSponsor());
+        elencoEventiView.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnAnnullaActionPerformed
 

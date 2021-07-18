@@ -19,6 +19,7 @@ import javax.swing.JOptionPane;
 import model.Admin;
 import model.Procuratore;
 import view.AdminView;
+import view.SezioneProcuratoreView;
 
 
 public class ModificaDatiProcuratore extends javax.swing.JFrame {
@@ -404,8 +405,8 @@ public class ModificaDatiProcuratore extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCercaJTFActionPerformed
 
     private void btnAnnullaJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnnullaJBActionPerformed
-       AdminView adminPage = new AdminView();
-       adminPage.setVisible(true);
+       SezioneProcuratoreView sezioneProcuratoreView = new SezioneProcuratoreView();
+       sezioneProcuratoreView.setVisible(true);
        this.setVisible(false);
     }//GEN-LAST:event_btnAnnullaJBActionPerformed
 

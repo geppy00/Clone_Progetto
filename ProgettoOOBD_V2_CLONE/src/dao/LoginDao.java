@@ -7,6 +7,10 @@ import model.Login;
 
 public class LoginDao {
     
+    /*INFORMAZIONI IMPORTANTI*/
+    private String nomeUtente;
+    
+    /*COSTRUTTORE*/
     public LoginDao(){
        
     }
@@ -136,4 +140,63 @@ public class LoginDao {
             finallyException.finallyException();
         }
     }
+    
+    public String prendiNomeUtente(String id, String opzUser) throws ExceptionDao {
+        String sql = null;
+        PreparedStatement pStmt = null;
+        Connection connection = null;
+        ResultSet rs = null;
+        
+        switch(opzUser) {
+            case "Atleta":
+                sql= "SELECT username FROM login WHERE codatleta='"+id+"' AND codprocuratore IS NULL AND codclub IS NULL AND codsponsor IS NULL;";
+            break;
+            
+            case "Procuratore":
+                sql= "SELECT username FROM login WHERE codprocuratore='"+id+"' AND codclub IS NULL AND codatleta IS NULL AND codsponsor IS NULL;";
+            break;
+            
+            case "Club":
+                sql= "SELECT username FROM login WHERE codclub = "+id+" AND codprocuratore IS NULL AND codatleta IS NULL AND codsponsor IS NULL;";
+            break;
+            
+            case "Sponsor":
+                sql= "SELECT username FROM login WHERE codsponsor = "+id+"AND codclub IS NULL AND codatleta IS NULL AND codprocuratore IS NULL;";
+            break;
+            
+            case "Admin":
+                sql= "SELECT username FROM login WHERE opzuser = 'Admin'";
+            break;
+        }
+        
+        
+        try {
+            connection = new DataAccessObject().connectionToDatabase();
+            pStmt = connection.prepareStatement(sql);
+            rs = pStmt.executeQuery();
+            
+            while(rs.next()) {   
+                this.setNomeUtente(rs.getString("username"));
+            }
+        }catch(SQLException e) {
+            throw new ExceptionDao("ERRORE RICERCA NOME UTENTE SPORTIVO FALLITA "+e);
+        }
+        
+        finally{
+            FinallyException finallyException = new FinallyException();
+            finallyException.finallyException();
+        }
+        
+        return this.getNomeUtente();
+    }
+    
+    /*GET AND SET*/
+    public String getNomeUtente() {
+        return nomeUtente;
+    }
+
+    public void setNomeUtente(String nomeUtente) {
+        this.nomeUtente = nomeUtente;
+    }
+    
 }

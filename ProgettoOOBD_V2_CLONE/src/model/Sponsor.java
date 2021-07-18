@@ -5,7 +5,7 @@ import dao.ExceptionDao;
 import dao.SponsorDao;
 import java.util.ArrayList;
 
-public class Sponsor {
+public class Sponsor extends Login {
     
     private int idSponsor;
     private String nome;
@@ -94,9 +94,5 @@ public class Sponsor {
     
     public void eliminaEvento(Evento evento) throws ExceptionDao {
         new SponsorDao().eliminaEvento(evento);
-    }
-    
-    public String prendiNomeUtente(Sponsor sponsor) throws ExceptionDao {
-        return new SponsorDao().prendiNomeUtente(sponsor);
     }
 }

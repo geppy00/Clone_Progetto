@@ -9,11 +9,14 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Procuratore;
 
 public class ProcuratoreView extends javax.swing.JFrame {
-
+    
     /*INFORMAZIONI IMPORTANTI*/
     private String idProcuratore;
+    private String opzUser = "Procuratore";
+    private Procuratore procuratore = new Procuratore();
     
     /*CONTROLLER PER PROCURATORE*/
     ControllerProcuratore controllerProcuratore = new ControllerProcuratore();
@@ -28,7 +31,7 @@ public class ProcuratoreView extends javax.swing.JFrame {
         jLDataAttuale.setText(dtf.format(LocalDateTime.now()));
         
         try {
-            jLCurrentAccount.setText("Current Account: "+controllerProcuratore.prendiNomeUtente(this.getIdProcuratore()));
+            jLCurrentAccount.setText("Current Account: "+procuratore.prendiNomeUtente(this.getIdProcuratore(), this.getOpzUser()));
         } catch (ExceptionDao ex) {
             Logger.getLogger(ProcuratoreView.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -265,6 +268,15 @@ public class ProcuratoreView extends javax.swing.JFrame {
     public void setIdProcuratore(String idProcuratore) {
         this.idProcuratore = idProcuratore;
     }
+    
+    public String getOpzUser() {
+        return opzUser;
+    }
+
+    public void setOpzUser(String opzUser) {
+        this.opzUser = opzUser;
+    }
+
 
     /*MAIN*/
     public static void main(String args[]) {

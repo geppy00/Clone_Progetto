@@ -383,7 +383,7 @@ public class RegistraContrattoClub extends javax.swing.JFrame {
                 }
                 else {
                     //messageError.closeFiestraMessage(jPMessage);
-                    messageError.showMessage(false, true, "success", "Registrazione Effettuata Con Successo", errorMessage, jPMessage, btnCloseMessage);
+                    messageError.showMessage(false, true, "success", "Atleta Trovato Con Successo", errorMessage, jPMessage, btnCloseMessage);
                     datiAtleta.forEach((Atleta atleta)->{
                         nomeJTF.setText(atleta.getNome());
                         cognomeJTF.setText(atleta.getCognmome());

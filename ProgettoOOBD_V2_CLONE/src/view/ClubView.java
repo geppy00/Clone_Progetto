@@ -12,8 +12,11 @@ import java.util.logging.Logger;
 import model.Club;
 
 public class ClubView extends javax.swing.JFrame {
+
     /*INFORMAZIONI IMPORTANTI*/
     private String idClub;
+    private String opzUser = "Club";
+    private Club club = new Club();
     
     /*CONTROLLER PER CLUB*/
     ControllerClub controllerClub = new ControllerClub();
@@ -29,7 +32,7 @@ public class ClubView extends javax.swing.JFrame {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         jLDataAttuale.setText(dtf.format(LocalDateTime.now()));
         try {
-            jLCurrentAccount.setText("Current Account: "+controllerClub.prendiNomeUtente(Integer.parseInt(this.getIdClub())));
+            jLCurrentAccount.setText("Current Account: "+club.prendiNomeUtente(this.getIdClub(), this.getOpzUser()));
         } catch (ExceptionDao ex) {
             Logger.getLogger(ClubView.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -223,7 +226,16 @@ public class ClubView extends javax.swing.JFrame {
     public void setIdClub(String idClub) {
         this.idClub = idClub;
     }
+    
+    public String getOpzUser() {
+        return opzUser;
+    }
 
+    public void setOpzUser(String opzUser) {
+        this.opzUser = opzUser;
+    }
+
+    /*MAIN*/
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
