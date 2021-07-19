@@ -7,7 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
 import model.Evento;
 import model.Sponsor;
 import refactorCode.FinallyException;
@@ -208,8 +207,6 @@ public class SponsorDao {
         String sql = "UPDATE evento set titolo='"+evento.getTitolo()+"', luogoevento='"+evento.getLuogoEvento()+"', data_inizioevento='"+evento.getDataInizio()+"', ora_inizio_evento='"+evento.getOraInizio()+"', data_fineevento='"+evento.getDataFine()+"', ora_fine_evento='"+evento.getOraFine()+"', gettonevalue='"+evento.getGettoneValue()+"', descrizione='"+evento.getDescrizione()+"' WHERE idevento="+evento.getIdEvento()+" AND idsponsor="+evento.getIdSponsor()+";";
         Statement stmt = null;
         Connection connection = null;
-        
-        System.out.println(sql);
         
         try{
             connection = new DataAccessObject().connectionToDatabase();

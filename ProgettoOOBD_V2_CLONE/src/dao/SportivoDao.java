@@ -7,7 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
 import model.Atleta;
 import model.Invitati;
 import model.Procuratore;
@@ -21,7 +20,7 @@ public class SportivoDao {
         String sql;
         PreparedStatement pStmt = null;
         Connection connection = null;
-        System.out.println("IDCLUB DAO= "+atleta.getIdClub());
+        
         if(atleta.getIdClub() > 0) {
             sql = "INSERT INTO atleta(nome, cognome, sexo, nazione, indirizzo, datanascita, telefono, codfiscale, ruolo_atleta, peso, codprocuratore, iban_atleta, codclub) VALUES(?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?, ?, ?)";
             try{
@@ -166,7 +165,9 @@ public class SportivoDao {
     
     public void aggiornaSportivo(Atleta atleta, String codiceFiscaleDaModificare) throws ExceptionDao {
         String sql;
-        System.out.println("id club DAO="+atleta.getIdClub());
+        Statement stmt = null;
+        Connection connection = null;
+        
         if(atleta.getIdClub() > 0)
             sql = "UPDATE atleta set nome='"+atleta.getNome()+"', cognome='"+atleta.getCognmome()+"', sexo='"+atleta.getSesso()+
                          "', nazione='"+atleta.getNazione()+"', indirizzo='"+atleta.getIndirizzo()+"', datanascita='"+atleta.getDataNascita()+"', telefono='"+atleta.getTelefono()+
@@ -175,8 +176,6 @@ public class SportivoDao {
             sql = "UPDATE atleta set nome='"+atleta.getNome()+"', cognome='"+atleta.getCognmome()+"', sexo='"+atleta.getSesso()+
                          "', nazione='"+atleta.getNazione()+"', indirizzo='"+atleta.getIndirizzo()+"', datanascita='"+atleta.getDataNascita()+"', telefono='"+atleta.getTelefono()+
                          "', codfiscale='"+atleta.getCodiceFiscale()+"', ruolo_atleta='"+atleta.getRuolo()+"', peso='"+atleta.getPeso()+"', codprocuratore='"+atleta.getIdProcuratore()+"', iban_atleta='"+atleta.getIban()+"' WHERE codfiscale='"+codiceFiscaleDaModificare+"';";
-        Statement stmt = null;
-        Connection connection = null;
         
         try{
             connection = new DataAccessObject().connectionToDatabase();

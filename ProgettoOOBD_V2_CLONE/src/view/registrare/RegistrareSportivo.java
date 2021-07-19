@@ -568,7 +568,7 @@ public class RegistrareSportivo extends javax.swing.JFrame {
     }//GEN-LAST:event_inputIbanAtletaJTFFocusGained
 
     private void inputIbanAtletaJTFFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_inputIbanAtletaJTFFocusLost
-       if(inputIbanAtletaJTF.getText().equals("")){
+        if(inputIbanAtletaJTF.getText().equals("")){
             inputIbanAtletaJTF.setText("IBAN");
             inputIbanAtletaJTF.setForeground(new Color(231,231,231));
         }

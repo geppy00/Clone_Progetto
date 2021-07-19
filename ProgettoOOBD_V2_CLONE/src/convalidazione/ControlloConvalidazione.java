@@ -12,7 +12,6 @@ public class ControlloConvalidazione {
     
     //ADMIN
     public boolean controlloRegistraProcuratore(String matricolaPresa, String nomePreso, String cognomePreso, String nazionePresa, String indirizzoPreso, java.sql.Date dataNascitaPresoSql, String codiceFiscalePreso) {
-        System.out.println("DATA CONVALIDAZIONE="+dataNascitaPresoSql);
         if(matricolaPresa != null && !(matricolaPresa.equals("")) && !(matricolaPresa.equals("Matricola")) && nomePreso != null && !(nomePreso.equals("")) && !(nomePreso.equals("Nome")) && cognomePreso != null && !(cognomePreso.equals("")) && !(cognomePreso.equals("Cognome")) && nazionePresa != null && !(nazionePresa.equals("")) && !(nazionePresa.equals("")) && indirizzoPreso != null && !(indirizzoPreso.equals("")) && !(indirizzoPreso.equals("")) && dataNascitaPresoSql != null && !(dataNascitaPresoSql.equals("")) && codiceFiscalePreso != null && !(codiceFiscalePreso.equals("")) && !(codiceFiscalePreso.equals("Codice Fiscale"))) 
             return true;
         else

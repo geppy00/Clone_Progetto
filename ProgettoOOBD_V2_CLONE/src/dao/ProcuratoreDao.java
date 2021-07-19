@@ -9,7 +9,6 @@ import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
 import model.Atleta;
 import model.Club;
 import model.Contratto;
@@ -330,7 +329,6 @@ public class ProcuratoreDao {
                 return -1;
             else 
                 while(rs.next()){
-                    System.out.println("rs="+rs.getDouble("valore_contrattuale"));
                     return rs.getDouble("valore_contrattuale");
                 } 
         } catch(SQLException e) {
@@ -360,7 +358,6 @@ public class ProcuratoreDao {
                 return -1;
             else 
                 while(rs.next()){
-                    System.out.println("rs="+rs.getDouble("valore_contrattuale"));
                     return rs.getDouble("valore_contrattuale");
                 } 
         } catch(SQLException e) {

@@ -9,7 +9,6 @@ import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
 import model.Stipendio;
 import refactorCode.FinallyException;
 
@@ -60,9 +59,6 @@ public class StipendioDao {
                 return null;
             else {
                 while(rs.next()) {
-                    
-                    System.out.println("ID STIPENDIO= " + rs.getInt("idstipendio"));
-                    
                     stipendio.setIdStipendio(rs.getInt("idstipendio"));
                     stipendio.setValoreStipendio(rs.getDouble("val_stipendio"));
                     stipendio.setStatusPagamento(rs.getInt("status_pagamento"));
@@ -202,7 +198,6 @@ public class StipendioDao {
             stmt = connection.createStatement();
             stmt.executeUpdate(sql);
             connection.commit();
-            JOptionPane.showMessageDialog(null, "MODIFICA DEL PAGAMENTO EFFETTUATO CON SUCCESSO");
         }catch(SQLException e) {
             throw new ExceptionDao("ERRORE AGGIORNAMENTO CLUB FALLITA "+e);
         }
@@ -222,7 +217,6 @@ public class StipendioDao {
             connection = new DataAccessObject().connectionToDatabase();
             pStmt = connection.prepareStatement(sql);
             pStmt.executeUpdate();
-            JOptionPane.showMessageDialog(null, "PAGAMENTO PER LA CIFRA: "+stipendio.getValoreStipendio()+" IN DATA: "+stipendio.getDataPagamento()+"\n\t\tANNULLATO CON SUCCESSO");
         }catch(SQLException e) {
             throw new ExceptionDao("ERRORE ELIMINAZIONE CLUB FALLITA "+e);
         }

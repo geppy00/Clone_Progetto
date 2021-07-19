@@ -40,7 +40,6 @@ public class LoginDao {
                     rs = pStmt.executeQuery();
                     while(rs.next()) {
                         id = rs.getString("codprocuratore");
-                        System.out.println("ID LOGINDAO="+id);
                         return id;
                     }
                 }
@@ -60,7 +59,6 @@ public class LoginDao {
                     rs = pStmt.executeQuery();
                     while(rs.next()) {
                         int idInt = rs.getInt("idsponsor");
-                        System.out.println("nella dao="+idInt);
                         id = Integer.toString(idInt);
                         return id;
                     }
@@ -114,26 +112,25 @@ public class LoginDao {
                 break;
         }
         
-        System.out.println("COMANDO SQL: "+sql);
         
-         try{
+        try{
             connection = new DataAccessObject().connectionToDatabase();
             pStmt = connection.prepareStatement(sql);
             pStmt.setString(1, login.getUsername());
             pStmt.setString(2, login.getPassword());
             pStmt.setString(3, login.getOpzioneLogin());
-            
+
             if(login.getOpzioneLogin().equals("Procuratore") || login.getOpzioneLogin().equals("Atleta"))
                 pStmt.setString(4, login.getIdGenerico());
             else
                 pStmt.setInt(4, Integer.parseInt(login.getIdGenerico()));
-            
+
             pStmt.execute();
             pStmt.close();
             connection.close();
-        }catch(SQLException e) {
-            throw new ExceptionDao("ERRORE REGISTRAZIONE CLUB FALLITA "+e);
-        }
+       }catch(SQLException e) {
+           throw new ExceptionDao("ERRORE REGISTRAZIONE CLUB FALLITA "+e);
+       }
        
         finally{
             FinallyException finallyException = new FinallyException();

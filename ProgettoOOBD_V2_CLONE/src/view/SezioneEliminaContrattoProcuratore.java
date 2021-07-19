@@ -1,6 +1,7 @@
 
 package view;
 
+import convalidazione.MessageError;
 import dao.DataAccessObject;
 import dao.ExceptionDao;
 import java.awt.Color;
@@ -29,6 +30,9 @@ public class SezioneEliminaContrattoProcuratore extends javax.swing.JFrame {
     private int idContratto;
     private String idAtleta;
     
+    /*CONTROLLI*/
+    private MessageError messageError = new MessageError();
+    
     /*COSTRUTTORI*/
     public SezioneEliminaContrattoProcuratore(String idProcuratore) {
         initComponents();
@@ -53,7 +57,8 @@ public class SezioneEliminaContrattoProcuratore extends javax.swing.JFrame {
         } catch (ExceptionDao ex) {
             //Logger.getLogger(SezioneEliminaContrattoProcuratore.class.getName()).log(Level.SEVERE, null, ex);
             Toolkit.getDefaultToolkit().beep();
-            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nERRORE FATALE NON E' STATO POSSIBILE RICAVARE I DATI RIPROVARE", "ERRORE FATALE", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nERRORE FATALE NON E' STATO POSSIBILE RICAVARE I DATI RIPROVARE", "ERRORE FATALE", JOptionPane.ERROR_MESSAGE);
+            messageError.showMessage(false, true, "warning","Errore Fatale Non E' Stato Possibile Ricavare I dati Riprovare" , jLabel3, jPanel2, btnClose);
             SezioneGestioneContrattiView sezioneGestioneContrattiView = new SezioneGestioneContrattiView(this.getIdProcuratore());
             sezioneGestioneContrattiView.setVisible(true);
             this.setVisible(false);
@@ -144,10 +149,14 @@ public class SezioneEliminaContrattoProcuratore extends javax.swing.JFrame {
         tblContrattiClubJT = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblContrattiSponsorJT = new javax.swing.JTable();
-        btnClose = new javax.swing.JButton();
         jLDataAttuale = new javax.swing.JLabel();
         btnLogoutJB = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        btnClose = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        btnClose1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -215,19 +224,6 @@ public class SezioneEliminaContrattoProcuratore extends javax.swing.JFrame {
 
         jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 270, 720, 170));
 
-        btnClose.setBackground(new java.awt.Color(11, 58, 151));
-        btnClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_multiply_32px_1.png"))); // NOI18N
-        btnClose.setBorder(null);
-        btnClose.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnClose.setFocusPainted(false);
-        btnClose.setFocusable(false);
-        btnClose.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCloseActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 0, 40, 40));
-
         jLDataAttuale.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLDataAttuale.setForeground(new java.awt.Color(255, 255, 255));
         jLDataAttuale.setText("13/01/2023");
@@ -254,6 +250,64 @@ public class SezioneEliminaContrattoProcuratore extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 5, -1, -1));
+
+        jPanel2.setBackground(new java.awt.Color(46, 204, 113));
+
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_info_26px.png"))); // NOI18N
+
+        btnClose.setBackground(new java.awt.Color(46, 204, 113));
+        btnClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_multiply_32px_1.png"))); // NOI18N
+        btnClose.setBorder(null);
+        btnClose.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnClose.setFocusPainted(false);
+        btnClose.setFocusable(false);
+        btnClose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCloseActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("jLabel3");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 642, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(btnClose, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel3)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, 730, 30));
+
+        btnClose1.setBackground(new java.awt.Color(11, 58, 151));
+        btnClose1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_multiply_32px_1.png"))); // NOI18N
+        btnClose1.setBorder(null);
+        btnClose1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnClose1.setFocusPainted(false);
+        btnClose1.setFocusable(false);
+        btnClose1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClose1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnClose1, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 0, 40, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -296,8 +350,7 @@ public class SezioneEliminaContrattoProcuratore extends javax.swing.JFrame {
     }//GEN-LAST:event_tblContrattiSponsorJTMouseClicked
 
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
-        this.setVisible(false);
-        System.exit(0);
+        this.jPanel2.setVisible(false);
     }//GEN-LAST:event_btnCloseActionPerformed
 
     private void btnLogoutJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutJBActionPerformed
@@ -309,6 +362,12 @@ public class SezioneEliminaContrattoProcuratore extends javax.swing.JFrame {
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
         this.setState(Frame.ICONIFIED);
     }//GEN-LAST:event_jLabel1MouseClicked
+
+    private void btnClose1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClose1ActionPerformed
+        SezioneGestioneContrattiView sezioneGestioneContrattiView = new SezioneGestioneContrattiView(this.getIdProcuratore());
+        sezioneGestioneContrattiView.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnClose1ActionPerformed
 
       /*GET AND SET*/
     public String getIdProcuratore() {
@@ -348,10 +407,14 @@ public class SezioneEliminaContrattoProcuratore extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClose;
+    private javax.swing.JButton btnClose1;
     private javax.swing.JButton btnLogoutJB;
     private javax.swing.JLabel jLDataAttuale;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tblContrattiClubJT;

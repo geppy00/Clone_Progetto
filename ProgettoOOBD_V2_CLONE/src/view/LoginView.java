@@ -7,7 +7,6 @@ import java.awt.Color;
 import java.awt.Frame;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 
 
 public class LoginView extends javax.swing.JFrame {
@@ -219,7 +218,6 @@ public class LoginView extends javax.swing.JFrame {
        
         try {
             setIdCopiato(loginController.verificaLogin(userName, password, scelta));
-            System.out.println("CODICE ACCESSO "+getIdCopiato());
             if(getIdCopiato() == null){ 
                 jMessagge.setVisible(false);
                 jMessagge.setBackground(new Color(231,76,60));
