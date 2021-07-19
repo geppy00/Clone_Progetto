@@ -3,6 +3,7 @@ package view;
 
 import controller.ControllerProcuratore;
 import convalidazione.ControlloConvalidazione;
+import convalidazione.MessageError;
 import dao.DataAccessObject;
 import dao.ExceptionDao;
 import java.awt.Color;
@@ -26,8 +27,10 @@ import javax.swing.table.DefaultTableModel;
 import refactorCode.FinallyException;
 
 public class PercentualiGuadagnoProcuratoreView extends javax.swing.JFrame {
+    
     /*CONTROLLORE PER GESTIRE GLI ERRORI*/
     private ControlloConvalidazione controlloConvalidazione = new ControlloConvalidazione();
+    private MessageError messageError = new MessageError();
     
     /*DATI IMPORTANTI*/
     private String idProcuratore;
@@ -68,10 +71,8 @@ public class PercentualiGuadagnoProcuratoreView extends javax.swing.JFrame {
             this.stampaDatiAtltetaTbl();
         } catch (ExceptionDao ex) {
             Toolkit.getDefaultToolkit().beep();
-            JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nERRORE FATALE PROVARE AD RIAPRIRE LA FINESTRA", "ERRORE", JOptionPane.ERROR_MESSAGE);
-            ProcuratoreView procuratoreView = new ProcuratoreView(this.getIdProcuratore());
-            procuratoreView.setVisible(true);
-            this.setVisible(false);
+            //JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nERRORE FATALE PROVARE AD RIAPRIRE LA FINESTRA", "ERRORE", JOptionPane.ERROR_MESSAGE);
+            messageError.showMessage(false, true, "warning","Errore Fatale Provare Ad Riaprire La Finestra" , jLabel3, jPanel2, btnCloseMessage);
         }
     }
     
@@ -101,8 +102,12 @@ public class PercentualiGuadagnoProcuratoreView extends javax.swing.JFrame {
         totaleGettoniJTF = new javax.swing.JLabel();
         totaleValoreContrattualeJTF = new javax.swing.JLabel();
         jLDataAttuale = new javax.swing.JLabel();
-        btnLogoutJB = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        btnCloseMessage = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        btnLogoutJB1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -262,19 +267,6 @@ public class PercentualiGuadagnoProcuratoreView extends javax.swing.JFrame {
         jLDataAttuale.setText("13/01/2023");
         jPanel1.add(jLDataAttuale, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, -1, -1));
 
-        btnLogoutJB.setBackground(new java.awt.Color(11, 58, 151));
-        btnLogoutJB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_multiply_32px_1.png"))); // NOI18N
-        btnLogoutJB.setBorder(null);
-        btnLogoutJB.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnLogoutJB.setFocusPainted(false);
-        btnLogoutJB.setFocusable(false);
-        btnLogoutJB.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLogoutJBActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnLogoutJB, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 0, -1, 40));
-
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_subtract_32px_1.png"))); // NOI18N
         jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -283,6 +275,65 @@ public class PercentualiGuadagnoProcuratoreView extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 5, -1, -1));
+
+        jPanel2.setBackground(new java.awt.Color(231, 76, 60));
+
+        jLabel2.setBackground(new java.awt.Color(231, 76, 60));
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_info_26px.png"))); // NOI18N
+
+        btnCloseMessage.setBackground(new java.awt.Color(231, 76, 60));
+        btnCloseMessage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_multiply_32px_1.png"))); // NOI18N
+        btnCloseMessage.setBorder(null);
+        btnCloseMessage.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCloseMessage.setFocusPainted(false);
+        btnCloseMessage.setFocusable(false);
+        btnCloseMessage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCloseMessageActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setBackground(new java.awt.Color(231, 76, 60));
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("jLabel3");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 702, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnCloseMessage)
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnCloseMessage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, 790, 30));
+
+        btnLogoutJB1.setBackground(new java.awt.Color(11, 58, 151));
+        btnLogoutJB1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_multiply_32px_1.png"))); // NOI18N
+        btnLogoutJB1.setBorder(null);
+        btnLogoutJB1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnLogoutJB1.setFocusPainted(false);
+        btnLogoutJB1.setFocusable(false);
+        btnLogoutJB1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutJB1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnLogoutJB1, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 0, -1, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -351,7 +402,8 @@ public class PercentualiGuadagnoProcuratoreView extends javax.swing.JFrame {
                 atletaMigliorGuadagnoJTF.setText(nomeAtletaMigliorGuadagno);
             else {
                 Toolkit.getDefaultToolkit().beep();
-                JOptionPane.showMessageDialog(this, "NON E' STATO POSSIBILE RICERCARE L'ATLETA MIGLIORE\n\t\tRIPROVARE", "WARNING", JOptionPane.WARNING_MESSAGE);
+                //JOptionPane.showMessageDialog(this, "NON E' STATO POSSIBILE RICERCARE L'ATLETA MIGLIORE\n\t\tRIPROVARE", "WARNING", JOptionPane.WARNING_MESSAGE);
+                messageError.showMessage(false, true, "warning","Errore Fatale Provare Ad Riaprire La Finestra" , jLabel3, jPanel2, btnCloseMessage);
             }
         } catch (ExceptionDao ex) {
             Logger.getLogger(PercentualiGuadagnoProcuratoreView.class.getName()).log(Level.SEVERE, null, ex);
@@ -359,14 +411,18 @@ public class PercentualiGuadagnoProcuratoreView extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnCalcolaJBActionPerformed
   
-    private void btnLogoutJBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutJBActionPerformed
-        this.setVisible(false);
-        System.exit(0);
-    }//GEN-LAST:event_btnLogoutJBActionPerformed
+    private void btnCloseMessageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseMessageActionPerformed
+        
+    }//GEN-LAST:event_btnCloseMessageActionPerformed
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
         this.setState(Frame.ICONIFIED);
     }//GEN-LAST:event_jLabel1MouseClicked
+
+    private void btnLogoutJB1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutJB1ActionPerformed
+        this.setVisible(false);
+        System.exit(0);
+    }//GEN-LAST:event_btnLogoutJB1ActionPerformed
 
     /*METODI*/
     private String prendiNomeSponsor() throws ExceptionDao {
@@ -494,10 +550,14 @@ public class PercentualiGuadagnoProcuratoreView extends javax.swing.JFrame {
     private javax.swing.JLabel atletaMigliorGuadagnoJTF;
     private javax.swing.JButton btnAnnullaJB;
     private javax.swing.JButton btnCalcolaJB;
-    private javax.swing.JButton btnLogoutJB;
+    private javax.swing.JButton btnCloseMessage;
+    private javax.swing.JButton btnLogoutJB1;
     private javax.swing.JLabel jLDataAttuale;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;

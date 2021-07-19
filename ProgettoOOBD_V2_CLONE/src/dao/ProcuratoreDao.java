@@ -419,7 +419,6 @@ public class ProcuratoreDao {
             stmt = connection.createStatement();
             stmt.executeUpdate(sql);
             connection.commit();
-            JOptionPane.showMessageDialog(null, "CONTRATTO AGGIORNATO CON SUCCESSO");
         }catch(SQLException e) {
             throw new ExceptionDao("ERRORE AGGIORNAMENTO CONTRATTO FALLITA "+e);
         }
