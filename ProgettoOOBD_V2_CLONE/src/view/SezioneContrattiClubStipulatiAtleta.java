@@ -37,7 +37,7 @@ public class SezioneContrattiClubStipulatiAtleta extends javax.swing.JFrame {
          tblDatiContrattiClubJT.getTableHeader().setForeground(new Color(255,255,255));
         
         try {
-            stampaDatiTabella();
+            stampaDatiTabellaContratti();
         } catch (ExceptionDao ex) {
             Logger.getLogger(SezioneGettoniEventoAtleta.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -49,7 +49,7 @@ public class SezioneContrattiClubStipulatiAtleta extends javax.swing.JFrame {
 
     
     /*METODI*/
-    private void stampaDatiTabella() throws ExceptionDao {
+    private void stampaDatiTabellaContratti() throws ExceptionDao {
         PreparedStatement pStmt = null;
         Connection connection = null;
         ResultSet rs = null;

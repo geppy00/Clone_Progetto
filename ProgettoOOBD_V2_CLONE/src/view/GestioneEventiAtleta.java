@@ -40,7 +40,7 @@ public class GestioneEventiAtleta extends javax.swing.JFrame {
          
         
         try {
-            stampaDati();
+            stampaDatiEventi();
         } catch (ExceptionDao ex) {
             Logger.getLogger(GestioneEventiAtleta.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -181,7 +181,7 @@ public class GestioneEventiAtleta extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel1MouseClicked
 
     /*METODI*/
-    private void stampaDati() throws ExceptionDao {
+    private void stampaDatiEventi() throws ExceptionDao {
         PreparedStatement pStmt = null;
         Connection connection = null;
         ResultSet rs = null;

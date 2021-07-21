@@ -38,6 +38,7 @@ public class SezioneEliminaContrattoProcuratore extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.idProcuratore = idProcuratore;
+        this.jPanel2.setVisible(false);
         
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         jLDataAttuale.setText(dtf.format(LocalDateTime.now()));
@@ -53,7 +54,7 @@ public class SezioneEliminaContrattoProcuratore extends javax.swing.JFrame {
          tblContrattiSponsorJT.getTableHeader().setForeground(new Color(255,255,255));
         
         try {
-            this.stampaDatiTabella();
+            this.stampaDatiTabellaEliContratto();
         } catch (ExceptionDao ex) {
             //Logger.getLogger(SezioneEliminaContrattoProcuratore.class.getName()).log(Level.SEVERE, null, ex);
             Toolkit.getDefaultToolkit().beep();
@@ -70,7 +71,7 @@ public class SezioneEliminaContrattoProcuratore extends javax.swing.JFrame {
     }
 
     /*METODI*/
-    private void stampaDatiTabella() throws ExceptionDao {
+    private void stampaDatiTabellaEliContratto() throws ExceptionDao {
         PreparedStatement pStmt = null;
         Connection connection = null;
         ResultSet rs = null;

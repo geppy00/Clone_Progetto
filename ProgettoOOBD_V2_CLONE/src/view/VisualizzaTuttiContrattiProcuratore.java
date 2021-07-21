@@ -53,7 +53,7 @@ public class VisualizzaTuttiContrattiProcuratore extends javax.swing.JFrame {
          tblNessunContrattoJT.getTableHeader().setForeground(new Color(255,255,255));
         
         try { 
-            stampaDati();
+            stampaTuttiContratti();
         } catch (ExceptionDao ex) {
             Logger.getLogger(VisualizzaTuttiContrattiProcuratore.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -64,7 +64,7 @@ public class VisualizzaTuttiContrattiProcuratore extends javax.swing.JFrame {
     }
 
     /*METODI*/
-    private void stampaDati() throws ExceptionDao {
+    private void stampaTuttiContratti() throws ExceptionDao {
         PreparedStatement pStmt = null;
         Connection connection = null;
         ResultSet rs = null;

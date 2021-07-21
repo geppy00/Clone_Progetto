@@ -49,7 +49,7 @@ public class ContrattiClubProcuratoreView extends javax.swing.JFrame {
          tblDatiContrattiClubJT.setRowHeight(25);
         
         try {
-            stampaDatiTabella();
+            stampaDatiTabellaClub();
            
         } catch (ExceptionDao ex) {
             Logger.getLogger(ContrattiClubProcuratoreView.class.getName()).log(Level.SEVERE, null, ex);
@@ -62,7 +62,7 @@ public class ContrattiClubProcuratoreView extends javax.swing.JFrame {
 
 
     /*METODI*/
-    private void stampaDatiTabella() throws ExceptionDao {
+    private void stampaDatiTabellaClub() throws ExceptionDao {
         PreparedStatement pStmt = null;
         Connection connection = null;
         ResultSet rs = null;

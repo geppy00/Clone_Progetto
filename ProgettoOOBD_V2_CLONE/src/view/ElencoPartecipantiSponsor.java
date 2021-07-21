@@ -37,7 +37,7 @@ public class ElencoPartecipantiSponsor extends javax.swing.JFrame {
         tblDatiPartecipantiJT.getTableHeader().setForeground(new Color(255,255,255));
         
         try {
-            stampaDatiTabella();
+            stampaDatiTabellaPartecipanti();
         } catch (ExceptionDao ex) {
             Logger.getLogger(ElencoPartecipantiSponsor.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -46,7 +46,7 @@ public class ElencoPartecipantiSponsor extends javax.swing.JFrame {
     public ElencoPartecipantiSponsor() {}
  
     /*METODI*/
-    private void stampaDatiTabella() throws ExceptionDao {
+    private void stampaDatiTabellaPartecipanti() throws ExceptionDao {
         PreparedStatement pStmt = null;
         Connection connection = null;
         ResultSet rs = null;

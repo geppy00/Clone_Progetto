@@ -408,6 +408,7 @@ public class RegistraContrattoClub extends javax.swing.JFrame {
         
         if(controlloConvalidazione.controllaId(String.valueOf(idClub)) == true) {
             try {
+                messageError.closeFiestraMessage(jPMessage);
                 String nomeClub = controllerProcuratore.cercaClub(idClub);
                 if(controlloConvalidazione.controllaNome(nomeClub) == true)
                     inputNomeClubJTF.setText(nomeClub);

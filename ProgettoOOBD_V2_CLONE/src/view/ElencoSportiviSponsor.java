@@ -45,7 +45,7 @@ public class ElencoSportiviSponsor extends javax.swing.JFrame {
            
         
         try {
-            visualizzaDatiTabella();
+            visualizzaDatiTabellaSportivi();
         } catch (ExceptionDao ex) {
             Logger.getLogger(ElencoSportiviSponsor.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -53,7 +53,7 @@ public class ElencoSportiviSponsor extends javax.swing.JFrame {
 
   
     /*METODI*/
-    private void visualizzaDatiTabella() throws ExceptionDao {
+    private void visualizzaDatiTabellaSportivi() throws ExceptionDao {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");  
         PreparedStatement pStmt = null;
         Connection connection = null;
@@ -114,7 +114,15 @@ public class ElencoSportiviSponsor extends javax.swing.JFrame {
             new String [] {
                 "Codice Fiscale", "Nome", "Cognome", "Anno Stipulazione", "Anno Termine"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tblDatiSportiviJT.setFocusable(false);
         tblDatiSportiviJT.setRequestFocusEnabled(false);
         tblDatiSportiviJT.setRowHeight(25);

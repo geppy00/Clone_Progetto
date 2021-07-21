@@ -38,7 +38,7 @@ public class SezionePagamentiClubAtleta extends javax.swing.JFrame {
             tblPagamentiClubJT.getTableHeader().setForeground(new Color(255,255,255));
         
         try {
-            stampaDatiTabella();
+            stampaDatiTabellaPagamenti();
         } catch (ExceptionDao ex) {
             Logger.getLogger(SezionePagamentiClubAtleta.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -50,7 +50,7 @@ public class SezionePagamentiClubAtleta extends javax.swing.JFrame {
     }
 
     /*METODI*/
-    private void stampaDatiTabella() throws ExceptionDao {
+    private void stampaDatiTabellaPagamenti() throws ExceptionDao {
         PreparedStatement pStmt = null;
         Connection connection = null;
         ResultSet rs = null;
@@ -134,6 +134,7 @@ public class SezionePagamentiClubAtleta extends javax.swing.JFrame {
         btnTornaIndietroJB1.setBackground(new java.awt.Color(11, 58, 151));
         btnTornaIndietroJB1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMG/icons8_left_32px_2.png"))); // NOI18N
         btnTornaIndietroJB1.setBorder(null);
+        btnTornaIndietroJB1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnTornaIndietroJB1.setFocusable(false);
         btnTornaIndietroJB1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

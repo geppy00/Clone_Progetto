@@ -362,6 +362,7 @@ public class RegistrareContrattoSponsor extends javax.swing.JFrame {
         
         if(controlloConvalidazione.controllaId(String.valueOf(idSponsor)) == true) {
             try {
+                messageError.closeFiestraMessage(jPMessage);
                 String nomeSponsor = controllerProcuratore.cercaSponsor(idSponsor);
                 if(controlloConvalidazione.controllaNome(nomeSponsor) == true)
                     nomeSponsorJTF.setText(nomeSponsor);

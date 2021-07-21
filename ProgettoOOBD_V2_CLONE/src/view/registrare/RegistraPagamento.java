@@ -50,7 +50,7 @@ public class RegistraPagamento extends javax.swing.JFrame {
         elencoAtletiJT.getTableHeader().setForeground(new Color(255,255,255));
         
         try {
-            this.stampaDati();
+            this.stampaDatiAtleta();
         } catch (ExceptionDao ex) {
             Logger.getLogger(RegistraPagamento.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -61,7 +61,7 @@ public class RegistraPagamento extends javax.swing.JFrame {
     }
     
     /*METODI*/
-    private void stampaDati() throws ExceptionDao {
+    private void stampaDatiAtleta() throws ExceptionDao {
         PreparedStatement pStmt = null;
         Connection connection = null;
         ResultSet rs = null;

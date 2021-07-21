@@ -44,14 +44,14 @@ public class RegistrareSportivo extends javax.swing.JFrame {
         tblDatiClubJT.getTableHeader().setForeground(new Color(255,255,255));
         
         try {
-            this.stampaDatiTabella();
+            this.stampaDatiTabellaClub();
         } catch (ExceptionDao ex) {
             Logger.getLogger(RegistrareSportivo.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
     /*METODI*/
-    private void stampaDatiTabella() throws ExceptionDao {
+    private void stampaDatiTabellaClub() throws ExceptionDao {
         PreparedStatement pStmt = null;
         Connection connection = null;
         ResultSet rs = null;

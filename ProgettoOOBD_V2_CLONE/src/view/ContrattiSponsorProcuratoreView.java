@@ -39,7 +39,7 @@ public class ContrattiSponsorProcuratoreView extends javax.swing.JFrame {
          tblDatiContrattiSponsorJT.getTableHeader().setForeground(new Color(255,255,255));
         
         try {
-            stampaDatiTabella();
+            stampaDatiTabellaSponsor();
         } catch (ExceptionDao ex) {
             Logger.getLogger(ContrattiSponsorProcuratoreView.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -50,7 +50,7 @@ public class ContrattiSponsorProcuratoreView extends javax.swing.JFrame {
     }
     
      /*METODI*/
-    private void stampaDatiTabella() throws ExceptionDao {
+    private void stampaDatiTabellaSponsor() throws ExceptionDao {
         PreparedStatement pStmt = null;
         Connection connection = null;
         ResultSet rs = null;

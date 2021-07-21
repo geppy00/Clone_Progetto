@@ -41,7 +41,7 @@ public class ElencoEventiView extends javax.swing.JFrame {
          tblDatiEventoJT.getTableHeader().setForeground(new Color(255,255,255));
         
         try {
-            stampaDatiTabella();
+            stampaDatiTabellaEventi();
         } catch (ExceptionDao ex) {
             Logger.getLogger(ElencoEventiView.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -188,7 +188,7 @@ public class ElencoEventiView extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel1MouseClicked
 
     /*METODI*/
-    private void stampaDatiTabella() throws ExceptionDao {
+    private void stampaDatiTabellaEventi() throws ExceptionDao {
         PreparedStatement pStmt = null;
         Connection connection = null;
         ResultSet rs = null;

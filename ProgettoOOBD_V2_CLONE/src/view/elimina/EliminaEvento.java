@@ -50,7 +50,7 @@ public class EliminaEvento extends javax.swing.JFrame {
          tblDatiEventoJT.getTableHeader().setForeground(new Color(255,255,255));
         
         try {
-            stampaDatiTabella();
+            stampaDatiEvento();
         } catch (ExceptionDao ex) {
             Logger.getLogger(EliminaEvento.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -281,7 +281,7 @@ public class EliminaEvento extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     /*METODI*/
-    private void stampaDatiTabella() throws ExceptionDao {
+    private void stampaDatiEvento() throws ExceptionDao {
         PreparedStatement pStmt = null;
         Connection connection = null;
         ResultSet rs = null;
@@ -375,7 +375,7 @@ public class EliminaEvento extends javax.swing.JFrame {
         try {
             DefaultTableModel tblModel = (DefaultTableModel)tblDatiEventoJT.getModel();
             tblModel.setRowCount(0);
-            stampaDatiTabella();
+            stampaDatiEvento();
         } catch (ExceptionDao ex) {
             Logger.getLogger(EliminaEvento.class.getName()).log(Level.SEVERE, null, ex);
         }

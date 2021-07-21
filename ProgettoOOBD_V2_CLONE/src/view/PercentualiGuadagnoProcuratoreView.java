@@ -44,8 +44,8 @@ public class PercentualiGuadagnoProcuratoreView extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.idProcuratore = idProcuratore;
-        
-        
+        this.jPanel2.setVisible(false);
+
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         jLDataAttuale.setText(dtf.format(LocalDateTime.now()));
         
