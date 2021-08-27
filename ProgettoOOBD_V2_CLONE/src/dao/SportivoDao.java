@@ -193,26 +193,65 @@ public class SportivoDao {
         }
     }
     
-    public void registraInvitato(Invitati invitati) throws ExceptionDao {
+    public boolean controllaInvitato(Invitati invitati) throws ExceptionDao {
+        String sql= "SELECT * FROM invitatti WHERE idatleta='"+invitati.getIdAtleta()+"' AND idevento="+invitati.getIdEvento()+";";
+        PreparedStatement pStmt = null;
+        Connection connection = null;
+        ResultSet rs = null;
+        String idAtletaInvitato;
+        int idEventoInvitato;
+        
+        try {
+            connection = new DataAccessObject().connectionToDatabase();
+            pStmt = connection.prepareStatement(sql);
+            rs = pStmt.executeQuery();
+            while(rs.next()) {
+                idAtletaInvitato = rs.getString("idatleta");
+                idEventoInvitato = rs.getInt("idevento");
+                
+                System.out.println("idAtletaInvitato="+idAtletaInvitato+" idEventoInvitato="+idEventoInvitato);
+                
+                if(invitati.getIdAtleta().equals(idAtletaInvitato) && invitati.getIdEvento() == idEventoInvitato)
+                    return false;
+            }
+            
+        } catch(SQLException e) {
+            throw new ExceptionDao("ERRORE CONTROLLO INVITATTI"+e);
+        }
+        
+        finally {
+            FinallyException finallyException = new FinallyException();
+            finallyException.finallyException();
+        }
+        
+        return true;
+    }
+    
+    public boolean registraInvitato(Invitati invitati) throws ExceptionDao {
         String sql= "INSERT INTO invitatti(idatleta, idevento, status_presenza) VALUES(?, ?, ?)";
         PreparedStatement pStmt = null;
         Connection connection = null;
         
-        try{
-          connection = new DataAccessObject().connectionToDatabase();
-          pStmt = connection.prepareStatement(sql);
-          pStmt.setString(1, invitati.getIdAtleta());
-          pStmt.setInt(2, invitati.getIdEvento());
-          pStmt.setInt(3, invitati.getStatusPresenza());
-          pStmt.execute();
-        }catch(SQLException e) {
-            throw new ExceptionDao("ERRORE REGISTRAZIONE INVITATI FALLITA "+e);
+        if(this.controllaInvitato(invitati)) {
+            try {
+                connection = new DataAccessObject().connectionToDatabase();
+                pStmt = connection.prepareStatement(sql);
+                pStmt.setString(1, invitati.getIdAtleta());
+                pStmt.setInt(2, invitati.getIdEvento());
+                pStmt.setInt(3, invitati.getStatusPresenza());
+                pStmt.execute();
+            } catch(SQLException e) {
+                throw new ExceptionDao("ERRORE REGISTRAZIONE INVITATI FALLITA "+e);
+            } 
+            finally {
+                FinallyException finallyException = new FinallyException();
+                finallyException.finallyException();
+            }
+            
+            return true;
         }
-        
-        finally{
-            FinallyException finallyException = new FinallyException();
-            finallyException.finallyException();
-        }
+        else 
+            return false;
     }
     
 }

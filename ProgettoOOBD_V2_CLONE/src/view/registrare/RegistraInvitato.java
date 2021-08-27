@@ -180,10 +180,16 @@ public class RegistraInvitato extends javax.swing.JFrame {
         ControllerSportivo controllerSportivo = new ControllerSportivo();
         try {
             if(controlloConvalidazione.controllaInvitatti(this.getIdAtleta(), String.valueOf(this.getIdEvento())) == true) {
-                controllerSportivo.registraInvitato(this.getIdAtleta(), this.getIdEvento(), 1);
-                messageError.showMessage(false, true, "success", "L'Atleta "+this.getIdAtleta()+" E' Invitato Per L'Evento Numero "+this.getIdEvento() ,jLMessaggio , jMessagge, btnCloseMessage);
-                this.btnYesJB.setEnabled(false);
-                this.btnNoJB.setEnabled(false);
+                if(controllerSportivo.registraInvitato(this.getIdAtleta(), this.getIdEvento(), 1)) {
+                    messageError.showMessage(false, true, "success", "L'Atleta "+this.getIdAtleta()+" E' Invitato Per L'Evento Numero "+this.getIdEvento() ,jLMessaggio , jMessagge, btnCloseMessage);
+                    this.btnYesJB.setEnabled(false);
+                    this.btnNoJB.setEnabled(false);
+                }
+                else {
+                    messageError.showMessage(false, true, "warning", "Già Hai Scelto Per Questo Evento",jLMessaggio , jMessagge, btnCloseMessage);
+                    this.btnYesJB.setEnabled(false);
+                    this.btnNoJB.setEnabled(false);
+                }
                 /*try {
                     java.util.concurrent.TimeUnit.SECONDS.sleep(3);
                 } catch (InterruptedException ex) {
@@ -210,10 +216,16 @@ public class RegistraInvitato extends javax.swing.JFrame {
         
         try {
             if(controlloConvalidazione.controllaInvitatti(this.getIdAtleta(), String.valueOf(this.getIdEvento())) == true) {
-                controllerSportivo.registraInvitato(this.getIdAtleta(), this.getIdEvento(), 0);
-                messageError.showMessage(false, true, "success", "L'Atleta "+this.getIdAtleta()+" Non E' Invitato Per L'Evento Numero "+this.getIdEvento() ,jLMessaggio , jMessagge, btnCloseMessage);
-                this.btnYesJB.setEnabled(false);
-                this.btnNoJB.setEnabled(false);
+                if(controllerSportivo.registraInvitato(this.getIdAtleta(), this.getIdEvento(), 0)) {
+                    messageError.showMessage(false, true, "success", "L'Atleta "+this.getIdAtleta()+" Non E' Invitato Per L'Evento Numero "+this.getIdEvento() ,jLMessaggio , jMessagge, btnCloseMessage);
+                    this.btnYesJB.setEnabled(false);
+                    this.btnNoJB.setEnabled(false);
+                }
+                else {
+                    messageError.showMessage(false, true, "warning", "Già Hai Scelto Per Questo Evento",jLMessaggio , jMessagge, btnCloseMessage);
+                    this.btnYesJB.setEnabled(false);
+                    this.btnNoJB.setEnabled(false);
+                }
                 /*try {
                     java.util.concurrent.TimeUnit.SECONDS.sleep(3);
                 } catch (InterruptedException ex) {

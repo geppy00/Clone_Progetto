@@ -139,7 +139,7 @@ public class ProcuratoreDao {
     public void aggiornaProcuratore(Procuratore procuratore, String matricolaDaModificare) throws ExceptionDao {
         String sql = "UPDATE procuratore set code_procuratore='"+procuratore.getCode_procuratore()+"', nome='"+procuratore.getNome()+"', cognome='"+procuratore.getCognome()+
                      "', sexo='"+procuratore.getSesso()+"', nazione='"+procuratore.getNazione()+"', indirizzo='"+procuratore.getIndirizzo()+"', datanascita='"+procuratore.getDataNascita()+
-                     "', telefono='"+procuratore.getTelefono()+"', codfiscale='"+procuratore.getCodFiscale()+"', iban_procuratore='"+procuratore.getIban()+"' WHERE codfiscale='"+matricolaDaModificare+"';";
+                     "', telefono='"+procuratore.getTelefono()+"', codfiscale='"+procuratore.getCodFiscale()+"', iban_procuratore='"+procuratore.getIban()+"' WHERE code_procuratore='"+matricolaDaModificare+"';";
         Statement stmt = null;
         Connection connection = null;
         

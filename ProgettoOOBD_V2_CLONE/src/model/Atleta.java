@@ -182,8 +182,8 @@ public class Atleta extends Login {
 
     
     /*METODO*/
-    public void registraInvitato(Invitati invitati) throws ExceptionDao {
-        new SportivoDao().registraInvitato(invitati);
+    public boolean registraInvitato(Invitati invitati) throws ExceptionDao {
+        return new SportivoDao().registraInvitato(invitati);
     }
    
 }

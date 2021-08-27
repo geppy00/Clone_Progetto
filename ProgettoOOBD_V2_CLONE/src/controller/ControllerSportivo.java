@@ -51,11 +51,17 @@ public class ControllerSportivo {
         return false;
     }
     
-    public void registraInvitato(String idAtleta, int idEvento, int statusPresenza)throws ExceptionDao {
+    public boolean registraInvitato(String idAtleta, int idEvento, int statusPresenza)throws ExceptionDao {
         if(idAtleta != null && idAtleta.length() > 0 && idEvento > 0 && statusPresenza == 1 || statusPresenza == 0) {
             Invitati invitati = new Invitati(idAtleta, idEvento, statusPresenza);
             Atleta atleta = new Atleta();
-            atleta.registraInvitato(invitati);
-        }   
+            
+            if(atleta.registraInvitato(invitati))
+                return true;
+            else
+                return false;
+        }
+        
+        return false;
     }
 }

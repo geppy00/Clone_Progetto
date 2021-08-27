@@ -122,7 +122,7 @@ public class SezioneEliminaContrattoProcuratore extends javax.swing.JFrame {
                 String dataFine = dateFormat.format(rs.getDate("dataend"));
                 String valore = String.valueOf(rs.getDouble("valore_contrattuale"));
                 String idContrattoPreso = String.valueOf(rs.getInt("numero_contratto"));
-                
+
                 String tbDataSponsor[] = {idAtletaPreso, nomeAtleta, nomeSponsor, dataInizio, dataFine, valore, idContrattoPreso};
                 DefaultTableModel tblModelSponsor = (DefaultTableModel)tblContrattiSponsorJT.getModel();
                 tblModelSponsor.addRow(tbDataSponsor);
