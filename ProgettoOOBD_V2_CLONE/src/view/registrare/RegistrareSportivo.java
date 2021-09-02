@@ -453,7 +453,7 @@ public class RegistrareSportivo extends javax.swing.JFrame {
         } catch(NullPointerException nex) {
             Toolkit.getDefaultToolkit().beep();
             //JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nINSERIRE UNA DATA VALIDA", "ERRORE", JOptionPane.ERROR_MESSAGE);
-            messageError.showMessage(false, true, "warning","Inserire Una Data Valida" , errorMessage, jPMessage, btnCloseMessage);
+            getMessageError().showMessage(false, true, "warning","Inserire Una Data Valida" , getErrorMessage(), getjPMessage(), getBtnCloseMessage());
         }
 
         String telefonoPreso = inputTelefonoJTF.getText();
@@ -466,7 +466,7 @@ public class RegistrareSportivo extends javax.swing.JFrame {
         } catch(NumberFormatException nex) {
             Toolkit.getDefaultToolkit().beep();
             //JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nINSERIRE UN NUMERO VALIDO", "ERRORE", JOptionPane.ERROR_MESSAGE);
-            messageError.showMessage(false, true, "warning","Inserire Un Numero Valido" , errorMessage, jPMessage, btnCloseMessage);
+            getMessageError().showMessage(false, true, "warning","Inserire Un Numero Valido" , getErrorMessage(), getjPMessage(), getBtnCloseMessage());
         }
         
         String ibanPreso = inputIbanAtletaJTF.getText();
@@ -479,24 +479,25 @@ public class RegistrareSportivo extends javax.swing.JFrame {
         else
             idClub = Integer.parseInt(inputIdClubJTF.getText());
 
-        if(controlloConvalidazione.controlloRegistraAtleta(nomePreso, cognomePreso, nazionePreso, indirizzoPreso, dataNascitaPresoSql, codiceFiscalePreso) == true) {
+        if(controlloConvalidazione.controlloRegistraAtleta(nomePreso, cognomePreso, nazionePreso, indirizzoPreso, dataNascitaPresoSql, codiceFiscalePreso, idProcuratore) == true) {
             try {
                 controllerSportivo.registraSportivo(nomePreso, cognomePreso, sessoPreso, nazionePreso, indirizzoPreso, dataNascitaPresoSql, telefonoPreso, codiceFiscalePreso, ruoloAtletaPreso, pesoPreso, idProcuratore, ibanPreso, idClub);
                 //JOptionPane.showMessageDialog(this, "✓ REGISTRAZIONE EFFETTUATA CON SUCCESSO", "REGISTRAZIONE", JOptionPane.INFORMATION_MESSAGE);
-                messageError.showMessage(false, true, "success", "Registrazione Effettuata Con Successo", errorMessage , jPMessage, btnCloseMessage);
+                getMessageError().showMessage(false, true, "success", "Registrazione Effettuata Con Successo", getErrorMessage(), getjPMessage(), getBtnCloseMessage());
             } catch (ExceptionDao ex) {
-                Logger.getLogger(RegistrareSportivo.class.getName()).log(Level.SEVERE, null, ex);
+                //Logger.getLogger(RegistrareSportivo.class.getName()).log(Level.SEVERE, null, ex);
+                getMessageError().showMessage(false, true, "warning","Procuratore Con ID "+inputIDProcuratoreJTF.getText()+" Non Presente Nel Sistema" , getErrorMessage(), getjPMessage(), getBtnCloseMessage());
             }
         }
         else {
             Toolkit.getDefaultToolkit().beep();
             //JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nUNO O PIU' CAMPI MANCANTI", "ERRORE", JOptionPane.ERROR_MESSAGE);
-            messageError.showMessage(false, true, "warning","Uno O Piu' Campi Mancanti" , errorMessage, jPMessage, btnCloseMessage);
+            getMessageError().showMessage(false, true, "warning","Uno O Piu' Campi Mancanti" , getErrorMessage(), getjPMessage(), getBtnCloseMessage());
         }
     }//GEN-LAST:event_btnRegistraJBActionPerformed
 
     private void btnCloseMessageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseMessageActionPerformed
-        jPMessage.setVisible(false);
+        getjPMessage().setVisible(false);
     }//GEN-LAST:event_btnCloseMessageActionPerformed
 
     private void btnLogoutJB1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutJB1ActionPerformed
@@ -703,4 +704,37 @@ public class RegistrareSportivo extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblDatiClubJT;
     // End of variables declaration//GEN-END:variables
+
+    public javax.swing.JButton getBtnCloseMessage() {
+        return btnCloseMessage;
+    }
+
+    public void setBtnCloseMessage(javax.swing.JButton btnCloseMessage) {
+        this.btnCloseMessage = btnCloseMessage;
+    }
+
+    public javax.swing.JLabel getErrorMessage() {
+        return errorMessage;
+    }
+
+    public void setErrorMessage(javax.swing.JLabel errorMessage) {
+        this.errorMessage = errorMessage;
+    }
+
+    public javax.swing.JPanel getjPMessage() {
+        return jPMessage;
+    }
+
+    public void setjPMessage(javax.swing.JPanel jPMessage) {
+        this.jPMessage = jPMessage;
+    }
+    
+    public MessageError getMessageError() {
+        return messageError;
+    }
+
+    public void setMessageError(MessageError messageError) {
+        this.messageError = messageError;
+    }
+
 }

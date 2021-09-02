@@ -493,7 +493,8 @@ public class ModificaSportivo extends javax.swing.JFrame {
                         //JOptionPane.showMessageDialog(this, "✓ MODIFICA DELL'ATLETA "+codiceFiscalePreso+" EFFETTUATA CON SUCCESSO", "MODIFICA", JOptionPane.INFORMATION_MESSAGE);
                         messageError.showMessage(false, true, "success", "Modifica Dell'Atleta Con Codice Fiscale "+codiceFiscalePreso+" Effettuata Con Successo", errorMessage, jPMessage, btnCloseMessage);
                     } catch (ExceptionDao ex) {
-                        Logger.getLogger(ModificaSportivo.class.getName()).log(Level.SEVERE, null, ex);
+                        //Logger.getLogger(ModificaSportivo.class.getName()).log(Level.SEVERE, null, ex);
+                        messageError.showMessage(false, true, "warning", "Club Con ID "+inputIdClubJTF1.getText()+" Non Presente Nel Sistema", errorMessage, jPMessage, btnCloseMessage);
                     }
                 }
                 else {

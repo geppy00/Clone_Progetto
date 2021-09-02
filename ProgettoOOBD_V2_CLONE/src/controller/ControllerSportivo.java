@@ -1,6 +1,7 @@
 
 package controller;
 
+import convalidazione.MessageError;
 import dao.ExceptionDao;
 import java.util.ArrayList;
 import model.Admin;

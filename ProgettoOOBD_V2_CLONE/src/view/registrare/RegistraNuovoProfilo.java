@@ -426,7 +426,8 @@ public class RegistraNuovoProfilo extends javax.swing.JFrame {
                         messageError.showMessage(false, true, "warning","Registrazione Fallita Riprova" , errorMessage, jPMessage, btnCloseMessage);
                     }
                 }catch (ExceptionDao ex) {
-                        Logger.getLogger(RegistraNuovoProfilo.class.getName()).log(Level.SEVERE, null, ex);
+                        //Logger.getLogger(RegistraNuovoProfilo.class.getName()).log(Level.SEVERE, null, ex);
+                        messageError.showMessage(false, true, "warning","ID "+idCorrispodente+" Non E' Un "+opzUser+" Oppure Non Esiste" , errorMessage, jPMessage, btnCloseMessage);
                 }
             }
         }

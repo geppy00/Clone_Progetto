@@ -81,8 +81,8 @@ public class ControlloConvalidazione {
             return false;
     }
     
-    public boolean controlloRegistraAtleta(String nome, String cognome, String nazione, String indirizzo, java.sql.Date dataNascita, String codiceFiscale) {
-        if(nome != null && (!(nome.equals("")) && !(nome.equals("Nome"))) && cognome != null && (!(cognome.equals("")) && !(cognome.equals("Cognome"))) && nazione != null && (!(nazione.equals("")) && !(nazione.equals("Nazione"))) && indirizzo != null && (!(indirizzo.equals("")) && !(indirizzo.equals("Indirizzo"))) && dataNascita != null && !(dataNascita.equals("")) && codiceFiscale != null && (!(codiceFiscale.equals("")) && !(codiceFiscale.equals("Codice Fiscale"))))
+    public boolean controlloRegistraAtleta(String nome, String cognome, String nazione, String indirizzo, java.sql.Date dataNascita, String codiceFiscale, String idProcuratore) {
+        if(nome != null && (!(nome.equals("")) && !(nome.equals("Nome"))) && cognome != null && (!(cognome.equals("")) && !(cognome.equals("Cognome"))) && nazione != null && (!(nazione.equals("")) && !(nazione.equals("Nazione"))) && indirizzo != null && (!(indirizzo.equals("")) && !(indirizzo.equals("Indirizzo"))) && dataNascita != null && !(dataNascita.equals("")) && codiceFiscale != null && (!(codiceFiscale.equals("")) && !(codiceFiscale.equals("Codice Fiscale"))) && (!(idProcuratore.equals("")) && !(idProcuratore.equals("ID Dell'Procuratore Corrispondente"))))
             return true;
         else
             return false;

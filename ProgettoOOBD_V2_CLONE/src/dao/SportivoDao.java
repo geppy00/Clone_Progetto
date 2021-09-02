@@ -1,6 +1,7 @@
 
 package dao;
 
+import convalidazione.MessageError;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -41,7 +42,7 @@ public class SportivoDao {
                 pStmt.setInt(13, atleta.getIdClub());
                 pStmt.execute();
             }catch(SQLException e) {
-                throw new ExceptionDao("ERRORE REGISTRAZIONE PROCURATORE FALLITA "+e);
+                throw new ExceptionDao("ERRORE ATLETA PROCURATORE FALLITA "+e);
             }
             finally {
                 FinallyException finallyException = new FinallyException();
@@ -67,7 +68,7 @@ public class SportivoDao {
                 pStmt.setString(12, atleta.getIban());
                 pStmt.execute();
             }catch(SQLException e) {
-                throw new ExceptionDao("ERRORE REGISTRAZIONE PROCURATORE FALLITA "+e);
+                throw new ExceptionDao("ERRORE REGISTRAZIONE ATLETA FALLITA "+e);
             }
             finally {
                 FinallyException finallyException = new FinallyException();

@@ -15,6 +15,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -26,6 +27,9 @@ import javax.swing.table.DefaultTableModel;
 import refactorCode.FinallyException;
 
 public class PercentualiGuadagnoProcuratoreView extends javax.swing.JFrame {
+    
+    //Per rappresentare la somma totale
+    private static DecimalFormat df2 = new DecimalFormat("#.##");
     
     /*CONTROLLORE PER GESTIRE GLI ERRORI*/
     private ControlloConvalidazione controlloConvalidazione = new ControlloConvalidazione();
@@ -196,8 +200,8 @@ public class PercentualiGuadagnoProcuratoreView extends javax.swing.JFrame {
 
         totaleGuadagnojL.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         totaleGuadagnojL.setForeground(new java.awt.Color(255, 255, 255));
-        totaleGuadagnojL.setText("Totale");
-        jPanel1.add(totaleGuadagnojL, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 83, -1, -1));
+        totaleGuadagnojL.setText("Totale (-22% IVA)");
+        jPanel1.add(totaleGuadagnojL, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 90, -1, -1));
 
         totaleGettoniJL.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
         totaleGettoniJL.setForeground(new java.awt.Color(255, 255, 255));
@@ -244,8 +248,8 @@ public class PercentualiGuadagnoProcuratoreView extends javax.swing.JFrame {
 
         totaleGuadagnoJTF.setFont(new java.awt.Font("Segoe UI Semibold", 0, 24)); // NOI18N
         totaleGuadagnoJTF.setForeground(new java.awt.Color(46, 204, 113));
-        totaleGuadagnoJTF.setText("0.000£");
-        jPanel1.add(totaleGuadagnoJTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 80, 130, -1));
+        totaleGuadagnoJTF.setText("0.000€");
+        jPanel1.add(totaleGuadagnoJTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(752, 86, 130, -1));
 
         atletaMigliorGuadagnoJTF.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
         atletaMigliorGuadagnoJTF.setForeground(new java.awt.Color(46, 204, 113));
@@ -253,12 +257,12 @@ public class PercentualiGuadagnoProcuratoreView extends javax.swing.JFrame {
 
         totaleGettoniJTF.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
         totaleGettoniJTF.setForeground(new java.awt.Color(46, 204, 113));
-        totaleGettoniJTF.setText("0.000£");
+        totaleGettoniJTF.setText("0.000€");
         jPanel1.add(totaleGettoniJTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 578, 90, -1));
 
         totaleValoreContrattualeJTF.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
         totaleValoreContrattualeJTF.setForeground(new java.awt.Color(46, 204, 113));
-        totaleValoreContrattualeJTF.setText("0.000£");
+        totaleValoreContrattualeJTF.setText("0.000€");
         jPanel1.add(totaleValoreContrattualeJTF, new org.netbeans.lib.awtextra.AbsoluteConstraints(156, 578, 120, -1));
 
         jLDataAttuale.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -389,11 +393,11 @@ public class PercentualiGuadagnoProcuratoreView extends javax.swing.JFrame {
         
         double sommaTotale = sommaTotaleContratto + sommaTotaleGettoni;
         
+        double sommaIvata = sommaTotale - ((sommaTotale * 22) / 100);
         
-        
-        totaleValoreContrattualeJTF.setText(String.valueOf(sommaTotaleContratto)+"£");
-        totaleGettoniJTF.setText(String.valueOf(sommaTotaleGettoni)+"£");
-        totaleGuadagnoJTF.setText(String.valueOf(sommaTotale)+"£");
+        totaleValoreContrattualeJTF.setText(String.valueOf(sommaTotaleContratto)+"€");
+        totaleGettoniJTF.setText(String.valueOf(sommaTotaleGettoni)+"€");
+        totaleGuadagnoJTF.setText(String.valueOf(df2.format(sommaIvata))+"€");
         
         try {
             String nomeAtletaMigliorGuadagno = controllerProcuratore.prendiAtletaMaggiorGuadagno(this.getIdProcuratore());

@@ -1,6 +1,7 @@
 
 package model;
 
+import convalidazione.MessageError;
 import dao.AdminDao;
 import dao.ClubDao;
 import dao.ExceptionDao;
