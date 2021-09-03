@@ -104,7 +104,7 @@ public class ControlloConvalidazione {
     
     //CLUB
     public boolean controlloRegistraPagamento(String importo, String idDestinatario) {
-        if(importo != null && (!(importo.equals("")) && !(importo.equals("L'Importo"))) && Integer.parseInt(importo) > 0 && idDestinatario != null && (!(idDestinatario.equals("")) && !(idDestinatario.equals("ID Destinatario"))))
+        if(importo != null && (!(importo.equals("")) && !(importo.equals("L'Importo")) && !(importo.equals("LImporto"))) && Integer.parseInt(importo) > 0 && idDestinatario != null && (!(idDestinatario.equals("")) && !(idDestinatario.equals("ID Destinatario"))))
             return true;
         else
             return false;

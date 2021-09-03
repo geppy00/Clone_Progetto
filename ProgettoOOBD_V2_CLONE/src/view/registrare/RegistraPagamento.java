@@ -230,9 +230,9 @@ public class RegistraPagamento extends javax.swing.JFrame {
             .addGroup(jPMessageLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(errorMessage, javax.swing.GroupLayout.DEFAULT_SIZE, 478, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(errorMessage, javax.swing.GroupLayout.DEFAULT_SIZE, 506, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnCloseMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -310,7 +310,8 @@ public class RegistraPagamento extends javax.swing.JFrame {
                 //JOptionPane.showMessageDialog(this, "PAGAMENTO EFFETTUATO CON SUCCESSO\nRiepilogo\nImporto: "+importo+"\nDestinatario: "+idDestinatario+"\nData Pagamento: "+javaDate+"\nID Mittente: "+this.getIdClub(), "REGISTRAZIONE PAGAMENTO", JOptionPane.INFORMATION_MESSAGE);
                 messageError.showMessage(false, true, "success", "Pagamento Effettuato Con Successo", errorMessage , jPMessage, btnCloseMessage);
             } catch (ExceptionDao ex) {
-                Logger.getLogger(RegistraPagamento.class.getName()).log(Level.SEVERE, null, ex);
+                //Logger.getLogger(RegistraPagamento.class.getName()).log(Level.SEVERE, null, ex);
+                messageError.showMessage(false, true, "warning","Destinatario Con ID "+idDestinatario+" Non Presente Nel Sistema" , errorMessage, jPMessage, btnCloseMessage);
             }
         }
         else {

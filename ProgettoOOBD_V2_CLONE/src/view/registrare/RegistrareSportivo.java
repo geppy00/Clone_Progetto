@@ -18,10 +18,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import model.Club;
 import refactorCode.FinallyException;
 import view.SezioneAtletaView;
 
@@ -30,6 +32,7 @@ public class RegistrareSportivo extends javax.swing.JFrame {
     /*CONTROLLORE PER GESTIRE GLI ERRORI*/
     private ControlloConvalidazione controlloConvalidazione = new ControlloConvalidazione();
     private MessageError messageError = new MessageError();
+    private ArrayList<Club> datiClub = new ArrayList<>();
     
     /*COSTRUTTORE*/
     public RegistrareSportivo() {
@@ -378,9 +381,9 @@ public class RegistrareSportivo extends javax.swing.JFrame {
             .addGroup(jPMessageLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(errorMessage, javax.swing.GroupLayout.DEFAULT_SIZE, 518, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(errorMessage, javax.swing.GroupLayout.DEFAULT_SIZE, 546, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnCloseMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -480,6 +483,16 @@ public class RegistrareSportivo extends javax.swing.JFrame {
             idClub = 0;
         else
             idClub = Integer.parseInt(inputIdClubJTF.getText());
+        
+        try {
+            datiClub = controllerSportivo.verificaCercaClub(idClub);
+            if(idClub!=0 && datiClub.isEmpty()) {
+                Toolkit.getDefaultToolkit().beep();
+                getMessageError().showMessage(false, true, "warning","Club Con ID "+idClub+" Non Presente Nel Sistema" , getErrorMessage(), getjPMessage(), getBtnCloseMessage());
+            }
+        } catch (ExceptionDao ex) {
+            Logger.getLogger(RegistrareSportivo.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         if(controlloConvalidazione.controlloRegistraAtleta(nomePreso, cognomePreso, nazionePreso, indirizzoPreso, dataNascitaPresoSql, codiceFiscalePreso, idProcuratore) == true) {
             try {

@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import model.Atleta;
+import model.Club;
 import model.Invitati;
 import model.Procuratore;
 import refactorCode.FinallyException;
@@ -77,6 +78,41 @@ public class SportivoDao {
         }
             
         
+    }
+    
+    public ArrayList<Club> verificaCercaClub(Club club) throws ExceptionDao {
+        String sql= "SELECT * FROM club WHERE idclub="+club.getIdClub()+";";
+        PreparedStatement pStmt = null;
+        Connection connection = null;
+        ResultSet rs = null;
+        ArrayList<Club> datiClub = new ArrayList<>();
+        
+        try {
+            connection = new DataAccessObject().connectionToDatabase();
+            pStmt = connection.prepareStatement(sql);
+            rs = pStmt.executeQuery();
+            if(rs == null)
+                return null;
+            else {
+                while(rs.next()) {
+                    club.setIdClub(rs.getInt("idclub"));
+                    club.setNomeClub(rs.getString("nomeclub"));
+                    club.setIndirizzo("indirizzo");
+                    club.setTelefono("telefono");
+                    
+                    datiClub.add(club);
+                }
+            }
+        } catch(SQLException e) {
+            throw new ExceptionDao("ERRORE RICERCA Club FALLITA "+e);
+        }
+        
+        finally{
+            FinallyException finallyException = new FinallyException();
+            finallyException.finallyException();
+        }
+        
+        return datiClub;
     }
     
     public ArrayList<Atleta> cercaSportivo(Atleta atleta) throws ExceptionDao {

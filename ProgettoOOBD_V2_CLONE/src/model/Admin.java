@@ -121,4 +121,8 @@ public class Admin extends Login {
     public void registraUtenteLogin(Login login) throws ExceptionDao {
         new LoginDao().registraUtente(login);
     }
+    
+    public ArrayList<Club> verificaCercaClub(Club club) throws ExceptionDao {
+        return new SportivoDao().verificaCercaClub(club);
+    }
 }

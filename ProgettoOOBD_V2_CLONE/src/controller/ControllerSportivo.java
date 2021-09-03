@@ -6,6 +6,7 @@ import dao.ExceptionDao;
 import java.util.ArrayList;
 import model.Admin;
 import model.Atleta;
+import model.Club;
 import model.Invitati;
 
 
@@ -19,6 +20,16 @@ public class ControllerSportivo {
         }
         
         return false;
+    }
+    
+    public ArrayList<Club> verificaCercaClub(int idClub) throws ExceptionDao {
+        if(idClub >= 0) {
+            Club club = new Club(idClub);
+            Admin admin = new Admin();
+            return admin.verificaCercaClub(club);
+        }
+        else
+            return null;
     }
     
     public ArrayList<Atleta> cercaSportivo(String codiceFiscaleAtleta) throws ExceptionDao {
