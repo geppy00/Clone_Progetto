@@ -34,10 +34,12 @@ public class EliminaProcuratore extends javax.swing.JFrame {
         
         jPMessage.setVisible(false);
         
-         jTBDati.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
-         jTBDati.getTableHeader().setOpaque(false);
-         jTBDati.getTableHeader().setBackground(new Color(32, 136, 203));
-         jTBDati.getTableHeader().setForeground(new Color(255,255,255));
+        jTBDati.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
+        jTBDati.getTableHeader().setOpaque(false);
+        jTBDati.getTableHeader().setBackground(new Color(32, 136, 203));
+        jTBDati.getTableHeader().setForeground(new Color(255,255,255));
+        
+        this.setVisible(true);
     }
 
     
@@ -344,14 +346,14 @@ public class EliminaProcuratore extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel2MouseClicked
 
     
-    public static void main(String args[]) {
+    /*public static void main(String args[]) {
     
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new EliminaProcuratore().setVisible(true);
             }
         });
-    }
+    }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAnnullaJB;

@@ -65,6 +65,8 @@ public class ModificaContrattiProcuratore extends javax.swing.JFrame {
         }
         
         stampaDatiContratto(this.getIdContratto());
+        
+        this.setVisible(true);
     }
     
     public ModificaContrattiProcuratore() {
@@ -589,13 +591,13 @@ public class ModificaContrattiProcuratore extends javax.swing.JFrame {
 
 
     /*MAIN*/
-    public static void main(String args[]) {
+    /*public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new ModificaContrattiProcuratore().setVisible(true);
             }
         });
-    }
+    }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser DataInizioJDC;

@@ -41,6 +41,8 @@ public class SezioneContrattiClubStipulatiAtleta extends javax.swing.JFrame {
         } catch (ExceptionDao ex) {
             Logger.getLogger(SezioneGettoniEventoAtleta.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        this.setVisible(true);
     }
     
     public SezioneContrattiClubStipulatiAtleta() {
@@ -208,13 +210,13 @@ public class SezioneContrattiClubStipulatiAtleta extends javax.swing.JFrame {
     }
  
     /*MAIN*/
-    public static void main(String args[]) {
+    /*public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new SezioneContrattiClubStipulatiAtleta().setVisible(true);
             }
         });
-    }
+    }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClose;

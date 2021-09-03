@@ -29,12 +29,13 @@ public class EliminaAtleta extends javax.swing.JFrame {
     public EliminaAtleta() {
         initComponents();
         this.setLocationRelativeTo(null);
-         jPMessage.setVisible(false);
-         tableAtletaJT.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
-         tableAtletaJT.getTableHeader().setOpaque(false);
-         tableAtletaJT.getTableHeader().setBackground(new Color(32, 136, 203));
-         tableAtletaJT.getTableHeader().setForeground(new Color(255,255,255));
-       
+        jPMessage.setVisible(false);
+        tableAtletaJT.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
+        tableAtletaJT.getTableHeader().setOpaque(false);
+        tableAtletaJT.getTableHeader().setBackground(new Color(32, 136, 203));
+        tableAtletaJT.getTableHeader().setForeground(new Color(255,255,255));
+        
+        this.setVisible(true);
     }
 
     @SuppressWarnings("unchecked")
@@ -338,13 +339,13 @@ public class EliminaAtleta extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel2MouseClicked
 
 
-    public static void main(String args[]) {
+    /*public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new EliminaAtleta().setVisible(true);
             }
         });
-    }
+    }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField InputCodiceFiscaleJTF;

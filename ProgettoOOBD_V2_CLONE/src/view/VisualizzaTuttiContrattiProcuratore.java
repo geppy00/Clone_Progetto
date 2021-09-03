@@ -57,6 +57,8 @@ public class VisualizzaTuttiContrattiProcuratore extends javax.swing.JFrame {
         } catch (ExceptionDao ex) {
             Logger.getLogger(VisualizzaTuttiContrattiProcuratore.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        this.setVisible(true);
     }
     
     public VisualizzaTuttiContrattiProcuratore() {
@@ -328,13 +330,13 @@ public class VisualizzaTuttiContrattiProcuratore extends javax.swing.JFrame {
     }
 
     /*MAIN*/
-    public static void main(String args[]) {
+    /*public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new VisualizzaTuttiContrattiProcuratore().setVisible(true);
             }
         });
-    }
+    }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAnnullaJB1;

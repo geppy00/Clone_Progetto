@@ -26,6 +26,8 @@ public class RegistraSponsor extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         jMessagge.setVisible(false);
+        
+        this.setVisible(true);
     }
 
     @SuppressWarnings("unchecked")
@@ -302,13 +304,13 @@ public class RegistraSponsor extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel1MouseClicked
 
    
-    public static void main(String args[]) {
+    /*public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new RegistraSponsor().setVisible(true);
             }
         });
-    }
+    }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAnnullaJB;

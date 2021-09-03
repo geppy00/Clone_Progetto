@@ -29,6 +29,8 @@ public class ModificaSponsor extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         jMessagge.setVisible(false);
+        
+        this.setVisible(true);
     }
 
     @SuppressWarnings("unchecked")
@@ -348,13 +350,13 @@ public class ModificaSponsor extends javax.swing.JFrame {
     }//GEN-LAST:event_inputTelefonoJTFFocusLost
 
    
-    public static void main(String args[]) {
+    /*public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new ModificaSponsor().setVisible(true);
             }
         });
-    }
+    }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAggiornaJB;

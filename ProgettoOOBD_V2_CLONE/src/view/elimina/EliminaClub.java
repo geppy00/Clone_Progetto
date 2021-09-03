@@ -32,11 +32,13 @@ public class EliminaClub extends javax.swing.JFrame {
     public EliminaClub() {
         initComponents();
         this.setLocationRelativeTo(null);
-         jPMessage.setVisible(false);
-         datiClubTabellaJT.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
-         datiClubTabellaJT.getTableHeader().setOpaque(false);
-         datiClubTabellaJT.getTableHeader().setBackground(new Color(32, 136, 203));
-         datiClubTabellaJT.getTableHeader().setForeground(new Color(255,255,255));
+        jPMessage.setVisible(false);
+        datiClubTabellaJT.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
+        datiClubTabellaJT.getTableHeader().setOpaque(false);
+        datiClubTabellaJT.getTableHeader().setBackground(new Color(32, 136, 203));
+        datiClubTabellaJT.getTableHeader().setForeground(new Color(255,255,255));
+        
+        this.setVisible(true);
     }
 
 
@@ -347,13 +349,13 @@ public class EliminaClub extends javax.swing.JFrame {
 
 
     /*MAIN*/
-    public static void main(String args[]) {
+    /*public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new EliminaClub().setVisible(true);
             }
         });
-    }
+    }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCercaJB;

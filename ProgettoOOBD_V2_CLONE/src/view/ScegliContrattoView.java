@@ -17,6 +17,8 @@ public class ScegliContrattoView extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.idProcuratore = idProcuratore;
+        
+        this.setVisible(true);
     }
     
     public ScegliContrattoView() {
@@ -176,13 +178,13 @@ public class ScegliContrattoView extends javax.swing.JFrame {
     
     
     /*MAIN*/
-    public static void main(String args[]) {
+    /*public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new ScegliContrattoView().setVisible(true);
             }
         });
-    }
+    }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClubJB;

@@ -32,6 +32,8 @@ public class ModificaPagamento extends javax.swing.JFrame {
         this.idClub = idClub;
         jMessagge1.setVisible(false);
         this.setLocationRelativeTo(null);
+        
+        this.setVisible(true);
     }
 
     public ModificaPagamento() {
@@ -410,13 +412,13 @@ public class ModificaPagamento extends javax.swing.JFrame {
     }
 
     /*MAIN*/
-    public static void main(String args[]) {
+    /*public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new ModificaPagamento().setVisible(true);
             }
         });
-    }
+    }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAnnullaJB;

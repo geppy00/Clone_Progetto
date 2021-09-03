@@ -54,6 +54,8 @@ public class ContrattiClubProcuratoreView extends javax.swing.JFrame {
         } catch (ExceptionDao ex) {
             Logger.getLogger(ContrattiClubProcuratoreView.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        this.setVisible(true);
     }
     
     public ContrattiClubProcuratoreView() {
@@ -247,13 +249,13 @@ public class ContrattiClubProcuratoreView extends javax.swing.JFrame {
     }
     
     /*MAIN*/
-    public static void main(String args[]) {
+    /*public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new ContrattiClubProcuratoreView().setVisible(true);
             }
         });
-    }
+    }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogoutJB;

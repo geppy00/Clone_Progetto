@@ -38,6 +38,8 @@ public class RegistrareContrattoSponsor extends javax.swing.JFrame {
         this.idProcuratore = idProcuratore;
         
         jPMessage.setVisible(false);
+        
+        this.setVisible(true);
     }
     
     public RegistrareContrattoSponsor() {
@@ -518,13 +520,13 @@ public class RegistrareContrattoSponsor extends javax.swing.JFrame {
     
     
     /*MAIN*/
-    public static void main(String args[]) {
+    /*public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new RegistrareContrattoSponsor().setVisible(true);
             }
         });
-    }
+    }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAnnullaJB;

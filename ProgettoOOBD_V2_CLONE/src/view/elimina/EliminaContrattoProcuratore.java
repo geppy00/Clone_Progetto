@@ -33,6 +33,8 @@ public class EliminaContrattoProcuratore extends javax.swing.JFrame {
         this.idAtleta = idAtleta;
         jMessagge.setVisible(false);
         adviceJL.setText("SEI SICURO DI VOLER ELIMINARE IL CONTRATTO NUMERO "+this.getNumeroContratto()+" ?");
+        
+        this.setVisible(true);
     }
     
     public EliminaContrattoProcuratore() {
@@ -250,13 +252,13 @@ public class EliminaContrattoProcuratore extends javax.swing.JFrame {
     }
     
     /*MAIN*/
-    public static void main(String args[]) {
+    /*public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new EliminaContrattoProcuratore().setVisible(true);
             }
         });
-    }
+    }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel adviceJL;

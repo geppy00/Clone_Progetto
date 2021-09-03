@@ -33,6 +33,8 @@ public class SponsorView extends javax.swing.JFrame {
         } catch (ExceptionDao ex) {
             Logger.getLogger(SponsorView.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        this.setVisible(true);
     }
 
     public SponsorView() {
@@ -278,13 +280,13 @@ public class SponsorView extends javax.swing.JFrame {
     }
 
     /*MAIN*/
-    public static void main(String args[]) {
+    /*public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new SponsorView().setVisible(true);
             }
         });
-    }
+    }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClose;

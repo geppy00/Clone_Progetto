@@ -32,6 +32,8 @@ public class ModificaDatiClub extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         
         jPMessage.setVisible(false);
+        
+        this.setVisible(true);
     }
 
 
@@ -360,13 +362,13 @@ public class ModificaDatiClub extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel2MouseClicked
 
 
-    public static void main(String args[]) {
+    /*public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new ModificaDatiClub().setVisible(true);
             }
         });
-    }
+    }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCercaJB;

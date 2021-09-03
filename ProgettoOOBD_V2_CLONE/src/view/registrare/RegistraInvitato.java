@@ -27,6 +27,8 @@ public class RegistraInvitato extends javax.swing.JFrame {
         this.idEvento = idEvento;
         
         this.jMessagge.setVisible(false);
+        
+        this.setVisible(true);
     }
 
     public RegistraInvitato() {
@@ -277,13 +279,13 @@ public class RegistraInvitato extends javax.swing.JFrame {
     }
     
    /*MAIN*/
-    public static void main(String args[]) {
+    /*public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new RegistraInvitato().setVisible(true);
             }
         });
-    }
+    }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel adviceJL;

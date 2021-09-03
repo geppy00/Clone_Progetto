@@ -49,6 +49,8 @@ public class ElencoSportiviSponsor extends javax.swing.JFrame {
         } catch (ExceptionDao ex) {
             Logger.getLogger(ElencoSportiviSponsor.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        this.setVisible(true);
     }
 
   
@@ -213,13 +215,13 @@ public class ElencoSportiviSponsor extends javax.swing.JFrame {
     }
     
     /*MAIN*/
-    public static void main(String args[]) {
+    /*public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new ElencoSportiviSponsor().setVisible(true);
             }
         });
-    }
+    }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClose;

@@ -14,6 +14,7 @@ public class SezioneAtletaView extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
        
+        this.setVisible(true);
     }
 
   
@@ -227,13 +228,13 @@ public class SezioneAtletaView extends javax.swing.JFrame {
 
      
   
-    public static void main(String args[]) {
+    /*public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new SezioneAtletaView().setVisible(true);
             }
         });
-    }
+    }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAggiornaSportivoJB;

@@ -34,6 +34,8 @@ public class ModificaSportivo extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         
         jPMessage.setVisible(false);
+        
+        this.setVisible(true);
     }
 
     @SuppressWarnings("unchecked")
@@ -536,13 +538,13 @@ public class ModificaSportivo extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel2MouseClicked
 
 
-    public static void main(String args[]) {
+    /*public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new ModificaSportivo().setVisible(true);
             }
         });
-    }
+    }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAggiornaJB;

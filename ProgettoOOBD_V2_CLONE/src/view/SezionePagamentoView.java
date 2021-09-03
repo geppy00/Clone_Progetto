@@ -19,6 +19,8 @@ public class SezionePagamentoView extends javax.swing.JFrame {
         initComponents();
         this.idClub = idClub;
         this.setLocationRelativeTo(null);
+        
+        this.setVisible(true);
     }
     
     public SezionePagamentoView() {
@@ -273,14 +275,14 @@ public class SezionePagamentoView extends javax.swing.JFrame {
     }
     
     
-    public static void main(String args[]) {
+    /*public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new SezionePagamentoView().setVisible(true);
             }
         });
-    }
+    }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClose;

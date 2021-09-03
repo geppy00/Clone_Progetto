@@ -44,6 +44,8 @@ public class GestioneEventiAtleta extends javax.swing.JFrame {
         } catch (ExceptionDao ex) {
             Logger.getLogger(GestioneEventiAtleta.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        this.setVisible(true);
     }
     
     public GestioneEventiAtleta() {
@@ -233,13 +235,13 @@ public class GestioneEventiAtleta extends javax.swing.JFrame {
     }
     
     /*MAIN*/
-    public static void main(String args[]) {
+    /*public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new GestioneEventiAtleta().setVisible(true);
             }
         });
-    }
+    }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAnnullaJB;

@@ -64,6 +64,8 @@ public class SezioneEliminaContrattoProcuratore extends javax.swing.JFrame {
             sezioneGestioneContrattiView.setVisible(true);
             this.setVisible(false);
         }
+        
+        this.setVisible(true);
     }
     
     public SezioneEliminaContrattoProcuratore() {
@@ -398,13 +400,13 @@ public class SezioneEliminaContrattoProcuratore extends javax.swing.JFrame {
 
     
     /*MAIN*/
-    public static void main(String args[]) {
+    /*public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new SezioneEliminaContrattoProcuratore().setVisible(true);
             }
         });
-    }
+    }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClose;

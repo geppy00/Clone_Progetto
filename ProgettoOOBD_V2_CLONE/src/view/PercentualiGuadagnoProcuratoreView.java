@@ -77,6 +77,8 @@ public class PercentualiGuadagnoProcuratoreView extends javax.swing.JFrame {
             //JOptionPane.showMessageDialog(this, "!! ATTENZIONE !!\nERRORE FATALE PROVARE AD RIAPRIRE LA FINESTRA", "ERRORE", JOptionPane.ERROR_MESSAGE);
             messageError.showMessage(false, true, "warning","Errore Fatale Provare Ad Riaprire La Finestra" , jLabel3, jPanel2, btnCloseMessage);
         }
+        
+        this.setVisible(true);
     }
     
     public PercentualiGuadagnoProcuratoreView() {
@@ -539,14 +541,14 @@ public class PercentualiGuadagnoProcuratoreView extends javax.swing.JFrame {
     }
     
     /*MAIN*/
-    public static void main(String args[]) {
+    /*public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new PercentualiGuadagnoProcuratoreView().setVisible(true);
             }
         });
-    }
+    }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel atletaMaggiorGuadagnoJL;

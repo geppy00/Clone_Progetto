@@ -12,6 +12,8 @@ public class SezioneSponsorView extends javax.swing.JFrame {
     public SezioneSponsorView() {
         initComponents();
         this.setLocationRelativeTo(null);
+        
+        this.setVisible(true);
     }
 
     
@@ -225,14 +227,14 @@ public class SezioneSponsorView extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel2MouseClicked
 
     
-    public static void main(String args[]) {
+    /*public static void main(String args[]) {
         
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new SezioneSponsorView().setVisible(true);
             }
         });
-    }
+    }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAggiornaSponsorJB;

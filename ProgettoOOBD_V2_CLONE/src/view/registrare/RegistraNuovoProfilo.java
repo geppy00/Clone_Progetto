@@ -57,6 +57,8 @@ public class RegistraNuovoProfilo extends javax.swing.JFrame {
             adminView.setVisible(true);
             this.setVisible(false);
         }
+        
+        this.setVisible(true);
     }
     
     /*METODI*/
@@ -543,14 +545,14 @@ public class RegistraNuovoProfilo extends javax.swing.JFrame {
         this.setState(Frame.ICONIFIED);
     }//GEN-LAST:event_jLabel2MouseClicked
 
-    public static void main(String args[]) {
+    /*public static void main(String args[]) {
   
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new RegistraNuovoProfilo().setVisible(true);
             }
         });
-    }
+    }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCloseMessage;

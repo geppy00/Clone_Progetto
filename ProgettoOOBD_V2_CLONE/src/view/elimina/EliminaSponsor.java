@@ -27,11 +27,14 @@ public class EliminaSponsor extends javax.swing.JFrame {
     private ArrayList<Sponsor> datiSponsor = new ArrayList<Sponsor>();
     private int idSponsor;
     
+    /*COSTRUTTORE*/
     public EliminaSponsor() {
         initComponents();
         this.setLocationRelativeTo(null);
         
         this.jMessagge.setVisible(false);
+        
+        this.setVisible(true);
     }
 
    
@@ -332,13 +335,13 @@ public class EliminaSponsor extends javax.swing.JFrame {
 
     
     /*MAIN*/
-    public static void main(String args[]) {
+    /*public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new EliminaSponsor().setVisible(true);
             }
         });
-    }
+    }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAnnullaJB;

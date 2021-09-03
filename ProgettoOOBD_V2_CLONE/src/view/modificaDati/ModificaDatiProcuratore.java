@@ -32,10 +32,13 @@ public class ModificaDatiProcuratore extends javax.swing.JFrame {
     /*DATI DEL PROCURATORE*/
     private ArrayList<Procuratore> datiProcuratore =  new ArrayList<Procuratore>();
     
+    /*COSTRUTTORE*/
     public ModificaDatiProcuratore() {
         initComponents();
         this.setLocationRelativeTo(null);
         jPMessage.setVisible(false);
+        
+        this.setVisible(true);
     }
 
     
@@ -482,13 +485,13 @@ public class ModificaDatiProcuratore extends javax.swing.JFrame {
     }
     
     /*MAIN*/
-    public static void main(String args[]) {
+    /*public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new ModificaDatiProcuratore().setVisible(true);
             }
         });
-    }
+    }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAnnullaJB;

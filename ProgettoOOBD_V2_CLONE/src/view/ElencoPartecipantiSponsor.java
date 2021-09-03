@@ -41,6 +41,8 @@ public class ElencoPartecipantiSponsor extends javax.swing.JFrame {
         } catch (ExceptionDao ex) {
             Logger.getLogger(ElencoPartecipantiSponsor.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        this.setVisible(true);
     }
 
     public ElencoPartecipantiSponsor() {}
@@ -208,13 +210,13 @@ public class ElencoPartecipantiSponsor extends javax.swing.JFrame {
     }
     
     /*MAIN*/
-    public static void main(String args[]) {
+    /*public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new ElencoPartecipantiSponsor().setVisible(true);
             }
         });
-    }
+    }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogoutJB;

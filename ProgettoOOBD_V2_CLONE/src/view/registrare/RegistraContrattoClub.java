@@ -40,7 +40,7 @@ public class RegistraContrattoClub extends javax.swing.JFrame {
         this.idProcuratore = idProcuratore;
         jPMessage.setVisible(false);
         
-        
+        this.setVisible(true);
     }
     
     public RegistraContrattoClub() {}
@@ -526,14 +526,14 @@ public class RegistraContrattoClub extends javax.swing.JFrame {
     }
     
     /*MAIN*/
-    public static void main(String args[]) {
+    /*public static void main(String args[]) {
         
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new RegistraContrattoClub().setVisible(true);
             }
         });
-    }
+    }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser DataFineJDC;

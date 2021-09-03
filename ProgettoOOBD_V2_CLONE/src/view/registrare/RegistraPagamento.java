@@ -54,6 +54,8 @@ public class RegistraPagamento extends javax.swing.JFrame {
         } catch (ExceptionDao ex) {
             Logger.getLogger(RegistraPagamento.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        this.setVisible(true);
     }
 
     public RegistraPagamento() { 
@@ -389,14 +391,14 @@ public class RegistraPagamento extends javax.swing.JFrame {
 
     
     /*MAIN PER APRIRE FINESTRA*/
-    public static void main(String args[]) {
+    /*public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new RegistraPagamento().setVisible(true);
             }
         });
-    }
+    }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAnnullaJB;
